@@ -1,0 +1,32 @@
+Name: tidings
+Summary: Bearer of Tidings
+Version: 0.1
+Release: 1
+Group: Qt/Qt
+License: GPLv2
+Sources:
+- '%{name}-%{version}.tar.bz2'
+Description: |-
+  RSS and Atom feed reader for SailfishOS.
+Configure: none
+Builder: qtc5
+PkgConfigBR:
+- sailfishapp
+- Qt5Quick
+- Qt5Qml
+- Qt5Core
+Requires:
+- qt5-qtdeclarative-import-xmllistmodel
+- sailfishsilica-qt5
+- qt5-plugin-imageformat-ico
+- qt5-plugin-imageformat-gif
+Files:
+- '%{_bindir}'
+- '%{_datadir}/%{name}/qml'
+- '%{_datadir}/applications/%{name}.desktop'
+- '%{_datadir}/icons/hicolor/90x90/apps/%{name}.png'
+- /usr/bin
+- /usr/share/tidings
+- /usr/share/applications
+- /usr/share/icons/hicolor/90x90/apps
+PkgBR: []
