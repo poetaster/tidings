@@ -35,8 +35,8 @@ OTHER_FILES += qml/tidings.qml \
     qml/pages/license.js \
     qml/tidings.png
 
-TRANSLATIONS = l10n/en_US.ts
-
+TRANSLATIONS = l10n/en_US.ts \
+            l10n/ru_RU.ts
 lupdate_only{
 SOURCES = qml/tidings.qml \
           qml/pages/*.qml \
