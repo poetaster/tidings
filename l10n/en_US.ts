@@ -42,6 +42,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/FeedsPage.qml" line="56"/>
+        <source>About Tidings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/FeedsPage.qml" line="64"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
@@ -75,6 +80,11 @@ Please add some sources. →</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="26"/>
+        <source>Name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="32"/>
         <source>Enter name</source>
         <translation type="unfinished"></translation>
@@ -100,6 +110,11 @@ Please add some sources. →</source>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="22"/>
         <source>Add Source ...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="41"/>
+        <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -42,6 +42,11 @@
         <translation>Tidings</translation>
     </message>
     <message>
+        <location filename="../qml/pages/FeedsPage.qml" line="56"/>
+        <source>About Tidings</source>
+        <translation>О Tidings</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/FeedsPage.qml" line="64"/>
         <source>Refresh</source>
         <translation>Обновить</translation>
@@ -77,6 +82,11 @@ Please add some sources. →</source>
         <translation>Сохранить</translation>
     </message>
     <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="26"/>
+        <source>Name</source>
+        <translation>Название</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="32"/>
         <source>Enter name</source>
         <translation>Введите название</translation>
@@ -105,6 +115,11 @@ Please add some sources. →</source>
         <translation>Добавить источник...</translation>
     </message>
     <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="41"/>
+        <source>Deleting</source>
+        <translation>Удаление</translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SourcesPage.qml" line="101"/>
         <source>Pull down to add RSS, Atom, or OPML sources.</source>
         <translation>Потяните вниз, чтобы добавить RSS, Atom или OPML-источники.</translation>
@@ -125,7 +140,7 @@ Please add some sources. →</source>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="57"/>
         <source>Already at the beginning</source>
-        <translation>В начале</translation>
+        <translation>Начало</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="68"/>
@@ -135,7 +150,7 @@ Please add some sources. →</source>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="68"/>
         <source>Already at the end</source>
-        <translation>В конце</translation>
+        <translation>Конец</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="128"/>

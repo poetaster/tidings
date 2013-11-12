@@ -38,7 +38,7 @@ Page {
                                     && _contextMenu.parent === listItem
 
             function remove() {
-                remorse.execute(listItem, qsTR("Deleting"),
+                remorse.execute(listItem, qsTr("Deleting"),
                                 function() { sourcesModel.removeSource(sourceId); } )
             }
 

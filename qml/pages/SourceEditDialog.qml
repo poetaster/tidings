@@ -23,7 +23,7 @@ Dialog {
         }
 
         Label {
-            text: "Name"
+            text: qsTr("Name")
         }
 
         TextField {
