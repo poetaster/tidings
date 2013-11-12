@@ -35,3 +35,13 @@ OTHER_FILES += qml/tidings.qml \
     qml/pages/license.js \
     qml/tidings.png
 
+TRANSLATIONS = l10n/en_US.ts
+
+lupdate_only{
+SOURCES = qml/tidings.qml \
+          qml/pages/*.qml \
+          qml/cover/*.qml
+}
+
+RESOURCES += \
+    resources.qrc

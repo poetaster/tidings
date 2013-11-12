@@ -34,6 +34,7 @@
 
 #include <sailfishapp.h>
 
+#include <QTranslator>
 
 int main(int argc, char *argv[])
 {
@@ -46,6 +47,16 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
 
-    return SailfishApp::main(argc, argv);
+    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+
+    QTranslator *appTranslator = new QTranslator;
+    appTranslator->load(":/l10n/" + QLocale::system().name() + ".qm");
+    app->installTranslator(appTranslator);
+
+    QScopedPointer<QQuickView> view(SailfishApp::createView());
+    view->setSource(SailfishApp::pathTo("qml/tidings.qml"));
+    view->showFullScreen();
+    return app->exec();
+
 }
 

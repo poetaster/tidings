@@ -54,7 +54,7 @@ Page {
         PullDownMenu {
             MenuItem {
                 enabled: index > 0
-                text: enabled ? "Previous" : "Already at the beginning"
+                text: enabled ? qsTr("Previous") : qsTr("Already at the beginning")
 
                 onClicked: {
                     previousItem();
@@ -65,7 +65,7 @@ Page {
         PushUpMenu {
             MenuItem {
                 enabled: index < newsBlendModel.count - 1
-                text: enabled ? "Next" : "Already at the end"
+                text: enabled ? qsTr("Next") : qsTr("Already at the end")
 
                 onClicked: {
                     nextItem();
@@ -125,7 +125,7 @@ Page {
             Button {
                 visible: page.url !== ""
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Full view"
+                text: qsTr("Full view")
 
                 onClicked: {
                     var props = {

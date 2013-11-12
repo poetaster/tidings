@@ -15,7 +15,7 @@ Page {
 
             PageHeader {
                 id: header
-                title: "License"
+                title: qsTr("License")
             }
 
             Label {

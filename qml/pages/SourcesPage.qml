@@ -14,12 +14,12 @@ Page {
         anchors.fill: parent
 
         header: PageHeader {
-            title: "Sources"
+            title: qsTr("Sources")
         }
 
         PullDownMenu {
             MenuItem {
-                text: "Add Source ..."
+                text: qsTr("Add Source ...")
 
                 onClicked: {
                     pageStack.push("SourceEditDialog.qml", {});
@@ -38,7 +38,7 @@ Page {
                                     && _contextMenu.parent === listItem
 
             function remove() {
-                remorse.execute(listItem, "Deleting",
+                remorse.execute(listItem, qsTR("Deleting"),
                                 function() { sourcesModel.removeSource(sourceId); } )
             }
 
@@ -98,7 +98,7 @@ Page {
 
         ViewPlaceholder {
             enabled: listview.count === 0
-            text: "Pull down to add RSS, Atom, or OPML sources."
+            text: qsTr("Pull down to add RSS, Atom, or OPML sources.")
         }
 
         ScrollDecorator { }
@@ -109,7 +109,7 @@ Page {
         id: contextMenuComponent
         ContextMenu {
             MenuItem {
-                text: "Remove"
+                text: qsTr("Remove")
                 onClicked: {
                     _contextMenuItem.remove();
                 }
