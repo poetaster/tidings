@@ -84,24 +84,12 @@ Page {
             contentHeight: Theme.itemSizeExtraLarge
             clip: true
 
-            Image {
-                id: picture
-                visible: status === Image.Ready
-                anchors.left: parent.left
-                anchors.leftMargin: Theme.paddingMedium
-                width: 32
-                height: 32
-                fillMode: Image.PreserveAspectCrop
-                smooth: true
-                clip: true
-                source: thumbnail
-            }
-
             Label {
                 id: feedLabel
-                anchors.left: picture.visible ? picture.right : parent.left
-                anchors.right: parent.right
+                anchors.left: parent.left
+                anchors.right: picture.visible ? picture.left : parent.right
                 anchors.leftMargin: Theme.paddingMedium
+                anchors.rightMargin: Theme.paddingMedium
                 color: Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: name + " (" + Format.formatDate(date, Formatter.DurationElapsed) + ")"
@@ -110,7 +98,7 @@ Page {
             Separator {
                 anchors.top: feedLabel.bottom
                 anchors.left: feedLabel.left
-                anchors.right: parent.right
+                anchors.right: picture.visible ? picture.left : parent.right
                 anchors.rightMargin: Theme.paddingMedium
                 color: Theme.primaryColor
             }
@@ -119,7 +107,7 @@ Page {
                 id: headerLabel
                 anchors.top: feedLabel.bottom
                 anchors.left: feedLabel.left
-                anchors.right: parent.right
+                anchors.right: picture.visible ? picture.left : parent.right
                 anchors.rightMargin: Theme.paddingMedium
                 color: Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
@@ -127,6 +115,20 @@ Page {
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 maximumLineCount: 2
                 text: title
+            }
+
+            Image {
+                id: picture
+                visible: status === Image.Ready
+                y: Theme.paddingSmall
+                anchors.right: parent.right
+                anchors.rightMargin: Theme.paddingMedium
+                width: height
+                height: parent.height - 2 * Theme.paddingSmall
+                fillMode: Image.PreserveAspectCrop
+                smooth: true
+                clip: true
+                source: thumbnail
             }
 
             onClicked: {

@@ -19,8 +19,6 @@ Page {
         }
 
         Image {
-            //width: parent.width / 3
-            //height: width
             anchors.horizontalCenter: parent.horizontalCenter
             source: Qt.resolvedUrl("../tidings.png")
             smooth: true
@@ -50,7 +48,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Theme.fontSizeExtraSmall
             color: Theme.secondaryColor
-            text: "Version 0.1"
+            text: "Version 0.1.0"
         }
 
         Label {
@@ -89,6 +87,15 @@ Page {
             }
         }
 
+    }
+
+    Label {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: Theme.paddingSmall
+        color: Theme.secondaryColor
+        font.pixelSize: Theme.fontSizeTiny
+        text: "https://github.com/pycage/tidings"
     }
 
 }

@@ -12,8 +12,8 @@ Name:       tidings
 %{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
-Summary:    Bearer of Tidings
-Version:    0.1
+Summary:    Bearer of tidings.
+Version:    0.1.0
 Release:    1
 Group:      Qt/Qt
 License:    GPLv2
@@ -30,7 +30,7 @@ BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  desktop-file-utils
 
 %description
-RSS and Atom feed reader for SailfishOS.
+Tidings is a news feed aggregator for RSS, Atom, and OPML feeds. Always be up to date with the latest news of what matters to you on your mobile device.
 
 %prep
 %setup -q -n %{name}-%{version}

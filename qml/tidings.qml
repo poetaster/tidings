@@ -51,6 +51,14 @@ ApplicationWindow
             newsBlendModel.sources = sources;
             newsBlendModel.refresh();
         }
+
+        Component.onCompleted: {
+            if (count === 0) {
+                // add example feeds
+                addSource("Engadget", "http://www.engadget.com/rss.xml");
+                addSource("JollaUsers.com", "http://jollausers.com/feed/");
+            }
+        }
     }
 
     NewsBlendModel {
