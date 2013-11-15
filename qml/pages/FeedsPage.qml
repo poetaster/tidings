@@ -48,12 +48,12 @@ Page {
         model: newsBlendModel
 
         header: PageHeader {
-            title: "Tidings"
+            title: qsTr("Tidings")
         }
 
         PullDownMenu {
             MenuItem {
-                text: "About Tidings"
+                text: qsTr("About Tidings")
 
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
@@ -61,7 +61,7 @@ Page {
             }
 
             MenuItem {
-                text: "Refresh"
+                text: qsTr("Refresh")
 
                 onClicked: {
                     newsBlendModel.refresh();
@@ -71,7 +71,7 @@ Page {
 
         PushUpMenu {
             MenuItem {
-                text: "Back to top"
+                text: qsTr("Back to top")
 
                 onClicked: {
                     listview.scrollToTop();
@@ -146,7 +146,7 @@ Page {
 
         ViewPlaceholder {
             enabled: sourcesModel.count === 0
-            text: "No tidings is glad tidings?\n\nPlease add some sources. →"
+            text: qsTr("No tidings is glad tidings?\n\nPlease add some sources. →")
         }
 
         ScrollDecorator { }

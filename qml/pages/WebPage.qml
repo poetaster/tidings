@@ -21,7 +21,7 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: "Open in browser"
+                text: qsTr("Open in browser")
 
                 onClicked: {
                     Qt.openUrlExternally(url);

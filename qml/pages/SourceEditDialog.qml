@@ -19,27 +19,27 @@ Dialog {
         spacing: Theme.paddingSmall
 
         DialogHeader {
-            title: "Save"
+            title: qsTr("Save")
         }
 
         Label {
-            text: "Name"
+            text: qsTr("Name")
         }
 
         TextField {
             id: inputName
             width: parent.width
-            placeholderText: "Enter name"
+            placeholderText: qsTr("Enter name")
         }
 
         Label {
-            text: "Source Address"
+            text: qsTr("Source Address")
         }
 
         TextField {
             id: inputUrl
             width: parent.width
-            placeholderText: "Enter URL"
+            placeholderText: qsTr("Enter URL")
         }
     }
 

@@ -10,7 +10,7 @@ Page {
         anchors.rightMargin: Theme.paddingMedium
 
         PageHeader {
-            title: "About Tidings"
+            title: qsTr("About Tidings")
         }
 
         Item {
@@ -35,7 +35,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Theme.fontSizeMedium
             color: Theme.primaryColor
-            text: "A feed aggregator"
+            text: qsTr("A feed aggregator")
         }
 
         Item {
@@ -48,7 +48,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Theme.fontSizeExtraSmall
             color: Theme.secondaryColor
-            text: "Version 0.1.0"
+            text: qsTr("Version 0.1.0")
         }
 
         Label {
@@ -70,8 +70,8 @@ Page {
             font.pixelSize: Theme.fontSizeSmall
             color: Theme.secondaryColor
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-            text: "Tidings is open source software licensed under the terms of "
-                  + "the GNU General Public License."
+            text: qsTr("Tidings is open source software licensed under the terms of ")
+                  + qsTr("the GNU General Public License.")
         }
 
         Item {
@@ -81,7 +81,7 @@ Page {
 
         Button {
             anchors.horizontalCenter: parent.horizontalCenter
-            text: "View license"
+            text: qsTr("View license")
             onClicked: {
                 pageStack.push(Qt.resolvedUrl("LicensePage.qml"));
             }
