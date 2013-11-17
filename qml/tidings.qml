@@ -44,7 +44,8 @@ ApplicationWindow
             for (var i = 0; i < count; i++) {
                 var data = {
                     "name": get(i).name,
-                    "url": get(i).url
+                    "url": get(i).url,
+                    "color": get(i).color
                 };
                 sources.push(data);
             }
@@ -55,8 +56,12 @@ ApplicationWindow
         Component.onCompleted: {
             if (count === 0) {
                 // add example feeds
-                addSource("Engadget", "http://www.engadget.com/rss.xml");
-                addSource("JollaUsers.com", "http://jollausers.com/feed/");
+                addSource("Engadget",
+                          "http://www.engadget.com/rss.xml",
+                          "#ff0000");
+                addSource("JollaUsers.com",
+                          "http://jollausers.com/feed/",
+                          "#ffa000");
             }
         }
     }

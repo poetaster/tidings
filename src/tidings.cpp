@@ -34,6 +34,10 @@
 
 #include <sailfishapp.h>
 
+#include <QGuiApplication>
+#include <QLocale>
+#include <QQuickView>
+#include <QScopedPointer>
 #include <QTranslator>
 
 int main(int argc, char *argv[])

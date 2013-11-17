@@ -84,6 +84,12 @@ Page {
             contentHeight: Theme.itemSizeExtraLarge
             clip: true
 
+            Rectangle {
+                width: 2
+                height: parent.height
+                color: model.color
+            }
+
             Label {
                 id: feedLabel
                 anchors.left: parent.left

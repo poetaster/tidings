@@ -23,6 +23,7 @@ import QtQuick.XmlListModel 2.0
 
 XmlListModel {
     property string name
+    property string color
 
     query: "/rss/channel/item"
     namespaceDeclarations: "declare namespace media = 'http://search.yahoo.com/mrss/';" +

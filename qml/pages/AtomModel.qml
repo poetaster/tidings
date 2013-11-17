@@ -23,6 +23,7 @@ import QtQuick.XmlListModel 2.0
 
 XmlListModel {
     property string name
+    property string color
 
     query: "/atom:feed/atom:entry"
     namespaceDeclarations: "declare namespace atom = 'http://www.w3.org/2005/Atom';"

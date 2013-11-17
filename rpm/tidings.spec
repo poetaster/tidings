@@ -13,20 +13,20 @@ Name:       tidings
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    Bearer of tidings.
-Version:    0.1.0
+Version:    0.1.1
 Release:    1
 Group:      Qt/Qt
 License:    GPLv2
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  tidings.yaml
-Requires:   qt5-plugin-imageformat-gif
-Requires:   qt5-plugin-imageformat-ico
-Requires:   sailfishsilica-qt5
 Requires:   qt5-qtdeclarative-import-xmllistmodel
-BuildRequires:  pkgconfig(Qt5Core)
-BuildRequires:  pkgconfig(Qt5Qml)
-BuildRequires:  pkgconfig(Qt5Quick)
+Requires:   sailfishsilica-qt5
+Requires:   qt5-plugin-imageformat-ico
+Requires:   qt5-plugin-imageformat-gif
 BuildRequires:  pkgconfig(sailfishapp)
+BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(Qt5Qml)
+BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  desktop-file-utils
 
 %description
@@ -64,13 +64,13 @@ desktop-file-install --delete-original       \
 
 %files
 %defattr(-,root,root,-)
-/usr/share/icons/hicolor/90x90/apps
-/usr/share/applications
-/usr/share/tidings
-/usr/bin
-%{_datadir}/icons/hicolor/90x90/apps/%{name}.png
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/%{name}/qml
 %{_bindir}
+%{_datadir}/%{name}/qml
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/icons/hicolor/90x90/apps/%{name}.png
+/usr/bin
+/usr/share/tidings
+/usr/share/applications
+/usr/share/icons/hicolor/90x90/apps
 # >> files
 # << files

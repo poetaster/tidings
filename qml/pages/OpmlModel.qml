@@ -23,6 +23,7 @@ import QtQuick.XmlListModel 2.0
 
 XmlListModel {
     property string name
+    property string color
 
     query: "/opml/body/outline"
 

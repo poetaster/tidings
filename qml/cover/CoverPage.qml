@@ -43,6 +43,20 @@ CoverBackground {
             width: parent.width
             color: Theme.secondaryColor
         }
+
+        Item {
+            width: 1
+            height: 2 * Theme.paddingLarge
+        }
+
+        Label {
+            width: parent.width
+            font.pixelSize: Theme.fontSizeLarge
+            color: Theme.highlightColor
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            text: Format.formatDate(newsBlendModel.lastRefresh,
+                                    Formatter.DurationElapsed)
+        }
     }
 
     Column {

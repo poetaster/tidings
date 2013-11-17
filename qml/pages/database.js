@@ -1,6 +1,6 @@
 .import QtQuick.LocalStorage 2.0 as Sql
 
-var _REVISION = 1;
+var _REVISION = 2;
 
 var _database = Sql.LocalStorage.openDatabaseSync("TidingsDB", "1.0",
                                                   "Tidings Persisted Settings");
@@ -33,6 +33,7 @@ function _migrate(tx) {
     } else {
         // perform schema migration
         if (revision < 1) { _migrateRev1(tx); }
+        if (revision < 2) { _migrateRev2(tx); }
     }
 
     // set the new revision
@@ -40,6 +41,7 @@ function _migrate(tx) {
         tx.executeSql("INSERT INTO status (keyname, value) VALUES (?, ?)",
                       ["revision", _REVISION]);
     } else {
+        console.log("Updating database revision to " + _REVISION);
         tx.executeSql("UPDATE status SET value = ? WHERE keyname = ?",
                       [_REVISION, "revision"]);
     }
@@ -59,13 +61,20 @@ function _migrateRev1(tx) {
     }
 }
 
+/* Migrates to Rev 2, where we added color tags.
+ */
+function _migrateRev2(tx) {
+    tx.executeSql("ALTER TABLE sources ADD COLUMN color VARCHAR(9) DEFAULT '#00c0a0'");
+}
+
 /* Creates the initial schema.
  */
 function _createSchema(tx) {
     tx.executeSql("CREATE TABLE sources (" +
                   "  sourceid INT," +
                   "  name TEXT," +
-                  "  url TEXT" +
+                  "  url TEXT," +
+                  "  color VARCHAR(9)" +
                   ")");
 }
 
@@ -76,14 +85,16 @@ function sources() {
     var result = [];
 
     function f(tx) {
-        var res = tx.executeSql("SELECT sourceid, name, url FROM sources");
+        var res = tx.executeSql("SELECT sourceid, name, url, color "
+                                + "FROM sources");
         for (var i = 0; i < res.rows.length; i++)
         {
             var item = res.rows.item(i);
             result.push({
                             "sourceId": item.sourceid,
                             "name": item.name,
-                            "url": item.url
+                            "url": item.url,
+                            "color": item.color
                         });
         }
         console.log("feeds loaded");
@@ -95,7 +106,7 @@ function sources() {
 
 /* Adds a new feed source.
  */
-function addSource(name, url) {
+function addSource(name, url, color) {
 
     var nextId = 0;
 
@@ -106,8 +117,9 @@ function addSource(name, url) {
         } else {
             nextId = 0;
         }
-        tx.executeSql("INSERT INTO sources (sourceid, name, url) VALUES (?, ?, ?)",
-                      [nextId, name, url]);
+        tx.executeSql("INSERT INTO sources (sourceid, name, url, color) "
+                      + "VALUES (?, ?, ?, ?)",
+                      [nextId, name, url, color]);
     }
 
     _database.transaction(f);
@@ -116,11 +128,12 @@ function addSource(name, url) {
 
 /* Changes a feed source.
  */
-function changeSource(sourceId, name, url) {
+function changeSource(sourceId, name, url, color) {
 
     function f(tx) {
-        tx.executeSql("UPDATE sources SET name = ?, url = ? WHERE sourceid = ?",
-                      [name, url, sourceId]);
+        tx.executeSql("UPDATE sources SET name = ?, url = ?, color = ? "
+                      + "WHERE sourceid = ?",
+                      [name, url, color, sourceId]);
     }
 
     _database.transaction(f);

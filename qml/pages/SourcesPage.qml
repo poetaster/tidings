@@ -3,9 +3,6 @@ import Sailfish.Silica 1.0
 
 Page {
 
-    property Item _contextMenu
-    property Item _contextMenuItem
-
     SilicaListView {
         id: listview
 
@@ -27,72 +24,60 @@ Page {
             }
         }
 
-        delegate: Item {
+        delegate: ListItem {
             id: listItem
 
             property int sourceId: model.sourceId
             property string name: model.name
             property string url: model.url
-
-            property bool menuOpen: _contextMenu != null
-                                    && _contextMenu.parent === listItem
+            property string color: model.color
 
             function remove() {
-                remorse.execute(listItem, qsTr("Deleting"),
-                                function() { sourcesModel.removeSource(sourceId); } )
+                remorseAction(qsTr("Deleting"),
+                              function() { sourcesModel.removeSource(sourceId); });
             }
 
             width: listview.width
-            height: menuOpen ? _contextMenu.height + contentItem.height
-                             : contentItem.height
+            menu: contextMenuComponent
 
-            RemorseItem { id: remorse }
+            Rectangle {
+                width: 2
+                height: parent.height
+                color: model.color
+            }
 
-            ListItem {
-                id: contentItem
+            Label {
+                id: nameLabel
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: Theme.paddingMedium
+                anchors.rightMargin: Theme.paddingMedium
+                color: Theme.primaryColor
+                elide: Text.ElideRight
+                text: name
+            }
 
-                height: Theme.itemSizeMedium
+            Label {
+                anchors.top: nameLabel.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: Theme.paddingMedium
+                anchors.rightMargin: Theme.paddingMedium
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                elide: Text.ElideRight
+                text: url
+            }
 
-                Label {
-                    id: nameLabel
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: Theme.paddingMedium
-                    anchors.rightMargin: Theme.paddingMedium
-                    color: Theme.primaryColor
-                    elide: Text.ElideRight
-                    text: name
+            onClicked: {
+                var props = {
+                    "name": listItem.name,
+                    "url": listItem.url,
+                    "color": listItem.color,
+                    "sourceId": listItem.sourceId,
+                    "editOnly": true
                 }
-
-                Label {
-                    anchors.top: nameLabel.bottom
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: Theme.paddingMedium
-                    anchors.rightMargin: Theme.paddingMedium
-                    font.pixelSize: Theme.fontSizeExtraSmall
-                    color: Theme.secondaryColor
-                    elide: Text.ElideRight
-                    text: url
-                }
-
-                onPressAndHold: {
-                    if (! _contextMenu) {
-                        _contextMenu = contextMenuComponent.createObject(listview);
-                    }
-                    _contextMenuItem = listItem;
-                    _contextMenu.show(listItem);
-                }
-
-                onClicked: {
-                    var props = {
-                        "name": listItem.name,
-                        "url": listItem.url,
-                        "sourceId": listItem.sourceId,
-                        "editOnly": true
-                    }
-                    pageStack.push("SourceEditDialog.qml", props);
-                }
+                pageStack.push("SourceEditDialog.qml", props);
             }
         }
 
@@ -108,10 +93,12 @@ Page {
     Component {
         id: contextMenuComponent
         ContextMenu {
+            id: menu
             MenuItem {
                 text: qsTr("Remove")
+
                 onClicked: {
-                    _contextMenuItem.remove();
+                    menu.parent.remove();
                 }
             }
         }

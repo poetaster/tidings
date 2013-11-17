@@ -10,6 +10,9 @@ ListModel {
     // The list of all feed sources to load.
     property variant sources: []
 
+    // The time of the last refresh
+    property variant lastRefresh
+
     property AtomModel _atomModel: AtomModel {
         onStatusChanged: {
             if (status !== XmlListModel.Loading) {
@@ -77,6 +80,7 @@ ListModel {
             for (var i = 0; i < model.count; i++) {
                 var item = model.get(i);
                 item["name"] = model.name;
+                item["color"] = model.color;
                 item["date"] = item.dateString !== "" ? new Date(item.dateString)
                                                       : new Date();
                 item["sectionDate"] = Format.formatDate(item.date, Formatter.TimepointSectionRelative);
@@ -99,10 +103,12 @@ ListModel {
             var source = queue.pop();
             var url = source.url;
             var name = source.name;
+            var color = source.color;
 
             for (var i = 0; i < _models.length; i++) {
                 _models[i].name = name;
                 _models[i].source = url;
+                _models[i].color = color;
             }
 
             _sourcesQueue = queue;
@@ -119,5 +125,6 @@ ListModel {
         }
         _sourcesQueue = sources;
         _load();
+        lastRefresh = new Date();
     }
 }

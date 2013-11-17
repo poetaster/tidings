@@ -10,6 +10,7 @@ Page {
     property string title: newsBlendModel.get(index).title
     property string preview: newsBlendModel.get(index).description
     property string url: newsBlendModel.get(index).link
+    property string color: newsBlendModel.get(index).color
     property string date: newsBlendModel.get(index).date
 
     // style for rich text
@@ -45,6 +46,12 @@ Page {
         onNextItem: {
             nextItem();
         }
+    }
+
+    Rectangle {
+        width: 2
+        height: parent.height
+        color: page.color
     }
 
     SilicaFlickable {

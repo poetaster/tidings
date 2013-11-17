@@ -6,6 +6,7 @@ Dialog {
     property int sourceId
     property alias name: inputName.text
     property alias url: inputUrl.text
+    property alias color: swatch.color
     property bool editOnly
 
     canAccept: inputName.text !== ""
@@ -41,16 +42,49 @@ Dialog {
             width: parent.width
             placeholderText: qsTr("Enter URL")
         }
+
+        BackgroundItem {
+            id: colorPicker
+            height: Theme.itemSizeSmall
+
+            Rectangle {
+                id: swatch
+                width: height
+                height: parent.height
+                radius: 3
+                color: "#e60003"
+            }
+
+            Label {
+                anchors.left: swatch.right
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.leftMargin: Theme.paddingMedium
+                color: parent.down ? Theme.highlightColor : Theme.primaryColor
+                text: qsTr("Color tag")
+            }
+
+            onClicked: {
+                var dlg = pageStack.push("Sailfish.Silica.ColorPickerDialog");
+
+                function f() {
+                    swatch.color = dlg.color;
+                }
+
+                dlg.accepted.connect(f);
+            }
+        }
     }
 
     onAccepted: {
         if (editOnly) {
             sourcesModel.changeSource(sourceId,
                                       inputName.text,
-                                      inputUrl.text);
+                                      inputUrl.text,
+                                      "" + swatch.color);
         } else {
             sourcesModel.addSource(inputName.text,
-                                   inputUrl.text);
+                                   inputUrl.text,
+                                   "" + swatch.color);
         }
     }
 
