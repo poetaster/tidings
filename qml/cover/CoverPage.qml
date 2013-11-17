@@ -3,6 +3,13 @@ import Sailfish.Silica 1.0
 
 CoverBackground {
 
+    onStatusChanged: {
+        if (status === Cover.Active) {
+            labelElapsed.text = Format.formatDate(newsBlendModel.lastRefresh,
+                                                  Formatter.DurationElapsed);
+        }
+    }
+
     Column {
         visible: coverAdaptor.mode === "overview"
 
@@ -50,12 +57,11 @@ CoverBackground {
         }
 
         Label {
+            id: labelElapsed
             width: parent.width
             font.pixelSize: Theme.fontSizeLarge
             color: Theme.highlightColor
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-            text: Format.formatDate(newsBlendModel.lastRefresh,
-                                    Formatter.DurationElapsed)
         }
     }
 

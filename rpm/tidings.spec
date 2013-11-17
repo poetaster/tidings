@@ -19,14 +19,14 @@ Group:      Qt/Qt
 License:    GPLv2
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  tidings.yaml
-Requires:   qt5-qtdeclarative-import-xmllistmodel
-Requires:   sailfishsilica-qt5
-Requires:   qt5-plugin-imageformat-ico
 Requires:   qt5-plugin-imageformat-gif
-BuildRequires:  pkgconfig(sailfishapp)
-BuildRequires:  pkgconfig(Qt5Quick)
-BuildRequires:  pkgconfig(Qt5Qml)
+Requires:   qt5-plugin-imageformat-ico
+Requires:   sailfishsilica-qt5
+Requires:   qt5-qtdeclarative-import-xmllistmodel
 BuildRequires:  pkgconfig(Qt5Core)
+BuildRequires:  pkgconfig(Qt5Qml)
+BuildRequires:  pkgconfig(Qt5Quick)
+BuildRequires:  pkgconfig(sailfishapp)
 BuildRequires:  desktop-file-utils
 
 %description
@@ -64,13 +64,13 @@ desktop-file-install --delete-original       \
 
 %files
 %defattr(-,root,root,-)
-%{_bindir}
-%{_datadir}/%{name}/qml
-%{_datadir}/applications/%{name}.desktop
-%{_datadir}/icons/hicolor/90x90/apps/%{name}.png
-/usr/bin
-/usr/share/tidings
-/usr/share/applications
 /usr/share/icons/hicolor/90x90/apps
+/usr/share/applications
+/usr/share/tidings
+/usr/bin
+%{_datadir}/icons/hicolor/90x90/apps/%{name}.png
+%{_datadir}/applications/%{name}.desktop
+%{_datadir}/%{name}/qml
+%{_bindir}
 # >> files
 # << files
