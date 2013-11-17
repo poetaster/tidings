@@ -3,10 +3,14 @@ import Sailfish.Silica 1.0
 
 CoverBackground {
 
+    function refreshElapsed() {
+        labelElapsed.text = Format.formatDate(newsBlendModel.lastRefresh,
+                                              Formatter.DurationElapsed);
+    }
+
     onStatusChanged: {
         if (status === Cover.Active) {
-            labelElapsed.text = Format.formatDate(newsBlendModel.lastRefresh,
-                                                  Formatter.DurationElapsed);
+            refreshElapsed();
         }
     }
 
@@ -171,6 +175,7 @@ CoverBackground {
             iconSource: "image://theme/icon-cover-refresh"
             onTriggered: {
                 coverAdaptor.refresh();
+                refreshElapsed();
             }
         }
     }
@@ -182,6 +187,7 @@ CoverBackground {
             iconSource: "image://theme/icon-cover-refresh"
             onTriggered: {
                 coverAdaptor.refresh();
+                refreshElapsed();
             }
         }
 
