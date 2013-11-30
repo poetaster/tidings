@@ -6,17 +6,17 @@
 #         - desktop icon filename must be changed
 #         - desktop filename must be changed
 #         - icon definition filename in desktop file must be changed
-TARGET = tidings
+TARGET = harbour-tidings
 
 CONFIG += sailfishapp
 
-SOURCES += src/tidings.cpp
+SOURCES += \
+    src/harbour-tidings.cpp
 
-OTHER_FILES += qml/tidings.qml \
+OTHER_FILES += qml/harbour-tidings.qml \
     qml/cover/CoverPage.qml \
-    rpm/tidings.spec \
-    rpm/tidings.yaml \
-    tidings.desktop \
+    rpm/harbour-tidings.spec \
+    rpm/harbour-tidings.yaml \
     qml/pages/FeedsPage.qml \
     qml/pages/RssModel.qml \
     qml/pages/SourcesPage.qml \
@@ -33,12 +33,13 @@ OTHER_FILES += qml/tidings.qml \
     qml/pages/AboutPage.qml \
     qml/pages/LicensePage.qml \
     qml/pages/license.js \
-    qml/tidings.png
+    qml/tidings.png \
+    harbour-tidings.desktop
 
 TRANSLATIONS = l10n/en_US.ts \
             l10n/ru_RU.ts
 lupdate_only{
-SOURCES = qml/tidings.qml \
+SOURCES = \
           qml/pages/*.qml \
           qml/cover/*.qml
 }

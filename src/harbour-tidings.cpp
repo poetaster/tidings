@@ -58,9 +58,7 @@ int main(int argc, char *argv[])
     app->installTranslator(appTranslator);
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
-    view->setSource(SailfishApp::pathTo("qml/tidings.qml"));
+    view->setSource(SailfishApp::pathTo("qml/harbour-tidings.qml"));
     view->showFullScreen();
     return app->exec();
-
 }
-
