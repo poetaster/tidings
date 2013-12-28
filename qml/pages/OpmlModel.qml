@@ -27,6 +27,7 @@ XmlListModel {
 
     query: "/opml/body/outline"
 
+    XmlRole { name: "uid"; query: "@id/string()" }
     XmlRole { name: "title"; query: "@title/string()" }
     XmlRole { name: "link"; query: "@xmlUrl/string()" }
     XmlRole { name: "dateString"; query: "" } // doesn't exist

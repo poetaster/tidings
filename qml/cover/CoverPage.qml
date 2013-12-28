@@ -153,7 +153,8 @@ CoverBackground {
 
 
     CoverActionList {
-        enabled: coverAdaptor.hasPrevious && coverAdaptor.hasNext && coverAdaptor.mode === "feeds"
+        enabled: coverAdaptor.hasPrevious && coverAdaptor.hasNext && coverAdaptor.mode === "feeds" &&
+                 ! newsBlendModel.busy
 
         CoverAction {
             iconSource: "image://theme/icon-cover-previous"
@@ -171,7 +172,8 @@ CoverBackground {
     }
 
     CoverActionList {
-        enabled: coverAdaptor.hasPrevious && ! coverAdaptor.hasNext && coverAdaptor.mode === "feeds"
+        enabled: coverAdaptor.hasPrevious && ! coverAdaptor.hasNext && coverAdaptor.mode === "feeds" &&
+                 ! newsBlendModel.busy
 
         CoverAction {
             iconSource: "image://theme/icon-cover-previous"
@@ -182,7 +184,8 @@ CoverBackground {
     }
 
     CoverActionList {
-        enabled: ! coverAdaptor.hasPrevious && coverAdaptor.hasNext && coverAdaptor.mode === "feeds"
+        enabled: ! coverAdaptor.hasPrevious && coverAdaptor.hasNext && coverAdaptor.mode === "feeds" &&
+                 ! newsBlendModel.busy
 
         CoverAction {
             iconSource: "image://theme/icon-cover-next"
@@ -193,7 +196,8 @@ CoverBackground {
     }
 
     CoverActionList {
-        enabled: coverAdaptor.mode === "overview" && newsBlendModel.count === 0
+        enabled: coverAdaptor.mode === "overview" && newsBlendModel.count === 0 &&
+                 ! newsBlendModel.busy
 
         CoverAction {
             iconSource: "image://theme/icon-cover-refresh"

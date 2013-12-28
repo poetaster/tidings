@@ -122,6 +122,7 @@ Page {
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 maximumLineCount: 2
+                opacity: read ? 0.5 : 1
                 text: title
             }
 
@@ -135,6 +136,7 @@ Page {
                 height: parent.height - 2 * Theme.paddingSmall
                 fillMode: Image.PreserveAspectCrop
                 smooth: true
+                opacity: read ? 0.5 : 1
                 clip: true
                 source: thumbnail
             }

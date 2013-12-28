@@ -12,6 +12,7 @@ Page {
     property string url: newsBlendModel.get(index).link
     property string color: newsBlendModel.get(index).color
     property string date: newsBlendModel.get(index).date
+    property bool read: newsBlendModel.get(index).read
 
     property int _previousOfFeed: newsBlendModel.previousOfFeed(index)
     property int _nextOfFeed: newsBlendModel.nextOfFeed(index)
@@ -45,6 +46,9 @@ Page {
 
     Component.onCompleted: {
         navigationState.openedItem(index);
+        if (! read) {
+            newsBlendModel.setRead(index, true);
+        }
     }
 
     Connections {

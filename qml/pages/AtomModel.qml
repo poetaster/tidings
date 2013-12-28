@@ -28,6 +28,7 @@ XmlListModel {
     query: "/atom:feed/atom:entry"
     namespaceDeclarations: "declare namespace atom = 'http://www.w3.org/2005/Atom';"
 
+    XmlRole { name: "uid"; query: "atom:id/string()" }
     XmlRole { name: "title"; query: "atom:title/string()" }
     XmlRole { name: "link"; query: "atom:link[@rel='alternate']/@href/string()" }
     XmlRole { name: "description"; query: "atom:summary/string()" }

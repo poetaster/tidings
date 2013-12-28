@@ -1,6 +1,12 @@
+.pragma library
 .import QtQuick.LocalStorage 2.0 as Sql
 
-var _REVISION = 2;
+/* Revision of the database. Every schema modification increases the revision.
+ * Implement a migration function to that revision from the previous one and
+ * call it in _migrate.
+ * Update _createSchema with the schema modifications.
+ */
+var _REVISION = 3;
 
 var _database = Sql.LocalStorage.openDatabaseSync("TidingsDB", "1.0",
                                                   "Tidings Persisted Settings");
@@ -34,13 +40,14 @@ function _migrate(tx) {
         // perform schema migration
         if (revision < 1) { _migrateRev1(tx); }
         if (revision < 2) { _migrateRev2(tx); }
+        if (revision < 3) { _migrateRev3(tx); }
     }
 
     // set the new revision
     if (revision === 0) {
         tx.executeSql("INSERT INTO status (keyname, value) VALUES (?, ?)",
                       ["revision", _REVISION]);
-    } else {
+    } else if (revision < _REVISION) {
         console.log("Updating database revision to " + _REVISION);
         tx.executeSql("UPDATE status SET value = ? WHERE keyname = ?",
                       [_REVISION, "revision"]);
@@ -67,6 +74,15 @@ function _migrateRev2(tx) {
     tx.executeSql("ALTER TABLE sources ADD COLUMN color VARCHAR(9) DEFAULT '#00c0a0'");
 }
 
+/* Migrates to Rev 3, where we added a table for read items.
+ */
+function _migrateRev3(tx) {
+    tx.executeSql("CREATE TABLE read (" +
+                  "  url TEXT," +
+                  "  uid TEXT" +
+                  ")");
+}
+
 /* Creates the initial schema.
  */
 function _createSchema(tx) {
@@ -75,6 +91,11 @@ function _createSchema(tx) {
                   "  name TEXT," +
                   "  url TEXT," +
                   "  color VARCHAR(9)" +
+                  ")");
+
+    tx.executeSql("CREATE TABLE read (" +
+                  "  url TEXT," +
+                  "  uid TEXT" +
                   ")");
 }
 
@@ -144,9 +165,49 @@ function changeSource(sourceId, name, url, color) {
 function removeSource(sourceId) {
 
     function f(tx) {
+        var res = tx.executeSql("SELECT url FROM sources WHERE sourceid = ?",
+                                [sourceId]);
+
+        if (res.rows.length) {
+            tx.executeSql("DELETE FROM read WHERE url = ?",
+                          [res.rows.item(0).url]);
+        }
+
         tx.executeSql("DELETE FROM sources WHERE sourceid = ?",
                       [sourceId]);
     }
 
    _database.transaction(f);
+}
+
+/* Marks the given item as read.
+ */
+function setRead(url, uid, value) {
+
+    function f(tx) {
+        if (value) {
+            tx.executeSql("INSERT INTO read (url, uid) VALUES(?, ?)",
+                          [url, uid]);
+        } else {
+            tx.executeSql("DELETE FROM read WHERE url = ? AND uid = ?",
+                          [url, uid]);
+        }
+    }
+
+    _database.transaction(f);
+}
+
+/* Returns if the given item is marked as read.
+ */
+function isRead(url, uid) {
+    var result = false;
+
+    function f(tx) {
+        var res = tx.executeSql("SELECT url FROM read WHERE url = ? AND uid = ?",
+                                [url, uid]);
+        result = (res.rows.length > 0);
+    }
+
+    _database.transaction(f);
+    return result;
 }

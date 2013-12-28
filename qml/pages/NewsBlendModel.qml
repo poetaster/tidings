@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
 import Sailfish.Silica 1.0
+import "database.js" as Database
 
 /* List model that blends various feed models together.
  */
@@ -18,27 +19,42 @@ ListModel {
 
     property AtomModel _atomModel: AtomModel {
         onStatusChanged: {
-            if (status !== XmlListModel.Loading) {
+            if (status !== XmlListModel.Loading)
+            {
                 _addItems(_atomModel);
                 _load();
+            }
+            if (status === XmlListModel.Error)
+            {
+                listModel.error(errorString());
             }
         }
     }
 
     property OpmlModel _opmlModel: OpmlModel {
         onStatusChanged: {
-            if (status !== XmlListModel.Loading) {
+            if (status !== XmlListModel.Loading)
+            {
                 _addItems(_opmlModel);
                 _load();
+            }
+            if (status === XmlListModel.Error)
+            {
+                listModel.error(errorString());
             }
         }
     }
 
     property RssModel _rssModel: RssModel {
         onStatusChanged: {
-            if (status !== XmlListModel.Loading) {
+            if (status !== XmlListModel.Loading)
+            {
                 _addItems(_rssModel);
                 _load();
+            }
+            if (status === XmlListModel.Error)
+            {
+                listModel.error(errorString());
             }
         }
     }
@@ -48,6 +64,8 @@ ListModel {
     ]
 
     property variant _sourcesQueue: []
+
+    signal error(string details)
 
     /* Inserts the given item into this model.
      */
@@ -88,7 +106,21 @@ ListModel {
                 item["date"] = item.dateString !== "" ? new Date(item.dateString)
                                                       : new Date();
                 item["sectionDate"] = Format.formatDate(item.date, Formatter.TimepointSectionRelative);
-                _insertItem(item);
+                if (item.uid === "") {
+                    // if there is no UID, make a unique one
+                    if (item.dateString !== "") {
+                        item["uid"] = item.title + item.dateString;
+                    } else {
+                        var d = new Date();
+                        item["uid"] = item.title + d.getTime();
+                    }
+                    console.log(item.title + " -> " + item.uid);
+                }
+                item["read"] = Database.isRead(item.source, item.uid);
+                if (! item.read) {
+                    // read items are gone... forever
+                    _insertItem(item);
+                }
             }
         }
     }
@@ -167,6 +199,15 @@ ListModel {
             }
         }
         return -1;
+    }
+
+    /* Marks the given item as read.
+     */
+    function setRead(idx, value)
+    {
+        var item = get(idx);
+        Database.setRead(item.source, item.uid, value);
+        item.read = value;
     }
 
 }

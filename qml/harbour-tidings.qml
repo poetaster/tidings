@@ -68,6 +68,10 @@ ApplicationWindow
 
     NewsBlendModel {
         id: newsBlendModel
+
+        onError: {
+            notification.show(details);
+        }
     }
 
     QtObject {
@@ -100,6 +104,10 @@ ApplicationWindow
             coverAdaptor.mode = pageStack.currentPage.objectName === "ViewPage" ? "feeds"
                                                                                 : "overview";
         }
+    }
+
+    Notification {
+        id: notification
     }
 
     initialPage: FeedsPage { }

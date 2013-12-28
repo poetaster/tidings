@@ -29,6 +29,7 @@ XmlListModel {
     namespaceDeclarations: "declare namespace media = 'http://search.yahoo.com/mrss/';" +
             "declare namespace content = 'http://purl.org/rss/1.0/modules/content/';"
 
+    XmlRole { name: "uid"; query: "guid/string()" }
     XmlRole { name: "title"; query: "title/string()" }
     XmlRole { name: "link"; query: "link/string()" }
     XmlRole { name: "description"; query: "description/string()" }
