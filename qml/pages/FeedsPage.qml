@@ -42,6 +42,8 @@ Page {
     SilicaListView {
         id: listview
 
+        visible: ! newsBlendModel.busy
+
         anchors.fill: parent
         //spacing: Theme.paddingSmall
 
@@ -158,9 +160,13 @@ Page {
         ScrollDecorator { }
     }
 
+    FancyScroller {
+        flickable: listview
+    }
+
     BusyIndicator {
         anchors.centerIn: parent
-        running: listview.count === 0 & sourcesModel.count > 0
+        running: newsBlendModel.busy
         size: BusyIndicatorSize.Large
 
     }

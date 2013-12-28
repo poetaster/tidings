@@ -34,7 +34,8 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/LicensePage.qml \
     qml/pages/license.js \
     qml/tidings.png \
-    harbour-tidings.desktop
+    harbour-tidings.desktop \
+    qml/pages/FancyScroller.qml
 
 TRANSLATIONS = l10n/en_US.ts \
             l10n/ru_RU.ts

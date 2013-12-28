@@ -13,6 +13,9 @@ Page {
     property string color: newsBlendModel.get(index).color
     property string date: newsBlendModel.get(index).date
 
+    property int _previousOfFeed: newsBlendModel.previousOfFeed(index)
+    property int _nextOfFeed: newsBlendModel.nextOfFeed(index)
+
     // style for rich text
     property string _style: "<style>a:link { color:" + Theme.highlightColor + "}</style>"
 
@@ -26,6 +29,14 @@ Page {
     function nextItem() {
         var props = {
             "index": index + 1
+        };
+        pageStack.replace("ViewPage.qml", props);
+    }
+
+    function goToItem(idx)
+    {
+        var props = {
+            "index": idx
         };
         pageStack.replace("ViewPage.qml", props);
     }
@@ -60,11 +71,20 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                enabled: index > 0
-                text: enabled ? qsTr("Previous") : qsTr("Already at the beginning")
+                enabled: _previousOfFeed !== -1
+                text: feedName
 
                 onClicked: {
-                    previousItem();
+                    goToItem(_previousOfFeed);
+                }
+            }
+            MenuItem {
+                enabled: index > 0
+                text: enabled ? qsTr("Previous")
+                              : qsTr("Already at the beginning")
+
+                onClicked: {
+                    goToItem(index - 1)
                 }
             }
         }
@@ -72,10 +92,19 @@ Page {
         PushUpMenu {
             MenuItem {
                 enabled: index < newsBlendModel.count - 1
-                text: enabled ? qsTr("Next") : qsTr("Already at the end")
+                text: enabled ? qsTr("Next")
+                              : qsTr("Already at the end")
 
                 onClicked: {
-                    nextItem();
+                    goToItem(index + 1)
+                }
+            }
+            MenuItem {
+                enabled: _nextOfFeed !== -1
+                text: feedName
+
+                onClicked: {
+                    goToItem(_nextOfFeed);
                 }
             }
         }

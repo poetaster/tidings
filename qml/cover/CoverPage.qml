@@ -2,6 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 CoverBackground {
+    id: cover
 
     function refreshElapsed() {
         labelElapsed.text = Format.formatDate(newsBlendModel.lastRefresh,
@@ -61,7 +62,30 @@ CoverBackground {
         }
 
         Label {
+            visible: newsBlendModel.busy
+            font.pixelSize: Theme.fontSizeLarge
+            color: Theme.highlightColor
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            text: qsTr("Refreshing")
+
+            Timer {
+                property int angle: 0
+
+                running: cover.status === Cover.Active && parent.visible
+                interval: 50
+                repeat: true
+
+                onTriggered: {
+                    var a = angle;
+                    parent.opacity = 0.5 + 0.5 * Math.sin(angle * (Math.PI / 180.0));
+                    angle = (angle + 10) % 360;
+                }
+            }
+        }
+
+        Label {
             id: labelElapsed
+            visible: ! newsBlendModel.busy
             width: parent.width
             font.pixelSize: Theme.fontSizeLarge
             color: Theme.highlightColor
@@ -184,17 +208,17 @@ CoverBackground {
         enabled: coverAdaptor.mode === "overview" && newsBlendModel.count > 0
 
         CoverAction {
-            iconSource: "image://theme/icon-cover-refresh"
+            iconSource: "image://theme/icon-cover-next"
             onTriggered: {
-                coverAdaptor.refresh();
-                refreshElapsed();
+                coverAdaptor.firstItem();
             }
         }
 
         CoverAction {
-            iconSource: "image://theme/icon-cover-next"
+            iconSource: "image://theme/icon-cover-refresh"
             onTriggered: {
-                coverAdaptor.firstItem();
+                coverAdaptor.refresh();
+                refreshElapsed();
             }
         }
     }

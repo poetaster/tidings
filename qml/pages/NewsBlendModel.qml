@@ -7,11 +7,14 @@ import Sailfish.Silica 1.0
 ListModel {
     id: listModel
 
-    // The list of all feed sources to load.
+    // the list of all feed sources to load.
     property variant sources: []
 
-    // The time of the last refresh
+    // the time of the last refresh
     property variant lastRefresh
+
+    // flag indicating that this model is busy
+    property bool busy
 
     property AtomModel _atomModel: AtomModel {
         onStatusChanged: {
@@ -81,6 +84,7 @@ ListModel {
                 var item = model.get(i);
                 item["name"] = model.name;
                 item["color"] = model.color;
+                item["source"] = "" + model.source; // convert to string
                 item["date"] = item.dateString !== "" ? new Date(item.dateString)
                                                       : new Date();
                 item["sectionDate"] = Format.formatDate(item.date, Formatter.TimepointSectionRelative);
@@ -113,12 +117,17 @@ ListModel {
 
             _sourcesQueue = queue;
         }
+        else
+        {
+            busy = false;
+        }
     }
 
     /* Clears and reloads the model from the current sources.
      */
     function refresh() {
         console.log("Refreshing model");
+        busy = true;
         clear();
         for (var i = 0; i < sources.length; i++) {
             console.log("Source: " + sources[i].url);
@@ -127,4 +136,37 @@ ListModel {
         _load();
         lastRefresh = new Date();
     }
+
+    /* Returns the index of the previous item of the same feed as the given
+     * index, or -1 if there is none.
+     */
+    function previousOfFeed(idx)
+    {
+        var item = get(idx);
+        for (var i = idx - 1; i >= 0; --i)
+        {
+            if (get(i).source === item.source)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /* Returns the index of the next item of the same feed as the given index,
+     * or -1 if there is none.
+     */
+    function nextOfFeed(idx)
+    {
+        var item = get(idx);
+        for (var i = idx + 1; i < count; ++i)
+        {
+            if (get(i).source === item.source)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }
