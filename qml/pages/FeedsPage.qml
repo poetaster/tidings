@@ -37,15 +37,16 @@ Page {
         onRefresh: {
             newsBlendModel.refresh();
         }
+
+        onAbort: {
+            newsBlendModel.abort();
+        }
     }
 
     SilicaListView {
         id: listview
 
-        visible: ! newsBlendModel.busy
-
         anchors.fill: parent
-        //spacing: Theme.paddingSmall
 
         model: newsBlendModel
 
@@ -63,25 +64,21 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Refresh")
+                text: newsBlendModel.busy ? qsTr("Abort refreshing")
+                                          : qsTr("Refresh")
 
                 onClicked: {
-                    newsBlendModel.refresh();
-                }
-            }
-        }
-
-        PushUpMenu {
-            MenuItem {
-                text: qsTr("Back to top")
-
-                onClicked: {
-                    listview.scrollToTop();
+                    if (newsBlendModel.busy) {
+                        newsBlendModel.abort();
+                    } else {
+                        newsBlendModel.refresh();
+                    }
                 }
             }
         }
 
         delegate: ListItem {
+            visible: ! newsBlendModel.busy
             width: listview.width
             contentHeight: Theme.itemSizeExtraLarge
             clip: true
@@ -159,6 +156,13 @@ Page {
             text: qsTr("No tidings is glad tidings?\n\nPlease add some sources. →")
         }
 
+        ViewPlaceholder {
+            enabled: sourcesModel.count > 0 &&
+                     ! newsBlendModel.busy &&
+                     newsBlendModel.count === 0
+            text: qsTr("Pull down to refresh.")
+        }
+
         ScrollDecorator { }
     }
 
@@ -171,5 +175,18 @@ Page {
         running: newsBlendModel.busy
         size: BusyIndicatorSize.Large
 
+    }
+
+    Label {
+        visible: newsBlendModel.busy
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: Theme.paddingMedium
+        horizontalAlignment: Text.AlignHCenter
+        font.pixelSize: Theme.fontSizeMedium
+        color: Theme.secondaryColor
+        truncationMode: TruncationMode.Fade
+        text: newsBlendModel.currentlyLoading
     }
 }

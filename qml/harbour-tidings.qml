@@ -70,6 +70,7 @@ ApplicationWindow
         id: newsBlendModel
 
         onError: {
+            console.log("Error: " + details);
             notification.show(details);
         }
     }
@@ -92,6 +93,7 @@ ApplicationWindow
         property bool hasNext
 
         signal refresh
+        signal abort
         signal firstItem
         signal previousItem
         signal nextItem

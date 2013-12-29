@@ -152,9 +152,12 @@ CoverBackground {
 
 
 
+    // [previous] and [next]
     CoverActionList {
-        enabled: coverAdaptor.hasPrevious && coverAdaptor.hasNext && coverAdaptor.mode === "feeds" &&
-                 ! newsBlendModel.busy
+        enabled: ! newsBlendModel.busy &&
+                 coverAdaptor.mode === "feeds" &&
+                 coverAdaptor.hasPrevious &&
+                 coverAdaptor.hasNext
 
         CoverAction {
             iconSource: "image://theme/icon-cover-previous"
@@ -171,9 +174,12 @@ CoverBackground {
         }
     }
 
+    // [previous] only
     CoverActionList {
-        enabled: coverAdaptor.hasPrevious && ! coverAdaptor.hasNext && coverAdaptor.mode === "feeds" &&
-                 ! newsBlendModel.busy
+        enabled: ! newsBlendModel.busy &&
+                 coverAdaptor.mode === "feeds" &&
+                 coverAdaptor.hasPrevious &&
+                 ! coverAdaptor.hasNext
 
         CoverAction {
             iconSource: "image://theme/icon-cover-previous"
@@ -183,9 +189,12 @@ CoverBackground {
         }
     }
 
+    // [next] only
     CoverActionList {
-        enabled: ! coverAdaptor.hasPrevious && coverAdaptor.hasNext && coverAdaptor.mode === "feeds" &&
-                 ! newsBlendModel.busy
+        enabled: ! newsBlendModel.busy &&
+                 coverAdaptor.mode === "feeds" &&
+                 ! coverAdaptor.hasPrevious &&
+                 coverAdaptor.hasNext
 
         CoverAction {
             iconSource: "image://theme/icon-cover-next"
@@ -195,9 +204,23 @@ CoverBackground {
         }
     }
 
+    // [abort] while loading
     CoverActionList {
-        enabled: coverAdaptor.mode === "overview" && newsBlendModel.count === 0 &&
-                 ! newsBlendModel.busy
+        enabled: newsBlendModel.busy
+
+        CoverAction {
+            iconSource: "image://theme/icon-cover-cancel"
+            onTriggered: {
+                coverAdaptor.abort();
+            }
+        }
+    }
+
+    // [refresh only]
+    CoverActionList {
+        enabled: ! newsBlendModel.busy &&
+                 newsBlendModel.count === 0 &&
+                 coverAdaptor.mode === "overview"
 
         CoverAction {
             iconSource: "image://theme/icon-cover-refresh"
@@ -208,8 +231,11 @@ CoverBackground {
         }
     }
 
+    // [next] and [refresh]
     CoverActionList {
-        enabled: coverAdaptor.mode === "overview" && newsBlendModel.count > 0
+        enabled: ! newsBlendModel.busy &&
+                 newsBlendModel.count > 0 &&
+                 coverAdaptor.mode === "overview"
 
         CoverAction {
             iconSource: "image://theme/icon-cover-next"

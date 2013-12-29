@@ -17,8 +17,12 @@ ListModel {
     // flag indicating that this model is busy
     property bool busy
 
+    // name of the feed currently loading
+    property string currentlyLoading
+
     property AtomModel _atomModel: AtomModel {
         onStatusChanged: {
+            console.log("AtomModel.status = " + status + " (" + source + ")");
             if (status !== XmlListModel.Loading)
             {
                 _addItems(_atomModel);
@@ -26,13 +30,14 @@ ListModel {
             }
             if (status === XmlListModel.Error)
             {
-                listModel.error(errorString());
+                _handleError(errorString());
             }
         }
     }
 
     property OpmlModel _opmlModel: OpmlModel {
         onStatusChanged: {
+            console.log("OpmlModel.status = " + status + " (" + source + ")");
             if (status !== XmlListModel.Loading)
             {
                 _addItems(_opmlModel);
@@ -40,13 +45,14 @@ ListModel {
             }
             if (status === XmlListModel.Error)
             {
-                listModel.error(errorString());
+                _handleError(errorString());
             }
         }
     }
 
     property RssModel _rssModel: RssModel {
         onStatusChanged: {
+            console.log("RssModel.status = " + status + " (" + source + ")");
             if (status !== XmlListModel.Loading)
             {
                 _addItems(_rssModel);
@@ -54,7 +60,7 @@ ListModel {
             }
             if (status === XmlListModel.Error)
             {
-                listModel.error(errorString());
+                _handleError(errorString());
             }
         }
     }
@@ -141,6 +147,7 @@ ListModel {
             var name = source.name;
             var color = source.color;
 
+            currentlyLoading = name;
             for (var i = 0; i < _models.length; i++) {
                 _models[i].name = name;
                 _models[i].source = url;
@@ -152,6 +159,22 @@ ListModel {
         else
         {
             busy = false;
+            currentlyLoading = "";
+        }
+    }
+
+    /* Handles errors.
+     */
+    function _handleError(error) {
+        if (error.substring(0, 5) === "Host ") {
+            // Host ... not found
+            for (var i = 0; i < _models.length; i++) {
+                if (_models[i].status === XmlListModel.Loading) {
+                    _models[i].source = "";
+                }
+            }
+        } else {
+            listModel.error(error);
         }
     }
 
@@ -167,6 +190,16 @@ ListModel {
         _sourcesQueue = sources;
         _load();
         lastRefresh = new Date();
+    }
+
+    /* Aborts loading.
+     */
+    function abort() {
+        _sourcesQueue = [];
+        for (var i = 0; i < _models.length; i++) {
+            _models[i].source = "";
+        }
+        busy = false;
     }
 
     /* Returns the index of the previous item of the same feed as the given
