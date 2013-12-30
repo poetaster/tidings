@@ -6,7 +6,7 @@
  * call it in _migrate.
  * Update _createSchema with the schema modifications.
  */
-var _REVISION = 3;
+var _REVISION = 4;
 
 var _database = Sql.LocalStorage.openDatabaseSync("TidingsDB", "1.0",
                                                   "Tidings Persisted Settings");
@@ -41,6 +41,7 @@ function _migrate(tx) {
         if (revision < 1) { _migrateRev1(tx); }
         if (revision < 2) { _migrateRev2(tx); }
         if (revision < 3) { _migrateRev3(tx); }
+        if (revision < 4) { _migrateRev4(tx); }
     }
 
     // set the new revision
@@ -83,6 +84,12 @@ function _migrateRev3(tx) {
                   ")");
 }
 
+/* Migrates to Rev 4, where read items got a timestamp.
+ */
+function _migrateRev4(tx) {
+    tx.executeSql("ALTER TABLE read ADD COLUMN read INT DEFAULT 0");
+}
+
 /* Creates the initial schema.
  */
 function _createSchema(tx) {
@@ -95,7 +102,8 @@ function _createSchema(tx) {
 
     tx.executeSql("CREATE TABLE read (" +
                   "  url TEXT," +
-                  "  uid TEXT" +
+                  "  uid TEXT," +
+                  "  read INT" +
                   ")");
 }
 
@@ -186,8 +194,10 @@ function setRead(url, uid, value) {
 
     function f(tx) {
         if (value) {
-            tx.executeSql("INSERT INTO read (url, uid) VALUES(?, ?)",
-                          [url, uid]);
+            var d = new Date();
+            var now = d.getTime() / 1000;
+            tx.executeSql("INSERT INTO read (url, uid, read) VALUES (?, ?, ?)",
+                          [url, uid, now]);
         } else {
             tx.executeSql("DELETE FROM read WHERE url = ? AND uid = ?",
                           [url, uid]);
@@ -210,4 +220,20 @@ function isRead(url, uid) {
 
     _database.transaction(f);
     return result;
+}
+
+/* Forgets about read items older than the given amount of seconds.
+ * This helps reduce disk space consumption.
+ */
+function forgetRead(age) {
+
+    function f(tx) {
+        var d = new Date();
+        var now = d.getTime() / 1000;
+        var then = now - age;
+        tx.executeSql("DELETE FROM read WHERE read < ?",
+                      [then]);
+    }
+
+    _database.transaction(f);
 }

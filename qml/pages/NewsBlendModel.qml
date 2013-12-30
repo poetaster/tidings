@@ -243,4 +243,7 @@ ListModel {
         item.read = value;
     }
 
+    Component.onCompleted: {
+        Database.forgetRead(3600 * 24 * 90);
+    }
 }
