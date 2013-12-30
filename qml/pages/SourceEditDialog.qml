@@ -40,6 +40,7 @@ Dialog {
         TextField {
             id: inputUrl
             width: parent.width
+            inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhUrlCharactersOnly
             placeholderText: qsTr("Enter URL")
         }
 

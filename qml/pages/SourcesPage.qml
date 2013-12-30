@@ -19,7 +19,10 @@ Page {
                 text: qsTr("Add Source ...")
 
                 onClicked: {
-                    pageStack.push("SourceEditDialog.qml", {});
+                    var props = {
+                        "url": "http://"
+                    };
+                    pageStack.push("SourceEditDialog.qml", props);
                 }
             }
         }

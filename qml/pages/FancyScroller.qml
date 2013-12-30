@@ -28,6 +28,7 @@ Item {
         }
 
         onPressed: {
+            flickable.cancelFlick();
             flickable.scrollToTop();
         }
     }
@@ -53,6 +54,7 @@ Item {
         }
 
         onPressed: {
+            flickable.cancelFlick();
             flickable.scrollToBottom();
         }
     }
