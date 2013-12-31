@@ -32,5 +32,4 @@ XmlListModel {
     XmlRole { name: "link"; query: "@xmlUrl/string()" }
     XmlRole { name: "dateString"; query: "" } // doesn't exist
     XmlRole { name: "description"; query: "@text/string()" }
-    XmlRole { name: "thumbnail"; query: "" } // doesn't exist
 }

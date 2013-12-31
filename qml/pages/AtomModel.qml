@@ -34,5 +34,4 @@ XmlListModel {
     XmlRole { name: "description"; query: "atom:summary/string()" }
     XmlRole { name: "encoded"; query: "atom:content/string()" }
     XmlRole { name: "dateString"; query: "atom:updated/string()" }
-    XmlRole { name: "thumbnail"; query: "atom:link[@rel='enclosure']/@href/string()" }
 }

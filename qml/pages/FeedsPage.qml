@@ -48,7 +48,7 @@ Page {
 
         anchors.fill: parent
 
-        model: newsBlendModel
+        model: newsBlendModel.busy ? null : newsBlendModel
 
         header: PageHeader {
             title: qsTr("Tidings")
@@ -78,7 +78,6 @@ Page {
         }
 
         delegate: ListItem {
-            visible: ! newsBlendModel.busy
             width: listview.width
             contentHeight: Theme.itemSizeExtraLarge
             clip: true
@@ -126,16 +125,23 @@ Page {
             Image {
                 id: picture
                 visible: status === Image.Ready
-                y: Theme.paddingSmall
                 anchors.right: parent.right
-                anchors.rightMargin: Theme.paddingMedium
                 width: height
-                height: parent.height - 2 * Theme.paddingSmall
+                height: parent.height
+                sourceSize.width: width * 2
+                sourceSize.height: height * 2
                 fillMode: Image.PreserveAspectCrop
                 smooth: true
                 opacity: read ? 0.5 : 1
                 clip: true
                 source: thumbnail
+            }
+
+            Image {
+                visible: model.enclosuresAmount && enclosuresAmount > 0
+                anchors.top: parent.top
+                anchors.right: parent.right
+                source: "image://theme/icon-s-attach"
             }
 
             onClicked: {

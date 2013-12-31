@@ -126,7 +126,6 @@ function sources() {
                             "color": item.color
                         });
         }
-        console.log("feeds loaded");
     }
 
     _database.transaction(f);

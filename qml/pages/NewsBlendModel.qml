@@ -20,50 +20,60 @@ ListModel {
     // name of the feed currently loading
     property string currentlyLoading
 
+    property RssModel _rssModel: RssModel {
+        onStatusChanged: {
+            console.log("RssModel.status = " + status + " (" + source + ")");
+            if (status === XmlListModel.Error) {
+                _handleError(errorString());
+                _load();
+            } else if (status !== XmlListModel.Loading) {
+                _addItems(_rssModel);
+                if (count === 0) {
+                    _atomModel.name = name;
+                    _atomModel.source = "";
+                    _atomModel.source = source;
+                    _atomModel.color = color;
+                } else {
+                    _load();
+                }
+            }
+        }
+    }
+
     property AtomModel _atomModel: AtomModel {
         onStatusChanged: {
             console.log("AtomModel.status = " + status + " (" + source + ")");
-            if (status !== XmlListModel.Loading)
-            {
-                _addItems(_atomModel);
-                _load();
-            }
-            if (status === XmlListModel.Error)
-            {
+            if (status === XmlListModel.Error) {
                 _handleError(errorString());
+                _load();
+            } else if (status !== XmlListModel.Loading) {
+                _addItems(_atomModel);
+                if (count === 0) {
+                    _opmlModel.name = name;
+                    _opmlModel.source = "";
+                    _opmlModel.source = source;
+                    _opmlModel.color = color;
+                } else {
+                    _load();
+                }
             }
+
         }
     }
 
     property OpmlModel _opmlModel: OpmlModel {
         onStatusChanged: {
             console.log("OpmlModel.status = " + status + " (" + source + ")");
-            if (status !== XmlListModel.Loading)
-            {
+            if (status === XmlListModel.Error) {
+                _handleError(errorString());
+                _load();
+            } else if (status !== XmlListModel.Loading) {
                 _addItems(_opmlModel);
                 _load();
-            }
-            if (status === XmlListModel.Error)
-            {
-                _handleError(errorString());
             }
         }
     }
 
-    property RssModel _rssModel: RssModel {
-        onStatusChanged: {
-            console.log("RssModel.status = " + status + " (" + source + ")");
-            if (status !== XmlListModel.Loading)
-            {
-                _addItems(_rssModel);
-                _load();
-            }
-            if (status === XmlListModel.Error)
-            {
-                _handleError(errorString());
-            }
-        }
-    }
 
     property variant _models: [
         _atomModel, _opmlModel, _rssModel
@@ -106,12 +116,9 @@ ListModel {
         if (model.status === XmlListModel.Ready) {
             for (var i = 0; i < model.count; i++) {
                 var item = model.get(i);
-                item["name"] = model.name;
-                item["color"] = model.color;
                 item["source"] = "" + model.source; // convert to string
                 item["date"] = item.dateString !== "" ? new Date(item.dateString)
                                                       : new Date();
-                item["sectionDate"] = Format.formatDate(item.date, Formatter.TimepointSectionRelative);
                 if (item.uid === "") {
                     // if there is no UID, make a unique one
                     if (item.dateString !== "") {
@@ -120,15 +127,88 @@ ListModel {
                         var d = new Date();
                         item["uid"] = item.title + d.getTime();
                     }
-                    console.log(item.title + " -> " + item.uid);
                 }
+
                 item["read"] = Database.isRead(item.source, item.uid);
-                if (! item.read) {
-                    // read items are gone... forever
-                    _insertItem(item);
+                if (item.read) {
+                    // read items are gone
+                    continue;
                 }
+
+                item["name"] = model.name;
+                item["color"] = model.color;
+                item["sectionDate"] = Format.formatDate(item.date, Formatter.TimepointSectionRelative);
+                item["thumbnail"] = _findThumbnail(item);
+                item["enclosures"] = _getEnclosures(item);
+
+                _insertItem(item);
             }
         }
+    }
+
+    /* Returns a thumbnail URL if there is something usable, or an empty string
+     * otherwise.
+     */
+    function _findThumbnail(item) {
+        var i;
+        var url;
+
+        if (item.iTunesImage) {
+            return item.iTunesImage;
+        }
+
+        var thumb = "";
+        var minDelta = 9999;
+        var goodWidth = 100;
+        for (i = 1; i <= Math.min(item.thumbnailsAmount, 9); ++i) {
+            url = item["thumbnail_" + i + "_url"];
+            var width = item["thumbnail_" + i + "_width"];
+
+            if (width === undefined) {
+                width = 0;
+            }
+
+            if (Math.abs(goodWidth - width) < minDelta) {
+                minDelta = Math.abs(goodWidth - width);
+                thumb = url;
+            }
+        }
+
+        if (thumb !== "") {
+            return thumb;
+        }
+
+        for (i = 1; i <= Math.min(item.enclosuresAmount, 9); ++i) {
+            url = item["enclosure_" + i + "_url"];
+            var type = item["enclosure_" + i + "_type"];
+
+            if (type && type.substring(0, 6) === "image/") {
+                return url;
+            }
+        }
+
+        return "";
+    }
+
+    /* Returns a list of enclosure objects (url, type, length).
+     */
+    function _getEnclosures(item) {
+        var enclosures = [];
+        for (var i = 1; i <= Math.min(item.enclosuresAmount, 9); ++i) {
+            var url = item["enclosure_" + i + "_url"];
+            var type = item["enclosure_" + i + "_type"];
+            var length = item["enclosure_" + i + "_length"];
+
+            var enclosure = {
+                "url": url ? url : "",
+                "type": type ? type : "application/octet-stream",
+                "length" : length ? length : "-1"
+            };
+            console.log("enclosure " + url + " " + type + " " + length);
+            enclosures.push(enclosure);
+        }
+
+        return enclosures;
     }
 
     /* Takes the next source from the sources queue and loads it.
@@ -148,11 +228,10 @@ ListModel {
             var color = source.color;
 
             currentlyLoading = name;
-            for (var i = 0; i < _models.length; i++) {
-                _models[i].name = name;
-                _models[i].source = url;
-                _models[i].color = color;
-            }
+            _rssModel.name = name;
+            _rssModel.source = "";
+            _rssModel.source = url;
+            _rssModel.color = color;
 
             _sourcesQueue = queue;
         }
@@ -166,15 +245,27 @@ ListModel {
     /* Handles errors.
      */
     function _handleError(error) {
+        console.log(error);
+        var feedName = currentlyLoading;
         if (error.substring(0, 5) === "Host ") {
             // Host ... not found
+            /*
             for (var i = 0; i < _models.length; i++) {
                 if (_models[i].status === XmlListModel.Loading) {
                     _models[i].source = "";
                 }
             }
+            */
+        } else if (error.indexOf(" - server replied: ") !== -1) {
+            var idx = error.indexOf(" - server replied: ");
+            var reply = error.substring(idx + 19);
+            listModel.error(qsTr("Error with %1:\n%2")
+                            .arg(feedName)
+                            .arg(reply));
         } else {
-            listModel.error(error);
+            listModel.error(qsTr("Error with %1:\n%2")
+                            .arg(feedName)
+                            .arg(error));
         }
     }
 
