@@ -1,4 +1,4 @@
-/* Copyright (C) 2013 Martin Grimme  <martin.grimme _AT_ gmail.com>
+/* Copyright (C) 2013, 2014 Martin Grimme  <martin.grimme _AT_ gmail.com>
  *
  * This file was apapted from WeRSS
  * Copyright (C) 2010, 2011 Martin Grimme  <martin.grimme _AT_ gmail.com>
@@ -22,11 +22,6 @@ import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
 
 XmlListModel {
-    id: rssModel
-
-    property string name
-    property string color
-
     query: "/rss/channel/item"
     namespaceDeclarations: "declare namespace media = 'http://search.yahoo.com/mrss/';" +
             "declare namespace content = 'http://purl.org/rss/1.0/modules/content/';" +

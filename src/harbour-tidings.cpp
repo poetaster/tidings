@@ -39,6 +39,10 @@
 #include <QQuickView>
 #include <QScopedPointer>
 #include <QTranslator>
+#include <QtQml>
+
+#include "feedloader.h"
+#include "appversion.h"
 
 int main(int argc, char *argv[])
 {
@@ -57,7 +61,10 @@ int main(int argc, char *argv[])
     appTranslator->load(":/l10n/" + QLocale::system().name() + ".qm");
     app->installTranslator(appTranslator);
 
+    qmlRegisterType<FeedLoader>("harbour.tidings", 1, 0, "FeedLoader");
+
     QScopedPointer<QQuickView> view(SailfishApp::createView());
+    view->rootContext()->setContextProperty("appVersion", appVersion);
     view->setSource(SailfishApp::pathTo("qml/harbour-tidings.qml"));
     view->showFullScreen();
     return app->exec();

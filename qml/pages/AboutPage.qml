@@ -48,7 +48,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Theme.fontSizeExtraSmall
             color: Theme.secondaryColor
-            text: qsTr("Version 0.2.0")
+            text: qsTr("Version %1").arg(appVersion)
         }
 
         Label {
@@ -56,7 +56,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Theme.fontSizeExtraSmall
             color: Theme.secondaryColor
-            text: "Copyright © 2013 Martin Grimme"
+            text: "Copyright © 2013, 2014 Martin Grimme"
         }
 
         Item {

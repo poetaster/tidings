@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
 import Sailfish.Silica 1.0
+import harbour.tidings 1.0
 import "database.js" as Database
 
 /* List model that blends various feed models together.
@@ -15,27 +16,73 @@ ListModel {
     property variant lastRefresh
 
     // flag indicating that this model is busy
-    property bool busy
+    property bool busy: false
 
     // name of the feed currently loading
     property string currentlyLoading
+
+    property FeedLoader _feedLoader: FeedLoader {
+        property string feedName
+        property string feedColor
+
+        onSuccess: {
+            switch (type)
+            {
+            case FeedLoader.RSS2:
+                console.log("RSS2 format detected");
+                _rssModel.xml = "";
+                _rssModel.xml = data;
+                break;
+            case FeedLoader.RDF:
+                console.log("RDF format defected");
+                _rdfModel.xml = "";
+                _rdfModel.xml = data;
+                break;
+            case FeedLoader.Atom:
+                console.log("Atom format detected");
+                _atomModel.xml = "";
+                _atomModel.xml = data;
+                break;
+            case FeedLoader.OPML:
+                console.log("OPML format detected");
+                _opmlModel.xml = "";
+                _opmlModel.xml = data;
+                break;
+            default:
+                _handleError("Unsupported feed format.");
+                _loadNext();
+                break;
+            }
+        }
+
+        onError: {
+            _handleError(details);
+            _loadNext();
+        }
+    }
 
     property RssModel _rssModel: RssModel {
         onStatusChanged: {
             console.log("RssModel.status = " + status + " (" + source + ")");
             if (status === XmlListModel.Error) {
                 _handleError(errorString());
-                _load();
-            } else if (status !== XmlListModel.Loading) {
+                _loadNext();
+            } else if (status === XmlListModel.Ready) {
                 _addItems(_rssModel);
-                if (count === 0) {
-                    _atomModel.name = name;
-                    _atomModel.source = "";
-                    _atomModel.source = source;
-                    _atomModel.color = color;
-                } else {
-                    _load();
-                }
+                _loadNext();
+            }
+        }
+    }
+
+    property RssModel _rdfModel: RdfModel {
+        onStatusChanged: {
+            console.log("RdfModel.status = " + status + " (" + source + ")");
+            if (status === XmlListModel.Error) {
+                _handleError(errorString());
+                _loadNext();
+            } else if (status === XmlListModel.Ready) {
+                _addItems(_rdfModel);
+                _loadNext();
             }
         }
     }
@@ -45,19 +92,11 @@ ListModel {
             console.log("AtomModel.status = " + status + " (" + source + ")");
             if (status === XmlListModel.Error) {
                 _handleError(errorString());
-                _load();
-            } else if (status !== XmlListModel.Loading) {
+                _loadNext();
+            } else if (status === XmlListModel.Ready) {
                 _addItems(_atomModel);
-                if (count === 0) {
-                    _opmlModel.name = name;
-                    _opmlModel.source = "";
-                    _opmlModel.source = source;
-                    _opmlModel.color = color;
-                } else {
-                    _load();
-                }
+                _loadNext();
             }
-
         }
     }
 
@@ -66,14 +105,13 @@ ListModel {
             console.log("OpmlModel.status = " + status + " (" + source + ")");
             if (status === XmlListModel.Error) {
                 _handleError(errorString());
-                _load();
-            } else if (status !== XmlListModel.Loading) {
+                _loadNext();
+            } else if (status === XmlListModel.Ready) {
                 _addItems(_opmlModel);
-                _load();
+                _loadNext();
             }
         }
     }
-
 
     property variant _models: [
         _atomModel, _opmlModel, _rssModel
@@ -116,7 +154,7 @@ ListModel {
         if (model.status === XmlListModel.Ready) {
             for (var i = 0; i < model.count; i++) {
                 var item = model.get(i);
-                item["source"] = "" + model.source; // convert to string
+                item["source"] = "" + _feedLoader.source; // convert to string
                 item["date"] = item.dateString !== "" ? new Date(item.dateString)
                                                       : new Date();
                 if (item.uid === "") {
@@ -135,8 +173,8 @@ ListModel {
                     continue;
                 }
 
-                item["name"] = model.name;
-                item["color"] = model.color;
+                item["name"] = _feedLoader.feedName;
+                item["color"] = _feedLoader.feedColor;
                 item["sectionDate"] = Format.formatDate(item.date, Formatter.TimepointSectionRelative);
                 item["thumbnail"] = _findThumbnail(item);
                 item["enclosures"] = _getEnclosures(item);
@@ -213,13 +251,7 @@ ListModel {
 
     /* Takes the next source from the sources queue and loads it.
      */
-    function _load() {
-        for (var i = 0; i < _models.length; i++) {
-            if (_models[i].status === XmlListModel.Loading) {
-                return;
-            }
-        }
-
+    function _loadNext() {
         var queue = _sourcesQueue;
         if (queue.length > 0) {
             var source = queue.pop();
@@ -227,11 +259,11 @@ ListModel {
             var name = source.name;
             var color = source.color;
 
+            console.log("Now loading: " + name);
             currentlyLoading = name;
-            _rssModel.name = name;
-            _rssModel.source = "";
-            _rssModel.source = url;
-            _rssModel.color = color;
+            _feedLoader.feedColor = color;
+            _feedLoader.feedName = name;
+            _feedLoader.source = url;
 
             _sourcesQueue = queue;
         }
@@ -246,16 +278,12 @@ ListModel {
      */
     function _handleError(error) {
         console.log(error);
-        var feedName = currentlyLoading;
+        var feedName = currentlyLoading + "";
         if (error.substring(0, 5) === "Host ") {
             // Host ... not found
-            /*
-            for (var i = 0; i < _models.length; i++) {
-                if (_models[i].status === XmlListModel.Loading) {
-                    _models[i].source = "";
-                }
-            }
-            */
+            listModel.error(qsTr("Error with %1:\n%2")
+                            .arg(feedName)
+                            .arg(error));
         } else if (error.indexOf(" - server replied: ") !== -1) {
             var idx = error.indexOf(" - server replied: ");
             var reply = error.substring(idx + 19);
@@ -279,7 +307,7 @@ ListModel {
             console.log("Source: " + sources[i].url);
         }
         _sourcesQueue = sources;
-        _load();
+        _loadNext();
         lastRefresh = new Date();
     }
 
@@ -287,9 +315,11 @@ ListModel {
      */
     function abort() {
         _sourcesQueue = [];
+        /*
         for (var i = 0; i < _models.length; i++) {
             _models[i].source = "";
         }
+        */
         busy = false;
     }
 

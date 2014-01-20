@@ -22,13 +22,16 @@ import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
 
 XmlListModel {
-    query: "/atom:feed/atom:entry"
-    namespaceDeclarations: "declare namespace atom = 'http://www.w3.org/2005/Atom';"
+    query: "/rdf:RDF/item"
+    namespaceDeclarations: "declare default element namespace 'http://purl.org/rss/1.0/';" +
+                           "declare namespace rdf = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#';" +
+                           "declare namespace dc = 'http://purl.org/dc/elements/1.1/';" +
+                           "declare namespace content = 'http://purl.org/rss/1.0/modules/content/';"
 
-    XmlRole { name: "uid"; query: "atom:id/string()" }
-    XmlRole { name: "title"; query: "atom:title/string()" }
-    XmlRole { name: "link"; query: "atom:link[@rel='alternate']/@href/string()" }
-    XmlRole { name: "description"; query: "atom:summary/string()" }
-    XmlRole { name: "encoded"; query: "atom:content/string()" }
-    XmlRole { name: "dateString"; query: "atom:updated/string()" }
+    XmlRole { name: "uid"; query: "guid/string()" }
+    XmlRole { name: "title"; query: "title/string()" }
+    XmlRole { name: "link"; query: "link/string()" }
+    XmlRole { name: "description"; query: "description/string()" }
+    XmlRole { name: "encoded"; query: "content:encoded/string()" }
+    XmlRole { name: "dateString"; query: "dc:date/string()" }
 }

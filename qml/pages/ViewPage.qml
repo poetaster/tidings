@@ -9,6 +9,7 @@ Page {
     property string feedName: newsBlendModel.get(index).name
     property string title: newsBlendModel.get(index).title
     property string preview: newsBlendModel.get(index).description
+    property string encoded: newsBlendModel.get(index).encoded
     property string url: newsBlendModel.get(index).link
     property string color: newsBlendModel.get(index).color
     property string date: newsBlendModel.get(index).date
@@ -18,9 +19,6 @@ Page {
 
     property int _previousOfFeed: newsBlendModel.previousOfFeed(index)
     property int _nextOfFeed: newsBlendModel.nextOfFeed(index)
-
-    // style for rich text
-    property string _style: "<style>a:link { color:" + Theme.highlightColor + "}</style>"
 
     function previousItem() {
         var props = {
@@ -100,6 +98,16 @@ Page {
         }
     }
 
+    onStatusChanged: {
+        if (status === PageStatus.Active && url !== "")
+        {
+            var props = {
+                "url": url
+            }
+            pageStack.pushAttached(Qt.resolvedUrl("WebPage.qml"), props);
+        }
+    }
+
     Connections {
         target: coverAdaptor
 
@@ -119,31 +127,12 @@ Page {
     }
 
     SilicaFlickable {
+        id: contentFlickable
+
         anchors.fill: parent
         contentHeight: column.height
 
         PullDownMenu {
-            MenuItem {
-                enabled: page.url !== ""
-                text: qsTr("Open in browser")
-
-                onClicked: {
-                    Qt.openUrlExternally(page.url);
-                }
-            }
-
-            MenuItem {
-                enabled: page.url !== ""
-                text: qsTr("Full view")
-
-                onClicked: {
-                    var props = {
-                        "url": page.url
-                    };
-                    pageStack.push("WebPage.qml", props);
-                }
-            }
-
             MenuItem {
                 enabled: _previousOfFeed !== -1
                 text: "<" + feedName + ">"
@@ -203,6 +192,18 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 text: page.title
+
+                MouseArea {
+                    enabled: page.url !== ""
+                    anchors.fill: parent
+                    onClicked: {
+                        var props = {
+                            "url": page.url
+                        }
+                        pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
+                                       props);
+                    }
+                }
             }
 
             Label {
@@ -233,16 +234,23 @@ Page {
                 height: Theme.paddingMedium
             }
 
-            Label {
+            RescalingRichText {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
-                font.pixelSize: Theme.fontSizeSmall
+
                 color: Theme.primaryColor
-                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                text: _style + page.preview
-                textFormat: Text.RichText
+                fontSize: Theme.fontSizeSmall
+                text: page.encoded ? page.encoded : page.preview
+
+                onLinkActivated: {
+                    var props = {
+                        "url": link
+                    }
+                    pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
+                                                  props);
+                }
             }
 
             Item {
@@ -319,4 +327,5 @@ Page {
 
         ScrollDecorator { }
     }
+
 }

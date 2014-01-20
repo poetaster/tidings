@@ -9,9 +9,11 @@
 TARGET = harbour-tidings
 
 CONFIG += sailfishapp
+QT += xml
 
 SOURCES += \
-    src/harbour-tidings.cpp
+    src/harbour-tidings.cpp \
+    src/feedloader.cpp
 
 OTHER_FILES += qml/harbour-tidings.qml \
     qml/cover/CoverPage.qml \
@@ -36,7 +38,10 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/tidings.png \
     harbour-tidings.desktop \
     qml/pages/FancyScroller.qml \
-    qml/pages/Notification.qml
+    qml/pages/Notification.qml \
+    qml/pages/RdfModel.qml \
+    qml/pages/RescalingRichText.qml \
+    qml/pages/ExternalLinkDialog.qml
 
 TRANSLATIONS = l10n/en_US.ts \
             l10n/ru_RU.ts
@@ -48,3 +53,7 @@ SOURCES = \
 
 RESOURCES += \
     resources.qrc
+
+HEADERS += \
+    src/feedloader.h \
+    src/appversion.h
