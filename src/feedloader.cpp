@@ -16,6 +16,10 @@ FeedLoader::FeedLoader(QObject* parent)
 {
     myNetworkAccessManager = new QNetworkAccessManager(this);
 
+    connect(myNetworkAccessManager,
+            SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>&)),
+            this,
+            SLOT(slotSslErrors(QNetworkReply*,QList<QSslError>)));
     connect(myNetworkAccessManager, SIGNAL(finished(QNetworkReply*)),
             this, SLOT(slotGotReply(QNetworkReply*)));
 }
@@ -78,6 +82,14 @@ FeedLoader::FeedType FeedLoader::type() const
 
 }
 
+void FeedLoader::slotSslErrors(QNetworkReply* reply,
+                               const QList<QSslError>& errors)
+{
+    Q_UNUSED(errors)
+    // don't care about SSL errors, such as self-signed certificates, etc.
+    reply->ignoreSslErrors();
+}
+
 void FeedLoader::slotGotReply(QNetworkReply* reply)
 {
     int httpCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
@@ -123,12 +135,36 @@ void FeedLoader::slotGotReply(QNetworkReply* reply)
     switch (reply->error())
     {
     case QNetworkReply::NoError:
-        myData = QString::fromUtf8(reply->readAll());
+    {
+        qDebug() << "parsing now";
+        // XmlListModel expects UTF-8 encoded data in its 'xml' property,
+        // but still applies the XML document encoding, which is wrong,
+        // so convert from encoding to UTF-8 here, and remove the 'encoding'
+        // information
+
+        // convert from encoding to UTF-8
+        QDomDocument doc;
+        doc.setContent(reply->readAll(), false);
+        QString data = doc.toString();
+
+        // remove <?xml ... ?> instructions
+        if (data.startsWith("<?"))
+        {
+            int idx = data.indexOf("?>");
+            if (idx != -1)
+            {
+                data = data.mid(idx + 3);
+            }
+        }
+
+        // force UTF-8 for encoding
+        myData = "<?xml version='1.0' encoding='UTF-8'?>" + data;
         qDebug() << myData.size() << "bytes";
         qDebug() << myData.left(1024);
         emit dataChanged();
         emit success();
         break;
+    }
 
     default:
         qDebug() << "Network Error" << reply->error() << reply->errorString();

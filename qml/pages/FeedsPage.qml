@@ -48,7 +48,7 @@ Page {
 
         anchors.fill: parent
 
-        model: newsBlendModel.busy ? null : newsBlendModel
+        model: newsBlendModel
 
         header: PageHeader {
             title: qsTr("Tidings")
@@ -78,6 +78,7 @@ Page {
         }
 
         delegate: ListItem {
+            visible: ! newsBlendModel.busy
             width: listview.width
             contentHeight: Theme.itemSizeExtraLarge
             clip: true

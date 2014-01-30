@@ -61,6 +61,36 @@ ListModel {
         }
     }
 
+    property Timer _itemLoader: Timer {
+        property variant model
+        property int index
+
+        function load(loadModel)
+        {
+            model = loadModel;
+            index = 0;
+            start();
+        }
+
+        interval: 75
+        repeat: true
+
+        onTriggered: {
+            for (var end = index + 2;
+                 index < end && index < model.count;
+                 index++)
+            {
+                listModel._loadItem(model, index);
+                index++;
+            }
+            if (index >= model.count)
+            {
+                stop();
+                _loadNext();
+            }
+        }
+    }
+
     property RssModel _rssModel: RssModel {
         onStatusChanged: {
             console.log("RssModel.status = " + status + " (" + source + ")");
@@ -68,8 +98,7 @@ ListModel {
                 _handleError(errorString());
                 _loadNext();
             } else if (status === XmlListModel.Ready) {
-                _addItems(_rssModel);
-                _loadNext();
+                _itemLoader.load(_rssModel);
             }
         }
     }
@@ -81,8 +110,7 @@ ListModel {
                 _handleError(errorString());
                 _loadNext();
             } else if (status === XmlListModel.Ready) {
-                _addItems(_rdfModel);
-                _loadNext();
+                _itemLoader.load(_rdfModel);
             }
         }
     }
@@ -94,8 +122,7 @@ ListModel {
                 _handleError(errorString());
                 _loadNext();
             } else if (status === XmlListModel.Ready) {
-                _addItems(_atomModel);
-                _loadNext();
+                _itemLoader.load(_atomModel);
             }
         }
     }
@@ -108,7 +135,7 @@ ListModel {
                 _loadNext();
             } else if (status === XmlListModel.Ready) {
                 _addItems(_opmlModel);
-                _loadNext();
+                _itemLoader.load(_opmlModel);
             }
         }
     }
@@ -123,65 +150,81 @@ ListModel {
 
     /* Inserts the given item into this model.
      */
-    function _insertItem(item) {
+    function _insertItem(item)
+    {
 
-        function f(begin, end) {
-            if (begin === end) {
-                if (item.date < get(begin).date) {
+        function f(begin, end)
+        {
+            if (begin === end)
+            {
+                if (item.date < get(begin).date)
+                {
                     insert(begin + 1, item);
-                } else {
+                }
+                else
+                {
                     insert(begin, item);
                 }
-            } else {
+            }
+            else
+            {
                 var middle = begin + Math.floor((end - begin) / 2);
-                if (item.date < get(middle).date) {
+                if (item.date < get(middle).date)
+                {
                     f(middle + 1, end);
-                } else {
+                }
+                else
+                {
                     f(begin, middle);
                 }
             }
         }
-        if (count > 0) {
+        if (count > 0)
+        {
             f(0, count - 1);
-        } else {
+        }
+        else
+        {
             append(item);
         }
     }
 
     /* Adds the item from the given model.
      */
-    function _addItems(model) {
-        if (model.status === XmlListModel.Ready) {
-            for (var i = 0; i < model.count; i++) {
-                var item = model.get(i);
-                item["source"] = "" + _feedLoader.source; // convert to string
-                item["date"] = item.dateString !== "" ? new Date(item.dateString)
-                                                      : new Date();
-                if (item.uid === "") {
-                    // if there is no UID, make a unique one
-                    if (item.dateString !== "") {
-                        item["uid"] = item.title + item.dateString;
-                    } else {
-                        var d = new Date();
-                        item["uid"] = item.title + d.getTime();
-                    }
-                }
-
-                item["read"] = Database.isRead(item.source, item.uid);
-                if (item.read) {
-                    // read items are gone
-                    continue;
-                }
-
-                item["name"] = _feedLoader.feedName;
-                item["color"] = _feedLoader.feedColor;
-                item["sectionDate"] = Format.formatDate(item.date, Formatter.TimepointSectionRelative);
-                item["thumbnail"] = _findThumbnail(item);
-                item["enclosures"] = _getEnclosures(item);
-
-                _insertItem(item);
+    function _loadItem(model, i)
+    {
+        var item = model.get(i);
+        item["source"] = "" + _feedLoader.source; // convert to string
+        item["date"] = item.dateString !== "" ? new Date(item.dateString)
+                                              : new Date();
+        if (item.uid === "")
+        {
+            // if there is no UID, make a unique one
+            if (item.dateString !== "")
+            {
+                item["uid"] = item.title + item.dateString;
+            }
+            else
+            {
+                var d = new Date();
+                item["uid"] = item.title + d.getTime();
             }
         }
+
+        item["read"] = Database.isRead(item.source, item.uid);
+        if (item.read)
+        {
+            // read items are gone
+            return;
+        }
+
+        item["name"] = _feedLoader.feedName;
+        item["color"] = _feedLoader.feedColor;
+        item["sectionDate"] = Format.formatDate(item.date, Formatter.TimepointSectionRelative);
+        item["thumbnail"] = _findThumbnail(item);
+        item["enclosures"] = _getEnclosures(item);
+
+        _insertItem(item);
     }
 
     /* Returns a thumbnail URL if there is something usable, or an empty string
@@ -315,6 +358,7 @@ ListModel {
      */
     function abort() {
         _sourcesQueue = [];
+        _itemLoader.stop();
         /*
         for (var i = 0; i < _models.length; i++) {
             _models[i].source = "";

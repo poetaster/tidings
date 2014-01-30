@@ -1,6 +1,6 @@
 Name: harbour-tidings
 Summary: Bearer of tidings.
-Version: 0.2.1
+Version: 0.2.2
 Release: 1
 Group: Qt/Qt
 License: GPLv2
@@ -11,22 +11,22 @@ Description: |-
 Configure: none
 Builder: qtc5
 PkgConfigBR:
-- Qt5Core
-- Qt5Qml
-- Qt5Quick
 - sailfishapp
+- Qt5Quick
+- Qt5Qml
+- Qt5Core
 Requires:
-- qt5-plugin-imageformat-gif
-- qt5-plugin-imageformat-ico
-- sailfishsilica-qt5
 - qt5-qtdeclarative-import-xmllistmodel
+- sailfishsilica-qt5
+- qt5-plugin-imageformat-ico
+- qt5-plugin-imageformat-gif
 Files:
-- '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
-- '%{_datadir}/applications/%{name}.desktop'
-- '%{_datadir}/%{name}/qml'
-- '%{_bindir}'
-- /usr/bin
-- /usr/share/harbour-tidings
-- /usr/share/applications
 - /usr/share/icons/hicolor/86x86/apps
+- /usr/share/applications
+- /usr/share/harbour-tidings
+- /usr/bin
+- '%{_bindir}'
+- '%{_datadir}/%{name}/qml'
+- '%{_datadir}/applications/%{name}.desktop'
+- '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
 PkgBR: []

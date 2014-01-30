@@ -1,7 +1,9 @@
 #ifndef FEEDLOADER_H
 #define FEEDLOADER_H
 
+#include <QList>
 #include <QObject>
+#include <QSslError>
 #include <QString>
 #include <QUrl>
 
@@ -46,6 +48,7 @@ private:
     bool loading() const { return myIsLoading; }
 
 private slots:
+    void slotSslErrors(QNetworkReply* reply, const QList<QSslError>& errors);
     void slotGotReply(QNetworkReply* reply);
 
 private:
