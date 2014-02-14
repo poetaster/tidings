@@ -56,4 +56,5 @@ RESOURCES += \
 
 HEADERS += \
     src/feedloader.h \
-    src/appversion.h
+    src/appversion.h \
+    src/json.h

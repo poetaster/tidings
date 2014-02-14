@@ -86,6 +86,7 @@ ApplicationWindow
 
         property string feedName
         property string title
+        property string thumbnail
         property string page
         property string mode: "overview"
 

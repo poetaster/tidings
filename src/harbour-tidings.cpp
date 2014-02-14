@@ -41,8 +41,9 @@
 #include <QTranslator>
 #include <QtQml>
 
-#include "feedloader.h"
 #include "appversion.h"
+#include "feedloader.h"
+#include "json.h"
 
 int main(int argc, char *argv[])
 {
@@ -63,8 +64,11 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<FeedLoader>("harbour.tidings", 1, 0, "FeedLoader");
 
+    Json json;
+
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("appVersion", appVersion);
+    view->rootContext()->setContextProperty("json", &json);
     view->setSource(SailfishApp::pathTo("qml/harbour-tidings.qml"));
     view->showFullScreen();
     return app->exec();

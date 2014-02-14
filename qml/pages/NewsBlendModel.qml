@@ -218,6 +218,14 @@ ListModel {
             return;
         }
 
+        // don't add item if shelved, because it will be taken off the shelf
+        item["shelved"] = Database.isShelved(item.source, item.uid);
+        if (item.shelved)
+        {
+            return;
+        }
+
+
         item["name"] = _feedLoader.feedName;
         item["color"] = _feedLoader.feedColor;
         item["sectionDate"] = Format.formatDate(item.date, Formatter.TimepointSectionRelative);
@@ -312,6 +320,17 @@ ListModel {
         }
         else
         {
+            // add shelved items
+            var shelvedItems = Database.shelvedItems();
+            for (var i = 0; i < shelvedItems.length; ++i)
+            {
+                var item = json.fromJson(shelvedItems[i]);
+                item["date"] = item.dateString !== "" ? new Date(item.dateString)
+                                                      : new Date();
+                item["shelved"] = true;
+                _insertItem(item);
+            }
+
             busy = false;
             currentlyLoading = "";
         }
@@ -406,6 +425,40 @@ ListModel {
         var item = get(idx);
         Database.setRead(item.source, item.uid, value);
         item.read = value;
+    }
+
+    /* Keeps or removes the given item from the shelf.
+     */
+    function shelveItem(idx, value)
+    {
+        var item = get(idx);
+
+        if (value)
+        {
+            var v = {};
+            for (var key in item)
+            {
+                v[key] = item[key];
+            }
+            console.log("shelving " + item.source + " " + item.uid);
+            Database.shelveItem(item.source, item.uid, json.toJson(v));
+            // becomes unread
+            setRead(idx, false);
+        }
+        else
+        {
+            console.log("unshelving " + item.source + " " + item.uid);
+            Database.unshelveItem(item.source, item.uid);
+        }
+        item.shelved = value;
+    }
+
+    /* Returns if the given item is currently shelved.
+     */
+    function isShelved(idx)
+    {
+        var item = get(idx);
+        return Database.isShelved(item.source, item.uid);
     }
 
     Component.onCompleted: {

@@ -22,6 +22,7 @@ Page {
 
             coverAdaptor.feedName = newsBlendModel.get(index).name;
             coverAdaptor.title = newsBlendModel.get(index).title;
+            coverAdaptor.thumbnail = newsBlendModel.get(index).thumbnail;
             coverAdaptor.page = (index + 1) + "/" +  newsBlendModel.count;
         }
     }
@@ -78,6 +79,8 @@ Page {
         }
 
         delegate: ListItem {
+            id: feedItem
+
             visible: ! newsBlendModel.busy
             width: listview.width
             contentHeight: Theme.itemSizeExtraLarge
@@ -89,13 +92,21 @@ Page {
                 color: model.color
             }
 
+            Image {
+                id: shelveIcon
+                anchors.left: parent.left
+                anchors.leftMargin: Theme.paddingSmall
+                visible: shelved
+                source: "image://theme/icon-s-favorite"
+            }
+
             Label {
                 id: feedLabel
-                anchors.left: parent.left
+                anchors.left: shelveIcon.visible ? shelveIcon.right : parent.left
                 anchors.right: picture.visible ? picture.left : parent.right
-                anchors.leftMargin: Theme.paddingMedium
+                anchors.leftMargin: shelveIcon.visible ? Theme.paddingSmall : Theme.paddingMedium
                 anchors.rightMargin: Theme.paddingMedium
-                color: Theme.secondaryColor
+                color: feedItem.pressed ? Theme.secondaryHighlightColor : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: name + " (" + Format.formatDate(date, Formatter.DurationElapsed) + ")"
             }
@@ -105,7 +116,7 @@ Page {
                 anchors.left: feedLabel.left
                 anchors.right: picture.visible ? picture.left : parent.right
                 anchors.rightMargin: Theme.paddingMedium
-                color: Theme.primaryColor
+                color: feedItem.pressed ? Theme.primaryColor : Theme.highlightColor
             }
 
             Label {
@@ -114,7 +125,7 @@ Page {
                 anchors.left: feedLabel.left
                 anchors.right: picture.visible ? picture.left : parent.right
                 anchors.rightMargin: Theme.paddingMedium
-                color: Theme.primaryColor
+                color: feedItem.pressed ? Theme.highlightColor : Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere

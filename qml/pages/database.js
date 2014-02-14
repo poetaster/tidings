@@ -6,7 +6,7 @@
  * call it in _migrate.
  * Update _createSchema with the schema modifications.
  */
-var _REVISION = 4;
+var _REVISION = 5;
 
 var _database = Sql.LocalStorage.openDatabaseSync("TidingsDB", "1.0",
                                                   "Tidings Persisted Settings");
@@ -42,6 +42,7 @@ function _migrate(tx) {
         if (revision < 2) { _migrateRev2(tx); }
         if (revision < 3) { _migrateRev3(tx); }
         if (revision < 4) { _migrateRev4(tx); }
+        if (revision < 5) { _migrateRev5(tx); }
     }
 
     // set the new revision
@@ -90,6 +91,16 @@ function _migrateRev4(tx) {
     tx.executeSql("ALTER TABLE read ADD COLUMN read INT DEFAULT 0");
 }
 
+/* Migrates to Rev 5, where we added a shelf for kept items.
+ */
+function _migrateRev5(tx) {
+    tx.executeSql("CREATE TABLE shelf (" +
+                  "  url TEXT," +
+                  "  uid TEXT," +
+                  "  document TEXT" +
+                  ")");
+}
+
 /* Creates the initial schema.
  */
 function _createSchema(tx) {
@@ -104,6 +115,12 @@ function _createSchema(tx) {
                   "  url TEXT," +
                   "  uid TEXT," +
                   "  read INT" +
+                  ")");
+
+    tx.executeSql("CREATE TABLE shelf (" +
+                  "  url TEXT," +
+                  "  uid TEXT," +
+                  "  document TEXT" +
                   ")");
 }
 
@@ -189,8 +206,8 @@ function removeSource(sourceId) {
 
 /* Marks the given item as read.
  */
-function setRead(url, uid, value) {
-
+function setRead(url, uid, value)
+{
     function f(tx) {
         if (value) {
             var d = new Date();
@@ -235,4 +252,67 @@ function forgetRead(age) {
     }
 
     _database.transaction(f);
+}
+
+/* Returns all shelved items as a list of JSON strings.
+ */
+function shelvedItems()
+{
+    var result = [];
+
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT document FROM shelf");
+        for (var i = 0; i < res.rows.length; i++)
+        {
+            var data = res.rows.item(i);
+            result.push(data.document);
+        }
+    }
+
+    _database.transaction(f);
+    return result;
+}
+
+/* Shelves the given item.
+ */
+function shelveItem(url, uid, document)
+{
+    function f(tx)
+    {
+        tx.executeSql("INSERT INTO shelf (url, uid, document) VALUES (?, ?, ?)",
+                      [url, uid, document]);
+    }
+
+    _database.transaction(f);
+}
+
+/* Unshelves the given item.
+ */
+function unshelveItem(url, uid)
+{
+    function f(tx)
+    {
+        tx.executeSql("DELETE FROM shelf WHERE url = ? AND uid = ?",
+                      [url, uid]);
+    }
+
+    _database.transaction(f);
+}
+
+/* Returns if the given item is shelved.
+ */
+function isShelved(url, uid)
+{
+    var result = false;
+
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT url FROM shelf WHERE url = ? AND uid = ?",
+                                [url, uid]);
+        result = (res.rows.length > 0);
+    }
+
+    _database.transaction(f);
+    return result;
 }

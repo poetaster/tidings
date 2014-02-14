@@ -16,6 +16,7 @@ Page {
     property bool read: newsBlendModel.get(index).read
     property variant enclosures: newsBlendModel.get(index).enclosures
     property string duration: newsBlendModel.get(index).duration
+    property bool shelved: newsBlendModel.isShelved(index)
 
     property int _previousOfFeed: newsBlendModel.previousOfFeed(index)
     property int _nextOfFeed: newsBlendModel.nextOfFeed(index)
@@ -134,6 +135,16 @@ Page {
 
         PullDownMenu {
             MenuItem {
+                text: shelved ? "Don't keep it"
+                              : "Keep it"
+
+                onClicked: {
+                    newsBlendModel.shelveItem(index, ! shelved);
+                    shelved = ! shelved;
+                }
+            }
+
+            MenuItem {
                 enabled: _previousOfFeed !== -1
                 text: "<" + feedName + ">"
 
@@ -182,26 +193,48 @@ Page {
                 title: page.feedName
             }
 
-            Label {
+            Item {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
-                horizontalAlignment: Text.AlignLeft
-                color: Theme.highlightColor
-                font.pixelSize: Theme.fontSizeSmall
-                wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                text: page.title
+                height: childrenRect.height
 
-                MouseArea {
-                    enabled: page.url !== ""
-                    anchors.fill: parent
-                    onClicked: {
-                        var props = {
-                            "url": page.url
+                Label {
+                    anchors.left: parent.left
+                    anchors.right: shelveIcon.left
+                    anchors.rightMargin: Theme.paddingMedium
+                    horizontalAlignment: Text.AlignLeft
+                    color: Theme.highlightColor
+                    font.pixelSize: Theme.fontSizeSmall
+                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                    text: page.title
+
+                    MouseArea {
+                        enabled: page.url !== ""
+                        anchors.fill: parent
+                        onClicked: {
+                            var props = {
+                                "url": page.url
+                            }
+                            pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
+                                           props);
                         }
-                        pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
-                                       props);
+                    }
+                }
+
+                Image {
+                    id: shelveIcon
+                    anchors.right: parent.right
+                    source: shelved ? "image://theme/icon-l-favorite"
+                                    : "image://theme/icon-l-star"
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            newsBlendModel.shelveItem(index, ! shelved);
+                            shelved = ! shelved;
+                        }
                     }
                 }
             }
