@@ -135,7 +135,7 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: shelved ? "Don't keep it"
+                text: shelved ? "Keep it not"
                               : "Keep it"
 
                 onClicked: {

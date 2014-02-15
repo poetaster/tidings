@@ -17,16 +17,20 @@ CoverBackground {
 
     Image {
         id: backgroundImage
-        visible: coverAdaptor.thumbnail !== "" && coverAdaptor.mode === "feeds"
+        visible: coverAdaptor.thumbnail !== "" &&
+                 coverAdaptor.mode === "feeds" &&
+                 status === Image.Ready
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
         smooth: true
+        asynchronous: true
         source: coverAdaptor.thumbnail
 
         Rectangle {
             anchors.fill: parent
             gradient: Gradient {
-                GradientStop { position: 0; color: "#a0000000" }
+                GradientStop { position: 0; color: "#80000000" }
+                GradientStop { position: 0.6; color: "#80000000" }
                 GradientStop { position: 1; color: "transparent" }
             }
         }
@@ -34,9 +38,9 @@ CoverBackground {
 
     OpacityRampEffect {
         sourceItem: backgroundImage
-        direction: 2
-        slope: 1.0
-        offset: 0.0
+        direction: 3
+        slope: 2.0
+        offset: 0.5
     }
 
     Column {

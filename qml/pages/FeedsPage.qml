@@ -65,6 +65,14 @@ Page {
             }
 
             MenuItem {
+                text: "Sort by: %1".arg(newsBlendModel.feedSorter.name)
+
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("SortSelectorPage.qml"));
+                }
+            }
+
+            MenuItem {
                 text: newsBlendModel.busy ? qsTr("Abort refreshing")
                                           : qsTr("Refresh")
 
@@ -130,7 +138,7 @@ Page {
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 maximumLineCount: 2
-                opacity: read ? 0.5 : 1
+                opacity: (read && ! shelved) ? 0.5 : 1
                 text: title
             }
 
@@ -144,7 +152,7 @@ Page {
                 sourceSize.height: height * 2
                 fillMode: Image.PreserveAspectCrop
                 smooth: true
-                opacity: read ? 0.5 : 1
+                opacity: (read && ! shelved) ? 0.5 : 1
                 clip: true
                 source: thumbnail
             }
@@ -164,7 +172,7 @@ Page {
             }
         }
 
-        section.property: "sectionDate"
+        section.property: "sectionTitle"
         section.delegate: SectionHeader {
             text: section
         }

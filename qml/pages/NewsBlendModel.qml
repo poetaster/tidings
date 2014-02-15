@@ -9,6 +9,9 @@ import "database.js" as Database
 ListModel {
     id: listModel
 
+    // the sorter for this model
+    property FeedSorter feedSorter: latestFirstSorter
+
     // the list of all feed sources to load.
     property variant sources: []
 
@@ -20,6 +23,86 @@ ListModel {
 
     // name of the feed currently loading
     property string currentlyLoading
+
+    property FeedSorter latestFirstSorter: FeedSorter {
+        name: "Latest first"
+        compare: function(a, b)
+        {
+            return (a.date < b.date) ? -1
+                                     : (a.date === b.date) ? 0
+                                                           : 1;
+        }
+        getSection: function(item)
+        {
+            return Format.formatDate(item.date, Formatter.TimepointSectionRelative);
+        }
+    }
+
+    property FeedSorter oldestFirstSorter: FeedSorter {
+        name: "Oldest first"
+        compare: function(a, b)
+        {
+            return (a.date < b.date) ? 1
+                                     : (a.date === b.date) ? 0
+                                                           : -1;
+        }
+        getSection: function(item)
+        {
+            return Format.formatDate(item.date, Formatter.TimepointSectionRelative);
+        }
+    }
+
+
+    property FeedSorter feedSourceLatestFirstSorter: FeedSorter {
+        name: "Feed, then latest first"
+        compare: function(a, b)
+        {
+            if (a.source === b.source)
+            {
+                return (a.date < b.date) ? -1
+                                         : (a.date === b.date) ? 0
+                                                               : 1;
+            }
+            else
+            {
+                return (a.name < b.name) ? 1
+                                         : -1;
+            }
+        }
+        getSection: function(item)
+        {
+            return item.name;
+        }
+    }
+
+    property FeedSorter feedSourceOldestFirstSorter: FeedSorter {
+        name: "Feed, then oldest first"
+        compare: function(a, b)
+        {
+            if (a.source === b.source)
+            {
+                return (a.date < b.date) ? 1
+                                         : (a.date === b.date) ? 0
+                                                               : -1;
+            }
+            else
+            {
+                return (a.name < b.name) ? 1
+                                         : -1;
+            }
+        }
+        getSection: function(item)
+        {
+            return item.name;
+        }
+    }
+
+    property variant feedSorters: [
+        latestFirstSorter,
+        oldestFirstSorter,
+        feedSourceLatestFirstSorter,
+        feedSourceOldestFirstSorter
+    ]
 
     property FeedLoader _feedLoader: FeedLoader {
         property string feedName
@@ -152,12 +235,12 @@ ListModel {
      */
     function _insertItem(item)
     {
-
-        function f(begin, end)
+        // binary search for insertion place
+        function f(begin, end, comp)
         {
             if (begin === end)
             {
-                if (item.date < get(begin).date)
+                if (comp(item, get(begin)) === -1)
                 {
                     insert(begin + 1, item);
                 }
@@ -169,19 +252,21 @@ ListModel {
             else
             {
                 var middle = begin + Math.floor((end - begin) / 2);
-                if (item.date < get(middle).date)
+                if (comp(item, get(middle)) === -1)
                 {
-                    f(middle + 1, end);
+                    f(middle + 1, end, comp);
                 }
                 else
                 {
-                    f(begin, middle);
+                    f(begin, middle, comp);
                 }
             }
         }
+
+        item["sectionTitle"] = feedSorter.getSection(item);
         if (count > 0)
         {
-            f(0, count - 1);
+            f(0, count - 1, feedSorter.compare);
         }
         else
         {
@@ -228,7 +313,6 @@ ListModel {
 
         item["name"] = _feedLoader.feedName;
         item["color"] = _feedLoader.feedColor;
-        item["sectionDate"] = Format.formatDate(item.date, Formatter.TimepointSectionRelative);
         item["thumbnail"] = _findThumbnail(item);
         item["enclosures"] = _getEnclosures(item);
 
@@ -442,8 +526,6 @@ ListModel {
             }
             console.log("shelving " + item.source + " " + item.uid);
             Database.shelveItem(item.source, item.uid, json.toJson(v));
-            // becomes unread
-            setRead(idx, false);
         }
         else
         {
@@ -459,6 +541,28 @@ ListModel {
     {
         var item = get(idx);
         return Database.isShelved(item.source, item.uid);
+    }
+
+    // rearrange items if the sorter changed
+    onFeedSorterChanged: {
+        console.log("rearrange items");
+        var items = [];
+        for (var i = 0; i < count; ++i)
+        {
+            var item = get(i);
+            var v = {};
+            for (var key in item)
+            {
+                v[key] = item[key];
+            }
+            items.push(v);
+        }
+        clear();
+        for (i = 0; i < items.length; ++i)
+        {
+            console.log(items[i].title);
+            _insertItem(items[i]);
+        }
     }
 
     Component.onCompleted: {
