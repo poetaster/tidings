@@ -89,7 +89,9 @@ Page {
         delegate: ListItem {
             id: feedItem
 
-            visible: ! newsBlendModel.busy
+            opacity: newsBlendModel.busy ? 0.1 : 1
+            enabled: ! newsBlendModel.busy
+
             width: listview.width
             contentHeight: Theme.itemSizeExtraLarge
             clip: true
@@ -114,7 +116,7 @@ Page {
                 anchors.right: picture.visible ? picture.left : parent.right
                 anchors.leftMargin: shelveIcon.visible ? Theme.paddingSmall : Theme.paddingMedium
                 anchors.rightMargin: Theme.paddingMedium
-                color: feedItem.pressed ? Theme.secondaryHighlightColor : Theme.secondaryColor
+                color: feedItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: name + " (" + Format.formatDate(date, Formatter.DurationElapsed) + ")"
             }
@@ -124,7 +126,7 @@ Page {
                 anchors.left: feedLabel.left
                 anchors.right: picture.visible ? picture.left : parent.right
                 anchors.rightMargin: Theme.paddingMedium
-                color: feedItem.pressed ? Theme.primaryColor : Theme.highlightColor
+                color: feedItem.highlighted ? Theme.primaryColor : Theme.highlightColor
             }
 
             Label {
@@ -133,7 +135,7 @@ Page {
                 anchors.left: feedLabel.left
                 anchors.right: picture.visible ? picture.left : parent.right
                 anchors.rightMargin: Theme.paddingMedium
-                color: feedItem.pressed ? Theme.highlightColor : Theme.primaryColor
+                color: feedItem.highlighted ? Theme.highlightColor : Theme.primaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere

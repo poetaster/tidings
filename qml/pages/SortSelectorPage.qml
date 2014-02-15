@@ -14,6 +14,8 @@ Page {
         }
 
         delegate: ListItem {
+            id: listitem
+
             width: listview.width
 
             Label {
@@ -21,6 +23,7 @@ Page {
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.verticalCenter: parent.verticalCenter
+                color: listitem.highlighted ? Theme.highlightColor : Theme.primaryColor
             }
 
             onClicked: {

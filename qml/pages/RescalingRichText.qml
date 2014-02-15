@@ -15,7 +15,6 @@ Item {
     property real fontSize: Theme.fontSizeSmall
 
     property real scaling: 1
-    property bool isScaled
 
     property string _style: "<style>" +
                             "a:link { color:" + Theme.highlightColor + "}" +
@@ -27,8 +26,24 @@ Item {
     clip: true
 
     onWidthChanged: {
-        isScaled = false;
         rescaleTimer.restart();
+    }
+
+    Label {
+        id: layoutLabel
+
+        visible: false
+        width: parent.width
+        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        textFormat: Text.RichText
+
+        // tiny font so that only images are relevant
+        text: "<style>* { font-size: 1px }</style>" + parent.text
+
+        onContentWidthChanged: {
+            console.log("contentWidth: " + contentWidth);
+            rescaleTimer.restart();
+        }
     }
 
     Label {
@@ -45,11 +60,6 @@ Item {
 
         text: _style + parent.text
 
-        onContentWidthChanged: {
-            console.log("contentWidth: " + contentWidth);
-            rescaleTimer.restart();
-        }
-
         onLinkActivated: {
             root.linkActivated(link);
         }
@@ -60,13 +70,12 @@ Item {
         interval: 100
 
         onTriggered: {
-            var contentWidth = Math.floor(contentLabel.contentWidth);
-            if (! isScaled)
-            {
-                isScaled = true;
-                scaling = parent.width / (contentLabel.contentWidth + 0.0);
-                console.log("scaling: " + scaling);
-            }
+            var contentWidth = Math.floor(layoutLabel.contentWidth);
+            scaling = Math.min(1, parent.width / (layoutLabel.contentWidth + 0.0));
+            console.log("scaling: " + scaling);
+
+            // force reflow
+            contentLabel.text = contentLabel.text + " ";
         }
     }
 }
