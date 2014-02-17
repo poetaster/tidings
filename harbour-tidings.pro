@@ -43,7 +43,8 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/RescalingRichText.qml \
     qml/pages/ExternalLinkDialog.qml \
     qml/pages/FeedSorter.qml \
-    qml/pages/SortSelectorPage.qml
+    qml/pages/SortSelectorPage.qml \
+    qml/cover/overlay.png
 
 TRANSLATIONS = l10n/en_US.ts \
             l10n/ru_RU.ts

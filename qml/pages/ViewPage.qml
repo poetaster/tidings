@@ -18,6 +18,8 @@ Page {
     property string duration: newsBlendModel.get(index).duration
     property bool shelved: newsBlendModel.isShelved(index)
 
+    property bool _tintedBackground: false
+
     property int _previousOfFeed: newsBlendModel.previousOfFeed(index)
     property int _nextOfFeed: newsBlendModel.nextOfFeed(index)
 
@@ -122,6 +124,12 @@ Page {
     }
 
     Rectangle {
+        visible: _tintedBackground
+        anchors.fill: parent
+        color: Qt.rgba(1, 1, 1, 0.7)
+    }
+
+    Rectangle {
         width: 2
         height: parent.height
         color: page.color
@@ -135,12 +143,10 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: shelved ? "Keep it not"
-                              : "Keep it"
+                text: qsTr("Toggle background")
 
                 onClicked: {
-                    newsBlendModel.shelveItem(index, ! shelved);
-                    shelved = ! shelved;
+                    _tintedBackground = ! _tintedBackground
                 }
             }
 
@@ -205,9 +211,10 @@ Page {
                     anchors.right: shelveIcon.left
                     anchors.rightMargin: Theme.paddingMedium
                     horizontalAlignment: Text.AlignLeft
-                    color: Theme.highlightColor
+                    color: _tintedBackground ? "#606060" : Theme.highlightColor
                     font.pixelSize: Theme.fontSizeSmall
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                    textFormat: Text.RichText
                     text: page.title
 
                     MouseArea {
@@ -246,7 +253,7 @@ Page {
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignLeft
-                color: Theme.highlightColor
+                color: _tintedBackground ? "#606060" : Theme.highlightColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: qsTr("(%1 seconds)").arg(duration)
             }
@@ -257,7 +264,7 @@ Page {
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignLeft
-                color: Theme.secondaryColor
+                color: _tintedBackground ? "#606060" : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: Format.formatDate(page.date, Formatter.Timepoint)
             }
@@ -273,7 +280,7 @@ Page {
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
 
-                color: Theme.primaryColor
+                color: _tintedBackground ? "black" : Theme.primaryColor
                 fontSize: Theme.fontSizeSmall
                 text: page.encoded ? page.encoded : page.preview
 
@@ -284,6 +291,7 @@ Page {
                     pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
                                                   props);
                 }
+
             }
 
             Item {

@@ -43,6 +43,14 @@ CoverBackground {
         offset: 0.5
     }
 
+    Image {
+        visible: ! backgroundImage.visible
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        source: Qt.resolvedUrl("overlay.png")
+        opacity: 0.1
+    }
+
     Column {
         visible: coverAdaptor.mode === "overview"
 

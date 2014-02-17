@@ -50,7 +50,7 @@ ApplicationWindow
                 sources.push(data);
             }
             newsBlendModel.sources = sources;
-            newsBlendModel.refresh();
+            //newsBlendModel.refresh();
         }
 
         Component.onCompleted: {

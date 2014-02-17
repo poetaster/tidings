@@ -24,8 +24,11 @@ ListModel {
     // name of the feed currently loading
     property string currentlyLoading
 
+    // private list of items as JS dicts
+    property var _items: []
+
     property FeedSorter latestFirstSorter: FeedSorter {
-        name: "Latest first"
+        name: qsTr("Latest first")
         compare: function(a, b)
         {
             return (a.date < b.date) ? -1
@@ -39,7 +42,7 @@ ListModel {
     }
 
     property FeedSorter oldestFirstSorter: FeedSorter {
-        name: "Oldest first"
+        name: qsTr("Oldest first")
         compare: function(a, b)
         {
             return (a.date < b.date) ? 1
@@ -54,7 +57,7 @@ ListModel {
 
 
     property FeedSorter feedSourceLatestFirstSorter: FeedSorter {
-        name: "Feed, then latest first"
+        name: qsTr("Feed, then latest first")
         compare: function(a, b)
         {
             if (a.source === b.source)
@@ -76,7 +79,7 @@ ListModel {
     }
 
     property FeedSorter feedSourceOldestFirstSorter: FeedSorter {
-        name: "Feed, then oldest first"
+        name: qsTr("Feed, then oldest first")
         compare: function(a, b)
         {
             if (a.source === b.source)
@@ -174,6 +177,22 @@ ListModel {
         }
     }
 
+    property Timer _itemRearranger: Timer {
+        interval: 10
+        running: false
+
+        onTriggered: {
+            var items = _items.slice();
+            clear();
+            _items = [];
+            for (var i = 0; i < items.length; ++i)
+            {
+                _insertItem(items[i]);
+            }
+            busy = false;
+        }
+    }
+
     property RssModel _rssModel: RssModel {
         onStatusChanged: {
             console.log("RssModel.status = " + status + " (" + source + ")");
@@ -231,6 +250,16 @@ ListModel {
 
     signal error(string details)
 
+    function _createItem(obj)
+    {
+        var item = { };
+        for (var key in obj)
+        {
+            item[key] = obj[key];
+        }
+        return item;
+    }
+
     /* Inserts the given item into this model.
      */
     function _insertItem(item)
@@ -242,10 +271,12 @@ ListModel {
             {
                 if (comp(item, get(begin)) === -1)
                 {
+                    _items.splice(begin + 1, 0, item);
                     insert(begin + 1, item);
                 }
                 else
                 {
+                    _items.splice(begin, 0, item);
                     insert(begin, item);
                 }
             }
@@ -270,6 +301,7 @@ ListModel {
         }
         else
         {
+            _items.push(item);
             append(item);
         }
     }
@@ -278,7 +310,7 @@ ListModel {
      */
     function _loadItem(model, i)
     {
-        var item = model.get(i);
+        var item = _createItem(model.get(i));
         item["source"] = "" + _feedLoader.source; // convert to string
         item["date"] = item.dateString !== "" ? new Date(item.dateString)
                                               : new Date();
@@ -449,6 +481,7 @@ ListModel {
         console.log("Refreshing model");
         busy = true;
         clear();
+        _items = [];
         for (var i = 0; i < sources.length; i++) {
             console.log("Source: " + sources[i].url);
         }
@@ -462,11 +495,6 @@ ListModel {
     function abort() {
         _sourcesQueue = [];
         _itemLoader.stop();
-        /*
-        for (var i = 0; i < _models.length; i++) {
-            _models[i].source = "";
-        }
-        */
         busy = false;
     }
 
@@ -509,23 +537,19 @@ ListModel {
         var item = get(idx);
         Database.setRead(item.source, item.uid, value);
         item.read = value;
+        _items[idx].read = value;
     }
 
     /* Keeps or removes the given item from the shelf.
      */
     function shelveItem(idx, value)
     {
-        var item = get(idx);
+        var item = _items[idx];
 
         if (value)
         {
-            var v = {};
-            for (var key in item)
-            {
-                v[key] = item[key];
-            }
             console.log("shelving " + item.source + " " + item.uid);
-            Database.shelveItem(item.source, item.uid, json.toJson(v));
+            Database.shelveItem(item.source, item.uid, json.toJson(item));
         }
         else
         {
@@ -533,35 +557,23 @@ ListModel {
             Database.unshelveItem(item.source, item.uid);
         }
         item.shelved = value;
+        get(idx).shelved = value;
     }
 
     /* Returns if the given item is currently shelved.
      */
     function isShelved(idx)
     {
-        var item = get(idx);
+        var item = _items[idx];
         return Database.isShelved(item.source, item.uid);
     }
 
     // rearrange items if the sorter changed
     onFeedSorterChanged: {
-        console.log("rearrange items");
-        var items = [];
-        for (var i = 0; i < count; ++i)
+        if (count > 0 && ! busy)
         {
-            var item = get(i);
-            var v = {};
-            for (var key in item)
-            {
-                v[key] = item[key];
-            }
-            items.push(v);
-        }
-        clear();
-        for (i = 0; i < items.length; ++i)
-        {
-            console.log(items[i].title);
-            _insertItem(items[i]);
+            busy = true;
+            _itemRearranger.restart();
         }
     }
 

@@ -3,6 +3,15 @@ import Sailfish.Silica 1.0
 
 Page {
 
+    property var _callback
+
+    Component.onDestruction: {
+        if (_callback)
+        {
+            _callback();
+        }
+    }
+
     SilicaListView {
         id: listview
 
@@ -10,7 +19,7 @@ Page {
         model: newsBlendModel.feedSorters
 
         header: PageHeader {
-            title: "Sort by"
+            title: qsTr("Sort by")
         }
 
         delegate: ListItem {
@@ -27,7 +36,15 @@ Page {
             }
 
             onClicked: {
-                newsBlendModel.feedSorter = modelData;
+                function closure(sorter)
+                {
+                    return function()
+                    {
+                        newsBlendModel.feedSorter = sorter;
+                    }
+                }
+
+                _callback = closure(modelData);
                 pageStack.pop();
             }
         }

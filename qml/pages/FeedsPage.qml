@@ -4,6 +4,20 @@ import Sailfish.Silica 1.0
 Page {
     id: page
 
+    function replaceEntities(text)
+    {
+        return text.replace(/&apos;/g, "'")
+                   .replace(/&quot;/g, "\"")
+                   .replace(/&#38;/g, "&")
+                   .replace(/&Auml;/g, "Ä")
+                   .replace(/&auml;/g, "ä")
+                   .replace(/&Ouml;/g, "Ö")
+                   .replace(/&ouml;/g, "ö")
+                   .replace(/&Uuml;/g, "Ü")
+                   .replace(/&uuml;/g, "ü")
+                   .replace(/&amp;/g, "&");
+    }
+
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
     onStatusChanged: {
@@ -65,7 +79,8 @@ Page {
             }
 
             MenuItem {
-                text: "Sort by: %1".arg(newsBlendModel.feedSorter.name)
+                enabled: ! newsBlendModel.busy
+                text: qsTr("Sort by: %1").arg(newsBlendModel.feedSorter.name)
 
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SortSelectorPage.qml"));
@@ -89,7 +104,7 @@ Page {
         delegate: ListItem {
             id: feedItem
 
-            opacity: newsBlendModel.busy ? 0.1 : 1
+            opacity: newsBlendModel.busy ? 0.2 : 1
             enabled: ! newsBlendModel.busy
 
             width: listview.width
@@ -141,7 +156,8 @@ Page {
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 maximumLineCount: 2
                 opacity: (read && ! shelved) ? 0.5 : 1
-                text: title
+                textFormat: Text.PlainText
+                text: replaceEntities(title)
             }
 
             Image {
