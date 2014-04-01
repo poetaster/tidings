@@ -11,13 +11,13 @@ Item {
     id: root
 
     property string text
-    property alias color: contentLabel.color
+    property color color
     property real fontSize: Theme.fontSizeSmall
 
     property real scaling: 1
 
     property string _style: "<style>" +
-                            "a:link { color:" + Theme.highlightColor + "}" +
+                            "a:link { color:" + Theme.highlightColor + " }" +
                             "</style>"
 
     signal linkActivated(string link)
@@ -46,22 +46,30 @@ Item {
         }
     }
 
-    Label {
+    Loader {
         id: contentLabel
+        sourceComponent: rescaleTimer.running ? null : labelComponent
+    }
 
-        width: parent.width / scaling
-        scale: scaling
+    Component {
+        id: labelComponent
 
-        transformOrigin: Item.TopLeft
-        font.pixelSize: parent.fontSize / scaling
-        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-        textFormat: Text.RichText
-        smooth: true
+        Label {
+            width: root.width / scaling
+            scale: scaling
 
-        text: _style + parent.text
+            transformOrigin: Item.TopLeft
+            color: root.color
+            font.pixelSize: root.fontSize / scaling
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            textFormat: Text.RichText
+            smooth: true
 
-        onLinkActivated: {
-            root.linkActivated(link);
+            text: _style + root.text
+
+            onLinkActivated: {
+                root.linkActivated(link);
+            }
         }
     }
 
@@ -73,9 +81,6 @@ Item {
             var contentWidth = Math.floor(layoutLabel.contentWidth);
             scaling = Math.min(1, parent.width / (layoutLabel.contentWidth + 0.0));
             console.log("scaling: " + scaling);
-
-            // force reflow
-            contentLabel.text = contentLabel.text + " ";
         }
     }
 }
