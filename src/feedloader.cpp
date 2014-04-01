@@ -17,7 +17,7 @@ FeedLoader::FeedLoader(QObject* parent)
     myNetworkAccessManager = new QNetworkAccessManager(this);
 
     connect(myNetworkAccessManager,
-            SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>&)),
+            SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)),
             this,
             SLOT(slotSslErrors(QNetworkReply*,QList<QSslError>)));
     connect(myNetworkAccessManager, SIGNAL(finished(QNetworkReply*)),
