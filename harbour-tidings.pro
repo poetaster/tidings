@@ -44,7 +44,8 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/ExternalLinkDialog.qml \
     qml/pages/FeedSorter.qml \
     qml/pages/SortSelectorPage.qml \
-    qml/cover/overlay.png
+    qml/cover/overlay.png \
+    qml/pages/ConfigValue.qml
 
 TRANSLATIONS = l10n/en_US.ts \
             l10n/ru_RU.ts

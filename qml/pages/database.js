@@ -6,7 +6,7 @@
  * call it in _migrate.
  * Update _createSchema with the schema modifications.
  */
-var _REVISION = 5;
+var _REVISION = 6;
 
 var _database = Sql.LocalStorage.openDatabaseSync("TidingsDB", "1.0",
                                                   "Tidings Persisted Settings");
@@ -43,6 +43,7 @@ function _migrate(tx) {
         if (revision < 3) { _migrateRev3(tx); }
         if (revision < 4) { _migrateRev4(tx); }
         if (revision < 5) { _migrateRev5(tx); }
+        if (revision < 6) { _migrateRev6(tx); }
     }
 
     // set the new revision
@@ -58,7 +59,8 @@ function _migrate(tx) {
 
 /* Migrates to Rev 1.
  */
-function _migrateRev1(tx) {
+function _migrateRev1(tx)
+{
     tx.executeSql("ALTER TABLE sources ADD COLUMN sourceid INT DEFAULT 0");
     var res = tx.executeSql("SELECT url FROM sources");
     var nextId = 0;
@@ -72,13 +74,15 @@ function _migrateRev1(tx) {
 
 /* Migrates to Rev 2, where we added color tags.
  */
-function _migrateRev2(tx) {
+function _migrateRev2(tx)
+{
     tx.executeSql("ALTER TABLE sources ADD COLUMN color VARCHAR(9) DEFAULT '#00c0a0'");
 }
 
 /* Migrates to Rev 3, where we added a table for read items.
  */
-function _migrateRev3(tx) {
+function _migrateRev3(tx)
+{
     tx.executeSql("CREATE TABLE read (" +
                   "  url TEXT," +
                   "  uid TEXT" +
@@ -87,13 +91,15 @@ function _migrateRev3(tx) {
 
 /* Migrates to Rev 4, where read items got a timestamp.
  */
-function _migrateRev4(tx) {
+function _migrateRev4(tx)
+{
     tx.executeSql("ALTER TABLE read ADD COLUMN read INT DEFAULT 0");
 }
 
 /* Migrates to Rev 5, where we added a shelf for kept items.
  */
-function _migrateRev5(tx) {
+function _migrateRev5(tx)
+{
     tx.executeSql("CREATE TABLE shelf (" +
                   "  url TEXT," +
                   "  uid TEXT," +
@@ -101,9 +107,20 @@ function _migrateRev5(tx) {
                   ")");
 }
 
+/* Migrates to Rev 6, where we added a table for configuration.
+ */
+function _migrateRev6(tx)
+{
+    tx.executeSql("CREATE TABLE config (" +
+                  "  key VARCHAR(256)," +
+                  "  value TEXT" +
+                  ")");
+}
+
 /* Creates the initial schema.
  */
-function _createSchema(tx) {
+function _createSchema(tx)
+{
     tx.executeSql("CREATE TABLE sources (" +
                   "  sourceid INT," +
                   "  name TEXT," +
@@ -121,6 +138,11 @@ function _createSchema(tx) {
                   "  url TEXT," +
                   "  uid TEXT," +
                   "  document TEXT" +
+                  ")");
+
+    tx.executeSql("CREATE TABLE config (" +
+                  "  key VARCHAR(256)," +
+                  "  value TEXT" +
                   ")");
 }
 
@@ -311,6 +333,49 @@ function isShelved(url, uid)
         var res = tx.executeSql("SELECT url FROM shelf WHERE url = ? AND uid = ?",
                                 [url, uid]);
         result = (res.rows.length > 0);
+    }
+
+    _database.transaction(f);
+    return result;
+}
+
+/* Sets a configuration key.
+ */
+function configSet(key, value)
+{
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT key FROM config WHERE key = ?",
+                                [key]);
+        if (res.rows.length > 0)
+        {
+            tx.executeSql("UPDATE config SET value = ? WHERE key = ?",
+                          [value, key]);
+        }
+        else
+        {
+            tx.executeSql("INSERT INTO config (key, value) VALUES (?, ?)",
+                          [key, value]);
+        }
+    }
+
+    _database.transaction(f);
+}
+
+/* Retrieves a configuration key.
+ */
+function configGet(key, deflt)
+{
+    var result = deflt;
+
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT value FROM config WHERE key = ?",
+                                [key]);
+        if (res.rows.length > 0)
+        {
+            result = res.rows.item(0).value;
+        }
     }
 
     _database.transaction(f);

@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
     view->rootContext()->setContextProperty("appVersion", appVersion);
     view->rootContext()->setContextProperty("json", &json);
     view->setSource(SailfishApp::pathTo("qml/harbour-tidings.qml"));
+    view->setTitle("Tidings");
     view->showFullScreen();
     return app->exec();
 }

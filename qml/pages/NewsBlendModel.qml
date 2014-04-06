@@ -10,10 +10,12 @@ ListModel {
     id: listModel
 
     // the sorter for this model
-    property FeedSorter feedSorter: latestFirstSorter
+    property FeedSorter feedSorter: _getFeedSorter(configFeedSorter.value)
 
     // the list of all feed sources to load.
     property variant sources: []
+
+    property var feedInfo: ({ })
 
     // the time of the last refresh
     property variant lastRefresh
@@ -28,6 +30,7 @@ ListModel {
     property var _items: []
 
     property FeedSorter latestFirstSorter: FeedSorter {
+        key: "latestFirst"
         name: qsTr("Latest first")
         compare: function(a, b)
         {
@@ -42,6 +45,7 @@ ListModel {
     }
 
     property FeedSorter oldestFirstSorter: FeedSorter {
+        key: "oldestFirst"
         name: qsTr("Oldest first")
         compare: function(a, b)
         {
@@ -57,6 +61,7 @@ ListModel {
 
 
     property FeedSorter feedSourceLatestFirstSorter: FeedSorter {
+        key: "feedLatestFirst"
         name: qsTr("Feed, then latest first")
         compare: function(a, b)
         {
@@ -79,6 +84,7 @@ ListModel {
     }
 
     property FeedSorter feedSourceOldestFirstSorter: FeedSorter {
+        key: "feedOldestFirst"
         name: qsTr("Feed, then oldest first")
         compare: function(a, b)
         {
@@ -112,6 +118,9 @@ ListModel {
         property string feedColor
 
         onSuccess: {
+            feedInfo[source].loading = false;
+            listModel.feedInfoChanged();
+
             switch (type)
             {
             case FeedLoader.RSS2:
@@ -142,113 +151,148 @@ ListModel {
         }
 
         onError: {
+            feedInfo[source].loading = false;
+            listModel.feedInfoChanged();
+
             _handleError(details);
             _loadNext();
         }
     }
 
-    property Timer _itemLoader: Timer {
-        property variant model
-        property int index
 
-        function load(loadModel)
+    /* Timer for running tasks in the background.
+     */
+    property Timer _backgroundTimer: Timer {
+
+        property var bgWorkers: []
+
+        function execute(worker)
         {
-            model = loadModel;
-            index = 0;
-            start();
+            bgWorkers.push(worker);
+
+            if (! running)
+            {
+                start();
+            }
         }
 
-        interval: 75
+        function abort()
+        {
+            bgWorkers = [];
+            stop();
+        }
+
+        interval: 10
         repeat: true
 
         onTriggered: {
-            for (var end = index + 2;
-                 index < end && index < model.count;
-                 index++)
-            {
-                listModel._loadItem(model, index);
-                index++;
-            }
-            if (index >= model.count)
-            {
-                stop();
-                _loadNext();
-            }
-        }
-    }
+            var begin = new Date();
+            var now = begin;
 
-    property Timer _itemRearranger: Timer {
-        interval: 10
-        running: false
-
-        onTriggered: {
-            var items = _items.slice();
-            clear();
-            _items = [];
-            for (var i = 0; i < items.length; ++i)
+            while (bgWorkers.length > 0 &&
+                   now.getTime() - begin.getTime() < 30 /*ms*/)
             {
-                _insertItem(items[i]);
+                if (!bgWorkers[0]())
+                {
+                    bgWorkers.shift();
+                    if (bgWorkers.length === 0)
+                    {
+                        stop();
+                    }
+                    break;
+                }
+                now = new Date();
             }
-            busy = false;
         }
     }
 
     property RssModel _rssModel: RssModel {
         onStatusChanged: {
-            console.log("RssModel.status = " + status + " (" + source + ")");
-            if (status === XmlListModel.Error) {
-                _handleError(errorString());
-                _loadNext();
-            } else if (status === XmlListModel.Ready) {
-                _itemLoader.load(_rssModel);
+            if (source)
+            {
+                console.log("RssModel.status = " + status + " (" + source + ")");
+                if (status === XmlListModel.Error)
+                {
+                    _handleError(errorString());
+                    _loadNext();
+                }
+                else if (status === XmlListModel.Ready)
+                {
+                    _loadFromFeed(_rssModel);
+                }
             }
         }
     }
 
     property RssModel _rdfModel: RdfModel {
         onStatusChanged: {
-            console.log("RdfModel.status = " + status + " (" + source + ")");
-            if (status === XmlListModel.Error) {
-                _handleError(errorString());
-                _loadNext();
-            } else if (status === XmlListModel.Ready) {
-                _itemLoader.load(_rdfModel);
+            if (source)
+            {
+                console.log("RdfModel.status = " + status + " (" + source + ")");
+                if (status === XmlListModel.Error)
+                {
+                    _handleError(errorString());
+                    _loadNext();
+                }
+                else if (status === XmlListModel.Ready)
+                {
+                    _loadFromFeed(_rdfModel);
+                }
             }
         }
     }
 
     property AtomModel _atomModel: AtomModel {
         onStatusChanged: {
-            console.log("AtomModel.status = " + status + " (" + source + ")");
-            if (status === XmlListModel.Error) {
-                _handleError(errorString());
-                _loadNext();
-            } else if (status === XmlListModel.Ready) {
-                _itemLoader.load(_atomModel);
+            if (source)
+            {
+                console.log("AtomModel.status = " + status + " (" + source + ")");
+                if (status === XmlListModel.Error)
+                {
+                    _handleError(errorString());
+                    _loadNext();
+                }
+                else if (status === XmlListModel.Ready)
+                {
+                    _loadFromFeed(_atomModel);
+                }
             }
         }
     }
 
     property OpmlModel _opmlModel: OpmlModel {
         onStatusChanged: {
-            console.log("OpmlModel.status = " + status + " (" + source + ")");
-            if (status === XmlListModel.Error) {
-                _handleError(errorString());
-                _loadNext();
-            } else if (status === XmlListModel.Ready) {
-                _addItems(_opmlModel);
-                _itemLoader.load(_opmlModel);
+            if (source)
+            {
+                console.log("OpmlModel.status = " + status + " (" + source + ")");
+                if (status === XmlListModel.Error)
+                {
+                    _handleError(errorString());
+                    _loadNext();
+                }
+                else if (status === XmlListModel.Ready)
+                {
+                    _loadFromFeed(_opmlModel);
+                }
             }
         }
     }
 
-    property variant _models: [
-        _atomModel, _opmlModel, _rssModel
-    ]
-
-    property variant _sourcesQueue: []
+    property var _sourcesQueue: []
 
     signal error(string details)
+
+    function _getFeedSorter(key)
+    {
+        for (var i = 0; i < feedSorters.length; ++i)
+        {
+            if (feedSorters[i].key === key)
+            {
+                return feedSorters[i];
+            }
+        }
+        return null;
+    }
 
     function _createItem(obj)
     {
@@ -260,6 +304,99 @@ ListModel {
         return item;
     }
 
+    function _ensureFeedInfo(url)
+    {
+        if (! feedInfo[url])
+        {
+            feedInfo[url] = {
+                "lastRefresh": null,
+                "loading": false,
+                "count": 0,
+                "unreadCount": 0
+            }
+        }
+    }
+
+    function _feedInfoCountReset(url)
+    {
+        _ensureFeedInfo(url);
+        feedInfo[url].count = 0;
+        feedInfoChanged();
+    }
+
+    function _feedInfoCountIncrement(url)
+    {
+        _ensureFeedInfo(url);
+        feedInfo[url].count += 1;
+        feedInfoChanged();
+    }
+
+    function _feedInfoCountDecrement(url)
+    {
+        _ensureFeedInfo(url);
+        feedInfo[url].count -= 1;
+        feedInfoChanged();
+    }
+
+    function _feedInfoUnreadCountReset(url)
+    {
+        _ensureFeedInfo(url);
+        feedInfo[url].unreadCount = 0;
+        feedInfoChanged();
+    }
+
+    function _feedInfoUnreadCountDecrement(url)
+    {
+        _ensureFeedInfo(url);
+        feedInfo[url].unreadCount -= 1;
+        feedInfoChanged();
+    }
+
+    function _feedInfoUnreadCountIncrement(url)
+    {
+        _ensureFeedInfo(url);
+        feedInfo[url].unreadCount += 1;
+        feedInfoChanged();
+    }
+
+    function _feedInfoRefreshed(url)
+    {
+        _ensureFeedInfo(url);
+        feedInfo[url].lastRefresh = new Date();
+        feedInfoChanged();
+    }
+
+    function _feedInfoSetLoading(url, value)
+    {
+        _ensureFeedInfo(url);
+        feedInfo[url].loading = value;
+        feedInfoChanged();
+    }
+
+    /* Synchronizes the items with the UI. This needs to be done whenever the
+     * list of items changed.
+     */
+    function _synchronize()
+    {
+        clear();
+        for (var i = 0; i < _items.length; ++i)
+        {
+            append(_items[i]);
+        }
+    }
+
+    function _hasItem(source, uid)
+    {
+        for (var i = 0; i < _items.length; ++i)
+        {
+            if (_items[i].source === source && _items[i].uid === uid)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /* Inserts the given item into this model.
      */
     function _insertItem(item)
@@ -269,21 +406,21 @@ ListModel {
         {
             if (begin === end)
             {
-                if (comp(item, get(begin)) === -1)
+                if (comp(item, _items[begin]) === -1)
                 {
                     _items.splice(begin + 1, 0, item);
-                    insert(begin + 1, item);
+                    //insert(begin + 1, item);
                 }
                 else
                 {
                     _items.splice(begin, 0, item);
-                    insert(begin, item);
+                    //insert(begin, item);
                 }
             }
             else
             {
                 var middle = begin + Math.floor((end - begin) / 2);
-                if (comp(item, get(middle)) === -1)
+                if (comp(item, _items[middle]) === -1)
                 {
                     f(middle + 1, end, comp);
                 }
@@ -295,14 +432,14 @@ ListModel {
         }
 
         item["sectionTitle"] = feedSorter.getSection(item);
-        if (count > 0)
+        if (_items.length > 0)
         {
-            f(0, count - 1, feedSorter.compare);
+            f(0, _items.length - 1, feedSorter.compare);
         }
         else
         {
             _items.push(item);
-            append(item);
+            //append(item);
         }
     }
 
@@ -328,6 +465,12 @@ ListModel {
             }
         }
 
+        if (_hasItem(item.source, item.uid))
+        {
+            // do not insert the same item twice
+            return;
+        }
+
         item["read"] = Database.isRead(item.source, item.uid);
         if (item.read)
         {
@@ -342,52 +485,86 @@ ListModel {
             return;
         }
 
-
         item["name"] = _feedLoader.feedName;
         item["color"] = _feedLoader.feedColor;
         item["thumbnail"] = _findThumbnail(item);
         item["enclosures"] = _getEnclosures(item);
 
         _insertItem(item);
+        _feedInfoCountIncrement(_feedLoader.source);
+        _feedInfoUnreadCountIncrement(_feedLoader.source);
+    }
+
+    /* Returns the MIME type of an enclosure.
+     */
+    function _enclosureType(item, i)
+    {
+        var url = item["enclosure_" + i + "_url"];
+        var type = item["enclosure_" + i + "_type"];
+
+        if (type)
+        {
+            return type;
+        }
+        else if (url.substring(url.length - 4).toLowerCase() === ".jpg")
+        {
+            return "image/jpeg";
+        }
+        else if (url.substring(url.length - 4).toLowerCase() === ".png")
+        {
+            return "image/png";
+        }
+        else
+        {
+            return "application/octet-stream";
+        }
     }
 
     /* Returns a thumbnail URL if there is something usable, or an empty string
      * otherwise.
      */
-    function _findThumbnail(item) {
+    function _findThumbnail(item)
+    {
         var i;
         var url;
 
-        if (item.iTunesImage) {
+        if (item.iTunesImage)
+        {
             return item.iTunesImage;
         }
 
         var thumb = "";
         var minDelta = 9999;
         var goodWidth = 100;
-        for (i = 1; i <= Math.min(item.thumbnailsAmount, 9); ++i) {
+        for (i = 1; i <= Math.min(item.thumbnailsAmount, 9); ++i)
+        {
             url = item["thumbnail_" + i + "_url"];
             var width = item["thumbnail_" + i + "_width"];
 
-            if (width === undefined) {
+            if (width === undefined)
+            {
                 width = 0;
             }
 
-            if (Math.abs(goodWidth - width) < minDelta) {
+            if (Math.abs(goodWidth - width) < minDelta)
+            {
                 minDelta = Math.abs(goodWidth - width);
                 thumb = url;
             }
         }
 
-        if (thumb !== "") {
+        if (thumb !== "")
+        {
             return thumb;
         }
 
-        for (i = 1; i <= Math.min(item.enclosuresAmount, 9); ++i) {
+        for (i = 1; i <= Math.min(item.enclosuresAmount, 9); ++i)
+        {
             url = item["enclosure_" + i + "_url"];
-            var type = item["enclosure_" + i + "_type"];
+            var type = _enclosureType(item, i);
 
-            if (type && type.substring(0, 6) === "image/") {
+            if (type && type.substring(0, 6) === "image/")
+            {
                 return url;
             }
         }
@@ -397,16 +574,18 @@ ListModel {
 
     /* Returns a list of enclosure objects (url, type, length).
      */
-    function _getEnclosures(item) {
+    function _getEnclosures(item)
+    {
         var enclosures = [];
-        for (var i = 1; i <= Math.min(item.enclosuresAmount, 9); ++i) {
+        for (var i = 1; i <= Math.min(item.enclosuresAmount, 9); ++i)
+        {
             var url = item["enclosure_" + i + "_url"];
-            var type = item["enclosure_" + i + "_type"];
+            var type = _enclosureType(item, i);
             var length = item["enclosure_" + i + "_length"];
 
             var enclosure = {
                 "url": url ? url : "",
-                "type": type ? type : "application/octet-stream",
+                "type": type,
                 "length" : length ? length : "-1"
             };
             console.log("enclosure " + url + " " + type + " " + length);
@@ -418,37 +597,31 @@ ListModel {
 
     /* Takes the next source from the sources queue and loads it.
      */
-    function _loadNext() {
-        var queue = _sourcesQueue;
-        if (queue.length > 0) {
-            var source = queue.pop();
+    function _loadNext()
+    {
+        if (_sourcesQueue.length > 0)
+        {
+            var source = _sourcesQueue.shift();
             var url = source.url;
             var name = source.name;
             var color = source.color;
 
             console.log("Now loading: " + name);
             currentlyLoading = name;
+            busy = true;
+
+            _feedInfoSetLoading(url, true);
+            _feedInfoRefreshed(url);
+
             _feedLoader.feedColor = color;
             _feedLoader.feedName = name;
             _feedLoader.source = url;
-
-            _sourcesQueue = queue;
         }
         else
         {
-            // add shelved items
-            var shelvedItems = Database.shelvedItems();
-            for (var i = 0; i < shelvedItems.length; ++i)
-            {
-                var item = json.fromJson(shelvedItems[i]);
-                item["date"] = item.dateString !== "" ? new Date(item.dateString)
-                                                      : new Date();
-                item["shelved"] = true;
-                _insertItem(item);
-            }
-
-            busy = false;
             currentlyLoading = "";
+            _synchronize();
+            busy = false;
         }
     }
 
@@ -475,26 +648,186 @@ ListModel {
         }
     }
 
+    /* Loads items from the given feed model.
+     */
+    function _loadFromFeed(feedModel)
+    {
+        var index = 0;
+        _feedInfoSetLoading(_feedLoader.source, true);
+
+        function loader()
+        {
+            if (index < feedModel.count)
+            {
+                _loadItem(feedModel, index);
+                ++index;
+                return true;
+            }
+            else
+            {
+                _feedInfoSetLoading(_feedLoader.source, false);
+                _loadNext();
+                return false;
+            }
+        }
+
+        _backgroundTimer.execute(loader);
+    }
+
+    /* Rearranges the items according to the current sorter.
+     */
+    function _rearrangeItems()
+    {
+        busy = true;
+
+        var items = [];
+        for (var i = 0; i < _items.length; ++i)
+        {
+            items.push(_items[i]);
+        }
+        _items = [];
+
+        function rearranger()
+        {
+            if (items.length)
+            {
+                _insertItem(items.shift());
+                return true;
+            }
+            else
+            {
+                _synchronize();
+                busy = false;
+                return false;
+            }
+        }
+
+        _backgroundTimer.execute(rearranger);
+    }
+
     /* Clears and reloads the model from the current sources.
      */
-    function refresh() {
-        console.log("Refreshing model");
-        busy = true;
-        clear();
-        _items = [];
-        for (var i = 0; i < sources.length; i++) {
-            console.log("Source: " + sources[i].url);
+    function refreshAll()
+    {
+        var items = [];
+        for (var i = 0; i < _items.length; ++i)
+        {
+            if (! _items[i].read || _items[i].shelved)
+            {
+                items.push(_items[i]);
+            }
+            else
+            {
+                _feedInfoCountDecrement(_items[i].source);
+            }
+
         }
-        _sourcesQueue = sources;
+        _items = items;
+
+        for (i = 0; i < sources.length; i++)
+        {
+            console.log("Source: " + sources[i].url);
+            _sourcesQueue.push(sources[i]);
+            //_feedInfoCountReset(sources[i].url);
+        }
         _loadNext();
         lastRefresh = new Date();
+    }
+
+    /* Refreshes the model from the given source.
+     */
+    function refresh(source)
+    {
+        var items = [];
+        for (var i = 0; i < _items.length; ++i)
+        {
+            if (! _items[i].read ||
+                    _items[i].shelved ||
+                    _items[i].source !== source.url)
+            {
+                items.push(_items[i]);
+            }
+            else if (_items[i].source === source.url)
+            {
+                _feedInfoCountDecrement(source.url);
+            }
+        }
+        _items = items;
+
+        _sourcesQueue.push(source);
+        if (! busy)
+        {
+            //_feedInfoCountReset(source.url);
+            lastRefresh = new Date();
+            _loadNext();
+        }
+    }
+
+    /* Removes all items belonging to the given source, unless shelved.
+     */
+    function removeItems(source)
+    {
+        busy = true;
+        var items = [];
+        for (var i = 0; i < _items.length; ++i)
+        {
+            if (_items[i].shelved ||
+                _items[i].source !== source)
+            {
+                items.push(_items[i]);
+            }
+            else if (_items[i].source === source)
+            {
+                _feedInfoCountDecrement(source);
+            }
+        }
+        _items = items;
+        _synchronize();
+        _feedInfoUnreadCountReset(source);
+        busy = false;
+    }
+
+    /* Loads the shelved items.
+     */
+    function loadShelved()
+    {
+        var items = Database.shelvedItems();
+        busy = true;
+
+        function loader()
+        {
+            if (items.length > 0)
+            {
+                var item = json.fromJson(items.shift());
+                item["date"] = item.dateString !== "" ? new Date(item.dateString)
+                                                      : new Date();
+                item["shelved"] = true;
+
+                if (! _hasItem(item.uid))
+                {
+                    _insertItem(item);
+                    _feedInfoCountIncrement(item.source);
+                }
+                return true;
+            }
+            else
+            {
+                _synchronize();
+                busy = false;
+                return false;
+            }
+        }
+
+        _backgroundTimer.execute(loader);
     }
 
     /* Aborts loading.
      */
     function abort() {
         _sourcesQueue = [];
-        _itemLoader.stop();
+        _backgroundTimer.abort();
+        _synchronize();
+        _feedInfoSetLoading(_feedLoader.source, false);
         busy = false;
     }
 
@@ -503,10 +836,10 @@ ListModel {
      */
     function previousOfFeed(idx)
     {
-        var item = get(idx);
+        var item = _items[idx];
         for (var i = idx - 1; i >= 0; --i)
         {
-            if (get(i).source === item.source)
+            if (_items[i].source === item.source)
             {
                 return i;
             }
@@ -519,10 +852,25 @@ ListModel {
      */
     function nextOfFeed(idx)
     {
-        var item = get(idx);
+        var item = _items[idx];
         for (var i = idx + 1; i < count; ++i)
         {
-            if (get(i).source === item.source)
+            if (_items[i].source === item.source)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /* Returns the index of the first item of the given feed source, or -1 if
+     * there is none.
+     */
+    function firstOfFeed(source)
+    {
+        for (var i = 0; i < count; ++i)
+        {
+            if (_items[i].source === source)
             {
                 return i;
             }
@@ -535,9 +883,41 @@ ListModel {
     function setRead(idx, value)
     {
         var item = get(idx);
-        Database.setRead(item.source, item.uid, value);
-        item.read = value;
-        _items[idx].read = value;
+        if (! item.read)
+        {
+            Database.setRead(item.source, item.uid, value);
+            item.read = value;
+            _items[idx].read = value;
+            _feedInfoUnreadCountDecrement(item.source);
+        }
+    }
+
+    /* Marks all items of the given source as read.
+     */
+    function setAllRead(source)
+    {
+        var pos = 0;
+        busy = true;
+
+        function marker()
+        {
+            if (pos < _items.length)
+            {
+                if (_items[pos].source === source)
+                {
+                    setRead(pos, true);
+                }
+                ++pos;
+                return true;
+            }
+            else
+            {
+                busy = false;
+                return false;
+            }
+        }
+
+        _backgroundTimer.execute(marker);
     }
 
     /* Keeps or removes the given item from the shelf.
@@ -572,8 +952,7 @@ ListModel {
     onFeedSorterChanged: {
         if (count > 0 && ! busy)
         {
-            busy = true;
-            _itemRearranger.restart();
+            _rearrangeItems();
         }
     }
 

@@ -33,6 +33,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import "pages"
+import "cover"
 
 ApplicationWindow
 {
@@ -42,15 +43,16 @@ ApplicationWindow
         onModelChanged: {
             var sources = [];
             for (var i = 0; i < count; i++) {
+                /*
                 var data = {
                     "name": get(i).name,
                     "url": get(i).url,
                     "color": get(i).color
                 };
-                sources.push(data);
+                */
+                sources.push(get(i));
             }
             newsBlendModel.sources = sources;
-            //newsBlendModel.refresh();
         }
 
         Component.onCompleted: {
@@ -88,7 +90,12 @@ ApplicationWindow
         property string title
         property string thumbnail
         property string page
-        property string mode: "overview"
+        property string currentPage: (pageStack.depth > 0)
+                                     ? pageStack.currentPage.objectName
+                                     : ""
+        property variant lastRefresh: newsBlendModel.lastRefresh
+        property int totalCount: newsBlendModel.count
+        property bool busy: newsBlendModel.busy
 
         property bool hasPrevious
         property bool hasNext
@@ -100,12 +107,24 @@ ApplicationWindow
         signal nextItem
     }
 
-    Connections {
-        target: pageStack
+    ConfigValue {
+        id: configFeedSorter
+        key: "feed-sort-by"
+        value: "latestFirst"
+    }
 
-        onCurrentPageChanged: {
-            coverAdaptor.mode = pageStack.currentPage.objectName === "ViewPage" ? "feeds"
-                                                                                : "overview";
+    Timer {
+        id: minuteTimer
+
+        property bool tick: true
+
+        triggeredOnStart: true
+        running: Qt.application.active
+        interval: 60000
+        repeat: true
+
+        onTriggered: {
+            tickChanged();
         }
     }
 
@@ -113,6 +132,18 @@ ApplicationWindow
         id: notification
     }
 
-    initialPage: FeedsPage { }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    initialPage: sourcesPage
+    cover: coverPage
+
+    Component {
+        id: sourcesPage
+
+        SourcesPage { }
+    }
+
+    Component {
+        id: coverPage
+
+        CoverPage { }
+    }
 }

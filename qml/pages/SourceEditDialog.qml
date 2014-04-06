@@ -2,79 +2,100 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Dialog {
+    id: dialog
 
     property int sourceId
     property alias name: inputName.text
     property alias url: inputUrl.text
     property alias color: swatch.color
     property bool editOnly
+    property Item item
 
     canAccept: inputName.text !== ""
                && inputUrl.text !== ""
 
-    Column {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.leftMargin: Theme.paddingMedium
-        anchors.rightMargin: Theme.paddingMedium
-        spacing: Theme.paddingSmall
+    SilicaFlickable {
+        anchors.fill: parent
+        contentHeight: childrenRect.height
 
-        DialogHeader {
-            title: qsTr("Save")
+        PullDownMenu {
+            visible: dialog.item !== null
+
+            MenuItem {
+                text: qsTr("Remove")
+
+                onClicked: {
+                    dialog.item.remove();
+                    dialog.close();
+                }
+            }
         }
 
-        Label {
-            text: qsTr("Name")
-        }
+        Column {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.leftMargin: Theme.paddingMedium
+            anchors.rightMargin: Theme.paddingMedium
+            spacing: Theme.paddingSmall
 
-        TextField {
-            id: inputName
-            width: parent.width
-            placeholderText: qsTr("Enter name")
-        }
-
-        Label {
-            text: qsTr("Source Address")
-        }
-
-        TextField {
-            id: inputUrl
-            width: parent.width
-            inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhUrlCharactersOnly
-            placeholderText: qsTr("Enter URL")
-        }
-
-        BackgroundItem {
-            id: colorPicker
-            height: Theme.itemSizeSmall
-
-            Rectangle {
-                id: swatch
-                width: height
-                height: parent.height
-                radius: 3
-                color: "#e60003"
+            DialogHeader {
+                title: qsTr("Save")
             }
 
             Label {
-                anchors.left: swatch.right
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.leftMargin: Theme.paddingMedium
-                color: parent.down ? Theme.highlightColor : Theme.primaryColor
-                text: qsTr("Color tag")
+                text: qsTr("Name")
             }
 
-            onClicked: {
-                var dlg = pageStack.push("Sailfish.Silica.ColorPickerDialog");
+            TextField {
+                id: inputName
+                width: parent.width
+                placeholderText: qsTr("Enter name")
+            }
 
-                function f() {
-                    swatch.color = dlg.color;
+            Label {
+                text: qsTr("Source Address")
+            }
+
+            TextField {
+                id: inputUrl
+                width: parent.width
+                inputMethodHints: Qt.ImhNoAutoUppercase | Qt.ImhUrlCharactersOnly
+                placeholderText: qsTr("Enter URL")
+            }
+
+            BackgroundItem {
+                id: colorPicker
+                height: Theme.itemSizeSmall
+
+                Rectangle {
+                    id: swatch
+                    width: height
+                    height: parent.height
+                    radius: 3
+                    color: "#e60003"
                 }
 
-                dlg.accepted.connect(f);
+                Label {
+                    anchors.left: swatch.right
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: Theme.paddingMedium
+                    color: parent.down ? Theme.highlightColor : Theme.primaryColor
+                    text: qsTr("Color tag")
+                }
+
+                onClicked: {
+                    var dlg = pageStack.push("Sailfish.Silica.ColorPickerDialog");
+
+                    function f() {
+                        swatch.color = dlg.color;
+                    }
+
+                    dlg.accepted.connect(f);
+                }
             }
-        }
-    }
+        }//Column
+    }//Flickable
+
 
     onAccepted: {
         if (editOnly) {

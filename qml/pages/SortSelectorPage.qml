@@ -40,7 +40,7 @@ Page {
                 {
                     return function()
                     {
-                        newsBlendModel.feedSorter = sorter;
+                        configFeedSorter.value = sorter.key;
                     }
                 }
 

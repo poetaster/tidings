@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: page
+    objectName: "FeedsPage"
 
     function replaceEntities(text)
     {
@@ -18,12 +19,21 @@ Page {
                    .replace(/&amp;/g, "&");
     }
 
+    function positionAtFirst(feedUrl)
+    {
+        var idx = newsBlendModel.firstOfFeed(feedUrl);
+        if (idx !== -1)
+        {
+            listview.positionViewAtIndex(idx,
+                                         ListView.Beginning);
+        }
+    }
+
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
-    onStatusChanged: {
-        if (status === PageStatus.Active && pageStack.depth === 1) {
-            pageStack.pushAttached("SourcesPage.qml", {});
-        }
+
+    Component.onCompleted: {
+        newsBlendModel.loadShelved();
     }
 
     Connections {
@@ -50,7 +60,7 @@ Page {
         }
 
         onRefresh: {
-            newsBlendModel.refresh();
+            newsBlendModel.refreshAll();
         }
 
         onAbort: {
@@ -71,32 +81,11 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                text: qsTr("About Tidings")
-
-                onClicked: {
-                    pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
-                }
-            }
-
-            MenuItem {
                 enabled: ! newsBlendModel.busy
                 text: qsTr("Sort by: %1").arg(newsBlendModel.feedSorter.name)
 
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SortSelectorPage.qml"));
-                }
-            }
-
-            MenuItem {
-                text: newsBlendModel.busy ? qsTr("Abort refreshing")
-                                          : qsTr("Refresh")
-
-                onClicked: {
-                    if (newsBlendModel.busy) {
-                        newsBlendModel.abort();
-                    } else {
-                        newsBlendModel.refresh();
-                    }
                 }
             }
         }
@@ -133,7 +122,10 @@ Page {
                 anchors.rightMargin: Theme.paddingMedium
                 color: feedItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
-                text: name + " (" + Format.formatDate(date, Formatter.DurationElapsed) + ")"
+                text: (minuteTimer.tick ? "" : "") +
+                      name + " (" +
+                      Format.formatDate(date, Formatter.DurationElapsed) +
+                      ")"
             }
 
             Separator {
@@ -170,7 +162,6 @@ Page {
                 sourceSize.height: height * 2
                 fillMode: Image.PreserveAspectCrop
                 smooth: true
-                opacity: (read && ! shelved) ? 0.5 : 1
                 clip: true
                 source: thumbnail
             }
@@ -197,14 +188,7 @@ Page {
 
         ViewPlaceholder {
             enabled: sourcesModel.count === 0
-            text: qsTr("No tidings is glad tidings?\n\nPlease add some sources. →")
-        }
-
-        ViewPlaceholder {
-            enabled: sourcesModel.count > 0 &&
-                     ! newsBlendModel.busy &&
-                     newsBlendModel.count === 0
-            text: qsTr("Pull down to refresh.")
+            text: qsTr("Pull down to add feeds.")
         }
 
         ScrollDecorator { }
@@ -218,7 +202,6 @@ Page {
         anchors.centerIn: parent
         running: newsBlendModel.busy
         size: BusyIndicatorSize.Large
-
     }
 
     Label {

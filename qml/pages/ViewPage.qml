@@ -9,7 +9,7 @@ Page {
     property string feedName: newsBlendModel.get(index).name
     property string title: newsBlendModel.get(index).title
     property string preview: newsBlendModel.get(index).description
-    property string encoded: newsBlendModel.get(index).encoded
+    property string encoded: newsBlendModel.get(index).encoded.replace(/&lt;/g, "<")
     property string url: newsBlendModel.get(index).link
     property string color: newsBlendModel.get(index).color
     property string date: newsBlendModel.get(index).date
@@ -17,8 +17,6 @@ Page {
     property variant enclosures: newsBlendModel.get(index).enclosures
     property string duration: newsBlendModel.get(index).duration
     property bool shelved: newsBlendModel.isShelved(index)
-
-    property bool _tintedBackground: false
 
     property int _previousOfFeed: newsBlendModel.previousOfFeed(index)
     property int _nextOfFeed: newsBlendModel.nextOfFeed(index)
@@ -108,7 +106,16 @@ Page {
                 "url": url
             }
             pageStack.pushAttached(Qt.resolvedUrl("WebPage.qml"), props);
+
+            //preview = newsBlendModel.get(index).preview;
+            //encoded = newsBlendModel.get(index).encoded.replace(/&lt;/g, "<");
         }
+    }
+
+    ConfigValue {
+        id: configTintedBackground
+        key: "feed-background-tinted"
+        value: "0"
     }
 
     Connections {
@@ -124,7 +131,7 @@ Page {
     }
 
     Rectangle {
-        visible: _tintedBackground
+        visible: configTintedBackground.booleanValue
         anchors.fill: parent
         color: Qt.rgba(1, 1, 1, 0.7)
     }
@@ -146,7 +153,7 @@ Page {
                 text: qsTr("Toggle background")
 
                 onClicked: {
-                    _tintedBackground = ! _tintedBackground
+                    configTintedBackground.value = configTintedBackground.booleanValue ? "0" : "1";
                 }
             }
 
@@ -211,7 +218,7 @@ Page {
                     anchors.right: shelveIcon.left
                     anchors.rightMargin: Theme.paddingMedium
                     horizontalAlignment: Text.AlignLeft
-                    color: _tintedBackground ? "#606060" : Theme.highlightColor
+                    color: configTintedBackground.booleanValue ? "#606060" : Theme.highlightColor
                     font.pixelSize: Theme.fontSizeSmall
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     textFormat: Text.RichText
@@ -253,7 +260,7 @@ Page {
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignLeft
-                color: _tintedBackground ? "#606060" : Theme.highlightColor
+                color: configTintedBackground.booleanValue ? "#606060" : Theme.highlightColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: qsTr("(%1 seconds)").arg(duration)
             }
@@ -264,7 +271,7 @@ Page {
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignLeft
-                color: _tintedBackground ? "#606060" : Theme.secondaryColor
+                color: configTintedBackground.booleanValue ? "#606060" : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: Format.formatDate(page.date, Formatter.Timepoint)
             }
@@ -280,7 +287,7 @@ Page {
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
 
-                color: _tintedBackground ? "black" : Theme.primaryColor
+                color: configTintedBackground.booleanValue ? "black" : Theme.primaryColor
                 fontSize: Theme.fontSizeSmall
                 text: page.encoded ? page.encoded : page.preview
 

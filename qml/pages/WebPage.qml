@@ -3,6 +3,7 @@ import Sailfish.Silica 1.0
 
 Page {
     id: root
+    objectName: "WebPage"
 
     property string url
 
@@ -15,6 +16,8 @@ Page {
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
     Loader {
+        id: loader
+
         anchors.fill: parent
         sourceComponent: parent.status === PageStatus.Active ? webComponent : undefined
     }
@@ -53,7 +56,13 @@ Page {
 
             url: root.url
         }
+
     }
 
+    BusyIndicator {
+        running: loader.item ? loader.item.loading : false
+        anchors.centerIn: parent
+        size: BusyIndicatorSize.Large
+    }
 
 }

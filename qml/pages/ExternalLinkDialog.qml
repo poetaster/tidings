@@ -5,6 +5,8 @@ Dialog {
 
     property string url
 
+    allowedOrientations: Orientation.Landscape | Orientation.Portrait
+
     DialogHeader {
         title: qsTr("Open in browser")
     }
