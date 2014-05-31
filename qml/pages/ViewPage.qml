@@ -9,7 +9,8 @@ Page {
     property string feedName: newsBlendModel.get(index).name
     property string title: newsBlendModel.get(index).title
     property string preview: newsBlendModel.get(index).description
-    property string encoded: newsBlendModel.get(index).encoded.replace(/&lt;/g, "<")
+    // defuse styles until we have more sophisticated HTML normalizing
+    property string encoded: newsBlendModel.get(index).encoded.replace(" style=", " xstyle=")
     property string url: newsBlendModel.get(index).link
     property string color: newsBlendModel.get(index).color
     property string date: newsBlendModel.get(index).date

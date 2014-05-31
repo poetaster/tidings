@@ -24,7 +24,7 @@ Page {
                                      ? expandedIndex + 3 - (expandedIndex % 3)
                                      : 0
 
-        cellWidth: width / 3
+        cellWidth: page.width > page.height ? width / 5 : width / 3
         cellHeight: cellWidth
 
         model: sourcesModel.count + 1
@@ -114,6 +114,8 @@ Page {
             width: gridview.cellWidth
             height: gridview.cellWidth + contextMenu.height
             z: isExpanded ? 1000 : 1
+
+            enabled: ! newsBlendModel.busy
 
             Item {
                 id: itemContent
@@ -217,6 +219,13 @@ Page {
 
                 anchors.fill: parent
 
+                opacity: newsBlendModel.busy && ! busyIndicator.running ? 0.2
+                                                                        : 1
+
+                Behavior on opacity {
+                    NumberAnimation { }
+                }
+
                 Rectangle {
                     width: 2
                     height: parent.height
@@ -284,6 +293,8 @@ Page {
                 }
 
                 BusyIndicator {
+                    id: busyIndicator
+
                     running: feedInfo ? feedInfo.loading : false
                     anchors.centerIn: parent
                     size: BusyIndicatorSize.Medium
