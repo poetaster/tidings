@@ -48,7 +48,9 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/ConfigValue.qml
 
 TRANSLATIONS = l10n/en_US.ts \
-            l10n/ru_RU.ts
+            l10n/ru_RU.ts \
+            l10n/fr_FR.ts
+
 lupdate_only{
 SOURCES = \
           qml/pages/*.qml \
