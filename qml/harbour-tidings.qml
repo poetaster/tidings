@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2013 Martin Grimme  <martin.grimme _AT_ gmail.com>
+  Copyright (C) 2013, 2014 Martin Grimme  <martin.grimme _AT_ gmail.com>
 
   Copyright (C) 2013 Jolla Ltd.
   Contact: Thomas Perl <thomas.perl@jollamobile.com>
@@ -43,13 +43,6 @@ ApplicationWindow
         onModelChanged: {
             var sources = [];
             for (var i = 0; i < count; i++) {
-                /*
-                var data = {
-                    "name": get(i).name,
-                    "url": get(i).url,
-                    "color": get(i).color
-                };
-                */
                 sources.push(get(i));
             }
             newsBlendModel.sources = sources;

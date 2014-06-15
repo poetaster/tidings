@@ -6,7 +6,7 @@
  * call it in _migrate.
  * Update _createSchema with the schema modifications.
  */
-var _REVISION = 6;
+var _REVISION = 7;
 
 var _database = Sql.LocalStorage.openDatabaseSync("TidingsDB", "1.0",
                                                   "Tidings Persisted Settings");
@@ -44,6 +44,7 @@ function _migrate(tx) {
         if (revision < 4) { _migrateRev4(tx); }
         if (revision < 5) { _migrateRev5(tx); }
         if (revision < 6) { _migrateRev6(tx); }
+        if (revision < 7) { _migrateRev7(tx); }
     }
 
     // set the new revision
@@ -117,6 +118,17 @@ function _migrateRev6(tx)
                   ")");
 }
 
+/* Migrates to Rev 7, where we added a table for caching unread items.
+ */
+function _migrateRev7(tx)
+{
+    tx.executeSql("CREATE TABLE unread (" +
+                  "  url TEXT," +
+                  "  uid TEXT," +
+                  "  document TEXT" +
+                  ")");
+}
+
 /* Creates the initial schema.
  */
 function _createSchema(tx)
@@ -135,6 +147,12 @@ function _createSchema(tx)
                   ")");
 
     tx.executeSql("CREATE TABLE shelf (" +
+                  "  url TEXT," +
+                  "  uid TEXT," +
+                  "  document TEXT" +
+                  ")");
+
+    tx.executeSql("CREATE TABLE unread (" +
                   "  url TEXT," +
                   "  uid TEXT," +
                   "  document TEXT" +
@@ -236,6 +254,8 @@ function setRead(url, uid, value)
             var now = d.getTime() / 1000;
             tx.executeSql("INSERT INTO read (url, uid, read) VALUES (?, ?, ?)",
                           [url, uid, now]);
+            tx.executeSql("DELETE FROM unread WHERE url = ? AND uid = ?",
+                          [url, uid]);
         } else {
             tx.executeSql("DELETE FROM read WHERE url = ? AND uid = ?",
                           [url, uid]);
@@ -271,6 +291,87 @@ function forgetRead(age) {
         var then = now - age;
         tx.executeSql("DELETE FROM read WHERE read < ?",
                       [then]);
+    }
+
+    _database.transaction(f);
+}
+
+/* Returns the counts of shelved items per feed source.
+ */
+function shelvedCounts()
+{
+    var result = {};
+
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT url, count(DISTINCT uid) AS count " +
+                                "FROM shelf " +
+                                "GROUP BY url");
+        for (var i = 0; i < res.rows.length; i++)
+        {
+            var data = res.rows.item(i);
+            result[data.url] = data.count;
+        }
+    }
+
+    _database.transaction(f);
+    return result;
+}
+
+/* Returns the counts of cached unread items per feed source.
+ */
+function cachedCounts()
+{
+    var result = {};
+
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT url, count(DISTINCT uid) AS count " +
+                                "FROM unread " +
+                                "GROUP BY url");
+        for (var i = 0; i < res.rows.length; i++)
+        {
+            var data = res.rows.item(i);
+            result[data.url] = data.count;
+        }
+    }
+
+    _database.transaction(f);
+    return result;
+}
+
+/* Returns all cached unread items as a list of JSON strings.
+ */
+function cachedItems()
+{
+    var result = [];
+
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT document FROM unread");
+        for (var i = 0; i < res.rows.length; i++)
+        {
+            var data = res.rows.item(i);
+            result.push(data.document);
+        }
+    }
+
+    _database.transaction(f);
+    return result;
+}
+
+/* Loads a list of {url, uid, document} records into the unread cache.
+ */
+function cacheItems(items)
+{
+    function f(tx)
+    {
+        console.log("caching " + items.length + " unread items");
+        for (var i = 0; i < items.length; ++i)
+        {
+            tx.executeSql("INSERT INTO unread (url, uid, document) VALUES (?, ?, ?)",
+                          [items[i].url, items[i].uid, items[i].document]);
+        }
     }
 
     _database.transaction(f);

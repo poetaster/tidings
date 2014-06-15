@@ -32,8 +32,20 @@ Page {
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
 
+    /*
     Component.onCompleted: {
-        newsBlendModel.loadShelved();
+        newsBlendModel.loadPersistedItems();
+    }
+    */
+
+    Timer {
+        id: initTimer
+        interval: 500
+        running: true
+
+        onTriggered: {
+            newsBlendModel.loadPersistedItems();
+        }
     }
 
     Connections {
@@ -44,9 +56,11 @@ Page {
             coverAdaptor.hasPrevious = index > 0;
             coverAdaptor.hasNext = index < newsBlendModel.count - 1;
 
+            /*
             coverAdaptor.feedName = newsBlendModel.get(index).name;
             coverAdaptor.title = newsBlendModel.get(index).title;
             coverAdaptor.thumbnail = newsBlendModel.get(index).thumbnail;
+            */
             coverAdaptor.page = (index + 1) + "/" +  newsBlendModel.count;
         }
     }
@@ -81,7 +95,7 @@ Page {
 
         PullDownMenu {
             MenuItem {
-                enabled: ! newsBlendModel.busy
+                //enabled: ! newsBlendModel.busy
                 text: qsTr("Sort by: %1").arg(newsBlendModel.feedSorter.name)
 
                 onClicked: {
@@ -93,8 +107,10 @@ Page {
         delegate: ListItem {
             id: feedItem
 
-            opacity: newsBlendModel.busy ? 0.2 : 1
-            enabled: ! newsBlendModel.busy
+            property variant data: model
+
+            //opacity: newsBlendModel.busy ? 0.2 : 1
+            //enabled: ! newsBlendModel.busy
 
             width: listview.width
             contentHeight: Theme.itemSizeExtraLarge
@@ -110,7 +126,7 @@ Page {
                 id: shelveIcon
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingSmall
-                visible: shelved
+                visible: model.shelved
                 source: "image://theme/icon-s-favorite"
             }
 
@@ -123,8 +139,8 @@ Page {
                 color: feedItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: (minuteTimer.tick ? "" : "") +
-                      name + " (" +
-                      Format.formatDate(date, Formatter.DurationElapsed) +
+                      model.name + " (" +
+                      Format.formatDate(model.date, Formatter.DurationElapsed) +
                       ")"
             }
 
@@ -147,9 +163,9 @@ Page {
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 maximumLineCount: 2
-                opacity: (read && ! shelved) ? 0.5 : 1
+                opacity: (model.read && ! model.shelved) ? 0.5 : 1
                 textFormat: Text.PlainText
-                text: replaceEntities(title)
+                text: replaceEntities(model.title)
             }
 
             Image {
@@ -163,25 +179,28 @@ Page {
                 fillMode: Image.PreserveAspectCrop
                 smooth: true
                 clip: true
-                source: thumbnail
+                source: model.thumbnail
             }
 
             Image {
-                visible: model.enclosuresAmount && enclosuresAmount > 0
+                visible: model.enclosures.length > 0
                 anchors.top: parent.top
                 anchors.right: parent.right
                 source: "image://theme/icon-s-attach"
             }
 
             onClicked: {
+                listview.currentIndex = index;
                 var props = {
-                    "index": index
+                    "index": index,
+                    "listview": listview
                 };
                 pageStack.push("ViewPage.qml", props);
             }
         }
 
         section.property: "sectionTitle"
+        section.criteria: ViewSection.FullString
         section.delegate: SectionHeader {
             text: section
         }
@@ -195,6 +214,8 @@ Page {
     }
 
     FancyScroller {
+        visible: listview.quickScroll === undefined ||
+                 listview.quickScrollEnabled !== true
         flickable: listview
     }
 

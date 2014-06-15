@@ -44,6 +44,7 @@
 #include "appversion.h"
 #include "feedloader.h"
 #include "json.h"
+#include "newsblendmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -63,6 +64,7 @@ int main(int argc, char *argv[])
     app->installTranslator(appTranslator);
 
     qmlRegisterType<FeedLoader>("harbour.tidings", 1, 0, "FeedLoader");
+    qmlRegisterType<NewsBlendModel>("harbour.tidings", 1, 0, "NewsModel");
 
     Json json;
 

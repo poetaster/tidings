@@ -13,7 +13,8 @@ QT += xml
 
 SOURCES += \
     src/harbour-tidings.cpp \
-    src/feedloader.cpp
+    src/feedloader.cpp \
+    src/newsblendmodel.cpp
 
 OTHER_FILES += qml/harbour-tidings.qml \
     qml/cover/CoverPage.qml \
@@ -45,7 +46,9 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/FeedSorter.qml \
     qml/pages/SortSelectorPage.qml \
     qml/cover/overlay.png \
-    qml/pages/ConfigValue.qml
+    qml/pages/ConfigValue.qml \
+    qml/pages/BackgroundWorker.qml \
+    qml/pages/FeedStats.qml
 
 TRANSLATIONS = l10n/en_US.ts \
             l10n/ru_RU.ts
@@ -61,4 +64,5 @@ RESOURCES += \
 HEADERS += \
     src/feedloader.h \
     src/appversion.h \
-    src/json.h
+    src/json.h \
+    src/newsblendmodel.h

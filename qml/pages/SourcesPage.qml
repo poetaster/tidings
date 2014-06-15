@@ -100,7 +100,7 @@ Page {
                 {
                     return function f()
                     {
-                        newsBlendModel.removeItems(item.url);
+                        newsBlendModel.removeFeedItems(item.url);
                         sourcesModel.removeSource(item.sourceId);
                     }
                 }
@@ -214,7 +214,7 @@ Page {
                                              Qt.application.active) &&
                                             item &&
                                             newsBlendModel.feedInfo)
-                                           ? newsBlendModel.feedInfo[item.url]
+                                           ? newsBlendModel.feedInfo.stats[item.url]
                                            : null
 
                 anchors.fill: parent

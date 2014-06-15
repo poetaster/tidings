@@ -6,8 +6,10 @@ import "database.js" as Database
 
 /* List model that blends various feed models together.
  */
-ListModel {
+NewsModel {
     id: listModel
+
+    sortMode: feedSorter.sortMode
 
     // the sorter for this model
     property FeedSorter feedSorter: _getFeedSorter(configFeedSorter.value)
@@ -15,7 +17,7 @@ ListModel {
     // the list of all feed sources to load.
     property variant sources: []
 
-    property var feedInfo: ({ })
+    property var feedInfo: FeedStats { }
 
     // the time of the last refresh
     property variant lastRefresh
@@ -26,83 +28,43 @@ ListModel {
     // name of the feed currently loading
     property string currentlyLoading
 
-    // private list of items as JS dicts
-    property var _items: []
-
     property FeedSorter latestFirstSorter: FeedSorter {
         key: "latestFirst"
         name: qsTr("Latest first")
-        compare: function(a, b)
+        sortMode: NewsModel.LatestFirst
+        getSection: function(feedName, date)
         {
-            return (a.date < b.date) ? -1
-                                     : (a.date === b.date) ? 0
-                                                           : 1;
-        }
-        getSection: function(item)
-        {
-            return Format.formatDate(item.date, Formatter.TimepointSectionRelative);
+            return Format.formatDate(date, Formatter.TimepointSectionRelative);
         }
     }
 
     property FeedSorter oldestFirstSorter: FeedSorter {
         key: "oldestFirst"
         name: qsTr("Oldest first")
-        compare: function(a, b)
+        sortMode: NewsModel.OldestFirst
+        getSection: function(feedName, date)
         {
-            return (a.date < b.date) ? 1
-                                     : (a.date === b.date) ? 0
-                                                           : -1;
-        }
-        getSection: function(item)
-        {
-            return Format.formatDate(item.date, Formatter.TimepointSectionRelative);
+            return Format.formatDate(date, Formatter.TimepointSectionRelative);
         }
     }
-
 
     property FeedSorter feedSourceLatestFirstSorter: FeedSorter {
         key: "feedLatestFirst"
         name: qsTr("Feed, then latest first")
-        compare: function(a, b)
+        sortMode: NewsModel.FeedLatestFirst
+        getSection: function(feedName, date)
         {
-            if (a.source === b.source)
-            {
-                return (a.date < b.date) ? -1
-                                         : (a.date === b.date) ? 0
-                                                               : 1;
-            }
-            else
-            {
-                return (a.name < b.name) ? 1
-                                         : -1;
-            }
-        }
-        getSection: function(item)
-        {
-            return item.name;
+            return feedName;
         }
     }
 
     property FeedSorter feedSourceOldestFirstSorter: FeedSorter {
         key: "feedOldestFirst"
         name: qsTr("Feed, then oldest first")
-        compare: function(a, b)
+        sortMode: NewsModel.FeedOldestFirst
+        getSection: function(feedName, date)
         {
-            if (a.source === b.source)
-            {
-                return (a.date < b.date) ? 1
-                                         : (a.date === b.date) ? 0
-                                                               : -1;
-            }
-            else
-            {
-                return (a.name < b.name) ? 1
-                                         : -1;
-            }
-        }
-        getSection: function(item)
-        {
-            return item.name;
+            return feedName;
         }
     }
 
@@ -118,7 +80,7 @@ ListModel {
         property string feedColor
 
         onSuccess: {
-            feedInfo[source].loading = false;
+            feedInfo.setLoading(source, false);
             listModel.feedInfoChanged();
 
             switch (type)
@@ -151,7 +113,7 @@ ListModel {
         }
 
         onError: {
-            feedInfo[source].loading = false;
+            feedInfo.setLoading(source, false);
             listModel.feedInfoChanged();
 
             _handleError(details);
@@ -160,51 +122,8 @@ ListModel {
     }
 
 
-    /* Timer for running tasks in the background.
-     */
-    property Timer _backgroundTimer: Timer {
-
-        property var bgWorkers: []
-
-        function execute(worker)
-        {
-            bgWorkers.push(worker);
-
-            if (! running)
-            {
-                start();
-            }
-        }
-
-        function abort()
-        {
-            bgWorkers = [];
-            stop();
-        }
-
-        interval: 10
-        repeat: true
-
-        onTriggered: {
-            var begin = new Date();
-            var now = begin;
-
-            while (bgWorkers.length > 0 &&
-                   now.getTime() - begin.getTime() < 30 /*ms*/)
-            {
-                if (!bgWorkers[0]())
-                {
-                    bgWorkers.shift();
-                    if (bgWorkers.length === 0)
-                    {
-                        stop();
-                    }
-                    break;
-                }
-                now = new Date();
-            }
-        }
-    }
+    // worker for running tasks in the background
+    property BackgroundWorker _backgroundWorker: BackgroundWorker { }
 
     property RssModel _rssModel: RssModel {
         onStatusChanged: {
@@ -284,10 +203,12 @@ ListModel {
 
     function _getFeedSorter(key)
     {
+        console.log("get feed sorter for " + key);
         for (var i = 0; i < feedSorters.length; ++i)
         {
             if (feedSorters[i].key === key)
             {
+                console.log("using feed sorter " + feedSorters[i].key + " " + feedSorters[i].sortMode);
                 return feedSorters[i];
             }
         }
@@ -304,6 +225,7 @@ ListModel {
         return item;
     }
 
+    /*
     function _ensureFeedInfo(url)
     {
         if (! feedInfo[url])
@@ -372,81 +294,14 @@ ListModel {
         feedInfo[url].loading = value;
         feedInfoChanged();
     }
+    */
 
-    /* Synchronizes the items with the UI. This needs to be done whenever the
-     * list of items changed.
-     */
-    function _synchronize()
-    {
-        clear();
-        for (var i = 0; i < _items.length; ++i)
-        {
-            append(_items[i]);
-        }
-    }
-
-    function _hasItem(source, uid)
-    {
-        for (var i = 0; i < _items.length; ++i)
-        {
-            if (_items[i].source === source && _items[i].uid === uid)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /* Inserts the given item into this model.
-     */
-    function _insertItem(item)
-    {
-        // binary search for insertion place
-        function f(begin, end, comp)
-        {
-            if (begin === end)
-            {
-                if (comp(item, _items[begin]) === -1)
-                {
-                    _items.splice(begin + 1, 0, item);
-                    //insert(begin + 1, item);
-                }
-                else
-                {
-                    _items.splice(begin, 0, item);
-                    //insert(begin, item);
-                }
-            }
-            else
-            {
-                var middle = begin + Math.floor((end - begin) / 2);
-                if (comp(item, _items[middle]) === -1)
-                {
-                    f(middle + 1, end, comp);
-                }
-                else
-                {
-                    f(begin, middle, comp);
-                }
-            }
-        }
-
-        item["sectionTitle"] = feedSorter.getSection(item);
-        if (_items.length > 0)
-        {
-            f(0, _items.length - 1, feedSorter.compare);
-        }
-        else
-        {
-            _items.push(item);
-            //append(item);
-        }
-    }
-
-    /* Adds the item from the given model.
+    /* Adds the item from the given model. Returns the new item if it was
+     * inserted, or null otherwise.
      */
     function _loadItem(model, i)
     {
+        console.log("get from model " + i);
         var item = _createItem(model.get(i));
         item["source"] = "" + _feedLoader.source; // convert to string
         item["date"] = item.dateString !== "" ? new Date(item.dateString)
@@ -465,134 +320,33 @@ ListModel {
             }
         }
 
-        if (_hasItem(item.source, item.uid))
+        if (listModel.hasItem(item.source, item.uid))
         {
             // do not insert the same item twice
-            return;
+            return null;
         }
 
-        item["read"] = Database.isRead(item.source, item.uid);
-        if (item.read)
+        if (Database.isRead(item.source, item.uid))
         {
             // read items are gone
-            return;
+            return null;
         }
 
+        /*
         // don't add item if shelved, because it will be taken off the shelf
         item["shelved"] = Database.isShelved(item.source, item.uid);
         if (item.shelved)
         {
             return;
         }
+        */
 
         item["name"] = _feedLoader.feedName;
         item["color"] = _feedLoader.feedColor;
-        item["thumbnail"] = _findThumbnail(item);
-        item["enclosures"] = _getEnclosures(item);
 
-        _insertItem(item);
-        _feedInfoCountIncrement(_feedLoader.source);
-        _feedInfoUnreadCountIncrement(_feedLoader.source);
-    }
+        listModel.addItem(item);
 
-    /* Returns the MIME type of an enclosure.
-     */
-    function _enclosureType(item, i)
-    {
-        var url = item["enclosure_" + i + "_url"];
-        var type = item["enclosure_" + i + "_type"];
-
-        if (type)
-        {
-            return type;
-        }
-        else if (url.substring(url.length - 4).toLowerCase() === ".jpg")
-        {
-            return "image/jpeg";
-        }
-        else if (url.substring(url.length - 4).toLowerCase() === ".png")
-        {
-            return "image/png";
-        }
-        else
-        {
-            return "application/octet-stream";
-        }
-    }
-
-    /* Returns a thumbnail URL if there is something usable, or an empty string
-     * otherwise.
-     */
-    function _findThumbnail(item)
-    {
-        var i;
-        var url;
-
-        if (item.iTunesImage)
-        {
-            return item.iTunesImage;
-        }
-
-        var thumb = "";
-        var minDelta = 9999;
-        var goodWidth = 100;
-        for (i = 1; i <= Math.min(item.thumbnailsAmount, 9); ++i)
-        {
-            url = item["thumbnail_" + i + "_url"];
-            var width = item["thumbnail_" + i + "_width"];
-
-            if (width === undefined)
-            {
-                width = 0;
-            }
-
-            if (Math.abs(goodWidth - width) < minDelta)
-            {
-                minDelta = Math.abs(goodWidth - width);
-                thumb = url;
-            }
-        }
-
-        if (thumb !== "")
-        {
-            return thumb;
-        }
-
-        for (i = 1; i <= Math.min(item.enclosuresAmount, 9); ++i)
-        {
-            url = item["enclosure_" + i + "_url"];
-            var type = _enclosureType(item, i);
-
-            if (type && type.substring(0, 6) === "image/")
-            {
-                return url;
-            }
-        }
-
-        return "";
-    }
-
-    /* Returns a list of enclosure objects (url, type, length).
-     */
-    function _getEnclosures(item)
-    {
-        var enclosures = [];
-        for (var i = 1; i <= Math.min(item.enclosuresAmount, 9); ++i)
-        {
-            var url = item["enclosure_" + i + "_url"];
-            var type = _enclosureType(item, i);
-            var length = item["enclosure_" + i + "_length"];
-
-            var enclosure = {
-                "url": url ? url : "",
-                "type": type,
-                "length" : length ? length : "-1"
-            };
-            console.log("enclosure " + url + " " + type + " " + length);
-            enclosures.push(enclosure);
-        }
-
-        return enclosures;
+        return item;
     }
 
     /* Takes the next source from the sources queue and loads it.
@@ -610,8 +364,8 @@ ListModel {
             currentlyLoading = name;
             busy = true;
 
-            _feedInfoSetLoading(url, true);
-            _feedInfoRefreshed(url);
+            feedInfo.setLoading(url, true);
+            feedInfo.setRefreshed(url);
 
             _feedLoader.feedColor = color;
             _feedLoader.feedName = name;
@@ -620,7 +374,6 @@ ListModel {
         else
         {
             currentlyLoading = "";
-            _synchronize();
             busy = false;
         }
     }
@@ -653,82 +406,53 @@ ListModel {
     function _loadFromFeed(feedModel)
     {
         var index = 0;
-        _feedInfoSetLoading(_feedLoader.source, true);
+        var newItems = [];
+        feedInfo.setLoading(_feedLoader.source, true);
 
         function loader()
         {
             if (index < feedModel.count)
             {
-                _loadItem(feedModel, index);
+                var newItem = _loadItem(feedModel, index);
+                if (newItem)
+                {
+                    feedInfo.increment(_feedLoader.source);
+                    feedInfo.incrementUnread(_feedLoader.source);
+
+                    var tuple = {
+                        "url": newItem.source,
+                        "uid": newItem.uid,
+                        "document": json.toJson(newItem)
+                    };
+                    newItems.push(tuple);
+                }
                 ++index;
                 return true;
             }
             else
             {
-                _feedInfoSetLoading(_feedLoader.source, false);
+                Database.cacheItems(newItems);
+                feedInfo.setLoading(_feedLoader.source, false);
                 _loadNext();
                 return false;
             }
         }
 
-        _backgroundTimer.execute(loader);
-    }
-
-    /* Rearranges the items according to the current sorter.
-     */
-    function _rearrangeItems()
-    {
-        busy = true;
-
-        var items = [];
-        for (var i = 0; i < _items.length; ++i)
-        {
-            items.push(_items[i]);
-        }
-        _items = [];
-
-        function rearranger()
-        {
-            if (items.length)
-            {
-                _insertItem(items.shift());
-                return true;
-            }
-            else
-            {
-                _synchronize();
-                busy = false;
-                return false;
-            }
-        }
-
-        _backgroundTimer.execute(rearranger);
+        _backgroundWorker.execute(loader);
     }
 
     /* Clears and reloads the model from the current sources.
      */
     function refreshAll()
     {
-        var items = [];
-        for (var i = 0; i < _items.length; ++i)
-        {
-            if (! _items[i].read || _items[i].shelved)
-            {
-                items.push(_items[i]);
-            }
-            else
-            {
-                _feedInfoCountDecrement(_items[i].source);
-            }
+        // remove all read, but not shelved items
+        listModel.removeReadItems();
 
-        }
-        _items = items;
-
-        for (i = 0; i < sources.length; i++)
+        for (var i = 0; i < sources.length; i++)
         {
             console.log("Source: " + sources[i].url);
             _sourcesQueue.push(sources[i]);
-            //_feedInfoCountReset(sources[i].url);
+            feedInfo.reset(sources[i].url);
         }
         _loadNext();
         lastRefresh = new Date();
@@ -738,164 +462,66 @@ ListModel {
      */
     function refresh(source)
     {
-        var items = [];
-        for (var i = 0; i < _items.length; ++i)
-        {
-            if (! _items[i].read ||
-                    _items[i].shelved ||
-                    _items[i].source !== source.url)
-            {
-                items.push(_items[i]);
-            }
-            else if (_items[i].source === source.url)
-            {
-                _feedInfoCountDecrement(source.url);
-            }
-        }
-        _items = items;
+        // remove all read, but not shelved items from that source
+        listModel.removeReadItems(source);
 
         _sourcesQueue.push(source);
         if (! busy)
         {
-            //_feedInfoCountReset(source.url);
+            feedInfo.reset(source.url);
             lastRefresh = new Date();
             _loadNext();
         }
     }
 
-    /* Removes all items belonging to the given source, unless shelved.
+    /* Loads the persisted items.
      */
-    function removeItems(source)
+    function loadPersistedItems()
     {
-        busy = true;
-        var items = [];
-        for (var i = 0; i < _items.length; ++i)
+        var shelvedCounts = Database.shelvedCounts();
+        var cachedCounts = Database.cachedCounts();
+
+        var i;
+        var j;
+        var keys = Object.keys(shelvedCounts);
+        for (i = 0; i < keys.length; ++i)
         {
-            if (_items[i].shelved ||
-                _items[i].source !== source)
+            for (j = 0; j < shelvedCounts[keys[i]]; ++j)
             {
-                items.push(_items[i]);
-            }
-            else if (_items[i].source === source)
-            {
-                _feedInfoCountDecrement(source);
-            }
-        }
-        _items = items;
-        _synchronize();
-        _feedInfoUnreadCountReset(source);
-        busy = false;
-    }
-
-    /* Loads the shelved items.
-     */
-    function loadShelved()
-    {
-        var items = Database.shelvedItems();
-        busy = true;
-
-        function loader()
-        {
-            if (items.length > 0)
-            {
-                var item = json.fromJson(items.shift());
-                item["date"] = item.dateString !== "" ? new Date(item.dateString)
-                                                      : new Date();
-                item["shelved"] = true;
-
-                if (! _hasItem(item.uid))
-                {
-                    _insertItem(item);
-                    _feedInfoCountIncrement(item.source);
-                }
-                return true;
-            }
-            else
-            {
-                _synchronize();
-                busy = false;
-                return false;
+                feedInfo.increment(keys[i]);
             }
         }
 
-        _backgroundTimer.execute(loader);
+        keys = Object.keys(cachedCounts);
+        for (i = 0; i < keys.length; ++i)
+        {
+            for (j = 0; j < cachedCounts[keys[i]]; ++j)
+            {
+                feedInfo.increment(keys[i]);
+                feedInfo.incrementUnread(keys[i]);
+            }
+        }
+
+        var jsons = Database.shelvedItems();
+        loadItems(jsons, true);
+        jsons = Database.cachedItems();
+        loadItems(jsons, false);
     }
 
     /* Aborts loading.
      */
     function abort() {
         _sourcesQueue = [];
-        _backgroundTimer.abort();
-        _synchronize();
-        _feedInfoSetLoading(_feedLoader.source, false);
+        _backgroundWorker.abort();
+        feedInfo.setLoading(_feedLoader.source, false);
         busy = false;
-    }
-
-    /* Returns the index of the previous item of the same feed as the given
-     * index, or -1 if there is none.
-     */
-    function previousOfFeed(idx)
-    {
-        var item = _items[idx];
-        for (var i = idx - 1; i >= 0; --i)
-        {
-            if (_items[i].source === item.source)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /* Returns the index of the next item of the same feed as the given index,
-     * or -1 if there is none.
-     */
-    function nextOfFeed(idx)
-    {
-        var item = _items[idx];
-        for (var i = idx + 1; i < count; ++i)
-        {
-            if (_items[i].source === item.source)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /* Returns the index of the first item of the given feed source, or -1 if
-     * there is none.
-     */
-    function firstOfFeed(source)
-    {
-        for (var i = 0; i < count; ++i)
-        {
-            if (_items[i].source === source)
-            {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /* Marks the given item as read.
-     */
-    function setRead(idx, value)
-    {
-        var item = get(idx);
-        if (! item.read)
-        {
-            Database.setRead(item.source, item.uid, value);
-            item.read = value;
-            _items[idx].read = value;
-            _feedInfoUnreadCountDecrement(item.source);
-        }
     }
 
     /* Marks all items of the given source as read.
      */
     function setAllRead(source)
     {
+        /*
         var pos = 0;
         busy = true;
 
@@ -917,46 +543,38 @@ ListModel {
             }
         }
 
-        _backgroundTimer.execute(marker);
-    }
-
-    /* Keeps or removes the given item from the shelf.
-     */
-    function shelveItem(idx, value)
-    {
-        var item = _items[idx];
-
-        if (value)
-        {
-            console.log("shelving " + item.source + " " + item.uid);
-            Database.shelveItem(item.source, item.uid, json.toJson(item));
-        }
-        else
-        {
-            console.log("unshelving " + item.source + " " + item.uid);
-            Database.unshelveItem(item.source, item.uid);
-        }
-        item.shelved = value;
-        get(idx).shelved = value;
-    }
-
-    /* Returns if the given item is currently shelved.
-     */
-    function isShelved(idx)
-    {
-        var item = _items[idx];
-        return Database.isShelved(item.source, item.uid);
-    }
-
-    // rearrange items if the sorter changed
-    onFeedSorterChanged: {
-        if (count > 0 && ! busy)
-        {
-            _rearrangeItems();
-        }
+        _backgroundWorker.execute(marker);
+        */
     }
 
     Component.onCompleted: {
         Database.forgetRead(3600 * 24 * 90);
+    }
+
+    onShelvedChanged: {
+        console.log("shelved changed " + index);
+        var item = listModel.getItem(index);
+        if (listModel.isShelved(index))
+        {
+            Database.shelveItem(item.source, item.uid, json.toJson(item));
+        }
+        else
+        {
+            Database.unshelveItem(item.source, item.uid);
+        }
+    }
+
+    onReadChanged: {
+        var item = listModel.getItem(index);
+        Database.setRead(item.source, item.uid, listModel.isRead(index));
+        if (listModel.isRead(index))
+        {
+            feedInfo.decrementUnread(item.source);
+        }
+    }
+
+    onSectionTitleRequested: {
+        setSectionTitle(feedSorter.getSection(itemFeed, itemDate));
+
     }
 }
