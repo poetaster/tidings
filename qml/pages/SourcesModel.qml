@@ -43,6 +43,11 @@ ListModel {
         modelChanged();
     }
 
+    function forgetSourceRead(sourceId)
+    {
+        Database.forgetSourceRead(sourceId);
+    }
+
     Component.onCompleted: {
         var items = Database.sources();
 

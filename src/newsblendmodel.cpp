@@ -8,22 +8,20 @@ namespace
 
 int compare(NewsBlendModel::Item::ConstPtr a,
             NewsBlendModel::Item::ConstPtr b,
-            NewsBlendModel::SortMode sortMode)
+            NewsBlendModel::SortMode sortMode,
+            const QString& selectedFeedSource)
 {
     switch (sortMode)
     {
     case NewsBlendModel::LatestFirst:
-        //qDebug() << "latest first";
         return (a->date < b->date) ? -1
                                    : (a->date == b->date) ? 0
                                                           : 1;
     case NewsBlendModel::OldestFirst:
-        //qDebug() << "oldest first";
         return (a->date < b->date) ? 1
                                    : (a->date == b->date) ? 0
                                                           : -1;
     case NewsBlendModel::FeedLatestFirst:
-        //qDebug() << "feed latest first";
         if (a->feedSource == b->feedSource)
         {
             return (a->date < b->date) ? -1
@@ -36,7 +34,6 @@ int compare(NewsBlendModel::Item::ConstPtr a,
                                                : -1;
         }
     case NewsBlendModel::FeedOldestFirst:
-        //qDebug() << "feed oldest first";
         if (a->feedSource == b->feedSource)
         {
             return (a->date < b->date) ? 1
@@ -48,6 +45,37 @@ int compare(NewsBlendModel::Item::ConstPtr a,
             return (a->feedName < b->feedName) ? 1
                                                : -1;
         }
+    case NewsBlendModel::FeedOnlyLatestFirst:
+        if (a->feedSource != selectedFeedSource)
+        {
+            return -1;
+        }
+        else if (b->feedSource != selectedFeedSource)
+        {
+            return 1;
+        }
+        else
+        {
+            return (a->date < b->date) ? -1
+                                       : (a->date == b->date) ? 0
+                                                              : 1;
+        }
+
+    case NewsBlendModel::FeedOnlyOldestFirst:
+        if (a->feedSource != selectedFeedSource)
+        {
+            return -1;
+        }
+        else if (b->feedSource != selectedFeedSource)
+        {
+            return 1;
+        }
+        else
+        {
+            return (a->feedName < b->feedName) ? 1
+                                               : -1;
+        }
+
     default:
         return 0;
     }
@@ -75,6 +103,11 @@ NewsBlendModel::NewsBlendModel(QObject* parent)
 
     myRolenames[IsShelvedRole] = "shelved";
     myRolenames[IsReadRole] = "read";
+
+    foreach (int key, myRolenames.keys())
+    {
+        myInverseRolenames[myRolenames[key]] = key;
+    }
 }
 
 void NewsBlendModel::setSortMode(SortMode mode)
@@ -88,15 +121,36 @@ void NewsBlendModel::setSortMode(SortMode mode)
     {
         insertItem(item, false);
     }
-
     endResetModel();
 
     emit sortModeChanged();
 }
 
+void NewsBlendModel::setSelectedFeed(const QString& selectedFeed)
+{
+    if (selectedFeed != mySelectedFeed)
+    {
+        mySelectedFeed = selectedFeed;
+        emit selectedFeedChanged();
+        if (mySortMode == FeedOnlyLatestFirst ||
+            mySortMode == FeedOnlyOldestFirst)
+        {
+            setSortMode(mySortMode);
+        }
+    }
+}
+
 int NewsBlendModel::rowCount(const QModelIndex& parent) const
 {
-    return myItems.size();
+    if (mySortMode == FeedOnlyLatestFirst ||
+            mySortMode == FeedOnlyOldestFirst)
+    {
+        return myTotalCounts.value(mySelectedFeed, 0);
+    }
+    else
+    {
+        return myItems.size();
+    }
 }
 
 QVariant NewsBlendModel::data(const QModelIndex& index, int role) const
@@ -166,7 +220,7 @@ int NewsBlendModel::insertItem(const Item::Ptr item, bool update)
         {
             if (begin == end)
             {
-                if (compare(item, myItems.at(begin), mySortMode) == -1)
+                if (compare(item, myItems.at(begin), mySortMode, mySelectedFeed) == -1)
                 {
                     if (update)
                     {
@@ -201,7 +255,7 @@ int NewsBlendModel::insertItem(const Item::Ptr item, bool update)
                 int middle = begin / 2 + end / 2;
                 //qDebug() << "begin" << begin << "middle" << middle << "end" << end
                 //         << "sortMode" << mySortMode;
-                if (compare(item, myItems.at(middle), mySortMode) == -1)
+                if (compare(item, myItems.at(middle), mySortMode, mySelectedFeed) == -1)
                 {
                     begin = middle + 1;
                 }
@@ -225,6 +279,11 @@ int NewsBlendModel::insertItem(const Item::Ptr item, bool update)
         {
             endInsertRows();
         }
+    }
+
+    if (update)
+    {
+        emit countChanged();
     }
 
     return insertPos;
@@ -341,15 +400,22 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
     return item;
 }
 
-QVariantMap NewsBlendModel::getItem(int index) const
+QVariant NewsBlendModel::getAttribute(int idx, const QString& role) const
 {
+    return data(index(idx), myInverseRolenames.value(role.toUtf8(), 0));
+}
+
+QString NewsBlendModel::toJson(int index) const
+{
+    qDebug() << Q_FUNC_INFO << index;
     if (index >= 0 && index < myItems.size())
     {
-        return myItems.at(index)->rawData;
+        QJsonDocument doc = QJsonDocument::fromVariant(myItems.at(index)->rawData);
+        return QString::fromUtf8(doc.toJson());
     }
     else
     {
-        return QVariantMap();
+        return QString();
     }
 }
 
@@ -360,9 +426,19 @@ void NewsBlendModel::loadItems(const QVariantList& jsons, bool shelved)
         QJsonDocument doc = QJsonDocument::fromJson(json.toByteArray());
         QVariantMap itemData = doc.toVariant().toMap();
         Item::Ptr item = parseItem(itemData);
+
+
+        myTotalCounts[item->feedSource] =
+                myTotalCounts.value(item->feedSource, 0) + 1;
         if (shelved)
         {
             item->isShelved = true;
+            item->isRead = true;
+        }
+        else
+        {
+            myUnreadCounts[item->feedSource] =
+                    myUnreadCounts.value(item->feedSource, 0) + 1;
         }
         myItemMap[FullId(item->feedSource, item->uid)] = item;
     }
@@ -373,6 +449,11 @@ int NewsBlendModel::addItem(const QVariantMap& itemData, bool update)
 {
     Item::Ptr item = parseItem(itemData);
     //qDebug() << "add item" << item->title;
+
+    myTotalCounts[item->feedSource] =
+            myTotalCounts.value(item->feedSource, 0) + 1;
+    myUnreadCounts[item->feedSource] =
+            myUnreadCounts.value(item->feedSource, 0) + 1;
 
     myItemMap.insert(FullId(item->feedSource, item->uid), item);
     if (update)
@@ -407,25 +488,71 @@ void NewsBlendModel::setRead(int idx, bool value)
     if (idx >= 0 && idx < myItems.size())
     {
         myItems[idx]->isRead = value;
-        emit readChanged(idx);
+        --myUnreadCounts[myItems[idx]->feedSource];
+        emit readChanged(QList<int>() << idx);
         emit dataChanged(index(idx), index(idx),
                          QVector<int>() << IsReadRole);
     }
+}
+
+void NewsBlendModel::setFeedRead(const QString& feedSource)
+{
+    QList<int> indexes;
+    int size = myItems.size();
+    for (int i = 0; i < size; ++i)
+    {
+        if (myItems.at(i)->feedSource == feedSource &&
+            ! myItems.at(i)->isRead)
+        {
+            myItems[i]->isRead = true;
+            indexes << i;
+            emit dataChanged(index(i), index(i),
+                             QVector<int>() << IsReadRole);
+        }
+    }
+    myUnreadCounts[feedSource] = 0;
+    emit readChanged(indexes);
+}
+
+void NewsBlendModel::setAllRead()
+{
+    QList<int> indexes;
+    int size = myItems.size();
+    for (int i = 0; i < size; ++i)
+    {
+        if (! myItems.at(i)->isRead)
+        {
+            myItems[i]->isRead = true;
+            indexes << i;
+            emit dataChanged(index(i), index(i),
+                             QVector<int>() << IsReadRole);
+        }
+    }
+    foreach (const QString& key, myUnreadCounts.keys())
+    {
+        myUnreadCounts[key] = 0;
+    }
+    emit readChanged(indexes);
 }
 
 void NewsBlendModel::removeReadItems(const QString& feedSource)
 {
     beginResetModel();
     int pos = 0;
+    qDebug() << "removing read items";
     while (pos < myItems.size())
     {
         Item::Ptr item = myItems.at(pos);
+        qDebug() << pos << item->isRead << item->isShelved << item->feedSource << feedSource;
         if (item->isRead &&
                 ! item->isShelved &&
                 (feedSource.isEmpty() || item->feedSource == feedSource))
         {
+            qDebug() << "removing at" << pos;
             Item::Ptr item = myItems.takeAt(pos);
             myItemMap.remove(FullId(item->feedSource, item->uid));
+
+            --myTotalCounts[feedSource];
         }
         else
         {
@@ -446,6 +573,12 @@ void NewsBlendModel::removeFeedItems(const QString& feedSource)
         {
             Item::Ptr item = myItems.takeAt(pos);
             myItemMap.remove(FullId(item->feedSource, item->uid));
+
+            --myTotalCounts[feedSource];
+            if (! item->isRead)
+            {
+                --myUnreadCounts[feedSource];
+            }
         }
         else
         {
@@ -502,4 +635,53 @@ int NewsBlendModel::firstOfFeed(const QString& feedSource) const
         }
     }
     return -1;
+}
+
+QString NewsBlendModel::thumbnailOfFeed(const QString& feedSource) const
+{
+    int size = myItems.size();
+    for (int i = 0; i < size; ++i)
+    {
+        if (myItems.at(i)->feedSource == feedSource &&
+            myItems.at(i)->thumbnail.size())
+        {
+            return myItems.at(i)->thumbnail;
+        }
+    }
+    return QString();
+}
+
+QStringList NewsBlendModel::thumbnailsOfFeed(const QString& feedSource) const
+{
+    QStringList result;
+    int size = myItems.size();
+    for (int i = 0; i < size; ++i)
+    {
+        if (myItems.at(i)->feedSource == feedSource &&
+            myItems.at(i)->thumbnail.size())
+        {
+            result << myItems.at(i)->thumbnail;
+        }
+    }
+    return result;
+}
+
+QVariantMap NewsBlendModel::totalStats() const
+{
+    QVariantMap stats;
+    foreach (const QString& feedSource, myTotalCounts.keys())
+    {
+        stats[feedSource] = myTotalCounts[feedSource];
+    }
+    return stats;
+}
+
+QVariantMap NewsBlendModel::unreadStats() const
+{
+    QVariantMap stats;
+    foreach (const QString& feedSource, myUnreadCounts.keys())
+    {
+        stats[feedSource] = myUnreadCounts[feedSource];
+    }
+    return stats;
 }

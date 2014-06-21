@@ -13,33 +13,28 @@ QtObject {
         }
     }
 
-    function reset(key)
+    function setTotalCounts(counts)
     {
-        _ensureItem(key);
-        stats[key].unreadCount = 0;
-        stats[key].count = 0;
-        statsChanged();
+        var keys = Object.keys(counts);
+        console.log("total counts " + keys.length);
+        for (var i = 0; i < keys.length; ++i)
+        {
+            var feedSource = keys[i];
+            _ensureItem(feedSource);
+            stats[feedSource].count = counts[feedSource];
+        }
     }
 
-    function increment(key)
+    function setUnreadCounts(counts)
     {
-        _ensureItem(key);
-        stats[key].count += 1;
-        statsChanged();
-    }
-
-    function incrementUnread(key)
-    {
-        _ensureItem(key);
-        stats[key].unreadCount += 1;
-        statsChanged();
-    }
-
-    function decrementUnread(key)
-    {
-        _ensureItem(key);
-        stats[key].unreadCount -= 1;
-        statsChanged();
+        var keys = Object.keys(counts);
+        console.log("unread counts " + keys.length);
+        for (var i = 0; i < keys.length; ++i)
+        {
+            var feedSource = keys[i];
+            _ensureItem(feedSource);
+            stats[feedSource].unreadCount = counts[feedSource];
+        }
     }
 
     function setLoading(key, value)

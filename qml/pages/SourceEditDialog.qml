@@ -93,6 +93,20 @@ Dialog {
                     dlg.accepted.connect(f);
                 }
             }
+
+            Item {
+                width: 1
+                height: Theme.paddingSizeLarge
+            }
+
+            Button {
+                visible: editOnly
+                anchors.horizontalCenter: parent.horizontalCenter
+                text: "Forget about read items"
+                onClicked: {
+                    sourcesModel.forgetSourceRead(url);
+                }
+            }
         }//Column
     }//Flickable
 

@@ -48,7 +48,8 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/cover/overlay.png \
     qml/pages/ConfigValue.qml \
     qml/pages/BackgroundWorker.qml \
-    qml/pages/FeedStats.qml
+    qml/pages/FeedStats.qml \
+    qml/pages/FeedItem.qml
 
 TRANSLATIONS = l10n/en_US.ts \
             l10n/ru_RU.ts

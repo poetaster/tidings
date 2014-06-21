@@ -283,7 +283,8 @@ function isRead(url, uid) {
 /* Forgets about read items older than the given amount of seconds.
  * This helps reduce disk space consumption.
  */
-function forgetRead(age) {
+function forgetRead(age)
+{
 
     function f(tx) {
         var d = new Date();
@@ -291,6 +292,18 @@ function forgetRead(age) {
         var then = now - age;
         tx.executeSql("DELETE FROM read WHERE read < ?",
                       [then]);
+    }
+
+    _database.transaction(f);
+}
+
+/* Forgets about read items of the given feed source.
+ */
+function forgetSourceRead(sourceId)
+{
+    function f(tx) {
+        tx.executeSql("DELETE FROM read WHERE url = ?",
+                      [sourceId]);
     }
 
     _database.transaction(f);

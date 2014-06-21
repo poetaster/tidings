@@ -21,7 +21,7 @@ Page {
     }
 
     function nextItem() {
-        listview.currentIndex = listview.currentIndex - 1;
+        listview.currentIndex = listview.currentIndex + 1;
     }
 
     function goToItem(idx) {
@@ -80,7 +80,7 @@ Page {
 
     Component.onCompleted: {
         navigationState.openedItem(listview.currentIndex);
-        if (! itemData.read) {
+        if (! itemData.read && ! itemData.shelved) {
             newsBlendModel.setRead(listview.currentIndex, true);
         }
     }
@@ -104,7 +104,7 @@ Page {
             }
 
             navigationState.openedItem(listview.currentIndex);
-            if (! itemData.read) {
+            if (! itemData.read && ! itemData.shelved) {
                 newsBlendModel.setRead(listview.currentIndex, true);
             }
         }
@@ -264,7 +264,7 @@ Page {
 
             PageHeader {
                 id: pageHeader
-                title: itemData.name + " " + listview.currentIndex
+                title: itemData.name
             }
 
             Item {

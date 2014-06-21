@@ -31,13 +31,6 @@ Page {
 
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
-
-    /*
-    Component.onCompleted: {
-        newsBlendModel.loadPersistedItems();
-    }
-    */
-
     Timer {
         id: initTimer
         interval: 500
@@ -56,11 +49,10 @@ Page {
             coverAdaptor.hasPrevious = index > 0;
             coverAdaptor.hasNext = index < newsBlendModel.count - 1;
 
-            /*
-            coverAdaptor.feedName = newsBlendModel.get(index).name;
-            coverAdaptor.title = newsBlendModel.get(index).title;
-            coverAdaptor.thumbnail = newsBlendModel.get(index).thumbnail;
-            */
+            coverAdaptor.feedName = newsBlendModel.getAttribute(index, "name");
+            coverAdaptor.title = newsBlendModel.getAttribute(index, "title");
+            coverAdaptor.thumbnail = newsBlendModel.getAttribute(index, "thumbnail");
+
             coverAdaptor.page = (index + 1) + "/" +  newsBlendModel.count;
         }
     }
@@ -219,11 +211,13 @@ Page {
         flickable: listview
     }
 
+    /*
     BusyIndicator {
         anchors.centerIn: parent
         running: newsBlendModel.busy
         size: BusyIndicatorSize.Large
     }
+    */
 
     Label {
         visible: newsBlendModel.busy

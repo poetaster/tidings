@@ -7,6 +7,9 @@ Page {
 
     property Page feedsPage
 
+    property var cycleThumbnailSources: []
+    property int cycleIndex
+
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
     onStatusChanged: {
@@ -16,15 +19,41 @@ Page {
         }
     }
 
+    Timer {
+        running: Qt.application.active && page.status === PageStatus.Active
+        interval: 2000
+        repeat: true
+
+        onTriggered: {
+            if (cycleThumbnailSources.length === 0)
+            {
+                var temp = [];
+                for (var i = 0; i < sourcesModel.count; ++i)
+                {
+                    temp.push(i);
+                }
+                while (temp.length > 0)
+                {
+                    i = Math.floor(Math.random() * temp.length);
+                    cycleThumbnailSources.push(temp[i]);
+                    temp.splice(i, 1);
+                }
+            }
+            page.cycleIndex = cycleThumbnailSources.pop();
+        }
+    }
+
     SilicaGridView {
         id: gridview
 
+        property int itemsPerRow: page.width > page.height ? 5 : 3
         property int expandedIndex: -1
         property int minOffsetIndex: expandedIndex !== -1
-                                     ? expandedIndex + 3 - (expandedIndex % 3)
+                                     ? expandedIndex + itemsPerRow - (expandedIndex % itemsPerRow)
                                      : 0
 
-        cellWidth: page.width > page.height ? width / 5 : width / 3
+
+        cellWidth: width / itemsPerRow
         cellHeight: cellWidth
 
         model: sourcesModel.count + 1
@@ -45,6 +74,14 @@ Page {
             }
 
             MenuItem {
+                text: qsTr("Mark all read")
+
+                onClicked: {
+                    newsBlendModel.setAllRead();
+                }
+            }
+
+            MenuItem {
                 text: newsBlendModel.busy ? qsTr("Abort refreshing")
                                           : qsTr("Refresh all")
 
@@ -58,7 +95,7 @@ Page {
             }
         }
 
-        delegate: MouseArea {
+        delegate: Item {
             id: listItem
 
             property bool isExpanded: contextMenu.active &&
@@ -89,9 +126,9 @@ Page {
                 newsBlendModel.refresh(item);
             }
 
-            function markAllRead()
+            function setFeedRead()
             {
-                newsBlendModel.setAllRead(item.url);
+                newsBlendModel.setFeedRead(item.url);
             }
 
             function remove()
@@ -115,62 +152,92 @@ Page {
             height: gridview.cellWidth + contextMenu.height
             z: isExpanded ? 1000 : 1
 
-            enabled: ! newsBlendModel.busy
-
-            Item {
+            FeedItem {
                 id: itemContent
+                visible: index < sourcesModel.count
 
                 y: parent.yOffset
                 width: parent.width
                 height: gridview.cellHeight
 
-                // feed item
-                Loader {
-                    anchors.fill: parent
-                    sourceComponent: listItem.item ? feedComponent : null
+                // always update the feedInfo when the page becomes visible
+                property variant feedInfo: ((page.status === PageStatus.Active ||
+                                             Qt.application.active) &&
+                                            item &&
+                                            newsBlendModel.feedInfo)
+                                           ? newsBlendModel.feedInfo.stats[item.url]
+                                           : null
 
-                    onLoaded: {
-                        item.item = listItem.item
+                property bool loadingStatus: feedInfo ? feedInfo.loading : false
+
+                name: item ? item.name : ""
+                timestamp: (feedInfo && feedInfo.lastRefresh && minuteTimer.tick)
+                           ? feedInfo.lastRefresh
+                           : function() { return new Date(0); }()
+                colorTag: item ? item.color : "black"
+                totalCount: feedInfo ? feedInfo.count : 0
+                unreadCount: feedInfo ? feedInfo.unreadCount : 0
+                busy: feedInfo ? feedInfo.loading : false
+
+                Connections {
+                    target: page
+                    onCycleIndexChanged: {
+                        if (page.cycleIndex === index)
+                        {
+                            if (itemContent.thumbnails.length > 1)
+                            {
+                                itemContent.cycleThumbnails();
+                            }
+                            else if (page.cycleThumbnailSources.length > 0)
+                            {
+                                page.cycleIndex = page.cycleThumbnailSources.pop();
+                            }
+                        }
                     }
                 }
 
-                // [add feed] item
-                Image {
-                    visible: item == null
-                    anchors.centerIn: parent
-                    source: "image://theme/icon-l-add"
+                onLoadingStatusChanged: {
+                    if (! loadingStatus)
+                    {
+                        thumbnails = newsBlendModel.thumbnailsOfFeed(item.url);
+                    }
                 }
 
+                onClicked: {
+                    if (totalCount !== 0)
+                    {
+                        newsBlendModel.selectedFeed = item.url;
+                        feedsPage.positionAtFirst(item.url);
+                        pageStack.navigateForward();
+                    }
+                }
 
+                onPressAndHold: {
+                    gridview.expandedIndex = index;
+                    contextMenu.show(listItem);
+                }
             }
 
-            onClicked: {
-                if (item)
-                {
-                    feedsPage.positionAtFirst(item.url);
-                    pageStack.navigateForward();
+            // [add feed] item
+            MouseArea {
+                visible: ! itemContent.visible
+                y: parent.yOffset
+                width: parent.width
+                height: gridview.cellHeight
+
+                Image {
+                    anchors.centerIn: parent
+                    source: "image://theme/icon-l-add?" +
+                            (parent.pressed ? Theme.highlightColor : Theme.primaryColor)
                 }
-                else
-                {
+
+                onClicked: {
                     var props = {
                         "url": "http://"
                     };
                     var dlg = pageStack.push("SourceEditDialog.qml", props);
                 }
             }
-
-            onPressAndHold: {
-                if (item)
-                {
-                    gridview.expandedIndex = index;
-                    contextMenu.show(listItem);
-                }
-            }
-        }
-
-        ViewPlaceholder {
-            enabled: gridview.count === 0
-            text: qsTr("Pull down to add RSS, Atom, or OPML sources.")
         }
 
         ScrollDecorator { }
@@ -187,10 +254,10 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Mark all read")
+                text: qsTr("Mark as read")
 
                 onClicked: {
-                    contextMenu.parent.markAllRead();
+                    contextMenu.parent.setFeedRead();
                 }
             }
 
@@ -199,105 +266,6 @@ Page {
 
                 onClicked: {
                     contextMenu.parent.edit();
-                }
-            }
-        }
-
-        Component {
-            id: feedComponent
-
-            Item {
-                property variant item
-
-                // always update the feedInfo when the page becomes visible
-                property variant feedInfo: ((page.status === PageStatus.Active ||
-                                             Qt.application.active) &&
-                                            item &&
-                                            newsBlendModel.feedInfo)
-                                           ? newsBlendModel.feedInfo.stats[item.url]
-                                           : null
-
-                anchors.fill: parent
-
-                opacity: newsBlendModel.busy && ! busyIndicator.running ? 0.2
-                                                                        : 1
-
-                Behavior on opacity {
-                    NumberAnimation { }
-                }
-
-                Rectangle {
-                    width: 2
-                    height: parent.height
-                    color: item.color
-                }
-
-                Image {
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.bottom: parent.bottom
-                    fillMode: Image.PreserveAspectFit
-                    source: Qt.resolvedUrl("../cover/overlay.png")
-                    opacity: 0.1
-                }
-
-                Label {
-                    id: countLabel
-                    anchors.centerIn: parent
-                    font.pixelSize: Theme.fontSizeHuge
-                    color: Theme.primaryColor
-                    text: feedInfo ? feedInfo.unreadCount
-                                   : "0"
-                }
-
-                Label {
-                    id: totalCountLabel
-                    anchors.left: countLabel.right
-                    anchors.baseline: countLabel.baseline
-                    font.pixelSize: Theme.fontSizeSmall
-                    color: Theme.secondaryColor
-                    text: " / " + (feedInfo ? feedInfo.count
-                                          : "0")
-                }
-
-                Label {
-                    id: nameLabel
-
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: Theme.paddingSmall + 2
-                    anchors.rightMargin: Theme.paddingSmall
-                    font.pixelSize: Theme.fontSizeExtraSmall
-                    color: Theme.primaryColor
-                    truncationMode: TruncationMode.Fade
-                    text: item.name
-                }
-
-                Label {
-                    id: timeLabel
-
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.bottom: parent.bottom
-                    anchors.leftMargin: Theme.paddingSmall + 2
-                    anchors.rightMargin: Theme.paddingSmall
-                    anchors.bottomMargin: Theme.paddingSmall
-                    font.pixelSize: Theme.fontSizeExtraSmall
-                    color: Theme.secondaryColor
-                    elide: Text.ElideRight
-                    text: feedInfo && feedInfo.lastRefresh && minuteTimer.tick
-                          ? Format.formatDate(feedInfo.lastRefresh,
-                                              Formatter.DurationElapsed)
-                          : ""
-                }
-
-                BusyIndicator {
-                    id: busyIndicator
-
-                    running: feedInfo ? feedInfo.loading : false
-                    anchors.centerIn: parent
-                    size: BusyIndicatorSize.Medium
                 }
             }
         }
