@@ -99,7 +99,6 @@ NewsModel {
 
     property FeedLoader _feedLoader: FeedLoader {
         property string feedName
-        property string feedColor
 
         onSuccess: {
             listModel.feedInfoChanged();
@@ -144,6 +143,7 @@ NewsModel {
 
     // worker for running tasks in the background
     property BackgroundWorker _backgroundWorker: BackgroundWorker { }
+
 
     property RssModel _rssModel: RssModel {
         onStatusChanged: {
@@ -217,6 +217,7 @@ NewsModel {
         }
     }
 
+    // queue of feed sources to process
     property var _sourcesQueue: []
 
     signal error(string details)
@@ -235,16 +236,6 @@ NewsModel {
         return null;
     }
 
-    function _createItem(obj)
-    {
-        var item = { };
-        for (var key in obj)
-        {
-            item[key] = obj[key];
-        }
-        return item;
-    }
-
     function _updateStats()
     {
         console.log("updating stats");
@@ -258,9 +249,16 @@ NewsModel {
      */
     function _loadItem(model, i)
     {
-        console.log("get from model " + i);
-        var item = _createItem(model.get(i));
+        // convert model item to an associative array
+        var item = { };
+        var obj = model.get(i);
+        for (var key in obj)
+        {
+            item[key] = obj[key];
+        }
+
         item["source"] = "" + _feedLoader.source; // convert to string
+        item["logo"] = "" + _feedLoader.logo;
         item["date"] = item.dateString !== "" ? new Date(item.dateString)
                                               : new Date();
         if (item.uid === "")
@@ -289,9 +287,6 @@ NewsModel {
             return null;
         }
 
-        item["name"] = _feedLoader.feedName;
-        item["color"] = _feedLoader.feedColor;
-
         listModel.addItem(item);
 
         return item;
@@ -311,7 +306,6 @@ NewsModel {
             var source = _sourcesQueue.shift();
             var url = source.url;
             var name = source.name;
-            var color = source.color;
 
             console.log("Now loading: " + name);
             currentlyLoading = name;
@@ -320,7 +314,6 @@ NewsModel {
             feedInfo.setLoading(url, true);
             feedInfo.setRefreshed(url);
 
-            _feedLoader.feedColor = color;
             _feedLoader.feedName = name;
             _feedLoader.source = url;
         }
@@ -402,8 +395,11 @@ NewsModel {
             console.log("Source: " + sources[i].url);
             _sourcesQueue.push(sources[i]);
         }
-        _loadNext();
-        lastRefresh = new Date();
+        if (! busy)
+        {
+            _loadNext();
+            lastRefresh = new Date();
+        }
     }
 
     /* Refreshes the model from the given source.
@@ -485,6 +481,6 @@ NewsModel {
     }
 
     onSectionTitleRequested: {
-        setSectionTitle(feedSorter.getSection(itemFeed, itemDate));
+        setSectionTitle(feedSorter.getSection(feedName[itemFeed], itemDate));
     }
 }

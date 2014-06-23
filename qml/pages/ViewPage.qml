@@ -143,7 +143,7 @@ Page {
     Rectangle {
         width: 2
         height: parent.height
-        color: itemData.color
+        color: feedColor[itemData.source]
     }
 
     SilicaFlickable {
@@ -175,7 +175,7 @@ Page {
 
             MenuItem {
                 enabled: _previousOfFeed !== -1
-                text: "<" + itemData.name + ">"
+                text: "<" + feedName[itemData.source] + ">"
 
                 onClicked: {
                     function f()
@@ -237,7 +237,7 @@ Page {
             }
             MenuItem {
                 enabled: _nextOfFeed !== -1
-                text: "<" + itemData.name + ">"
+                text: "<" + feedName[itemData.source] + ">"
 
                 onClicked: {
                     function f()
@@ -264,7 +264,7 @@ Page {
 
             PageHeader {
                 id: pageHeader
-                title: itemData.name
+                title: feedName[itemData.source]
             }
 
             Item {

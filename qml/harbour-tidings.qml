@@ -37,6 +37,9 @@ import "cover"
 
 ApplicationWindow
 {
+    property alias feedName: sourcesModel.names
+    property alias feedColor: sourcesModel.colors
+
     SourcesModel {
         id: sourcesModel
 

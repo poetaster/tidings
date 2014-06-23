@@ -17,6 +17,7 @@ class FeedLoader : public QObject
     Q_PROPERTY(QUrl source READ source WRITE setSource
                NOTIFY sourceChanged)
     Q_PROPERTY(FeedType type READ type NOTIFY dataChanged)
+    Q_PROPERTY(QUrl logo READ logo NOTIFY dataChanged)
     Q_PROPERTY(QString data READ data NOTIFY dataChanged)
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
 public:
@@ -41,11 +42,13 @@ private:
     QUrl source() const { return mySource; }
     void setSource(const QUrl& source);
 
-    FeedType type() const;
-
+    FeedType type() const { return myType; }
+    QUrl logo() const { return myLogo; }
     QString data() const { return myData; }
 
     bool loading() const { return myIsLoading; }
+
+    void analyzeFeed();
 
 private slots:
     void slotSslErrors(QNetworkReply* reply, const QList<QSslError>& errors);
@@ -57,6 +60,8 @@ private:
     QUrl mySource;
     QString myData;
     bool myIsLoading;
+    FeedType myType;
+    QUrl myLogo;
 };
 
 #endif // FEEDLOADER_H

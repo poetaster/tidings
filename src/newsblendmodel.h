@@ -41,8 +41,6 @@ public:
         QString sectionTitle;
         QString uid;
         QString feedSource;
-        QString feedName;
-        QString feedColor;
         QDateTime date;
         QString title;
         QString body;
@@ -63,8 +61,6 @@ public:
         UidRole,
 
         FeedSourceRole,
-        FeedNameRole,
-        FeedColorRole,
 
         DateRole,
         TitleRole,
@@ -120,7 +116,7 @@ public:
     Q_INVOKABLE int nextOfFeed(int index) const;
     Q_INVOKABLE int firstOfFeed(const QString& feedSource) const;
 
-    Q_INVOKABLE QString thumbnailOfFeed(const QString& feedSource) const;
+    Q_INVOKABLE QString logoOfFeed(const QString& feedSource) const;
     Q_INVOKABLE QStringList thumbnailsOfFeed(const QString& feedSource) const;
 
     Q_INVOKABLE QVariantMap totalStats() const;
@@ -160,6 +156,7 @@ private:
 
     QMap<QString, int> myTotalCounts;
     QMap<QString, int> myUnreadCounts;
+    QMap<QString, QString> myFeedLogos;
 
     SortMode mySortMode;
 

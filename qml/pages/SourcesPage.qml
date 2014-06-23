@@ -65,6 +65,18 @@ Page {
         }
 
         PullDownMenu {
+            id: pulleyMenu
+
+            property var _action
+
+            onActiveChanged: {
+                if (! active && _action)
+                {
+                    _action();
+                    _action = null;
+                }
+            }
+
             MenuItem {
                 text: qsTr("About Tidings")
 
@@ -77,7 +89,9 @@ Page {
                 text: qsTr("Mark all read")
 
                 onClicked: {
-                    newsBlendModel.setAllRead();
+                    pulleyMenu._action = function() {
+                        newsBlendModel.setAllRead();
+                    };
                 }
             }
 
@@ -86,11 +100,13 @@ Page {
                                           : qsTr("Refresh all")
 
                 onClicked: {
-                    if (newsBlendModel.busy) {
-                        newsBlendModel.abort();
-                    } else {
-                        newsBlendModel.refreshAll();
-                    }
+                    pulleyMenu._action = function() {
+                        if (newsBlendModel.busy) {
+                            newsBlendModel.abort();
+                        } else {
+                            newsBlendModel.refreshAll();
+                        }
+                    };
                 }
             }
         }
@@ -200,6 +216,7 @@ Page {
                     if (! loadingStatus)
                     {
                         thumbnails = newsBlendModel.thumbnailsOfFeed(item.url);
+                        logo = newsBlendModel.logoOfFeed(item.url);
                     }
                 }
 
@@ -244,12 +261,23 @@ Page {
 
         ContextMenu {
             id: contextMenu
+            property var _action
+
+            onActiveChanged: {
+                if (! active && _action)
+                {
+                    _action();
+                    _action = null;
+                }
+            }
 
             MenuItem {
                 text: qsTr("Refresh")
 
                 onClicked: {
-                    contextMenu.parent.refresh();
+                    contextMenu._action = function() {
+                        contextMenu.parent.refresh();
+                    };
                 }
             }
 
@@ -257,7 +285,9 @@ Page {
                 text: qsTr("Mark as read")
 
                 onClicked: {
-                    contextMenu.parent.setFeedRead();
+                    contextMenu._action = function() {
+                        contextMenu.parent.setFeedRead();
+                    };
                 }
             }
 

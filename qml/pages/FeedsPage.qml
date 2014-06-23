@@ -5,20 +5,6 @@ Page {
     id: page
     objectName: "FeedsPage"
 
-    function replaceEntities(text)
-    {
-        return text.replace(/&apos;/g, "'")
-                   .replace(/&quot;/g, "\"")
-                   .replace(/&#38;/g, "&")
-                   .replace(/&Auml;/g, "Ä")
-                   .replace(/&auml;/g, "ä")
-                   .replace(/&Ouml;/g, "Ö")
-                   .replace(/&ouml;/g, "ö")
-                   .replace(/&Uuml;/g, "Ü")
-                   .replace(/&uuml;/g, "ü")
-                   .replace(/&amp;/g, "&");
-    }
-
     function positionAtFirst(feedUrl)
     {
         var idx = newsBlendModel.firstOfFeed(feedUrl);
@@ -101,17 +87,20 @@ Page {
 
             property variant data: model
 
-            //opacity: newsBlendModel.busy ? 0.2 : 1
-            //enabled: ! newsBlendModel.busy
-
             width: listview.width
             contentHeight: Theme.itemSizeExtraLarge
             clip: true
 
             Rectangle {
+                anchors.fill: parent
+                color: feedColor[model.source]
+                opacity: 0.1
+            }
+
+            Rectangle {
                 width: 2
                 height: parent.height
-                color: model.color
+                color: feedColor[model.source]
             }
 
             Image {
@@ -131,7 +120,7 @@ Page {
                 color: feedItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: (minuteTimer.tick ? "" : "") +
-                      model.name + " (" +
+                      feedName[model.source] + " (" +
                       Format.formatDate(model.date, Formatter.DurationElapsed) +
                       ")"
             }
@@ -157,7 +146,7 @@ Page {
                 maximumLineCount: 2
                 opacity: (model.read && ! model.shelved) ? 0.5 : 1
                 textFormat: Text.PlainText
-                text: replaceEntities(model.title)
+                text: model.title
             }
 
             Image {
@@ -211,24 +200,41 @@ Page {
         flickable: listview
     }
 
-    /*
-    BusyIndicator {
-        anchors.centerIn: parent
-        running: newsBlendModel.busy
-        size: BusyIndicatorSize.Large
-    }
-    */
 
-    Label {
+    // loading indicator
+    Rectangle {
         visible: newsBlendModel.busy
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: Theme.paddingMedium
-        horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: Theme.fontSizeMedium
-        color: Theme.secondaryColor
-        truncationMode: TruncationMode.Fade
-        text: newsBlendModel.currentlyLoading
+        width: parent.width
+        height: Theme.itemSizeMedium
+        gradient: Gradient {
+            GradientStop { position: 0; color: "transparent" }
+            GradientStop { position: 0.5; color: "black" }
+            GradientStop { position: 1; color: "black" }
+        }
+
+        BusyIndicator {
+            running: parent.visible
+            size: BusyIndicatorSize.Small
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: loadingLabel.top
+            anchors.bottomMargin: Theme.paddingSmall
+        }
+
+        Label {
+            id: loadingLabel
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: Theme.paddingLarge
+            anchors.rightMargin: Theme.paddingLarge
+            anchors.bottomMargin: Theme.paddingSmall
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: Theme.fontSizeTiny
+            color: Theme.secondaryColor
+            truncationMode: TruncationMode.Fade
+            text: newsBlendModel.currentlyLoading
+        }
+
     }
 }

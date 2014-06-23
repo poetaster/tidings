@@ -6,6 +6,7 @@ BackgroundItem {
 
     property alias name: nameLabel.text
     property date timestamp
+    property string logo
     property var thumbnails: []
     property alias colorTag: colorTagBar.color
     property int totalCount: 0
@@ -57,6 +58,7 @@ BackgroundItem {
             width: parent.width
             height: parent.height
             fillMode: Image.PreserveAspectCrop
+            asynchronous: true
             source: thumbnails.length > 0 ? thumbnails[_thumbnailOffset] : ""
         }
 
@@ -66,6 +68,7 @@ BackgroundItem {
             width: thumbImage.width
             height: thumbImage.height
             fillMode: Image.PreserveAspectCrop
+            asynchronous: true
             source: thumbnails.length > 0 ? thumbnails[(_thumbnailOffset + 1) % thumbnails.length] : ""
         }
     }
@@ -81,6 +84,7 @@ BackgroundItem {
         opacity: 0.1
     }
 
+    // color tag tint
     Rectangle {
         anchors.fill: parent
         color: colorTag
@@ -94,25 +98,28 @@ BackgroundItem {
         height: parent.height
     }
 
+    Image {
+        visible: logo !== ""
+        width: parent.width - Theme.paddingSmall
+        height: parent.height / 4
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.leftMargin: colorTagBar.width
+        horizontalAlignment: Qt.AlignLeft
+        verticalAlignment: Qt.AlignBottom
+        fillMode: Image.PreserveAspectFit
+        asynchronous: true
+        source: logo
+    }
 
     Label {
         id: unreadCountLabel
-        //visible: unreadCount !== 0
         anchors.centerIn: parent
+        anchors.verticalCenterOffset: -timeLabel.font.pixelSize
         font.pixelSize: Theme.fontSizeHuge
         color: feedItem.highlighted ? Theme.highlightColor : Theme.primaryColor
         text: unreadCount > 0 ? unreadCount : "✓"
     }
-
-    /*
-    Rectangle {
-        x: parent.width - width + radius
-        y: 0
-        width: totalCountLabel.implicitWidth + 2 * Theme.paddingSmall
-        height: totalCountLabel.implicitHeight
-        color: colorTag
-    }
-    */
 
     Label {
         id: totalCountLabel
@@ -140,10 +147,10 @@ BackgroundItem {
         id: timeLabel
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.leftMargin: Theme.paddingSmall + 2
+        anchors.top: unreadCountLabel.bottom
+        anchors.leftMargin: Theme.paddingSmall
         anchors.rightMargin: Theme.paddingSmall
-        anchors.bottomMargin: Theme.paddingSmall
+        horizontalAlignment: Qt.AlignHCenter
         font.pixelSize: Theme.fontSizeExtraSmall
         color: feedItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
         elide: Text.ElideRight

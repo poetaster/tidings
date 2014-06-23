@@ -30,8 +30,8 @@ int compare(NewsBlendModel::Item::ConstPtr a,
         }
         else
         {
-            return (a->feedName < b->feedName) ? 1
-                                               : -1;
+            return (a->feedSource < b->feedSource) ? 1
+                                                   : -1;
         }
     case NewsBlendModel::FeedOldestFirst:
         if (a->feedSource == b->feedSource)
@@ -42,8 +42,8 @@ int compare(NewsBlendModel::Item::ConstPtr a,
         }
         else
         {
-            return (a->feedName < b->feedName) ? 1
-                                               : -1;
+            return (a->feedSource < b->feedSource) ? 1
+                                                   : -1;
         }
     case NewsBlendModel::FeedOnlyLatestFirst:
         if (a->feedSource != selectedFeedSource)
@@ -72,8 +72,8 @@ int compare(NewsBlendModel::Item::ConstPtr a,
         }
         else
         {
-            return (a->feedName < b->feedName) ? 1
-                                               : -1;
+            return (a->feedSource < b->feedSource) ? 1
+                                                   : -1;
         }
 
     default:
@@ -87,8 +87,9 @@ NewsBlendModel::NewsBlendModel(QObject* parent)
     : QAbstractListModel(parent)
     , mySortMode(LatestFirst)
 {
-    myRolenames[FeedNameRole] = "name";
-    myRolenames[FeedColorRole] = "color";
+    myRolenames[FeedSourceRole] = "source";
+
+    myRolenames[UidRole] = "uid";
 
     myRolenames[SectionTitleRole] = "sectionTitle";
     myRolenames[DateRole] = "date";
@@ -140,7 +141,7 @@ void NewsBlendModel::setSelectedFeed(const QString& selectedFeed)
     }
 }
 
-int NewsBlendModel::rowCount(const QModelIndex& parent) const
+int NewsBlendModel::rowCount(const QModelIndex&) const
 {
     if (mySortMode == FeedOnlyLatestFirst ||
             mySortMode == FeedOnlyOldestFirst)
@@ -164,10 +165,10 @@ QVariant NewsBlendModel::data(const QModelIndex& index, int role) const
 
     switch (role)
     {
-    case FeedNameRole:
-        return item->feedName;
-    case FeedColorRole:
-        return item->feedColor;
+    case FeedSourceRole:
+        return item->feedSource;
+    case UidRole:
+        return item->uid;
     case SectionTitleRole:
         return item->sectionTitle;
     case DateRole:
@@ -208,7 +209,7 @@ int NewsBlendModel::insertItem(const Item::Ptr item, bool update)
 {
     int insertPos = -1;
 
-    emit sectionTitleRequested(item->feedName, item->date);
+    emit sectionTitleRequested(item->feedSource, item->date);
     item->sectionTitle = myCurrentSectionTitle;
     //qDebug() << "section title:" << item->sectionTitle;
 
@@ -375,13 +376,23 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
     item->sectionTitle = "unknown";
 
     item->feedSource = itemData.value("source").toString();
-    item->feedName = itemData.value("name").toString();
-    item->feedColor = itemData.value("color").toString();
 
     item->uid = itemData.value("uid").toString();
     item->date = itemData.value("date").toDateTime();
 
     item->title = itemData.value("title").toString();
+    item->title = item->title
+            .replace("&apos;", "'")
+            .replace("&quot;", "\"")
+            .replace("&#38;", "&")
+            .replace("&Auml;", "Ä")
+            .replace("&Ouml;", "Ö")
+            .replace("&Uuml;", "Ü")
+            .replace("&auml;", "ä")
+            .replace("&ouml;", "ö")
+            .replace("&uuml;", "ü")
+            .replace("&amp;", "&");
+
     const QString description = itemData.value("description").toString();
     // defuse styles until we have more sophisticated HTML normalizing
     const QString encoded = itemData.value("encoded").toString()
@@ -427,6 +438,11 @@ void NewsBlendModel::loadItems(const QVariantList& jsons, bool shelved)
         QVariantMap itemData = doc.toVariant().toMap();
         Item::Ptr item = parseItem(itemData);
 
+        if (myFeedLogos.value(item->feedSource).isEmpty())
+        {
+            myFeedLogos[item->feedSource] = itemData.value("logo").toString();
+            qDebug() << "Set logo" << myFeedLogos[item->feedSource];
+        }
 
         myTotalCounts[item->feedSource] =
                 myTotalCounts.value(item->feedSource, 0) + 1;
@@ -449,6 +465,11 @@ int NewsBlendModel::addItem(const QVariantMap& itemData, bool update)
 {
     Item::Ptr item = parseItem(itemData);
     //qDebug() << "add item" << item->title;
+
+    if (myFeedLogos.value(item->feedSource).isEmpty())
+    {
+        myFeedLogos[item->feedSource] = itemData.value("logo").toString();
+    }
 
     myTotalCounts[item->feedSource] =
             myTotalCounts.value(item->feedSource, 0) + 1;
@@ -539,16 +560,13 @@ void NewsBlendModel::removeReadItems(const QString& feedSource)
 {
     beginResetModel();
     int pos = 0;
-    qDebug() << "removing read items";
     while (pos < myItems.size())
     {
         Item::Ptr item = myItems.at(pos);
-        qDebug() << pos << item->isRead << item->isShelved << item->feedSource << feedSource;
         if (item->isRead &&
                 ! item->isShelved &&
                 (feedSource.isEmpty() || item->feedSource == feedSource))
         {
-            qDebug() << "removing at" << pos;
             Item::Ptr item = myItems.takeAt(pos);
             myItemMap.remove(FullId(item->feedSource, item->uid));
 
@@ -637,18 +655,9 @@ int NewsBlendModel::firstOfFeed(const QString& feedSource) const
     return -1;
 }
 
-QString NewsBlendModel::thumbnailOfFeed(const QString& feedSource) const
+QString NewsBlendModel::logoOfFeed(const QString& feedSource) const
 {
-    int size = myItems.size();
-    for (int i = 0; i < size; ++i)
-    {
-        if (myItems.at(i)->feedSource == feedSource &&
-            myItems.at(i)->thumbnail.size())
-        {
-            return myItems.at(i)->thumbnail;
-        }
-    }
-    return QString();
+    return myFeedLogos.value(feedSource);
 }
 
 QStringList NewsBlendModel::thumbnailsOfFeed(const QString& feedSource) const
