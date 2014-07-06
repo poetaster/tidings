@@ -281,7 +281,8 @@ NewsModel {
             return null;
         }
 
-        if (Database.isRead(item.source, item.uid))
+        if (Database.isRead(item.source, item.uid) &&
+            ! Database.isShelved(item.source, item.uid))
         {
             // read items are gone
             return null;
@@ -470,6 +471,31 @@ NewsModel {
     }
 
     onReadChanged: {
+        var i = 0;
+
+        function f()
+        {
+            if (i < indexes.length)
+            {
+                var index = indexes[i];
+                Database.setRead(listModel.getAttribute(index, "source"),
+                                 listModel.getAttribute(index, "uid"),
+                                 listModel.isRead(index));
+                ++i;
+                return true;
+            }
+            else
+            {
+                _updateStats();
+                return false;
+            }
+
+
+        }
+
+        _backgroundWorker.execute(f);
+
+        /*
         for (var i = 0; i < indexes.length; ++i)
         {
             var index = indexes[i];
@@ -478,6 +504,7 @@ NewsModel {
                              listModel.isRead(index));
         }
         _updateStats();
+        */
     }
 
     onSectionTitleRequested: {

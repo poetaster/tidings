@@ -444,6 +444,13 @@ void NewsBlendModel::loadItems(const QVariantList& jsons, bool shelved)
             qDebug() << "Set logo" << myFeedLogos[item->feedSource];
         }
 
+        FullId itemId(item->feedSource, item->uid);
+
+        if (myItemMap.contains(itemId))
+        {
+            continue;
+        }
+
         myTotalCounts[item->feedSource] =
                 myTotalCounts.value(item->feedSource, 0) + 1;
         if (shelved)
@@ -456,7 +463,7 @@ void NewsBlendModel::loadItems(const QVariantList& jsons, bool shelved)
             myUnreadCounts[item->feedSource] =
                     myUnreadCounts.value(item->feedSource, 0) + 1;
         }
-        myItemMap[FullId(item->feedSource, item->uid)] = item;
+        myItemMap[itemId] = item;
     }
     setSortMode(mySortMode);
 }

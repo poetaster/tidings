@@ -98,9 +98,10 @@ BackgroundItem {
         height: parent.height
     }
 
+    // logo of feed, if the feed has one
     Image {
         visible: logo !== ""
-        width: parent.width - Theme.paddingSmall
+        width: parent.width
         height: parent.height / 4
         anchors.left: parent.left
         anchors.bottom: parent.bottom
@@ -115,7 +116,6 @@ BackgroundItem {
     Label {
         id: unreadCountLabel
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: -timeLabel.font.pixelSize
         font.pixelSize: Theme.fontSizeHuge
         color: feedItem.highlighted ? Theme.highlightColor : Theme.primaryColor
         text: unreadCount > 0 ? unreadCount : "✓"
@@ -147,11 +147,11 @@ BackgroundItem {
         id: timeLabel
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: unreadCountLabel.bottom
+        anchors.top: nameLabel.bottom
         anchors.leftMargin: Theme.paddingSmall
         anchors.rightMargin: Theme.paddingSmall
         horizontalAlignment: Qt.AlignHCenter
-        font.pixelSize: Theme.fontSizeExtraSmall
+        font.pixelSize: Theme.fontSizeExtraSmall * 0.8
         color: feedItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
         elide: Text.ElideRight
         text: (timestamp && timestamp.getMilliseconds() > 0)
