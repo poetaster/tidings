@@ -111,11 +111,8 @@ NewsBlendModel::NewsBlendModel(QObject* parent)
     }
 }
 
-void NewsBlendModel::setSortMode(SortMode mode)
+void NewsBlendModel::reinsertItems()
 {
-    qDebug() << Q_FUNC_INFO << mode;
-    mySortMode = mode;
-
     beginResetModel();
     myItems.clear();
     foreach (Item::Ptr item, myItemMap.values())
@@ -123,8 +120,18 @@ void NewsBlendModel::setSortMode(SortMode mode)
         insertItem(item, false);
     }
     endResetModel();
+}
 
-    emit sortModeChanged();
+void NewsBlendModel::setSortMode(SortMode mode)
+{
+    if (mode != mySortMode)
+    {
+        qDebug() << Q_FUNC_INFO << mode;
+        mySortMode = mode;
+        reinsertItems();
+        emit sortModeChanged();
+        emit countChanged();
+    }
 }
 
 void NewsBlendModel::setSelectedFeed(const QString& selectedFeed)
@@ -136,7 +143,8 @@ void NewsBlendModel::setSelectedFeed(const QString& selectedFeed)
         if (mySortMode == FeedOnlyLatestFirst ||
             mySortMode == FeedOnlyOldestFirst)
         {
-            setSortMode(mySortMode);
+            reinsertItems();
+            emit countChanged();
         }
     }
 }
@@ -206,8 +214,15 @@ QVariant NewsBlendModel::data(const QModelIndex& index, int role) const
 }
 
 int NewsBlendModel::insertItem(const Item::Ptr item, bool update)
-{
+{   
     int insertPos = -1;
+
+    if ((mySortMode == FeedOnlyLatestFirst ||
+         mySortMode == FeedOnlyOldestFirst) &&
+        item->feedSource != mySelectedFeed)
+    {
+        return insertPos;
+    }
 
     emit sectionTitleRequested(item->feedSource, item->date);
     item->sectionTitle = myCurrentSectionTitle;
@@ -441,7 +456,7 @@ void NewsBlendModel::loadItems(const QVariantList& jsons, bool shelved)
         if (myFeedLogos.value(item->feedSource).isEmpty())
         {
             myFeedLogos[item->feedSource] = itemData.value("logo").toString();
-            qDebug() << "Set logo" << myFeedLogos[item->feedSource];
+            //qDebug() << "Set logo" << myFeedLogos[item->feedSource];
         }
 
         FullId itemId(item->feedSource, item->uid);
@@ -465,7 +480,7 @@ void NewsBlendModel::loadItems(const QVariantList& jsons, bool shelved)
         }
         myItemMap[itemId] = item;
     }
-    setSortMode(mySortMode);
+    reinsertItems();
 }
 
 int NewsBlendModel::addItem(const QVariantMap& itemData, bool update)

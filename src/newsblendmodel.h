@@ -119,7 +119,12 @@ public:
     Q_INVOKABLE QString logoOfFeed(const QString& feedSource) const;
     Q_INVOKABLE QStringList thumbnailsOfFeed(const QString& feedSource) const;
 
+    /* Returns the total count of items per feed source.
+     */
     Q_INVOKABLE QVariantMap totalStats() const;
+
+    /* Returns the count of unread items per feed source.
+     */
     Q_INVOKABLE QVariantMap unreadStats() const;
 
 signals:
@@ -132,6 +137,8 @@ signals:
                                const QDateTime& itemDate);
 
 private:
+    void reinsertItems();
+
     SortMode sortMode() const { return mySortMode; }
     void setSortMode(SortMode mode);
 

@@ -4,9 +4,11 @@ import Sailfish.Silica 1.0
 CoverBackground {
     id: cover
 
+    property string _elapsedText
+
     function refreshElapsed() {
-        labelElapsed.text = Format.formatDate(coverAdaptor.lastRefresh,
-                                              Formatter.DurationElapsed);
+        _elapsedText = Format.formatDate(coverAdaptor.lastRefresh,
+                                         Formatter.DurationElapsed);
     }
 
 
@@ -53,10 +55,80 @@ CoverBackground {
         opacity: 0.1
     }
 
+    // Main
+    Column {
+        visible: coverAdaptor.currentPage === "SourcesPage"
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.leftMargin: Theme.paddingLarge
+        anchors.rightMargin: Theme.paddingLarge
+        width: parent.width
+
+        Item {
+            width: 1
+            height: Theme.paddingLarge
+        }
+
+        Item {
+            width: parent.width
+            height: childrenRect.height
+
+            Label {
+                anchors.left: parent.left
+                anchors.right: parent.right
+                truncationMode: TruncationMode.Fade
+                font.pixelSize: Theme.fontSizeExtraSmall
+                color: Theme.secondaryColor
+                text: "Tidings"
+            }
+        }
+
+        Separator {
+            width: parent.width
+            color: Theme.secondaryColor
+        }
+
+        Item {
+            width: 1
+            height: 2 * Theme.paddingLarge
+        }
+
+        Label {
+            visible: coverAdaptor.busy
+            font.pixelSize: Theme.fontSizeLarge
+            color: Theme.highlightColor
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            text: qsTr("Refreshing")
+
+            Timer {
+                property int angle: 0
+
+                running: cover.status === Cover.Active && parent.visible
+                interval: 50
+                repeat: true
+
+                onTriggered: {
+                    var a = angle;
+                    parent.opacity = 0.5 + 0.5 * Math.sin(angle * (Math.PI / 180.0));
+                    angle = (angle + 10) % 360;
+                }
+            }
+        }
+
+        Label {
+            visible: ! coverAdaptor.busy
+            width: parent.width
+            font.pixelSize: Theme.fontSizeLarge
+            color: Theme.highlightColor
+            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            text: _elapsedText
+        }
+    }
+
     // Overview
     Column {
-        visible: (coverAdaptor.currentPage !== "ViewPage" &&
-                  coverAdaptor.currentPage !== "WebPage")
+        visible: coverAdaptor.currentPage === "FeedsPage"
 
         anchors.left: parent.left
         anchors.right: parent.right
@@ -124,12 +196,12 @@ CoverBackground {
         }
 
         Label {
-            id: labelElapsed
             visible: ! coverAdaptor.busy
             width: parent.width
             font.pixelSize: Theme.fontSizeLarge
             color: Theme.highlightColor
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+            text: _elapsedText
         }
     }
 
@@ -275,8 +347,7 @@ CoverBackground {
     // [next] and [refresh]
     CoverActionList {
         enabled: ! coverAdaptor.busy &&
-                 (coverAdaptor.currentPage === "SourcesPage" ||
-                  coverAdaptor.currentPage === "FeedsPage") &&
+                 coverAdaptor.currentPage === "FeedsPage" &&
                  coverAdaptor.totalCount > 0
 
         CoverAction {
