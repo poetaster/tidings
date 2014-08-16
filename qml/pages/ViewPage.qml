@@ -350,7 +350,7 @@ Page {
 
                 color: configTintedBackground.booleanValue ? "black" : Theme.primaryColor
                 fontSize: Theme.fontSizeSmall
-                text: itemData.body
+                text: newsBlendModel.itemBody(itemData.source, itemData.uid) // itemData.body
 
                 onLinkActivated: {
                     var props = {

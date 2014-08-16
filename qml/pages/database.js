@@ -6,7 +6,7 @@
  * call it in _migrate.
  * Update _createSchema with the schema modifications.
  */
-var _REVISION = 7;
+var _REVISION = 8;
 
 var _database = Sql.LocalStorage.openDatabaseSync("TidingsDB", "1.0",
                                                   "Tidings Persisted Settings");
@@ -45,6 +45,7 @@ function _migrate(tx) {
         if (revision < 5) { _migrateRev5(tx); }
         if (revision < 6) { _migrateRev6(tx); }
         if (revision < 7) { _migrateRev7(tx); }
+        if (revision < 8) { _migrateRev8(tx); }
     }
 
     // set the new revision
@@ -129,6 +130,13 @@ function _migrateRev7(tx)
                   ")");
 }
 
+/* Migrates to Rev 8, where we renamed table 'unread' to 'offlineCache'.
+ */
+function _migrateRev8(tx)
+{
+    tx.executeSql("ALTER TABLE unread RENAME TO offlineCache");
+}
+
 /* Creates the initial schema.
  */
 function _createSchema(tx)
@@ -152,7 +160,7 @@ function _createSchema(tx)
                   "  document TEXT" +
                   ")");
 
-    tx.executeSql("CREATE TABLE unread (" +
+    tx.executeSql("CREATE TABLE offlineCache (" +
                   "  url TEXT," +
                   "  uid TEXT," +
                   "  document TEXT" +
@@ -233,8 +241,13 @@ function removeSource(sourceId) {
                                 [sourceId]);
 
         if (res.rows.length) {
+            var url = res.rows.item(0).url;
+            tx.executeSql("DELETE FROM offlineCache WHERE url = ?",
+                          [url]);
             tx.executeSql("DELETE FROM read WHERE url = ?",
-                          [res.rows.item(0).url]);
+                          [url]);
+            tx.executeSql("DELETE FROM shelf WHERE url = ?",
+                          [url]);
         }
 
         tx.executeSql("DELETE FROM sources WHERE sourceid = ?",
@@ -244,21 +257,60 @@ function removeSource(sourceId) {
    _database.transaction(f);
 }
 
-/* Marks the given item as read.
+/* Loads a list of {url, uid, document} records into the offline cache.
  */
-function setRead(url, uid, value)
+function cacheItems(items)
 {
-    function f(tx) {
-        if (value) {
-            var d = new Date();
-            var now = d.getTime() / 1000;
-            tx.executeSql("INSERT INTO read (url, uid, read) VALUES (?, ?, ?)",
-                          [url, uid, now]);
-            tx.executeSql("DELETE FROM unread WHERE url = ? AND uid = ?",
-                          [url, uid]);
-        } else {
-            tx.executeSql("DELETE FROM read WHERE url = ? AND uid = ?",
-                          [url, uid]);
+    function f(tx)
+    {
+        console.log("caching " + items.length + " items");
+        for (var i = 0; i < items.length; ++i)
+        {
+            tx.executeSql("INSERT INTO offlineCache (url, uid, document) " +
+                          "VALUES (?, ?, ?)",
+                          [items[i].url, items[i].uid, items[i].document]);
+        }
+    }
+
+    _database.transaction(f);
+}
+
+/* Removes the read items from the offline cache.
+ */
+function uncacheReadItems()
+{
+    function f(tx)
+    {
+        tx.executeSql("DELETE FROM offlineCache " +
+                      "WHERE url || uid IN (SELECT url || uid FROM read)");
+    }
+
+    _database.transaction(f);
+}
+
+/* Marks the items given as a list {url, uid, value} records as read or unread,
+ * depending on their value property.
+ */
+function setItemsRead(items)
+{
+    function f(tx)
+    {
+        var d = new Date();
+        var now = d.getTime() / 1000;
+
+        for (var i = 0; i < items.length; ++i)
+        {
+            var value = items[i].value;
+            if (value)
+            {
+                tx.executeSql("INSERT INTO read (url, uid, read) VALUES (?, ?, ?)",
+                              [items[i].url, items[i].uid, now]);
+            }
+            else
+            {
+                tx.executeSql("DELETE FROM read WHERE url = ? AND uid = ?",
+                              [items[i].url, items[i].uid]);
+            }
         }
     }
 
@@ -331,7 +383,7 @@ function shelvedCounts()
     return result;
 }
 
-/* Returns the counts of cached unread items per feed source.
+/* Returns the counts of cached items per feed source.
  */
 function cachedCounts()
 {
@@ -340,7 +392,7 @@ function cachedCounts()
     function f(tx)
     {
         var res = tx.executeSql("SELECT url, count(DISTINCT uid) AS count " +
-                                "FROM unread " +
+                                "FROM offlineCache " +
                                 "GROUP BY url");
         for (var i = 0; i < res.rows.length; i++)
         {
@@ -353,71 +405,70 @@ function cachedCounts()
     return result;
 }
 
-/* Returns all cached unread items as a list of JSON strings.
+/* Loads the cached items in batches via a callback.
  */
-function cachedItems()
-{
-    var result = [];
-
-    function f(tx)
-    {
-        var res = tx.executeSql("SELECT document FROM unread");
-        for (var i = 0; i < res.rows.length; i++)
-        {
-            var data = res.rows.item(i);
-            result.push(data.document);
-        }
-    }
-
-    _database.transaction(f);
-    return result;
-}
-
-/* Loads a list of {url, uid, document} records into the unread cache.
- */
-function cacheItems(items)
+function batchLoadCached(batchSize, callback)
 {
     function f(tx)
     {
-        console.log("caching " + items.length + " unread items");
-        for (var i = 0; i < items.length; ++i)
+        for (var offset = 0; true; offset += batchSize)
         {
-            tx.executeSql("INSERT INTO unread (url, uid, document) VALUES (?, ?, ?)",
-                          [items[i].url, items[i].uid, items[i].document]);
+            var res = tx.executeSql("SELECT document FROM offlineCache " +
+                                    "ORDER BY uid LIMIT " + batchSize +
+                                    " OFFSET " + offset);
+            console.log("offset " + offset + " count " + res.rows.length);
+            if (res.rows.length > 0)
+            {
+                callback(res.rows);
+            }
+            else
+            {
+                break;
+            }
         }
     }
 
     _database.transaction(f);
 }
 
-/* Returns all shelved items as a list of JSON strings.
+/* Loads the shelved items in batches via a callback.
  */
-function shelvedItems()
+function batchLoadShelved(batchSize, callback)
 {
-    var result = [];
-
     function f(tx)
     {
-        var res = tx.executeSql("SELECT document FROM shelf");
-        for (var i = 0; i < res.rows.length; i++)
+        for (var offset = 0; true; offset += batchSize)
         {
-            var data = res.rows.item(i);
-            result.push(data.document);
+            var res = tx.executeSql("SELECT document FROM shelf " +
+                                    "ORDER BY uid LIMIT " + batchSize +
+                                    " OFFSET " + offset);
+            console.log("offset " + offset + " count " + res.rows.length);
+            if (res.rows.length > 0)
+            {
+                callback(res.rows);
+            }
+            else
+            {
+                break;
+            }
         }
     }
 
     _database.transaction(f);
-    return result;
 }
 
 /* Shelves the given item.
  */
-function shelveItem(url, uid, document)
+function shelveItem(url, uid)
 {
     function f(tx)
     {
-        tx.executeSql("INSERT INTO shelf (url, uid, document) VALUES (?, ?, ?)",
-                      [url, uid, document]);
+        tx.executeSql("INSERT INTO shelf (url, uid, document) " +
+                      "SELECT url, uid, document FROM offlineCache " +
+                      "WHERE url = ? AND uid = ?",
+                      [url, uid]);
+        tx.executeSql("DELETE FROM offlineCache WHERE url = ? AND uid = ?",
+                      [url, uid]);
     }
 
     _database.transaction(f);
@@ -429,6 +480,10 @@ function unshelveItem(url, uid)
 {
     function f(tx)
     {
+        tx.executeSql("INSERT INTO offlineCache (url, uid, document) " +
+                      "SELECT url, uid, document FROM shelf " +
+                      "WHERE url = ? AND uid = ?",
+                      [url, uid]);
         tx.executeSql("DELETE FROM shelf WHERE url = ? AND uid = ?",
                       [url, uid]);
     }
@@ -447,6 +502,43 @@ function isShelved(url, uid)
         var res = tx.executeSql("SELECT url FROM shelf WHERE url = ? AND uid = ?",
                                 [url, uid]);
         result = (res.rows.length > 0);
+    }
+
+    _database.transaction(f);
+    return result;
+}
+
+/* Returns the serialized data of the given feed item.
+ */
+function cachedItem(url, uid)
+{
+    var result = "";
+
+    function f(tx)
+    {
+        // the item is either in the offline cache (more likely) or on the shelf
+        var res = tx.executeSql("SELECT document FROM offlineCache " +
+                                "WHERE url = ? AND uid = ?",
+                                [url, uid]);
+
+        if (res.rows.length)
+        {
+            result = res.rows.item(0).document;
+        }
+        else
+        {
+            res = tx.executeSql("SELECT document FROM shelf " +
+                                "WHERE url = ? AND uid = ?",
+                                [url, uid]);
+            if (res.rows.length)
+            {
+                result = res.rows.item(0).document;
+            }
+            else
+            {
+                console.log("not found");
+            }
+        }
     }
 
     _database.transaction(f);

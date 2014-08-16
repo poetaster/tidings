@@ -154,7 +154,7 @@ BackgroundItem {
         font.pixelSize: Theme.fontSizeExtraSmall * 0.8
         color: feedItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
         elide: Text.ElideRight
-        text: (timestamp && timestamp.getMilliseconds() > 0)
+        text: (minuteTimer.tick && timestamp && timestamp.getMilliseconds() > 0)
               ? Format.formatDate(timestamp, Formatter.DurationElapsed)
               : ""
     }

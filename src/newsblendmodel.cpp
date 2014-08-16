@@ -385,7 +385,7 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
 {
     Item::Ptr item(new Item);
 
-    item->rawData = itemData;
+    //item->rawData = itemData;
 
     // will be set when inserting
     item->sectionTitle = "unknown";
@@ -408,11 +408,13 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
             .replace("&uuml;", "ü")
             .replace("&amp;", "&");
 
+    /*
     const QString description = itemData.value("description").toString();
     // defuse styles until we have more sophisticated HTML normalizing
     const QString encoded = itemData.value("encoded").toString()
             .replace(" style=", " xstyle=");
     item->body = encoded.size() ? encoded : description;
+    */
 
     item->link = itemData.value("link").toString();
 
@@ -429,20 +431,6 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
 QVariant NewsBlendModel::getAttribute(int idx, const QString& role) const
 {
     return data(index(idx), myInverseRolenames.value(role.toUtf8(), 0));
-}
-
-QString NewsBlendModel::toJson(int index) const
-{
-    qDebug() << Q_FUNC_INFO << index;
-    if (index >= 0 && index < myItems.size())
-    {
-        QJsonDocument doc = QJsonDocument::fromVariant(myItems.at(index)->rawData);
-        return QString::fromUtf8(doc.toJson());
-    }
-    else
-    {
-        return QString();
-    }
 }
 
 void NewsBlendModel::loadItems(const QVariantList& jsons, bool shelved)
@@ -528,54 +516,81 @@ void NewsBlendModel::setShelved(int idx, bool value)
 
 void NewsBlendModel::setRead(int idx, bool value)
 {
-    if (idx >= 0 && idx < myItems.size())
+    if (idx >= 0 && idx < myItems.size() && ! myItems[idx]->isShelved)
     {
         myItems[idx]->isRead = value;
-        --myUnreadCounts[myItems[idx]->feedSource];
-        emit readChanged(QList<int>() << idx);
+        myUnreadCounts[myItems[idx]->feedSource] += value ? -1 : 1;
+        QVariantMap item;
+        item["url"] = myItems[idx]->feedSource;
+        item["uid"] = myItems[idx]->uid;
+        item["value"] = value;
+        emit readChanged(QVariantList() << item);
         emit dataChanged(index(idx), index(idx),
                          QVector<int>() << IsReadRole);
     }
 }
 
-void NewsBlendModel::setFeedRead(const QString& feedSource)
+void NewsBlendModel::setFeedRead(const QString& feedSource, bool value)
 {
-    QList<int> indexes;
+    QVariantList items;
+    foreach (Item::Ptr item, myItemMap.values())
+    {
+        if (item->feedSource == feedSource &&
+            item->isRead != value &&
+            ! item->isShelved)
+        {
+            QVariantMap entry;
+            entry["url"] = item->feedSource;
+            entry["uid"] = item->uid;
+            entry["value"] = value;
+            items << entry;
+            item->isRead = value;
+
+            myUnreadCounts[feedSource] += value ? -1 : 1;
+        }
+    }
+
     int size = myItems.size();
     for (int i = 0; i < size; ++i)
     {
-        if (myItems.at(i)->feedSource == feedSource &&
-            ! myItems.at(i)->isRead)
+        if (myItems.at(i)->feedSource == feedSource)
         {
-            myItems[i]->isRead = true;
-            indexes << i;
             emit dataChanged(index(i), index(i),
                              QVector<int>() << IsReadRole);
         }
     }
-    myUnreadCounts[feedSource] = 0;
-    emit readChanged(indexes);
+
+    emit readChanged(items);
 }
 
 void NewsBlendModel::setAllRead()
 {
-    QList<int> indexes;
+    QVariantList items;
+    foreach (Item::Ptr item, myItemMap.values())
+    {
+        if (! item->isRead && ! item->isShelved)
+        {
+            QVariantMap entry;
+            entry["url"] = item->feedSource;
+            entry["uid"] = item->uid;
+            entry["value"] = true;
+            items << entry;
+            item->isRead = true;
+        }
+    }
+
     int size = myItems.size();
     for (int i = 0; i < size; ++i)
     {
-        if (! myItems.at(i)->isRead)
-        {
-            myItems[i]->isRead = true;
-            indexes << i;
-            emit dataChanged(index(i), index(i),
-                             QVector<int>() << IsReadRole);
-        }
+        myItems[i]->isRead = true;
+        emit dataChanged(index(i), index(i),
+                         QVector<int>() << IsReadRole);
     }
     foreach (const QString& key, myUnreadCounts.keys())
     {
         myUnreadCounts[key] = 0;
     }
-    emit readChanged(indexes);
+    emit readChanged(items);
 }
 
 void NewsBlendModel::removeReadItems(const QString& feedSource)
@@ -685,13 +700,11 @@ QString NewsBlendModel::logoOfFeed(const QString& feedSource) const
 QStringList NewsBlendModel::thumbnailsOfFeed(const QString& feedSource) const
 {
     QStringList result;
-    int size = myItems.size();
-    for (int i = 0; i < size; ++i)
+    foreach (Item::ConstPtr item, myItemMap.values())
     {
-        if (myItems.at(i)->feedSource == feedSource &&
-            myItems.at(i)->thumbnail.size())
+        if (item->feedSource == feedSource && item->thumbnail.size())
         {
-            result << myItems.at(i)->thumbnail;
+            result << item->thumbnail;
         }
     }
     return result;

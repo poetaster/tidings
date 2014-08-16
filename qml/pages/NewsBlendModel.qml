@@ -421,17 +421,35 @@ NewsModel {
     /* Loads the persisted items.
      */
     function loadPersistedItems()
-    {
-        var i;
-        for (i = 0; i < sources.length; ++i)
+    {   
+        for (var i = 0; i < sources.length; ++i)
         {
             feedInfo.setLoading(sources[i].url, true);
         }
 
-        var jsons = Database.shelvedItems();
-        loadItems(jsons, true);
-        jsons = Database.cachedItems();
-        loadItems(jsons, false);
+        function f1(rows)
+        {
+            var jsons = [];
+            for (var i = 0; i < rows.length; ++i)
+            {
+                jsons.push(rows.item(i).document);
+            }
+            loadItems(jsons, false);
+        }
+
+        Database.batchLoadCached(1000, f1);
+
+        function f2(rows)
+        {
+            var jsons = [];
+            for (var i = 0; i < rows.length; ++i)
+            {
+                jsons.push(rows.item(i).document);
+            }
+            loadItems(jsons, true);
+        }
+
+        Database.batchLoadShelved(1000, f2);
 
         for (i = 0; i < sources.length; ++i)
         {
@@ -443,7 +461,8 @@ NewsModel {
 
     /* Aborts loading.
      */
-    function abort() {
+    function abort()
+    {
         _sourcesQueue = [];
         _backgroundWorker.abort();
         feedInfo.setLoading(_feedLoader.source, false);
@@ -452,7 +471,24 @@ NewsModel {
         _updateStats();
     }
 
+    /* Retrieves the content of the given feed item.
+     */
+    function itemBody(source, uid)
+    {
+        console.log("itemBody: " + source + ", " + uid);
+        var jsonDoc = Database.cachedItem(source, uid);
+        console.log(jsonDoc);
+        if (jsonDoc !== "")
+        {
+            var item = json.fromJson(jsonDoc);
+            console.log(item.body);
+            return item.encoded.length > 0 ? item.encoded : item.description;
+        }
+        return "";
+    }
+
     Component.onCompleted: {
+        Database.uncacheReadItems();
         Database.forgetRead(3600 * 24 * 90);
     }
 
@@ -460,8 +496,7 @@ NewsModel {
         if (listModel.isShelved(index))
         {
             Database.shelveItem(getAttribute(index, "source"),
-                                getAttribute(index, "uid"),
-                                toJson(index));
+                                getAttribute(index, "uid"));
         }
         else
         {
@@ -471,40 +506,8 @@ NewsModel {
     }
 
     onReadChanged: {
-        var i = 0;
-
-        function f()
-        {
-            if (i < indexes.length)
-            {
-                var index = indexes[i];
-                Database.setRead(listModel.getAttribute(index, "source"),
-                                 listModel.getAttribute(index, "uid"),
-                                 listModel.isRead(index));
-                ++i;
-                return true;
-            }
-            else
-            {
-                _updateStats();
-                return false;
-            }
-
-
-        }
-
-        _backgroundWorker.execute(f);
-
-        /*
-        for (var i = 0; i < indexes.length; ++i)
-        {
-            var index = indexes[i];
-            Database.setRead(listModel.getAttribute(index, "source"),
-                             listModel.getAttribute(index, "uid"),
-                             listModel.isRead(index));
-        }
+        Database.setItemsRead(items);
         _updateStats();
-        */
     }
 
     onSectionTitleRequested: {

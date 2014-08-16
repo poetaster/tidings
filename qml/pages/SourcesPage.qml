@@ -144,7 +144,7 @@ Page {
 
             function setFeedRead()
             {
-                newsBlendModel.setFeedRead(item.url);
+                newsBlendModel.setFeedRead(item.url, true);
             }
 
             function remove()
@@ -187,7 +187,7 @@ Page {
                 property bool loadingStatus: feedInfo ? feedInfo.loading : false
 
                 name: item ? item.name : ""
-                timestamp: (feedInfo && feedInfo.lastRefresh && minuteTimer.tick)
+                timestamp: (feedInfo && feedInfo.lastRefresh)
                            ? feedInfo.lastRefresh
                            : function() { return new Date(0); }()
                 colorTag: item ? item.color : "black"

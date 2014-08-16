@@ -130,6 +130,7 @@ Dialog {
                 text: "Clear read status"
                 onClicked: {
                     sourcesModel.forgetSourceRead(url);
+                    newsBlendModel.setFeedRead(url, false);
                     dialog.close();
                 }
             }

@@ -11,6 +11,7 @@
 #include <QPair>
 #include <QStringList>
 #include <QVariant>
+#include <QVariantList>
 #include <QVariantMap>
 #include <QSharedPointer>
 
@@ -95,7 +96,7 @@ public:
     Q_INVOKABLE void setSectionTitle(const QString& title) { myCurrentSectionTitle = title; }
 
     Q_INVOKABLE QVariant getAttribute(int index, const QString& role) const;
-    Q_INVOKABLE QString toJson(int index) const;
+
     Q_INVOKABLE void loadItems(const QVariantList& jsons, bool shelved);
     Q_INVOKABLE int addItem(const QVariantMap& itemData, bool update = true);
     Q_INVOKABLE bool hasItem(const QString& feedSource,
@@ -103,7 +104,7 @@ public:
 
     Q_INVOKABLE bool isRead(int index) const { return myItems.at(index)->isRead; }
     Q_INVOKABLE void setRead(int index, bool value);
-    Q_INVOKABLE void setFeedRead(const QString& feedSource);
+    Q_INVOKABLE void setFeedRead(const QString& feedSource, bool value);
     Q_INVOKABLE void setAllRead();
 
     Q_INVOKABLE bool isShelved(int index) const { return myItems.at(index)->isShelved; }
@@ -132,7 +133,7 @@ signals:
     void selectedFeedChanged();
     void countChanged();
     void shelvedChanged(int index);
-    void readChanged(QList<int> indexes);
+    void readChanged(QVariantList items);
     void sectionTitleRequested(const QString& itemFeed,
                                const QDateTime& itemDate);
 

@@ -11,9 +11,13 @@ CoverBackground {
                                          Formatter.DurationElapsed);
     }
 
+    Timer {
+        triggeredOnStart: true
+        running: cover.status === Cover.Active
+        interval: 60000
+        repeat: true
 
-    onStatusChanged: {
-        if (status === Cover.Active) {
+        onTriggered: {
             refreshElapsed();
         }
     }
