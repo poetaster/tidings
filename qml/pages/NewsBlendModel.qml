@@ -32,60 +32,36 @@ NewsModel {
         key: "latestFirst"
         name: qsTr("Latest first")
         sortMode: NewsModel.LatestFirst
-        getSection: function(feedName, date)
-        {
-            return Format.formatDate(date, Formatter.TimepointSectionRelative);
-        }
     }
 
     property FeedSorter oldestFirstSorter: FeedSorter {
         key: "oldestFirst"
         name: qsTr("Oldest first")
         sortMode: NewsModel.OldestFirst
-        getSection: function(feedName, date)
-        {
-            return Format.formatDate(date, Formatter.TimepointSectionRelative);
-        }
     }
 
     property FeedSorter feedSourceLatestFirstSorter: FeedSorter {
         key: "feedLatestFirst"
         name: qsTr("Feed, then latest first")
         sortMode: NewsModel.FeedLatestFirst
-        getSection: function(feedName, date)
-        {
-            return feedName;
-        }
     }
 
     property FeedSorter feedSourceOldestFirstSorter: FeedSorter {
         key: "feedOldestFirst"
         name: qsTr("Feed, then oldest first")
         sortMode: NewsModel.FeedOldestFirst
-        getSection: function(feedName, date)
-        {
-            return feedName;
-        }
     }
 
     property FeedSorter feedOnlyLatestFirstSorter: FeedSorter {
         key: "feedOnlyLatestFirst"
         name: qsTr("Current feed only, latest first")
         sortMode: NewsModel.FeedOnlyLatestFirst
-        getSection: function(feedName, date)
-        {
-            return feedName;
-        }
     }
 
     property FeedSorter feedOnlyOldestFirstSorter: FeedSorter {
         key: "feedOnlyOldestFirst"
         name: qsTr("Current feed only, oldest first")
         sortMode: NewsModel.FeedOnlyOldestFirst
-        getSection: function(feedName, date)
-        {
-            return feedName;
-        }
     }
 
     property variant feedSorters: [
@@ -510,7 +486,4 @@ NewsModel {
         _updateStats();
     }
 
-    onSectionTitleRequested: {
-        setSectionTitle(feedSorter.getSection(feedName[itemFeed], itemDate));
-    }
 }

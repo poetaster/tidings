@@ -68,7 +68,7 @@ Page {
         model: newsBlendModel
 
         header: PageHeader {
-            title: qsTr("Tidings")
+            title: qsTr("%1 items").arg(newsBlendModel.count)
         }
 
         PullDownMenu {
@@ -178,12 +178,6 @@ Page {
                 };
                 pageStack.push("ViewPage.qml", props);
             }
-        }
-
-        section.property: "sectionTitle"
-        section.criteria: ViewSection.FullString
-        section.delegate: SectionHeader {
-            text: section
         }
 
         ViewPlaceholder {

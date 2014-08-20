@@ -92,7 +92,6 @@ NewsBlendModel::NewsBlendModel(QObject* parent)
 
     myRolenames[UidRole] = "uid";
 
-    myRolenames[SectionTitleRole] = "sectionTitle";
     myRolenames[DateRole] = "date";
 
     myRolenames[TitleRole] = "title";
@@ -178,8 +177,6 @@ QVariant NewsBlendModel::data(const QModelIndex& index, int role) const
         return item->feedSource;
     case UidRole:
         return item->uid;
-    case SectionTitleRole:
-        return item->sectionTitle;
     case DateRole:
         return item->date;
     case TitleRole:
@@ -224,10 +221,6 @@ int NewsBlendModel::insertItem(const Item::Ptr item, bool update)
     {
         return insertPos;
     }
-
-    emit sectionTitleRequested(item->feedSource, item->date);
-    item->sectionTitle = myCurrentSectionTitle;
-    //qDebug() << "section title:" << item->sectionTitle;
 
     if (myItems.size() > 0)
     {
@@ -386,9 +379,6 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
 {
     Item::Ptr item(new Item);
 
-    // will be set when inserting
-    item->sectionTitle = "unknown";
-
     item->feedSource = itemData.value("source").toString();
 
     item->uid = itemData.value("uid").toString();
@@ -431,6 +421,11 @@ void NewsBlendModel::loadItems(const QVariantList& jsons, bool shelved)
         QJsonDocument doc = QJsonDocument::fromJson(json.toByteArray());
         QVariantMap itemData = doc.toVariant().toMap();
         Item::Ptr item = parseItem(itemData);
+
+        if (mySelectedFeed.isEmpty())
+        {
+            mySelectedFeed = item->feedSource;
+        }
 
         if (myFeedLogos.value(item->feedSource).isEmpty())
         {

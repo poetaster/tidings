@@ -6,9 +6,4 @@ QtObject {
     property string key: "example"
     property string name: "by example"
     property int sortMode: NewsModel.LatestFirst
-
-    property var getSection: function(feedName, date)
-    {
-        return "";
-    }
 }

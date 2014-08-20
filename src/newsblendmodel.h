@@ -37,7 +37,6 @@ public:
         typedef QSharedPointer<Item> Ptr;
         typedef QSharedPointer<const Item> ConstPtr;
 
-        QString sectionTitle;
         QString uid;
         QString feedSource;
         QDateTime date;
@@ -56,7 +55,6 @@ public:
 
     enum
     {
-        SectionTitleRole,
         UidRole,
 
         FeedSourceRole,
@@ -90,8 +88,6 @@ public:
     virtual QHash<int, QByteArray> roleNames() const { return myRolenames; }
     virtual int rowCount(const QModelIndex& parent) const;
     virtual QVariant data(const QModelIndex& index, int role) const;
-
-    Q_INVOKABLE void setSectionTitle(const QString& title) { myCurrentSectionTitle = title; }
 
     Q_INVOKABLE QVariant getAttribute(int index, const QString& role) const;
 
@@ -132,8 +128,6 @@ signals:
     void countChanged();
     void shelvedChanged(int index);
     void readChanged(QVariantList items);
-    void sectionTitleRequested(const QString& itemFeed,
-                               const QDateTime& itemDate);
 
 private:
     void reinsertItems();
@@ -165,8 +159,6 @@ private:
     QMap<QString, QString> myFeedLogos;
 
     SortMode mySortMode;
-
-    QString myCurrentSectionTitle;
     QString mySelectedFeed;
 };
 
