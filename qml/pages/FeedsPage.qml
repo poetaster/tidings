@@ -72,12 +72,49 @@ Page {
         }
 
         PullDownMenu {
+            id: pulleyMenu
+
+            property var _action
+
+            onActiveChanged: {
+                if (! active && _action)
+                {
+                    _action();
+                    _action = null;
+                }
+            }
+
             MenuItem {
                 //enabled: ! newsBlendModel.busy
                 text: qsTr("Sort by: %1").arg(newsBlendModel.feedSorter.name)
 
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SortSelectorPage.qml"));
+                }
+            }
+
+            MenuItem {
+                text: qsTr("All read")
+
+                onClicked: {
+                    pulleyMenu._action = function() {
+                        newsBlendModel.setVisibleRead();
+                    };
+                }
+            }
+
+            MenuItem {
+                text: newsBlendModel.busy ? qsTr("Abort refreshing")
+                                          : qsTr("Refresh")
+
+                onClicked: {
+                    pulleyMenu._action = function() {
+                        if (newsBlendModel.busy) {
+                            newsBlendModel.abort();
+                        } else {
+                            newsBlendModel.refreshAll();
+                        }
+                    };
                 }
             }
         }

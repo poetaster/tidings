@@ -99,6 +99,7 @@ public:
     Q_INVOKABLE bool isRead(int index) const { return myItems.at(index)->isRead; }
     Q_INVOKABLE void setRead(int index, bool value);
     Q_INVOKABLE void setFeedRead(const QString& feedSource, bool value);
+    Q_INVOKABLE void setVisibleRead();
     Q_INVOKABLE void setAllRead();
 
     Q_INVOKABLE bool isShelved(int index) const { return myItems.at(index)->isShelved; }

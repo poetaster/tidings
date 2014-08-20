@@ -549,6 +549,30 @@ void NewsBlendModel::setFeedRead(const QString& feedSource, bool value)
     emit readChanged(items);
 }
 
+void NewsBlendModel::setVisibleRead()
+{
+    QVariantList items;
+    for (int i = 0; i < count(); ++i)
+    {
+        Item::Ptr item = myItems.at(i);
+        if (! item->isRead && ! item->isShelved)
+        {
+            QVariantMap entry;
+            entry["url"] = item->feedSource;
+            entry["uid"] = item->uid;
+            entry["value"] = true;
+            items << entry;
+            item->isRead = true;
+            emit dataChanged(index(i), index(i),
+                             QVector<int>() << IsReadRole);
+
+            --myUnreadCounts[item->feedSource];
+        }
+    }
+
+    emit readChanged(items);
+}
+
 void NewsBlendModel::setAllRead()
 {
     QVariantList items;

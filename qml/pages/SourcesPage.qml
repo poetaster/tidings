@@ -86,7 +86,7 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Mark all read")
+                text: qsTr("All read")
 
                 onClicked: {
                     pulleyMenu._action = function() {
@@ -97,7 +97,7 @@ Page {
 
             MenuItem {
                 text: newsBlendModel.busy ? qsTr("Abort refreshing")
-                                          : qsTr("Refresh all")
+                                          : qsTr("Refresh")
 
                 onClicked: {
                     pulleyMenu._action = function() {
@@ -282,7 +282,7 @@ Page {
             }
 
             MenuItem {
-                text: qsTr("Mark as read")
+                text: qsTr("All read")
 
                 onClicked: {
                     contextMenu._action = function() {
