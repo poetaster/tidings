@@ -408,14 +408,6 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
             .replace("&uuml;", "ü")
             .replace("&amp;", "&");
 
-    /*
-    const QString description = itemData.value("description").toString();
-    // defuse styles until we have more sophisticated HTML normalizing
-    const QString encoded = itemData.value("encoded").toString()
-            .replace(" style=", " xstyle=");
-    item->body = encoded.size() ? encoded : description;
-    */
-
     item->link = itemData.value("link").toString();
 
     item->mediaDuration = itemData.value("duration", 0).toLongLong();

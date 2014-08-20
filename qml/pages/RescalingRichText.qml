@@ -13,6 +13,7 @@ Item {
     property string text
     property color color
     property real fontSize: Theme.fontSizeSmall
+    property bool showSource: false
 
     property real scaling: 1
 
@@ -62,7 +63,7 @@ Item {
             color: root.color
             font.pixelSize: root.fontSize / scaling
             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-            textFormat: Text.RichText
+            textFormat: root.showSource ? Text.PlainText : Text.RichText
             smooth: true
 
             text: _style + root.text

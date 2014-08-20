@@ -481,8 +481,8 @@ NewsModel {
         if (jsonDoc !== "")
         {
             var item = json.fromJson(jsonDoc);
-            console.log(item.body);
-            return item.encoded.length > 0 ? item.encoded : item.description;
+            return htmlFilter.filter(item.encoded.length > 0 ? item.encoded
+                                                             : item.description);
         }
         return "";
     }

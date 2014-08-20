@@ -116,12 +116,6 @@ Page {
 
     }
 
-    ConfigValue {
-        id: configTintedBackground
-        key: "feed-background-tinted"
-        value: "0"
-    }
-
     Connections {
         target: coverAdaptor
 
@@ -132,12 +126,6 @@ Page {
         onNextItem: {
             nextItem();
         }
-    }
-
-    Rectangle {
-        visible: configTintedBackground.booleanValue
-        anchors.fill: parent
-        color: Qt.rgba(1, 1, 1, 0.7)
     }
 
     Rectangle {
@@ -162,14 +150,6 @@ Page {
                 {
                     _closeAction();
                     _closeAction = null;
-                }
-            }
-
-            MenuItem {
-                text: qsTr("Toggle background")
-
-                onClicked: {
-                    configTintedBackground.value = configTintedBackground.booleanValue ? "0" : "1";
                 }
             }
 
@@ -279,7 +259,7 @@ Page {
                     anchors.right: shelveIcon.left
                     anchors.rightMargin: Theme.paddingMedium
                     horizontalAlignment: Text.AlignLeft
-                    color: configTintedBackground.booleanValue ? "#606060" : Theme.highlightColor
+                    color: Theme.highlightColor
                     font.pixelSize: Theme.fontSizeSmall
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     textFormat: Text.RichText
@@ -321,7 +301,7 @@ Page {
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignLeft
-                color: configTintedBackground.booleanValue ? "#606060" : Theme.highlightColor
+                color: Theme.highlightColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: qsTr("(%1 seconds)").arg(itemData.mediaDuration)
             }
@@ -332,7 +312,7 @@ Page {
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignLeft
-                color: configTintedBackground.booleanValue ? "#606060" : Theme.secondaryColor
+                color: Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: Format.formatDate(itemData.date, Formatter.Timepoint)
             }
@@ -343,14 +323,15 @@ Page {
             }
 
             RescalingRichText {
+                id: body
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
 
-                color: configTintedBackground.booleanValue ? "black" : Theme.primaryColor
+                color: Theme.primaryColor
                 fontSize: Theme.fontSizeSmall
-                text: newsBlendModel.itemBody(itemData.source, itemData.uid) // itemData.body
+                text: newsBlendModel.itemBody(itemData.source, itemData.uid)
 
                 onLinkActivated: {
                     var props = {
