@@ -72,8 +72,9 @@ int compare(NewsBlendModel::Item::ConstPtr a,
         }
         else
         {
-            return (a->feedSource < b->feedSource) ? 1
-                                                   : -1;
+            return (a->date < b->date) ? 1
+                                       : (a->date == b->date) ? 0
+                                                              : -1;
         }
 
     default:
@@ -384,8 +385,6 @@ QString NewsBlendModel::findThumbnail(const QVariantMap& itemData) const
 NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData) const
 {
     Item::Ptr item(new Item);
-
-    //item->rawData = itemData;
 
     // will be set when inserting
     item->sectionTitle = "unknown";

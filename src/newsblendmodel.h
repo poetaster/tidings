@@ -37,8 +37,6 @@ public:
         typedef QSharedPointer<Item> Ptr;
         typedef QSharedPointer<const Item> ConstPtr;
 
-        QVariantMap rawData;
-
         QString sectionTitle;
         QString uid;
         QString feedSource;
