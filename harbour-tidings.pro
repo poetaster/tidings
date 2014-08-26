@@ -52,16 +52,8 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/FeedStats.qml \
     qml/pages/FeedItem.qml
 
-TRANSLATIONS = l10n/en_US.ts \
-            l10n/ru_RU.ts
-lupdate_only{
-SOURCES = \
-          qml/pages/*.qml \
-          qml/cover/*.qml
-}
-
-RESOURCES += \
-    resources.qrc
+CONFIG += sailfishapp_i18n
+TRANSLATIONS = translations/harbour-tidings-ru_RU.ts
 
 HEADERS += \
     src/feedloader.h \

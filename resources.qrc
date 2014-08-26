@@ -1,6 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>l10n/en_US.qm</file>
-        <file>l10n/ru_RU.qm</file>
-    </qresource>
-</RCC>
