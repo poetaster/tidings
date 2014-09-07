@@ -61,7 +61,7 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 
     QTranslator *appTranslator = new QTranslator;
-    appTranslator->load(":/l10n/" + QLocale::system().name() + ".qm");
+    appTranslator->load("harbour-tidings-" + QLocale::system().name(), SailfishApp::pathTo("translations").path());
     app->installTranslator(appTranslator);
 
     qmlRegisterType<FeedLoader>("harbour.tidings", 1, 0, "FeedLoader");
