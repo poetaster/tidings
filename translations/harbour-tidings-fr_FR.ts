@@ -125,12 +125,12 @@
         <translation>>Seulement le flux choisi, les plus anciens d'abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="635"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="641"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="645"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="311"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="317"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="321"/>
         <source>Error with %1 :
 %2</source>
-        <translation type="unfinished">Erreur - %1 :
+        <translation>Erreur - %1 :
 %2</translation>
     </message>
 </context>
@@ -149,7 +149,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="26"/>
         <source>Hiding the preview images saves network traffic. This switch does not affect embedded images in the item view.</source>
-        <translation>Ne pas afficher les aperçus des images économise la consommation du réseau. Ce réglage n'affecte pas les images intégrés dans le flux.</translation>
+        <translation>Ne pas afficher les aperçus des images économise la consommation du réseau. Ce réglage n'affecte pas les images intégrées dans le flux.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="43"/>
@@ -162,12 +162,12 @@
         <translation>Une fois activé, le fond des nouvelles est teintée de la couleur du flux.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="69"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="80"/>
         <source>Font scale:</source>
         <translation>Taille du texte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="70"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="71"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
         <translation>Ce réglage permet de changer la taille du texte dans l'affichage des nouvelles</translation>
     </message>
@@ -190,32 +190,57 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="33"/>
         <source>Feed</source>
-        <translation>flux</translation>
+        <translation>Flux</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="46"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="39"/>
         <source>Name</source>
         <translation>Titre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="52"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="40"/>
         <source>Enter name</source>
         <translation>Saisissez le titre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="56"/>
-        <source>Source Address</source>
-        <translation>Adresse du flux</translation>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="47"/>
+        <source>Feed URL</source>
+        <translation>URL du flux</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="63"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="48"/>
         <source>Enter URL</source>
-        <translation>Saisissez l&apos;URL</translation>
+        <translation>Entrez l'URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="83"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="78"/>
         <source>Color tag</source>
         <translation>Couleur</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="107"/>
+        <source>Database</source>
+        <translation>Données</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="118"/>
+        <source>Clearing the read status will cause all available items to be reloaded the next time.</source>
+        <translation>Effacer le statut "lu" va recharger toutes les nouvelles à la prochaine actualisation.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="129"/>
+        <source>Clear read status</source>
+        <translation>Effacer le statut "lu"</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="149"/>
+        <source>Deleting will remove the feed and all of its items from the database.</source>
+        <translation>Supprimer va effacer toutes les données relatives à ce flux.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="160"/>
+        <source>Delete</source>
+        <translation>Supprimer</translation>
     </message>
 </context>
 <context>
@@ -231,97 +256,102 @@
         <translation>À propos de Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="48"/>
-        <source>Abort refreshing</source>
-        <translation>Annuler la mise à jour</translation>
+        <location filename="../qml/pages/SourcesPage.qml" line="91"/>
+        <source>Settings</source>
+        <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="49"/>
-        <source>Refresh all</source>
-        <translation>Tout actualiser</translation>
+        <location filename="../qml/pages/SourcesPage.qml" line="99"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="311"/>
+        <source>All read</source>
+        <translation>marquer tous comme "lu"</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="109"/>
+        <source>Abort refreshing</source>
+        <translation>Annuler l'actualisation</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="110"/>
-        <source>Deleting</source>
-        <translation type="unfinished">Suppression</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="173"/>
-        <source>Pull down to add RSS, Atom, or OPML sources.</source>
-        <translation type="unfinished">Glisser vers le bas pour ajouter un flux RSS, Atom, ou OPML </translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="182"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="301"/>
         <source>Refresh</source>
-        <translation>Mettre à jour</translation>
+        <translation>Actualiser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="190"/>
-        <source>Mark all read</source>
-        <translation>Tout marquer comme lu</translation>
+        <location filename="../qml/pages/SourcesPage.qml" line="172"/>
+        <source>Clearing</source>
+        <translation>Effacement</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="198"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="189"/>
+        <source>Deleting</source>
+        <translation>Suppression</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="321"/>
         <source>Edit</source>
-        <translation type="unfinished">Éditer</translation>
+        <translation>Éditer</translation>
+    </message>
+</context>
+<context>
+    <name>SplashPage</name>
+    <message>
+        <location filename="../qml/pages/SplashPage.qml" line="23"/>
+        <source>Loading items...</source>
+        <translation>Chargement des nouvelles</translation>
     </message>
 </context>
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="82"/>
+        <location filename="../qml/pages/ViewPage.qml" line="67"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="84"/>
+        <location filename="../qml/pages/ViewPage.qml" line="69"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation>Images</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="86"/>
+        <location filename="../qml/pages/ViewPage.qml" line="71"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation>Vidéo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="88"/>
+        <location filename="../qml/pages/ViewPage.qml" line="73"/>
         <source>PDF document</source>
-        <translation type="unfinished">Document PDF</translation>
+        <translation>Document PDF</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="154"/>
-        <source>Toggle background</source>
-        <translation type="unfinished">Inverser le fond</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ViewPage.qml" line="171"/>
+        <location filename="../qml/pages/ViewPage.qml" line="173"/>
         <source>Previous</source>
         <translation>Précédent</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="172"/>
+        <location filename="../qml/pages/ViewPage.qml" line="174"/>
         <source>Already at the beginning</source>
         <translation>Premier article</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="183"/>
+        <location filename="../qml/pages/ViewPage.qml" line="204"/>
         <source>Next</source>
         <translation>Suivant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="184"/>
+        <location filename="../qml/pages/ViewPage.qml" line="205"/>
         <source>Already at the end</source>
         <translation type="unfinished">Dernier article</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="266"/>
+        <location filename="../qml/pages/ViewPage.qml" line="306"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished">(%1 secondes)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="312"/>
+        <location filename="../qml/pages/ViewPage.qml" line="353"/>
         <source>Media</source>
-        <translation type="unfinished">Media</translation>
+        <translation>Média</translation>
     </message>
 </context>
 <context>
