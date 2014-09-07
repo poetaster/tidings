@@ -187,6 +187,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="33"/>
+        <source>Feed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="39"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
@@ -223,7 +228,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="129"/>
-        <source>Clearing read status</source>
+        <source>Clear read status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

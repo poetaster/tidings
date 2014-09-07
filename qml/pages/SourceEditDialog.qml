@@ -30,7 +30,7 @@ Dialog {
             }
 
             SectionHeader {
-                text: "Feed"
+                text: qsTr("Feed")
             }
 
             TextField {
@@ -126,7 +126,7 @@ Dialog {
             Button {
                 visible: editOnly
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: qsTr("Clearing read status")
+                text: qsTr("Clear read status")
                 onClicked: {
                     dialog.item.forgetRead();
                     dialog.close();
