@@ -63,11 +63,21 @@ Page {
                 Component.onCompleted: {
                     var idx = _scales.indexOf(Math.floor(configFontScale.value));
                     currentIndex = idx >= 0 ? idx : 0;
+
+                    // description is a new property of Silica ComboBox;
+                    // only use it if available
+                    try
+                    {
+                        description = qsTr("This setting changes the scale of the fonts in the feed view.");
+                    }
+                    catch (err)
+                    {
+
+                    }
                 }
 
                 width: parent.width
                 label: qsTr("Font scale:")
-                description: qsTr("This setting changes the scale of the fonts in the feed view.")
 
                 menu: ContextMenu {
                     MenuItem { text: fontCombo._scales[0] + " %" }
