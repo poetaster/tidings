@@ -59,7 +59,7 @@
         <translation>%1 éléments</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="85"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="84"/>
         <source>Sort by: %1</source>
         <translation>Trier par : %1</translation>
     </message>
@@ -122,13 +122,13 @@
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="63"/>
         <source>Current feed only, oldest first</source>
-        <translation>>Seulement le flux choisi, les plus anciens d'abord</translation>
+        <translation>Seulement le flux choisi, les plus anciens d'abord</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="311"/>
         <location filename="../qml/pages/NewsBlendModel.qml" line="317"/>
         <location filename="../qml/pages/NewsBlendModel.qml" line="321"/>
-        <source>Error with %1 :
+        <source>Error with %1:
 %2</source>
         <translation>Erreur - %1 :
 %2</translation>
