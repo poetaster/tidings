@@ -54,32 +54,32 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="71"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="66"/>
         <source>%1 items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="89"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="84"/>
         <source>Sort by: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="97"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="92"/>
         <source>All read</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="107"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="102"/>
         <source>Abort refreshing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="108"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="103"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="222"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="218"/>
         <source>Pull down to add feeds.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -134,6 +134,44 @@
     </message>
 </context>
 <context>
+    <name>SettingsPage</name>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="15"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="25"/>
+        <source>Show preview images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="26"/>
+        <source>Hiding the preview images saves network traffic. This switch does not affect embedded images in the item view.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="43"/>
+        <source>Tinted items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="44"/>
+        <source>If enabled, items have their background tinted in their tag color.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="69"/>
+        <source>Font scale:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="70"/>
+        <source>This setting changes the scale of the fonts in the feed view.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SortSelectorPage</name>
     <message>
         <location filename="../qml/pages/SortSelectorPage.qml" line="22"/>
@@ -178,44 +216,82 @@
         <source>Database</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="118"/>
+        <source>Clearing the read status will cause all available items to be reloaded the next time.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="129"/>
+        <source>Clearing read status</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="149"/>
+        <source>Deleting will remove the feed and all of its items from the database.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="160"/>
+        <source>Delete</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SourcesPage</name>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="64"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="66"/>
         <source>Feeds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="81"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="83"/>
         <source>About Tidings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="89"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="285"/>
-        <source>All read</source>
+        <location filename="../qml/pages/SourcesPage.qml" line="91"/>
+        <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="99"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="311"/>
+        <source>All read</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="109"/>
         <source>Abort refreshing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="100"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="275"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="110"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="301"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="163"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="172"/>
+        <source>Clearing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="189"/>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="295"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="321"/>
         <source>Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>SplashPage</name>
+    <message>
+        <location filename="../qml/pages/SplashPage.qml" line="23"/>
+        <source>Loading items...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
