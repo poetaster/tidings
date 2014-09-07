@@ -109,6 +109,18 @@ ApplicationWindow
         value: "latestFirst"
     }
 
+    ConfigValue {
+        id: configShowPreviewImages
+        key: "feed-preview-images"
+        value: "1"
+    }
+
+    ConfigValue {
+        id: configTintedItems
+        key: "feed-tinted"
+        value: "1"
+    }
+
     Timer {
         id: initTimer
         interval: 500

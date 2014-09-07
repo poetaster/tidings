@@ -20,7 +20,9 @@ Page {
     }
 
     Timer {
-        running: Qt.application.active && page.status === PageStatus.Active
+        running: Qt.application.active &&
+                 page.status === PageStatus.Active &&
+                 configShowPreviewImages.booleanValue
         interval: 2000
         repeat: true
 
@@ -82,6 +84,14 @@ Page {
 
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
+                }
+            }
+
+            MenuItem {
+                text: qsTr("Settings")
+
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
                 }
             }
 

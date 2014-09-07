@@ -124,6 +124,7 @@ Page {
             clip: true
 
             Rectangle {
+                visible: configTintedItems.booleanValue
                 anchors.fill: parent
                 color: feedColor[model.source]
                 opacity: 0.1
@@ -192,7 +193,7 @@ Page {
                 fillMode: Image.PreserveAspectCrop
                 smooth: true
                 clip: true
-                source: model.thumbnail
+                source: configShowPreviewImages.booleanValue ? model.thumbnail : ""
             }
 
             Image {

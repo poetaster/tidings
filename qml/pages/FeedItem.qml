@@ -47,7 +47,7 @@ BackgroundItem {
 
     Rectangle {
         id: feedThumbnail
-        visible: thumbnails.length > 0
+        visible: thumbnails.length > 0 && configShowPreviewImages.booleanValue
         anchors.fill: parent
         color: "black"
         opacity: 0.4
@@ -86,6 +86,7 @@ BackgroundItem {
 
     // color tag tint
     Rectangle {
+        visible: configTintedItems.booleanValue
         anchors.fill: parent
         color: colorTag
         opacity: 0.1
