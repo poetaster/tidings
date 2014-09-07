@@ -19,14 +19,14 @@
         <translation>Version %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="75"/>
-        <source>the GNU General Public License.</source>
-        <translation>sous license GPL</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/AboutPage.qml" line="74"/>
         <source>Tidings is open source software licensed under the terms of </source>
         <translation>Tidings est un logiciel libre distribué </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="75"/>
+        <source>the GNU General Public License.</source>
+        <translation>sous license GPL</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="85"/>
@@ -37,7 +37,8 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="109"/>
+        <location filename="../qml/cover/CoverPage.qml" line="106"/>
+        <location filename="../qml/cover/CoverPage.qml" line="185"/>
         <source>Refreshing</source>
         <translation>Mise à jour</translation>
     </message>
@@ -53,9 +54,9 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="79"/>
-        <source>Tidings</source>
-        <translation type="unfinished">Nouvelles</translation>
+        <location filename="../qml/pages/FeedsPage.qml" line="66"/>
+        <source>%1 items</source>
+        <translation>%1 éléments</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="85"/>
@@ -63,29 +64,24 @@
         <translation>Trier par : %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="191"/>
-        <source>Pull down to add feeds.</source>
-        <translation type="unfinished">Glisser vers le bas pour ajouter un flux</translation>
+        <location filename="../qml/pages/FeedsPage.qml" line="92"/>
+        <source>All read</source>
+        <translation>Marquer comme lus</translation>
     </message>
     <message>
-        <source>About Tidings</source>
-        <translation type="obsolete">À propos de Tidings</translation>
+        <location filename="../qml/pages/FeedsPage.qml" line="102"/>
+        <source>Abort refreshing</source>
+        <translation>Annuler l'actualisation</translation>
     </message>
     <message>
+        <location filename="../qml/pages/FeedsPage.qml" line="103"/>
         <source>Refresh</source>
-        <translation type="obsolete">Actualiser</translation>
+        <translation>Actualiser</translation>
     </message>
     <message>
-        <source>Back to top</source>
-        <translation type="obsolete">Haut de page</translation>
-    </message>
-    <message>
-        <source>No tidings is glad tidings?
-
-Please add some sources. →</source>
-        <translation type="obsolete">Pas de nouvelle, bonne nouvelle ?
-        
-        Ajoutez des flux. →</translation>
+        <location filename="../qml/pages/FeedsPage.qml" line="218"/>
+        <source>Pull down to add feeds.</source>
+        <translation>Glisser vers le bas pour ajouter un flux</translation>
     </message>
 </context>
 <context>
@@ -99,24 +95,34 @@ Please add some sources. →</source>
 <context>
     <name>NewsBlendModel</name>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="34"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="33"/>
         <source>Latest first</source>
         <translation>Plus récents d'abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="49"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="39"/>
         <source>Oldest first</source>
         <translation>Plus anciens d'abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="65"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="45"/>
         <source>Feed, then latest first</source>
-        <translation>Flux, les plus récents d'abord</translation>
+        <translation>Flux, puis les plus récents d'abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="88"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="51"/>
         <source>Feed, then oldest first</source>
-        <translation>Flux, les plus anciens d'abord</translation>
+        <translation>Flux, puis les plus anciens d'abord</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="57"/>
+        <source>Current feed only, latest first</source>
+        <translation>Seulement le flux choisi, les plus récents d'abord</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="63"/>
+        <source>Current feed only, oldest first</source>
+        <translation>>Seulement le flux choisi, les plus anciens d'abord</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="635"/>
@@ -129,24 +135,62 @@ Please add some sources. →</source>
     </message>
 </context>
 <context>
+    <name>SettingsPage</name>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="15"/>
+        <source>Settings</source>
+        <translation>Paramètres</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="25"/>
+        <source>Show preview images</source>
+        <translation>Affiche les aperçus des images</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="26"/>
+        <source>Hiding the preview images saves network traffic. This switch does not affect embedded images in the item view.</source>
+        <translation>Ne pas afficher les aperçus des images économise la consommation du réseau. Ce réglage n'affecte pas les images intégrés dans le flux.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="43"/>
+        <source>Tinted items</source>
+        <translation>Flux teintés</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="44"/>
+        <source>If enabled, items have their background tinted in their tag color.</source>
+        <translation>Une fois activé, le fond des nouvelles est teintée de la couleur du flux.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="69"/>
+        <source>Font scale:</source>
+        <translation>Taille du texte</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="70"/>
+        <source>This setting changes the scale of the fonts in the feed view.</source>
+        <translation>Ce réglage permet de changer la taille du texte dans l'affichage des nouvelles</translation>
+    </message>
+</context>
+<context>
     <name>SortSelectorPage</name>
     <message>
         <location filename="../qml/pages/SortSelectorPage.qml" line="22"/>
         <source>Sort by</source>
-        <translation type="unfinished">Trier par</translation>
+        <translation>Trier par</translation>
     </message>
 </context>
 <context>
     <name>SourceEditDialog</name>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="25"/>
-        <source>Remove</source>
-        <translation type="unfinished">Supprimer</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="42"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="29"/>
         <source>Save</source>
         <translation>Enregistrer</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="33"/>
+        <source>Feed</source>
+        <translation>flux</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="46"/>

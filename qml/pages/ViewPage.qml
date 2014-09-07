@@ -5,42 +5,27 @@ Page {
     id: page
     objectName: "ViewPage"
 
-    property int index: 0
-    property string feedName: newsBlendModel.get(index).name
-    property string title: newsBlendModel.get(index).title
-    property string preview: newsBlendModel.get(index).description
-    // defuse styles until we have more sophisticated HTML normalizing
-    property string encoded: newsBlendModel.get(index).encoded.replace(" style=", " xstyle=")
-    property string url: newsBlendModel.get(index).link
-    property string color: newsBlendModel.get(index).color
-    property string date: newsBlendModel.get(index).date
-    property bool read: newsBlendModel.get(index).read
-    property variant enclosures: newsBlendModel.get(index).enclosures
-    property string duration: newsBlendModel.get(index).duration
-    property bool shelved: newsBlendModel.isShelved(index)
+    property ListView listview
+    property variant itemData: listview.currentItem !== null
+                               ? listview.currentItem.data
+                               : null
 
-    property int _previousOfFeed: newsBlendModel.previousOfFeed(index)
-    property int _nextOfFeed: newsBlendModel.nextOfFeed(index)
+    property Page _attachedWebView
+
+    property int _currentIndex: listview.currentIndex
+    property int _previousOfFeed: -1
+    property int _nextOfFeed: -1
 
     function previousItem() {
-        var props = {
-            "index": index - 1
-        };
-        pageStack.replace("ViewPage.qml", props);
+        listview.currentIndex = listview.currentIndex - 1;
     }
 
     function nextItem() {
-        var props = {
-            "index": index + 1
-        };
-        pageStack.replace("ViewPage.qml", props);
+        listview.currentIndex = listview.currentIndex + 1;
     }
 
     function goToItem(idx) {
-        var props = {
-            "index": idx
-        };
-        pageStack.replace("ViewPage.qml", props);
+        listview.currentIndex = idx;
     }
 
     /* Returns the filename of the given URL.
@@ -94,29 +79,41 @@ Page {
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
     Component.onCompleted: {
-        navigationState.openedItem(index);
-        if (! read) {
-            newsBlendModel.setRead(index, true);
+        navigationState.openedItem(listview.currentIndex);
+        if (! itemData.read && ! itemData.shelved) {
+            newsBlendModel.setRead(listview.currentIndex, true);
         }
     }
 
     onStatusChanged: {
-        if (status === PageStatus.Active && url !== "")
+        if (status === PageStatus.Active && itemData.link !== "")
         {
             var props = {
-                "url": url
+                "url": itemData.link
             }
-            pageStack.pushAttached(Qt.resolvedUrl("WebPage.qml"), props);
-
-            //preview = newsBlendModel.get(index).preview;
-            //encoded = newsBlendModel.get(index).encoded.replace(/&lt;/g, "<");
+            _attachedWebView = pageStack.pushAttached(Qt.resolvedUrl("WebPage.qml"), props);
         }
     }
 
-    ConfigValue {
-        id: configTintedBackground
-        key: "feed-background-tinted"
-        value: "0"
+    onItemDataChanged: {
+        if (itemData)
+        {
+            if (_attachedWebView)
+            {
+                _attachedWebView.url = itemData.link;
+            }
+
+            navigationState.openedItem(listview.currentIndex);
+            if (! itemData.read && ! itemData.shelved) {
+                newsBlendModel.setRead(listview.currentIndex, true);
+            }
+        }
+    }
+
+    on_CurrentIndexChanged: {
+        _previousOfFeed = newsBlendModel.previousOfFeed(listview.currentIndex);
+        _nextOfFeed = newsBlendModel.nextOfFeed(listview.currentIndex);
+
     }
 
     Connections {
@@ -132,15 +129,9 @@ Page {
     }
 
     Rectangle {
-        visible: configTintedBackground.booleanValue
-        anchors.fill: parent
-        color: Qt.rgba(1, 1, 1, 0.7)
-    }
-
-    Rectangle {
         width: 2
         height: parent.height
-        color: page.color
+        color: feedColor[itemData.source]
     }
 
     SilicaFlickable {
@@ -150,61 +141,110 @@ Page {
         contentHeight: column.height
 
         PullDownMenu {
-            MenuItem {
-                text: qsTr("Toggle background")
+            id: pulleyDown
 
-                onClicked: {
-                    configTintedBackground.value = configTintedBackground.booleanValue ? "0" : "1";
+            property var _closeAction
+
+            onActiveChanged: {
+                if (! active && _closeAction)
+                {
+                    _closeAction();
+                    _closeAction = null;
                 }
             }
 
             MenuItem {
                 enabled: _previousOfFeed !== -1
-                text: "<" + feedName + ">"
+                text: "<" + feedName[itemData.source] + ">"
 
                 onClicked: {
-                    goToItem(_previousOfFeed);
+                    function f()
+                    {
+                        goToItem(_previousOfFeed);
+                        contentFlickable.contentY = 0;
+                        column.opacity = 1;
+                    }
+                    pulleyDown._closeAction = f;
+                    column.opacity = 0;
                 }
             }
             MenuItem {
-                enabled: index > 0
+                enabled: listview.currentIndex > 0
                 text: enabled ? qsTr("Previous")
                               : qsTr("Already at the beginning")
 
                 onClicked: {
-                    goToItem(index - 1)
+                    function f()
+                    {
+                        goToItem(listview.currentIndex - 1);
+                        contentFlickable.contentY = 0;
+                        column.opacity = 1;
+                    }
+                    pulleyDown._closeAction = f;
+                    column.opacity = 0;
                 }
             }
         }
 
         PushUpMenu {
+            id: pulleyUp
+
+            property var _closeAction
+
+            onActiveChanged: {
+                if (! active && _closeAction)
+                {
+                    _closeAction();
+                    _closeAction = null;
+                }
+            }
+
             MenuItem {
-                enabled: index < newsBlendModel.count - 1
+                enabled: listview.currentIndex < listview.count - 1
                 text: enabled ? qsTr("Next")
                               : qsTr("Already at the end")
 
                 onClicked: {
-                    goToItem(index + 1)
+                    function f()
+                    {
+                        goToItem(listview.currentIndex + 1);
+                        contentFlickable.contentY = 0;
+                        column.opacity = 1;
+                    }
+                    pulleyUp._closeAction = f;
+                    column.opacity = 0;
                 }
             }
             MenuItem {
                 enabled: _nextOfFeed !== -1
-                text: "<" + feedName + ">"
+                text: "<" + feedName[itemData.source] + ">"
 
                 onClicked: {
-                    goToItem(_nextOfFeed);
+                    function f()
+                    {
+                        goToItem(_nextOfFeed);
+                        contentFlickable.contentY = 0;
+                        column.opacity = 1;
+                    }
+                    pulleyUp._closeAction = f;
+                    column.opacity = 0;
                 }
             }
         }
 
         Column {
             id: column
+
             width: parent.width
             height: childrenRect.height
 
+            Behavior on opacity {
+                NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
+            }
+
             PageHeader {
                 id: pageHeader
-                title: page.feedName
+                title: feedName[itemData.source]
             }
 
             Item {
@@ -219,18 +259,18 @@ Page {
                     anchors.right: shelveIcon.left
                     anchors.rightMargin: Theme.paddingMedium
                     horizontalAlignment: Text.AlignLeft
-                    color: configTintedBackground.booleanValue ? "#606060" : Theme.highlightColor
-                    font.pixelSize: Theme.fontSizeSmall
+                    color: Theme.highlightColor
+                    font.pixelSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     textFormat: Text.RichText
-                    text: page.title
+                    text: itemData.title
 
                     MouseArea {
-                        enabled: page.url !== ""
+                        enabled: itemData.link !== ""
                         anchors.fill: parent
                         onClicked: {
                             var props = {
-                                "url": page.url
+                                "url": itemData.link
                             }
                             pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
                                            props);
@@ -241,29 +281,29 @@ Page {
                 Image {
                     id: shelveIcon
                     anchors.right: parent.right
-                    source: shelved ? "image://theme/icon-l-favorite"
-                                    : "image://theme/icon-l-star"
+                    source: itemData.shelved ? "image://theme/icon-l-favorite"
+                                             : "image://theme/icon-l-star"
 
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            newsBlendModel.shelveItem(index, ! shelved);
-                            shelved = ! shelved;
+                            newsBlendModel.setShelved(listview.currentIndex, ! itemData.shelved);
+                            itemData.shelved = ! itemData.shelved;
                         }
                     }
                 }
             }
 
             Label {
-                visible: duration !== undefined && duration > 0
+                visible: itemData.mediaDuration > 0
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignLeft
-                color: configTintedBackground.booleanValue ? "#606060" : Theme.highlightColor
-                font.pixelSize: Theme.fontSizeExtraSmall
-                text: qsTr("(%1 seconds)").arg(duration)
+                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeExtraSmall * (configFontScale.value / 100.0)
+                text: qsTr("(%1 seconds)").arg(itemData.mediaDuration)
             }
 
             Label {
@@ -272,9 +312,9 @@ Page {
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignLeft
-                color: configTintedBackground.booleanValue ? "#606060" : Theme.secondaryColor
-                font.pixelSize: Theme.fontSizeExtraSmall
-                text: Format.formatDate(page.date, Formatter.Timepoint)
+                color: Theme.secondaryColor
+                font.pixelSize: Theme.fontSizeExtraSmall * (configFontScale.value / 100.0)
+                text: Format.formatDate(itemData.date, Formatter.Timepoint)
             }
 
             Item {
@@ -283,14 +323,15 @@ Page {
             }
 
             RescalingRichText {
+                id: body
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: Theme.paddingLarge
                 anchors.rightMargin: Theme.paddingLarge
 
-                color: configTintedBackground.booleanValue ? "black" : Theme.primaryColor
-                fontSize: Theme.fontSizeSmall
-                text: page.encoded ? page.encoded : page.preview
+                color: Theme.primaryColor
+                fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
+                text: newsBlendModel.itemBody(itemData.source, itemData.uid)
 
                 onLinkActivated: {
                     var props = {
@@ -314,9 +355,9 @@ Page {
 
             Repeater {
                 id: enclosureRepeater
-                model: enclosures
+                model: itemData.enclosures
 
-                ListItem {
+                delegate: ListItem {
                     width: column.width
 
                     Image {
@@ -330,7 +371,7 @@ Page {
                         fillMode: Image.PreserveAspectCrop
                         sourceSize.width: width * 2
                         sourceSize.height: height * 2
-                        source: enclosureRepeater.count ? _mediaIcon(model.url, model.type) : ""
+                        source: enclosureRepeater.count ? _mediaIcon(modelData.url, modelData.type) : ""
                         clip: true
                     }
 
@@ -343,14 +384,14 @@ Page {
                         truncationMode: TruncationMode.Fade
                         font.pixelSize: Theme.fontSizeSmall
                         color: Theme.primaryColor
-                        text: _urlFilename(model.url)
+                        text: _urlFilename(modelData.url)
                     }
                     Label {
                         anchors.top: mediaNameLabel.bottom
                         anchors.left: mediaNameLabel.left
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor
-                        text: _mediaTypeName(model.type)
+                        text: _mediaTypeName(modelData.type)
                     }
                     Label {
                         anchors.top: mediaNameLabel.bottom
@@ -358,12 +399,12 @@ Page {
                         anchors.rightMargin: Theme.paddingLarge
                         font.pixelSize: Theme.fontSizeExtraSmall
                         color: Theme.secondaryColor
-                        text: model.length >= 0 ? Format.formatFileSize(model.length)
-                                                : ""
+                        text: modelData.length >= 0 ? Format.formatFileSize(modelData.length)
+                                                    : ""
                     }
 
                     onClicked: {
-                        Qt.openUrlExternally(model.url);
+                        Qt.openUrlExternally(modelData.url);
                     }
                 }//ListItem
             }//Repeater

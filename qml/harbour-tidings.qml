@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2013 Martin Grimme  <martin.grimme _AT_ gmail.com>
+  Copyright (C) 2013, 2014 Martin Grimme  <martin.grimme _AT_ gmail.com>
 
   Copyright (C) 2013 Jolla Ltd.
   Contact: Thomas Perl <thomas.perl@jollamobile.com>
@@ -37,19 +37,15 @@ import "cover"
 
 ApplicationWindow
 {
+    property alias feedName: sourcesModel.names
+    property alias feedColor: sourcesModel.colors
+
     SourcesModel {
         id: sourcesModel
 
         onModelChanged: {
             var sources = [];
             for (var i = 0; i < count; i++) {
-                /*
-                var data = {
-                    "name": get(i).name,
-                    "url": get(i).url,
-                    "color": get(i).color
-                };
-                */
                 sources.push(get(i));
             }
             newsBlendModel.sources = sources;
@@ -113,6 +109,35 @@ ApplicationWindow
         value: "latestFirst"
     }
 
+    ConfigValue {
+        id: configShowPreviewImages
+        key: "feed-preview-images"
+        value: "1"
+    }
+
+    ConfigValue {
+        id: configTintedItems
+        key: "feed-tinted"
+        value: "1"
+    }
+
+    ConfigValue {
+        id: configFontScale
+        key: "font-scale"
+        value: "100"
+    }
+
+    Timer {
+        id: initTimer
+        interval: 500
+        running: true
+
+        onTriggered: {
+            newsBlendModel.loadPersistedItems();
+            pageStack.replace(sourcesPage);
+        }
+    }
+
     Timer {
         id: minuteTimer
 
@@ -132,8 +157,14 @@ ApplicationWindow
         id: notification
     }
 
-    initialPage: sourcesPage
+    initialPage: splashPage
     cover: coverPage
+
+    Component {
+        id: splashPage
+
+        SplashPage { }
+    }
 
     Component {
         id: sourcesPage

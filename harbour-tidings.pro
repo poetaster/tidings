@@ -13,7 +13,9 @@ QT += xml
 
 SOURCES += \
     src/harbour-tidings.cpp \
-    src/feedloader.cpp
+    src/feedloader.cpp \
+    src/newsblendmodel.cpp \
+    src/htmlfilter.cpp
 
 OTHER_FILES += qml/harbour-tidings.qml \
     qml/cover/CoverPage.qml \
@@ -45,22 +47,20 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/FeedSorter.qml \
     qml/pages/SortSelectorPage.qml \
     qml/cover/overlay.png \
-    qml/pages/ConfigValue.qml
+    qml/pages/ConfigValue.qml \
+    qml/pages/BackgroundWorker.qml \
+    qml/pages/FeedStats.qml \
+    qml/pages/FeedItem.qml \
+    qml/pages/SplashPage.qml \
+    qml/pages/SettingsPage.qml
 
-TRANSLATIONS = l10n/en_US.ts \
-            l10n/ru_RU.ts \
-            l10n/fr_FR.ts
-
-lupdate_only{
-SOURCES = \
-          qml/pages/*.qml \
-          qml/cover/*.qml
-}
-
-RESOURCES += \
-    resources.qrc
+CONFIG += sailfishapp_i18n
+TRANSLATIONS = translations/harbour-tidings-ru_RU.ts \
+               translations/harbour-tidings-fr_FR.ts
 
 HEADERS += \
     src/feedloader.h \
     src/appversion.h \
-    src/json.h
+    src/json.h \
+    src/newsblendmodel.h \
+    src/htmlfilter.h

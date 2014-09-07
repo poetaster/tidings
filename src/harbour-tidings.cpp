@@ -43,7 +43,9 @@
 
 #include "appversion.h"
 #include "feedloader.h"
+#include "htmlfilter.h"
 #include "json.h"
+#include "newsblendmodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -59,18 +61,23 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 
     QTranslator *appTranslator = new QTranslator;
-    appTranslator->load(":/l10n/" + QLocale::system().name() + ".qm");
+    appTranslator->load("harbour-tidings-" + QLocale::system().name(), SailfishApp::pathTo("translations").path());
     app->installTranslator(appTranslator);
 
     qmlRegisterType<FeedLoader>("harbour.tidings", 1, 0, "FeedLoader");
+    qmlRegisterType<NewsBlendModel>("harbour.tidings", 1, 0, "NewsModel");
 
+    HtmlFilter htmlFilter;
     Json json;
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("appVersion", appVersion);
+    view->rootContext()->setContextProperty("htmlFilter", &htmlFilter);
     view->rootContext()->setContextProperty("json", &json);
+
     view->setSource(SailfishApp::pathTo("qml/harbour-tidings.qml"));
     view->setTitle("Tidings");
     view->showFullScreen();
+
     return app->exec();
 }

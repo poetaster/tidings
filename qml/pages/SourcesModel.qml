@@ -3,6 +3,9 @@ import "database.js" as Database
 
 ListModel {
 
+    property var names: ({})
+    property var colors: ({})
+
     signal modelChanged
 
     function addSource(name, url, color) {
@@ -13,8 +16,12 @@ ListModel {
                    "url": url,
                    "color": color
                });
+        names[url] = name;
+        colors[url] = color;
 
         modelChanged();
+        namesChanged();
+        colorsChanged();
     }
 
     function changeSource(sourceId, name, url, color) {
@@ -24,11 +31,17 @@ ListModel {
                 get(i).name = name;
                 get(i).url = url;
                 get(i).color = color;
+
+                names[url] = name;
+                colors[url] = color;
+
                 break;
             }
         }
 
         modelChanged();
+        namesChanged();
+        colorsChanged();
     }
 
     function removeSource(sourceId) {
@@ -41,6 +54,13 @@ ListModel {
         }
 
         modelChanged();
+        namesChanged();
+        colorsChanged();
+    }
+
+    function forgetSourceRead(sourceId)
+    {
+        Database.forgetSourceRead(sourceId);
     }
 
     Component.onCompleted: {
@@ -49,9 +69,12 @@ ListModel {
         for (var i = 0; i < items.length; i++) {
             console.log(items[i].sourceId + " " + items[i].name);
             append(items[i]);
+            names[items[i].url] = items[i].name;
+            colors[items[i].url] = items[i].color;
         }
 
         modelChanged();
+        namesChanged();
+        colorsChanged();
     }
-
 }

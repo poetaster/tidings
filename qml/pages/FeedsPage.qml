@@ -5,20 +5,6 @@ Page {
     id: page
     objectName: "FeedsPage"
 
-    function replaceEntities(text)
-    {
-        return text.replace(/&apos;/g, "'")
-                   .replace(/&quot;/g, "\"")
-                   .replace(/&#38;/g, "&")
-                   .replace(/&Auml;/g, "Ä")
-                   .replace(/&auml;/g, "ä")
-                   .replace(/&Ouml;/g, "Ö")
-                   .replace(/&ouml;/g, "ö")
-                   .replace(/&Uuml;/g, "Ü")
-                   .replace(/&uuml;/g, "ü")
-                   .replace(/&amp;/g, "&");
-    }
-
     function positionAtFirst(feedUrl)
     {
         var idx = newsBlendModel.firstOfFeed(feedUrl);
@@ -31,11 +17,6 @@ Page {
 
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
-
-    Component.onCompleted: {
-        newsBlendModel.loadShelved();
-    }
-
     Connections {
         target: navigationState
 
@@ -44,9 +25,10 @@ Page {
             coverAdaptor.hasPrevious = index > 0;
             coverAdaptor.hasNext = index < newsBlendModel.count - 1;
 
-            coverAdaptor.feedName = newsBlendModel.get(index).name;
-            coverAdaptor.title = newsBlendModel.get(index).title;
-            coverAdaptor.thumbnail = newsBlendModel.get(index).thumbnail;
+            coverAdaptor.feedName = newsBlendModel.getAttribute(index, "name");
+            coverAdaptor.title = newsBlendModel.getAttribute(index, "title");
+            coverAdaptor.thumbnail = newsBlendModel.getAttribute(index, "thumbnail");
+
             coverAdaptor.page = (index + 1) + "/" +  newsBlendModel.count;
         }
     }
@@ -56,7 +38,12 @@ Page {
 
         onFirstItem: {
             pageStack.pop(page, PageStackAction.Immediate);
-            pageStack.push("ViewPage.qml");
+            listview.currentIndex = 0;
+            var props = {
+                "index": 0,
+                "listview": listview
+            };
+            pageStack.push("ViewPage.qml", props);
         }
 
         onRefresh: {
@@ -76,16 +63,53 @@ Page {
         model: newsBlendModel
 
         header: PageHeader {
-            title: qsTr("Tidings")
+            title: qsTr("%1 items").arg(newsBlendModel.count)
         }
 
         PullDownMenu {
+            id: pulleyMenu
+
+            property var _action
+
+            onActiveChanged: {
+                if (! active && _action)
+                {
+                    _action();
+                    _action = null;
+                }
+            }
+
             MenuItem {
-                enabled: ! newsBlendModel.busy
+                //enabled: ! newsBlendModel.busy
                 text: qsTr("Sort by: %1").arg(newsBlendModel.feedSorter.name)
 
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SortSelectorPage.qml"));
+                }
+            }
+
+            MenuItem {
+                text: qsTr("All read")
+
+                onClicked: {
+                    pulleyMenu._action = function() {
+                        newsBlendModel.setVisibleRead();
+                    };
+                }
+            }
+
+            MenuItem {
+                text: newsBlendModel.busy ? qsTr("Abort refreshing")
+                                          : qsTr("Refresh")
+
+                onClicked: {
+                    pulleyMenu._action = function() {
+                        if (newsBlendModel.busy) {
+                            newsBlendModel.abort();
+                        } else {
+                            newsBlendModel.refreshAll();
+                        }
+                    };
                 }
             }
         }
@@ -93,24 +117,30 @@ Page {
         delegate: ListItem {
             id: feedItem
 
-            opacity: newsBlendModel.busy ? 0.2 : 1
-            enabled: ! newsBlendModel.busy
+            property variant data: model
 
             width: listview.width
             contentHeight: Theme.itemSizeExtraLarge
             clip: true
 
             Rectangle {
+                visible: configTintedItems.booleanValue
+                anchors.fill: parent
+                color: feedColor[model.source]
+                opacity: 0.1
+            }
+
+            Rectangle {
                 width: 2
                 height: parent.height
-                color: model.color
+                color: feedColor[model.source]
             }
 
             Image {
                 id: shelveIcon
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingSmall
-                visible: shelved
+                visible: model.shelved
                 source: "image://theme/icon-s-favorite"
             }
 
@@ -123,8 +153,8 @@ Page {
                 color: feedItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall
                 text: (minuteTimer.tick ? "" : "") +
-                      name + " (" +
-                      Format.formatDate(date, Formatter.DurationElapsed) +
+                      feedName[model.source] + " (" +
+                      Format.formatDate(model.date, Formatter.DurationElapsed) +
                       ")"
             }
 
@@ -147,9 +177,9 @@ Page {
                 elide: Text.ElideRight
                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                 maximumLineCount: 2
-                opacity: (read && ! shelved) ? 0.5 : 1
+                opacity: (model.read && ! model.shelved) ? 0.5 : 1
                 textFormat: Text.PlainText
-                text: replaceEntities(title)
+                text: model.title
             }
 
             Image {
@@ -163,27 +193,24 @@ Page {
                 fillMode: Image.PreserveAspectCrop
                 smooth: true
                 clip: true
-                source: thumbnail
+                source: configShowPreviewImages.booleanValue ? model.thumbnail : ""
             }
 
             Image {
-                visible: model.enclosuresAmount && enclosuresAmount > 0
+                visible: model.enclosures.length > 0
                 anchors.top: parent.top
                 anchors.right: parent.right
                 source: "image://theme/icon-s-attach"
             }
 
             onClicked: {
+                listview.currentIndex = index;
                 var props = {
-                    "index": index
+                    "index": index,
+                    "listview": listview
                 };
                 pageStack.push("ViewPage.qml", props);
             }
-        }
-
-        section.property: "sectionTitle"
-        section.delegate: SectionHeader {
-            text: section
         }
 
         ViewPlaceholder {
@@ -195,25 +222,46 @@ Page {
     }
 
     FancyScroller {
+        visible: listview.quickScroll === undefined ||
+                 listview.quickScrollEnabled !== true
         flickable: listview
     }
 
-    BusyIndicator {
-        anchors.centerIn: parent
-        running: newsBlendModel.busy
-        size: BusyIndicatorSize.Large
-    }
 
-    Label {
+    // loading indicator
+    Rectangle {
         visible: newsBlendModel.busy
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.margins: Theme.paddingMedium
-        horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: Theme.fontSizeMedium
-        color: Theme.secondaryColor
-        truncationMode: TruncationMode.Fade
-        text: newsBlendModel.currentlyLoading
+        width: parent.width
+        height: Theme.itemSizeMedium
+        gradient: Gradient {
+            GradientStop { position: 0; color: "transparent" }
+            GradientStop { position: 0.5; color: "black" }
+            GradientStop { position: 1; color: "black" }
+        }
+
+        BusyIndicator {
+            running: parent.visible
+            size: BusyIndicatorSize.Small
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: loadingLabel.top
+            anchors.bottomMargin: Theme.paddingSmall
+        }
+
+        Label {
+            id: loadingLabel
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            anchors.leftMargin: Theme.paddingLarge
+            anchors.rightMargin: Theme.paddingLarge
+            anchors.bottomMargin: Theme.paddingSmall
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: Theme.fontSizeTiny
+            color: Theme.secondaryColor
+            truncationMode: TruncationMode.Fade
+            text: newsBlendModel.currentlyLoading
+        }
+
     }
 }
