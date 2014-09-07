@@ -121,6 +121,12 @@ ApplicationWindow
         value: "1"
     }
 
+    ConfigValue {
+        id: configFontScale
+        key: "font-scale"
+        value: "100"
+    }
+
     Timer {
         id: initTimer
         interval: 500

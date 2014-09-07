@@ -260,7 +260,7 @@ Page {
                     anchors.rightMargin: Theme.paddingMedium
                     horizontalAlignment: Text.AlignLeft
                     color: Theme.highlightColor
-                    font.pixelSize: Theme.fontSizeSmall
+                    font.pixelSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
                     wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                     textFormat: Text.RichText
                     text: itemData.title
@@ -302,7 +302,7 @@ Page {
                 anchors.rightMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignLeft
                 color: Theme.highlightColor
-                font.pixelSize: Theme.fontSizeExtraSmall
+                font.pixelSize: Theme.fontSizeExtraSmall * (configFontScale.value / 100.0)
                 text: qsTr("(%1 seconds)").arg(itemData.mediaDuration)
             }
 
@@ -313,7 +313,7 @@ Page {
                 anchors.rightMargin: Theme.paddingLarge
                 horizontalAlignment: Text.AlignLeft
                 color: Theme.secondaryColor
-                font.pixelSize: Theme.fontSizeExtraSmall
+                font.pixelSize: Theme.fontSizeExtraSmall * (configFontScale.value / 100.0)
                 text: Format.formatDate(itemData.date, Formatter.Timepoint)
             }
 
@@ -330,7 +330,7 @@ Page {
                 anchors.rightMargin: Theme.paddingLarge
 
                 color: Theme.primaryColor
-                fontSize: Theme.fontSizeSmall
+                fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
                 text: newsBlendModel.itemBody(itemData.source, itemData.uid)
 
                 onLinkActivated: {
