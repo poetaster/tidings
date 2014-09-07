@@ -161,12 +161,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="69"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="80"/>
         <source>Font scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="70"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="71"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
         <translation type="unfinished"></translation>
     </message>
