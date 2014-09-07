@@ -17,16 +17,6 @@ Page {
 
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
-    Timer {
-        id: initTimer
-        interval: 500
-        running: true
-
-        onTriggered: {
-            newsBlendModel.loadPersistedItems();
-        }
-    }
-
     Connections {
         target: navigationState
 
@@ -48,7 +38,12 @@ Page {
 
         onFirstItem: {
             pageStack.pop(page, PageStackAction.Immediate);
-            pageStack.push("ViewPage.qml");
+            listview.currentIndex = 0;
+            var props = {
+                "index": 0,
+                "listview": listview
+            };
+            pageStack.push("ViewPage.qml", props);
         }
 
         onRefresh: {

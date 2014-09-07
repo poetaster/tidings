@@ -110,6 +110,17 @@ ApplicationWindow
     }
 
     Timer {
+        id: initTimer
+        interval: 500
+        running: true
+
+        onTriggered: {
+            newsBlendModel.loadPersistedItems();
+            pageStack.replace(sourcesPage);
+        }
+    }
+
+    Timer {
         id: minuteTimer
 
         property bool tick: true
@@ -128,8 +139,14 @@ ApplicationWindow
         id: notification
     }
 
-    initialPage: sourcesPage
+    initialPage: splashPage
     cover: coverPage
+
+    Component {
+        id: splashPage
+
+        SplashPage { }
+    }
 
     Component {
         id: sourcesPage

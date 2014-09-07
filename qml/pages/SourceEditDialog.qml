@@ -115,8 +115,7 @@ Dialog {
                 color: Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 wrapMode: Text.Wrap
-                text: "Clearing the read status of this feed will cause all available " +
-                      "items to be reloaded the next time."
+                text: qsTr("Clearing the read status will cause all available items to be reloaded the next time.")
             }
 
             Item {
@@ -127,10 +126,9 @@ Dialog {
             Button {
                 visible: editOnly
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Clear read status"
+                text: qsTr("Clearing read status")
                 onClicked: {
-                    sourcesModel.forgetSourceRead(url);
-                    newsBlendModel.setFeedRead(url, false);
+                    dialog.item.forgetRead();
                     dialog.close();
                 }
             }
@@ -148,8 +146,7 @@ Dialog {
                 color: Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 wrapMode: Text.Wrap
-                text: "Clearing the starred items will remove all starred items of this feed from " +
-                      "the database."
+                text: qsTr("Deleting will remove the feed and all of its items from the database.")
             }
 
             Item {
@@ -160,39 +157,7 @@ Dialog {
             Button {
                 visible: editOnly
                 anchors.horizontalCenter: parent.horizontalCenter
-                text: "Clear starred items"
-                onClicked: {
-                    sourcesModel.forgetSourceRead(url);
-                    dialog.close();
-                }
-            }
-
-            Item {
-                width: 1
-                height: Theme.paddingLarge
-            }
-
-            Label {
-                visible: editOnly
-                anchors.left: parent.left
-                anchors.right: parent.right
-                anchors.margins: Theme.paddingLarge
-                color: Theme.secondaryColor
-                font.pixelSize: Theme.fontSizeSmall
-                wrapMode: Text.Wrap
-                text: "Deleting this feed will remove the feed and all of its items " +
-                      "(including starred ones) from the database."
-            }
-
-            Item {
-                width: 1
-                height: Theme.paddingLarge
-            }
-
-            Button {
-                visible: editOnly
-                anchors.horizontalCenter: parent.horizontalCenter
-                text: "Delete feed"
+                text: qsTr("Delete")
                 onClicked: {
                     dialog.item.remove();
                     dialog.close();

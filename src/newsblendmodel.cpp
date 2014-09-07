@@ -467,20 +467,22 @@ int NewsBlendModel::addItem(const QVariantMap& itemData, bool update)
         myFeedLogos[item->feedSource] = itemData.value("logo").toString();
     }
 
-    myTotalCounts[item->feedSource] =
-            myTotalCounts.value(item->feedSource, 0) + 1;
-    myUnreadCounts[item->feedSource] =
-            myUnreadCounts.value(item->feedSource, 0) + 1;
+    FullId fullId(item->feedSource, item->uid);
+    if (! myItemMap.contains(fullId))
+    {
+        myTotalCounts[item->feedSource] =
+                myTotalCounts.value(item->feedSource, 0) + 1;
+        myUnreadCounts[item->feedSource] =
+                myUnreadCounts.value(item->feedSource, 0) + 1;
 
-    myItemMap.insert(FullId(item->feedSource, item->uid), item);
-    if (update)
-    {
-        return insertItem(item, update);
+        myItemMap.insert(FullId(item->feedSource, item->uid), item);
+        if (update)
+        {
+            return insertItem(item, update);
+        }
     }
-    else
-    {
-        return 0;
-    }
+
+    return 0;
 }
 
 bool NewsBlendModel::hasItem(const QString& feedSource,
@@ -633,23 +635,18 @@ void NewsBlendModel::removeFeedItems(const QString& feedSource)
     int pos = 0;
     while (pos < myItems.size())
     {
-        if (myItems.at(pos)->feedSource == feedSource &&
-            ! myItems.at(pos)->isShelved)
+        if (myItems.at(pos)->feedSource == feedSource)
         {
             Item::Ptr item = myItems.takeAt(pos);
             myItemMap.remove(FullId(item->feedSource, item->uid));
-
-            --myTotalCounts[feedSource];
-            if (! item->isRead)
-            {
-                --myUnreadCounts[feedSource];
-            }
         }
         else
         {
             ++pos;
         }
     }
+    myTotalCounts.remove(feedSource);
+    myUnreadCounts.remove(feedSource);
     endResetModel();
 }
 

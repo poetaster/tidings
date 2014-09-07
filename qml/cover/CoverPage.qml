@@ -336,8 +336,8 @@ CoverBackground {
     CoverActionList {
         enabled: ! coverAdaptor.busy &&
                  (coverAdaptor.currentPage === "SourcesPage" ||
-                  coverAdaptor.currentPage === "FeedsPage") &&
-                 coverAdaptor.totalCount === 0
+                  coverAdaptor.currentPage === "FeedsPage" &&
+                  coverAdaptor.totalCount === 0)
 
         CoverAction {
             iconSource: "image://theme/icon-cover-refresh"

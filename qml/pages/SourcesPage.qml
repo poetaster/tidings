@@ -147,6 +147,23 @@ Page {
                 newsBlendModel.setFeedRead(item.url, true);
             }
 
+            function forgetRead()
+            {
+                function closure(item, sourcesModel, newsBlendModel)
+                {
+                    return function f()
+                    {
+                        sourcesModel.forgetSourceRead(item.url);
+                        newsBlendModel.setFeedRead(item.url, false);
+                    }
+                }
+
+                var remorseItem = remorseComponent.createObject(itemContent);
+                remorseItem.execute(itemContent, qsTr("Clearing"),
+                                    closure(item, sourcesModel, newsBlendModel));
+
+            }
+
             function remove()
             {
                 function closure(item, sourcesModel, newsBlendModel)
@@ -157,7 +174,6 @@ Page {
                         sourcesModel.removeSource(item.sourceId);
                     }
                 }
-
 
                 var remorseItem = remorseComponent.createObject(itemContent);
                 remorseItem.execute(itemContent, qsTr("Deleting"),
