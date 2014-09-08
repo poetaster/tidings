@@ -71,7 +71,7 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="102"/>
         <source>Abort refreshing</source>
-        <translation>Annuler l'actualisation</translation>
+        <translation>Annuler l&apos;actualisation</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="103"/>
@@ -97,32 +97,32 @@
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="33"/>
         <source>Latest first</source>
-        <translation>Plus récents d'abord</translation>
+        <translation>Plus récents d&apos;abord</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="39"/>
         <source>Oldest first</source>
-        <translation>Plus anciens d'abord</translation>
+        <translation>Plus anciens d&apos;abord</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="45"/>
         <source>Feed, then latest first</source>
-        <translation>Flux, puis les plus récents d'abord</translation>
+        <translation>Flux, puis les plus récents d&apos;abord</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="51"/>
         <source>Feed, then oldest first</source>
-        <translation>Flux, puis les plus anciens d'abord</translation>
+        <translation>Flux, puis les plus anciens d&apos;abord</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="57"/>
         <source>Current feed only, latest first</source>
-        <translation>Seulement le flux choisi, les plus récents d'abord</translation>
+        <translation>Seulement le flux choisi, les plus récents d&apos;abord</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="63"/>
         <source>Current feed only, oldest first</source>
-        <translation>Seulement le flux choisi, les plus anciens d'abord</translation>
+        <translation>Seulement le flux choisi, les plus anciens d&apos;abord</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="311"/>
@@ -149,7 +149,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="26"/>
         <source>Hiding the preview images saves network traffic. This switch does not affect embedded images in the item view.</source>
-        <translation>Ne pas afficher les aperçus des images économise la consommation du réseau. Ce réglage n'affecte pas les images intégrées dans le flux.</translation>
+        <translation>Ne pas afficher les aperçus des images économise la consommation du réseau. Ce réglage n&apos;affecte pas les images intégrées dans le flux.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="43"/>
@@ -169,7 +169,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="71"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
-        <translation>Ce réglage permet de changer la taille du texte dans l'affichage des nouvelles</translation>
+        <translation>Ce réglage permet de changer la taille du texte dans l&apos;affichage des nouvelles</translation>
     </message>
 </context>
 <context>
@@ -210,7 +210,7 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="48"/>
         <source>Enter URL</source>
-        <translation>Entrez l'URL</translation>
+        <translation>Entrez l&apos;URL</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="78"/>
@@ -225,12 +225,12 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="118"/>
         <source>Clearing the read status will cause all available items to be reloaded the next time.</source>
-        <translation>Effacer le statut "lu" va recharger toutes les nouvelles à la prochaine actualisation.</translation>
+        <translation>Effacer le statut &quot;lu&quot; va recharger toutes les nouvelles à la prochaine actualisation.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="129"/>
         <source>Clear read status</source>
-        <translation>Effacer le statut "lu"</translation>
+        <translation>Effacer le statut &quot;lu&quot;</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="149"/>
@@ -246,12 +246,12 @@
 <context>
     <name>SourcesPage</name>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="35"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="66"/>
         <source>Feeds</source>
         <translation>Flux</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="40"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="83"/>
         <source>About Tidings</source>
         <translation>À propos de Tidings</translation>
     </message>
@@ -264,12 +264,12 @@
         <location filename="../qml/pages/SourcesPage.qml" line="99"/>
         <location filename="../qml/pages/SourcesPage.qml" line="311"/>
         <source>All read</source>
-        <translation>marquer tous comme "lu"</translation>
+        <translation>Marquer tous comme &quot;lu&quot;</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="109"/>
         <source>Abort refreshing</source>
-        <translation>Annuler l'actualisation</translation>
+        <translation>Annuler l&apos;actualisation</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="110"/>

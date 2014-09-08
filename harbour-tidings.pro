@@ -55,8 +55,10 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/SettingsPage.qml
 
 CONFIG += sailfishapp_i18n
-TRANSLATIONS = translations/harbour-tidings-ru_RU.ts \
-               translations/harbour-tidings-fr_FR.ts
+TRANSLATIONS += translations/harbour-tidings-ru_RU.ts
+TRANSLATIONS += translations/harbour-tidings-fr_FR.ts
+
+CONFIG += sailfishapp_i18n_unfinished
 
 HEADERS += \
     src/feedloader.h \
