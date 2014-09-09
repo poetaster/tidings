@@ -31,6 +31,8 @@ public:
     };
     explicit FeedLoader(QObject* parent = 0);
 
+    Q_INVOKABLE void abort();
+
 signals:
     void sourceChanged();
     void dataChanged();
@@ -52,10 +54,11 @@ private:
 
 private slots:
     void slotSslErrors(QNetworkReply* reply, const QList<QSslError>& errors);
-    void slotGotReply(QNetworkReply* reply);
+    void slotGotReply();
 
 private:
     QNetworkAccessManager* myNetworkAccessManager;
+    QNetworkReply* myCurrentReply;
 
     QUrl mySource;
     QString myData;

@@ -440,7 +440,14 @@ NewsModel {
     function abort()
     {
         _sourcesQueue = [];
+        _feedLoader.abort();
         _backgroundWorker.abort();
+
+        _atomModel.source = "";
+        _rssModel.source = "";
+        _rdfModel.source = "";
+        _opmlModel.source = "";
+
         feedInfo.setLoading(_feedLoader.source, false);
         busy = false;
 

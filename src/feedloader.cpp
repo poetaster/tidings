@@ -49,6 +49,7 @@ QString nodeText(const QDomNode& node, QStringList path, bool& exists)
 FeedLoader::FeedLoader(QObject* parent)
     : QObject(parent)
     , myNetworkAccessManager(0)
+    , myCurrentReply(0)
     , myIsLoading(false)
     , myType(Unknown)
 {
@@ -62,8 +63,18 @@ FeedLoader::FeedLoader(QObject* parent)
             this, SLOT(slotGotReply(QNetworkReply*)));
 }
 
+void FeedLoader::abort()
+{
+    if (myCurrentReply)
+    {
+        myCurrentReply->abort();
+    }
+}
+
 void FeedLoader::setSource(const QUrl& source)
 {
+    abort();
+
     mySource = source;
     emit sourceChanged();
 
@@ -83,7 +94,9 @@ void FeedLoader::setSource(const QUrl& source)
 
     qDebug() << "Requesting" << source;
 
-    myNetworkAccessManager->get(req);
+    myCurrentReply = myNetworkAccessManager->get(req);
+    connect(myCurrentReply, SIGNAL(finished()),
+            this, SLOT(slotGotReply()));
 }
 
 void FeedLoader::analyzeFeed()
@@ -131,8 +144,11 @@ void FeedLoader::slotSslErrors(QNetworkReply* reply,
     reply->ignoreSslErrors();
 }
 
-void FeedLoader::slotGotReply(QNetworkReply* reply)
+void FeedLoader::slotGotReply()
 {
+    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+    myCurrentReply = 0;
+
     int httpCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 
     qDebug() << "Receiving"
@@ -159,7 +175,9 @@ void FeedLoader::slotGotReply(QNetworkReply* reply)
                              QString("Tidings/%1 (Sailfish OS)")
                              .arg(appVersion)
                              .toUtf8());
-            myNetworkAccessManager->get(req);
+            myCurrentReply = myNetworkAccessManager->get(req);
+            connect(myCurrentReply, SIGNAL(finished()),
+                    this, SLOT(slotGotReply()));
         }
         else
         {
