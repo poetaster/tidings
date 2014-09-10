@@ -262,7 +262,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="99"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="311"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="319"/>
         <source>All read</source>
         <translation>Marquer tous comme &quot;lu&quot;</translation>
     </message>
@@ -273,7 +273,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="110"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="301"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="309"/>
         <source>Refresh</source>
         <translation>Actualiser</translation>
     </message>
@@ -288,7 +288,7 @@
         <translation>Suppression</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="321"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="329"/>
         <source>Edit</source>
         <translation>Éditer</translation>
     </message>

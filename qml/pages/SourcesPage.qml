@@ -238,6 +238,14 @@ Page {
                     }
                 }
 
+                Component.onCompleted: {
+                    if (item)
+                    {
+                        thumbnails = newsBlendModel.thumbnailsOfFeed(item.url);
+                        logo = newsBlendModel.logoOfFeed(item.url);
+                    }
+                }
+
                 onLoadingStatusChanged: {
                     if (! loadingStatus)
                     {

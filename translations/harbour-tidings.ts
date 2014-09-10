@@ -261,7 +261,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="99"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="311"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="319"/>
         <source>All read</source>
         <translation type="unfinished"></translation>
     </message>
@@ -272,7 +272,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="110"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="301"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="309"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
@@ -287,7 +287,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="321"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="329"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
