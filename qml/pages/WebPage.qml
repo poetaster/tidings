@@ -54,6 +54,20 @@ Page {
                 }
             }
 
+            Component.onCompleted: {
+                try
+                {
+                    experimental.userAgent =
+                            "Mozilla/5.0 (Maemo; Linux; Jolla; Sailfish; Mobile) " +
+                            "AppleWebKit/534.13 (KHTML, like Gecko) " +
+                            "NokiaBrowser/8.5.0 Mobile Safari/534.13";
+                }
+                catch (err)
+                {
+
+                }
+            }
+
             url: root.url
         }
 
