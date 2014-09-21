@@ -52,7 +52,8 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/FeedStats.qml \
     qml/pages/FeedItem.qml \
     qml/pages/SplashPage.qml \
-    qml/pages/SettingsPage.qml
+    qml/pages/SettingsPage.qml \
+    qml/pages/MediaItem.qml
 
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-tidings-ru_RU.ts

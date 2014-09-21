@@ -357,9 +357,13 @@ Page {
                 id: enclosureRepeater
                 model: itemData.enclosures
 
-                delegate: ListItem {
+                delegate: MediaItem {
                     width: column.width
+                    url: modelData.url
+                    mimeType: modelData.type
+                    length: modelData.length
 
+                    /*
                     Image {
                         id: mediaIcon
                         anchors.left: parent.left
@@ -406,6 +410,7 @@ Page {
                     onClicked: {
                         Qt.openUrlExternally(modelData.url);
                     }
+                    */
                 }//ListItem
             }//Repeater
 

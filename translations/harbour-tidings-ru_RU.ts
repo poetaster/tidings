@@ -93,6 +93,29 @@
     </message>
 </context>
 <context>
+    <name>MediaItem</name>
+    <message>
+        <location filename="../qml/pages/MediaItem.qml" line="48"/>
+        <source>Audio</source>
+        <translation type="unfinished">Аудио</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MediaItem.qml" line="50"/>
+        <source>Image</source>
+        <translation type="unfinished">Изображение</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MediaItem.qml" line="52"/>
+        <source>Video</source>
+        <translation type="unfinished">Видео</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/MediaItem.qml" line="54"/>
+        <source>PDF document</source>
+        <translation type="unfinished">Документ PDF</translation>
+    </message>
+</context>
+<context>
     <name>NewsBlendModel</name>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="33"/>
