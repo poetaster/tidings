@@ -112,6 +112,16 @@ Page {
                     };
                 }
             }
+
+            MenuItem {
+                visible: audioPlayer.playing
+                text: qsTr("Stop Audio")
+
+                onClicked: {
+                    audioPlayer.stop();
+                    audioPlayer.source = "";
+                }
+            }
         }
 
         delegate: ListItem {

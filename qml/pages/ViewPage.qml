@@ -362,56 +362,7 @@ Page {
                     url: modelData.url
                     mimeType: modelData.type
                     length: modelData.length
-
-                    /*
-                    Image {
-                        id: mediaIcon
-                        anchors.left: parent.left
-                        anchors.leftMargin: Theme.paddingLarge
-                        width: height
-                        height: parent.height
-                        asynchronous: true
-                        smooth: true
-                        fillMode: Image.PreserveAspectCrop
-                        sourceSize.width: width * 2
-                        sourceSize.height: height * 2
-                        source: enclosureRepeater.count ? _mediaIcon(modelData.url, modelData.type) : ""
-                        clip: true
-                    }
-
-                    Label {
-                        id: mediaNameLabel
-                        anchors.left: mediaIcon.right
-                        anchors.right: parent.right
-                        anchors.leftMargin: Theme.paddingLarge
-                        anchors.rightMargin: Theme.paddingLarge
-                        truncationMode: TruncationMode.Fade
-                        font.pixelSize: Theme.fontSizeSmall
-                        color: Theme.primaryColor
-                        text: _urlFilename(modelData.url)
-                    }
-                    Label {
-                        anchors.top: mediaNameLabel.bottom
-                        anchors.left: mediaNameLabel.left
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        color: Theme.secondaryColor
-                        text: _mediaTypeName(modelData.type)
-                    }
-                    Label {
-                        anchors.top: mediaNameLabel.bottom
-                        anchors.right: parent.right
-                        anchors.rightMargin: Theme.paddingLarge
-                        font.pixelSize: Theme.fontSizeExtraSmall
-                        color: Theme.secondaryColor
-                        text: modelData.length >= 0 ? Format.formatFileSize(modelData.length)
-                                                    : ""
-                    }
-
-                    onClicked: {
-                        Qt.openUrlExternally(modelData.url);
-                    }
-                    */
-                }//ListItem
+                }
             }//Repeater
 
             Item {

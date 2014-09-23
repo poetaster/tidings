@@ -79,7 +79,12 @@
         <translation>Обновить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="218"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="118"/>
+        <source>Stop Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FeedsPage.qml" line="228"/>
         <source>Pull down to add feeds.</source>
         <translation>Потяните вниз, чтобы добавить подписки.</translation>
     </message>
@@ -95,22 +100,21 @@
 <context>
     <name>MediaItem</name>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="48"/>
         <source>Audio</source>
-        <translation type="unfinished">Аудио</translation>
+        <translation type="obsolete">Аудио</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="50"/>
+        <location filename="../qml/pages/MediaItem.qml" line="82"/>
         <source>Image</source>
         <translation type="unfinished">Изображение</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="52"/>
+        <location filename="../qml/pages/MediaItem.qml" line="84"/>
         <source>Video</source>
         <translation type="unfinished">Видео</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="54"/>
+        <location filename="../qml/pages/MediaItem.qml" line="86"/>
         <source>PDF document</source>
         <translation type="unfinished">Документ PDF</translation>
     </message>
@@ -285,7 +289,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="99"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="319"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="329"/>
         <source>All read</source>
         <translation>Прочитано</translation>
     </message>
@@ -296,22 +300,27 @@
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="110"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="309"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="319"/>
         <source>Refresh</source>
         <translation>Обновить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="172"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="125"/>
+        <source>Stop Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="182"/>
         <source>Clearing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="189"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="199"/>
         <source>Deleting</source>
         <translation>Удаление</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="329"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="339"/>
         <source>Edit</source>
         <translation>Редактировать</translation>
     </message>

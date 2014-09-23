@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtMultimedia 5.0
 
 ListItem {
     id: item
@@ -69,6 +68,8 @@ ListItem {
     function _mediaIcon(url, type) {
         if (type.substring(0, 6) === "image/") {
             return url;
+        } else if (type.substring(0, 6) === "video/") {
+            return "image://theme/icon-l-play";
         } else {
             return "image://theme/icon-m-other";
         }
@@ -88,23 +89,83 @@ ListItem {
         }
     }
 
-    Audio {
-        id: audio
-        source: _isAudio ? item.url
-                         : ""
-        autoLoad: false
-        autoPlay: false
+    height: Theme.itemSizeLarge
+
+    onClicked: {
+        if (_isAudio)
+        {
+            if (audioProxy.playing)
+            {
+                audioProxy.pause();
+            }
+            else
+            {
+                audioProxy.play();
+            }
+        }
+        else
+        {
+            Qt.openUrlExternally(item.url);
+        }
+    }
+
+    QtObject {
+        id: audioProxy
+
+        property bool _active: audioPlayer.source == source
+        property bool playing: _active ? audioPlayer.playing
+                                       : false
+        property bool paused: _active ? audioPlayer.paused
+                                      : false
+        property real duration: _active ? audioPlayer.duration
+                                        : -1
+        property real position: _active ? audioPlayer.position
+                                        : 0
+
+        property string source: _isAudio ? item.url : ""
+
+        function play()
+        {
+            if (_active)
+            {
+                audioPlayer.play();
+            }
+            else
+            {
+                audioPlayer.stop();
+                audioPlayer.source = source;
+                audioPlayer.seek(0);
+                audioPlayer.play();
+            }
+        }
+
+        function pause()
+        {
+            if (_active) audioPlayer.pause();
+        }
+
+        function seek(value)
+        {
+            if (_active) audioPlayer.seek(value);
+        }
 
         onPositionChanged: {
-            if (! slider.down)
+            if (_active)
             {
-                slider.value = position;
+                if (! slider.down)
+                {
+                    slider.value = position;
+                }
             }
         }
 
         onDurationChanged: {
-            slider.maximumValue = duration;
+            if (_active)
+            {
+                slider.maximumValue = duration;
+            }
         }
+
     }
 
     Image {
@@ -120,8 +181,8 @@ ListItem {
         sourceSize.width: width * 2
         sourceSize.height: height * 2
         source: ! _isAudio ? _mediaIcon(item.url, item.mimeType)
-                           : audio.playbackState === Audio.PlayingState ? "image://theme/icon-l-pause"
-                                                                        : "image://theme/icon-l-play"
+                           : audioProxy.playing ? "image://theme/icon-l-pause"
+                                                : "image://theme/icon-l-play"
         clip: true
     }
 
@@ -152,7 +213,7 @@ ListItem {
         anchors.rightMargin: Theme.paddingLarge
         font.pixelSize: Theme.fontSizeExtraSmall
         color: Theme.secondaryColor
-        text: slider.visible ? _toTime(audio.duration)
+        text: slider.visible ? _toTime(audioProxy.duration)
                              : item.length >= 0 ? Format.formatFileSize(item.length)
                                                 : ""
     }
@@ -161,8 +222,7 @@ ListItem {
         id: slider
 
         visible: _isAudio
-        enabled: audio.playbackState === Audio.PlayingState ||
-                 audio.playbackState === Audio.PausedState
+        enabled: audioProxy.playing || audioProxy.paused
 
         anchors.left: label1.right
         anchors.right: label2.left
@@ -178,31 +238,14 @@ ListItem {
         onDownChanged: {
             if (! down)
             {
-                audio.seek(value);
-                if (audio.playbackState !== Audio.PlayingState)
+                audioProxy.seek(value);
+                if (! audioProxy.playing)
                 {
-                    audio.play();
+                    audioProxy.play();
                 }
             }
         }
-    }
 
-    onClicked: {
-        if (_isAudio)
-        {
-            if (audio.playbackState == Audio.PlayingState)
-            {
-                audio.pause();
-            }
-            else
-            {
-                audio.play();
-            }
-        }
-        else
-        {
-            Qt.openUrlExternally(item.url);
-        }
-    }
+    }//Slider
 
 }

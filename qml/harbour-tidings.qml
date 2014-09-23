@@ -32,6 +32,7 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtMultimedia 5.0
 import "pages"
 import "cover"
 
@@ -151,6 +152,16 @@ ApplicationWindow
         onTriggered: {
             tickChanged();
         }
+    }
+
+    Audio {
+        id: audioPlayer
+
+        property bool playing: playbackState === Audio.PlayingState
+        property bool paused: playbackState === Audio.PausedState
+
+        autoLoad: false
+        autoPlay: false
     }
 
     Notification {
