@@ -235,8 +235,9 @@ NewsModel {
 
         item["source"] = "" + _feedLoader.source; // convert to string
         item["logo"] = "" + _feedLoader.logo;
-        item["date"] = item.dateString !== "" ? new Date(item.dateString)
+        item["date"] = item.dateString !== "" ? dateParser.parse(item.dateString)
                                               : new Date();
+
         if (item.uid === "")
         {
             // if there is no UID, make a unique one

@@ -66,4 +66,5 @@ HEADERS += \
     src/appversion.h \
     src/json.h \
     src/newsblendmodel.h \
-    src/htmlfilter.h
+    src/htmlfilter.h \
+    src/dateparser.h

@@ -384,6 +384,18 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
     item->uid = itemData.value("uid").toString();
     item->date = itemData.value("date").toDateTime();
 
+    // work around broken dates in cached data caused by a Qt 5.2 bug
+    if (! item->date.isValid())
+    {
+        item->date = QDateTime::fromString(itemData.value("dateString").toString(),
+                                           Qt::RFC2822Date);
+    }
+    if (! item->date.isValid())
+    {
+        item->date = QDateTime::fromString(itemData.value("dateString").toString(),
+                                           Qt::ISODate);
+    }
+
     item->title = itemData.value("title").toString();
     item->title = item->title
             .replace("&apos;", "'")

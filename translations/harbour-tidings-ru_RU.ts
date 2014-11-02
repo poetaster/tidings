@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU">
+<TS version="2.1" language="ru_RU">
 <context>
     <name>AboutPage</name>
     <message>
@@ -104,17 +104,17 @@
         <translation type="obsolete">Аудио</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="82"/>
+        <location filename="../qml/pages/MediaItem.qml" line="81"/>
         <source>Image</source>
         <translation type="unfinished">Изображение</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="84"/>
+        <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Video</source>
         <translation type="unfinished">Видео</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="86"/>
+        <location filename="../qml/pages/MediaItem.qml" line="85"/>
         <source>PDF document</source>
         <translation type="unfinished">Документ PDF</translation>
     </message>
@@ -152,9 +152,9 @@
         <translation>Только текущая лента, старые в начале</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="311"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="317"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="321"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="312"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="318"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="322"/>
         <source>Error with %1:
 %2</source>
         <translation>Ошибка с %1:
