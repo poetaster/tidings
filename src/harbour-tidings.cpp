@@ -42,6 +42,7 @@
 #include <QtQml>
 
 #include "appversion.h"
+#include "dateparser.h"
 #include "feedloader.h"
 #include "htmlfilter.h"
 #include "json.h"
@@ -67,11 +68,13 @@ int main(int argc, char *argv[])
     qmlRegisterType<FeedLoader>("harbour.tidings", 1, 0, "FeedLoader");
     qmlRegisterType<NewsBlendModel>("harbour.tidings", 1, 0, "NewsModel");
 
+    DateParser dateParser;
     HtmlFilter htmlFilter;
     Json json;
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("appVersion", appVersion);
+    view->rootContext()->setContextProperty("dateParser", &dateParser);
     view->rootContext()->setContextProperty("htmlFilter", &htmlFilter);
     view->rootContext()->setContextProperty("json", &json);
 

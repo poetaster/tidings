@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
@@ -95,22 +95,17 @@
 <context>
     <name>MediaItem</name>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="48"/>
-        <source>Audio</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MediaItem.qml" line="50"/>
+        <location filename="../qml/pages/MediaItem.qml" line="81"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="52"/>
+        <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="54"/>
+        <location filename="../qml/pages/MediaItem.qml" line="85"/>
         <source>PDF document</source>
         <translation type="unfinished"></translation>
     </message>
@@ -148,9 +143,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="311"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="317"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="321"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="312"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="318"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="322"/>
         <source>Error with %1:
 %2</source>
         <translation type="unfinished"></translation>
