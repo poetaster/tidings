@@ -237,6 +237,10 @@ NewsModel {
         item["logo"] = "" + _feedLoader.logo;
         item["date"] = item.dateString !== "" ? new Date(item.dateString)
                                               : new Date();
+
+        console.log("Date String: " + item.dateString);
+        console.log("Date: " + item["date"]);
+
         if (item.uid === "")
         {
             // if there is no UID, make a unique one

@@ -100,17 +100,17 @@
 <context>
     <name>MediaItem</name>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="82"/>
+        <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="84"/>
+        <location filename="../qml/pages/MediaItem.qml" line="85"/>
         <source>Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="86"/>
+        <location filename="../qml/pages/MediaItem.qml" line="87"/>
         <source>PDF document</source>
         <translation type="unfinished"></translation>
     </message>
@@ -148,9 +148,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="311"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="317"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="315"/>
         <location filename="../qml/pages/NewsBlendModel.qml" line="321"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="325"/>
         <source>Error with %1:
 %2</source>
         <translation type="unfinished"></translation>

@@ -104,17 +104,17 @@
         <translation type="obsolete">Audio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="82"/>
+        <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Image</source>
         <translation type="unfinished">Images</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="84"/>
+        <location filename="../qml/pages/MediaItem.qml" line="85"/>
         <source>Video</source>
         <translation type="unfinished">Vidéo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="86"/>
+        <location filename="../qml/pages/MediaItem.qml" line="87"/>
         <source>PDF document</source>
         <translation type="unfinished">Document PDF</translation>
     </message>
@@ -152,9 +152,9 @@
         <translation>Seulement le flux choisi, les plus anciens d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="311"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="317"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="315"/>
         <location filename="../qml/pages/NewsBlendModel.qml" line="321"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="325"/>
         <source>Error with %1:
 %2</source>
         <translation>Erreur - %1 :

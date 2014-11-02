@@ -6,7 +6,7 @@
  * call it in _migrate.
  * Update _createSchema with the schema modifications.
  */
-var _REVISION = 8;
+var _REVISION = 9;
 
 var _database = Sql.LocalStorage.openDatabaseSync("TidingsDB", "1.0",
                                                   "Tidings Persisted Settings");
@@ -46,6 +46,7 @@ function _migrate(tx) {
         if (revision < 6) { _migrateRev6(tx); }
         if (revision < 7) { _migrateRev7(tx); }
         if (revision < 8) { _migrateRev8(tx); }
+        if (revision < 9) { _migrateRev9(tx); }
     }
 
     // set the new revision
@@ -137,6 +138,16 @@ function _migrateRev8(tx)
     tx.executeSql("ALTER TABLE unread RENAME TO offlineCache");
 }
 
+/* Migrates to Rev 9, where we added audio bookmarks.
+ */
+function _migrateRev9(tx)
+{
+    tx.executeSql("CREATE TABLE audioBookmarks (" +
+                  "  url TEXT," +
+                  "  position INT" +
+                  ")");
+}
+
 /* Creates the initial schema.
  */
 function _createSchema(tx)
@@ -169,6 +180,11 @@ function _createSchema(tx)
     tx.executeSql("CREATE TABLE config (" +
                   "  key VARCHAR(256)," +
                   "  value TEXT" +
+                  ")");
+
+    tx.executeSql("CREATE TABLE audioBookmarks (" +
+                  "  url TEXT," +
+                  "  position INT" +
                   ")");
 }
 
@@ -538,6 +554,52 @@ function cachedItem(url, uid)
             {
                 console.log("not found");
             }
+        }
+    }
+
+    _database.transaction(f);
+    return result;
+}
+
+/* Sets an audio bookmark.
+ */
+function setAudioBookmark(url, millisecs)
+{
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT url FROM audioBookmarks WHERE url = ?",
+                                [url]);
+        if (res.rows.length > 0)
+        {
+            tx.executeSql("UPDATE audioBookmarks SET position = ? WHERE url = ?",
+                          [millisecs, url]);
+        }
+        else
+        {
+            tx.executeSql("INSERT INTO audioBookmarks (url, position) " +
+                          "VALUES (?, ?)",
+                          [url, millisecs]);
+        }
+    }
+
+    _database.transaction(f);
+}
+
+/* Returns the audio bookmark position for the given URL, or 0 if there is
+ * no bookmark set.
+ */
+function audioBookmark(url)
+{
+    var result = 0;
+
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT position FROM audioBookmarks " +
+                                "WHERE url = ?",
+                                [url]);
+        if (res.rows.length > 0)
+        {
+            result = res.rows.item(0).position;
         }
     }
 

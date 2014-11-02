@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import "database.js" as Database
 
 ListItem {
     id: item
@@ -134,14 +135,18 @@ ListItem {
             {
                 audioPlayer.stop();
                 audioPlayer.source = source;
-                audioPlayer.seek(0);
+                audioPlayer.seek(Math.max(0, Database.audioBookmark(source) - 3));
                 audioPlayer.play();
             }
         }
 
         function pause()
         {
-            if (_active) audioPlayer.pause();
+            if (_active)
+            {
+                audioPlayer.pause();
+                Database.setAudioBookmark(source, audioPlayer.position);
+            }
         }
 
         function seek(value)
@@ -165,7 +170,6 @@ ListItem {
                 slider.maximumValue = duration;
             }
         }
-
     }
 
     Image {
@@ -204,7 +208,10 @@ ListItem {
         anchors.left: mediaNameLabel.left
         font.pixelSize: Theme.fontSizeExtraSmall
         color: Theme.secondaryColor
-        text: slider.visible ? _toTime(slider.value) : _mediaTypeName(item.mimeType)
+        //text: slider.visible ? _toTime(slider.value) : _mediaTypeName(item.mimeType)
+        text: ! slider.visible ? _mediaTypeName(item.mimeType)
+                               : audioProxy.playing ? _toTime(slider.value)
+                                                    : _toTime(Database.audioBookmark(audioProxy.source))
     }
     Label {
         id: label2
