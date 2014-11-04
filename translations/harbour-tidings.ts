@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1">
+<TS version="2.0">
 <context>
     <name>AboutPage</name>
     <message>
@@ -100,17 +100,17 @@
 <context>
     <name>MediaItem</name>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="81"/>
+        <location filename="../qml/pages/MediaItem.qml" line="82"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="83"/>
+        <location filename="../qml/pages/MediaItem.qml" line="84"/>
         <source>Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="85"/>
+        <location filename="../qml/pages/MediaItem.qml" line="86"/>
         <source>PDF document</source>
         <translation type="unfinished"></translation>
     </message>

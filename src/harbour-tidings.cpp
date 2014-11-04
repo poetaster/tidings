@@ -34,12 +34,17 @@
 
 #include <sailfishapp.h>
 
+#include <QDir>
 #include <QGuiApplication>
 #include <QLocale>
 #include <QQuickView>
 #include <QScopedPointer>
+#include <QStandardPaths>
+#include <QString>
+#include <QStringList>
 #include <QTranslator>
 #include <QtQml>
+#include <QDebug>
 
 #include "appversion.h"
 #include "dateparser.h"
@@ -47,6 +52,43 @@
 #include "htmlfilter.h"
 #include "json.h"
 #include "newsblendmodel.h"
+
+/* Clears the web cache, because Qt 5.2 WebView chokes on caches from
+ * older Qt versions.
+ */
+void clearWebCache()
+{
+    const QStringList cachePaths = QStandardPaths::standardLocations(
+                QStandardPaths::CacheLocation);
+
+    if (cachePaths.size())
+    {
+        // some very old versions of SailfishOS may not find this cache,
+        // but that's OK since they don't have the web cache bug anyway
+        const QString tidingsWebCache =
+                QDir(cachePaths.at(0)).filePath(".QtWebKit");
+        QDir cacheDir(tidingsWebCache);
+        if (cacheDir.exists())
+        {
+            if (cacheDir.removeRecursively())
+            {
+                qDebug() << "Cleared web cache:" << tidingsWebCache;
+            }
+            else
+            {
+                qDebug() << "Failed to clear web cache:" << tidingsWebCache;
+            }
+        }
+        else
+        {
+            qDebug() << "Web cache does not exist:" << tidingsWebCache;
+        }
+    }
+    else
+    {
+        qDebug() << "No web cache available.";
+    }
+}
 
 int main(int argc, char *argv[])
 {
@@ -60,6 +102,8 @@ int main(int argc, char *argv[])
     // To display the view, call "show()" (will show fullscreen on device).
 
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+
+    clearWebCache();
 
     QTranslator *appTranslator = new QTranslator;
     appTranslator->load("harbour-tidings-" + QLocale::system().name(), SailfishApp::pathTo("translations").path());

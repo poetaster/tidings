@@ -1,4 +1,5 @@
 #include "newsblendmodel.h"
+#include "dateparser.h"
 
 #include <QJsonDocument>
 #include <QDebug>
@@ -385,16 +386,8 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
     item->date = itemData.value("date").toDateTime();
 
     // work around broken dates in cached data caused by a Qt 5.2 bug
-    if (! item->date.isValid())
-    {
-        item->date = QDateTime::fromString(itemData.value("dateString").toString(),
-                                           Qt::RFC2822Date);
-    }
-    if (! item->date.isValid())
-    {
-        item->date = QDateTime::fromString(itemData.value("dateString").toString(),
-                                           Qt::ISODate);
-    }
+    DateParser dp;
+    item->date = dp.parse(itemData.value("dateString").toString());
 
     item->title = itemData.value("title").toString();
     item->title = item->title

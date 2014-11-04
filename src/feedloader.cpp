@@ -59,8 +59,6 @@ FeedLoader::FeedLoader(QObject* parent)
             SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)),
             this,
             SLOT(slotSslErrors(QNetworkReply*,QList<QSslError>)));
-    connect(myNetworkAccessManager, SIGNAL(finished(QNetworkReply*)),
-            this, SLOT(slotGotReply(QNetworkReply*)));
 }
 
 void FeedLoader::abort()
