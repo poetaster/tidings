@@ -235,11 +235,8 @@ NewsModel {
 
         item["source"] = "" + _feedLoader.source; // convert to string
         item["logo"] = "" + _feedLoader.logo;
-        item["date"] = item.dateString !== "" ? new Date(item.dateString)
+        item["date"] = item.dateString !== "" ? dateParser.parse(item.dateString)
                                               : new Date();
-
-        console.log("Date String: " + item.dateString);
-        console.log("Date: " + item["date"]);
 
         if (item.uid === "")
         {
