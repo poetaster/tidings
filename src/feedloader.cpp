@@ -147,8 +147,6 @@ void FeedLoader::slotGotReply()
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     myCurrentReply = 0;
 
-    int httpCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
-
     qDebug() << "Receiving"
              << reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt()
              << reply->request().url();

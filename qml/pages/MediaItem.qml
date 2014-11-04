@@ -125,6 +125,25 @@ ListItem {
 
         property string source: _isAudio ? item.url : ""
 
+        property Timer _seeker: Timer {
+            interval: 50
+
+            onTriggered: {
+                if (audioProxy._active)
+                {
+                    if (! audioPlayer.playing)
+                    {
+                        console.log("Stream is not ready. Deferring seek operation.")
+                        _seeker.start();
+                    }
+                    else
+                    {
+                        audioPlayer.seek(Math.max(0, Database.audioBookmark(audioProxy.source) - 3000));
+                    }
+                }
+            }
+        }
+
         function play()
         {
             if (_active)
@@ -133,10 +152,17 @@ ListItem {
             }
             else
             {
+                // save bookmark before switching to another podcast
+                if (audioPlayer.playing)
+                {
+                    Database.setAudioBookmark(audioPlayer.source,
+                                              audioPlayer.position);
+                }
+
                 audioPlayer.stop();
                 audioPlayer.source = source;
-                audioPlayer.seek(Math.max(0, Database.audioBookmark(source) - 3));
                 audioPlayer.play();
+                _seeker.start();
             }
         }
 
@@ -144,8 +170,8 @@ ListItem {
         {
             if (_active)
             {
-                audioPlayer.pause();
                 Database.setAudioBookmark(source, audioPlayer.position);
+                audioPlayer.pause();
             }
         }
 
@@ -208,9 +234,8 @@ ListItem {
         anchors.left: mediaNameLabel.left
         font.pixelSize: Theme.fontSizeExtraSmall
         color: Theme.secondaryColor
-        //text: slider.visible ? _toTime(slider.value) : _mediaTypeName(item.mimeType)
         text: ! slider.visible ? _mediaTypeName(item.mimeType)
-                               : audioProxy.playing ? _toTime(slider.value)
+                               : audioProxy.playing ? _toTime(slider.sliderValue)
                                                     : _toTime(Database.audioBookmark(audioProxy.source))
     }
     Label {
@@ -245,7 +270,7 @@ ListItem {
         onDownChanged: {
             if (! down)
             {
-                audioProxy.seek(value);
+                audioProxy.seek(sliderValue);
                 if (! audioProxy.playing)
                 {
                     audioProxy.play();
