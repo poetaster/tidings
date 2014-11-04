@@ -386,8 +386,11 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
     item->date = itemData.value("date").toDateTime();
 
     // work around broken dates in cached data caused by a Qt 5.2 bug
-    DateParser dp;
-    item->date = dp.parse(itemData.value("dateString").toString());
+    if (! item->date.isValid())
+    {
+        DateParser dp;
+        item->date = dp.parse(itemData.value("dateString").toString());
+    }
 
     item->title = itemData.value("title").toString();
     item->title = item->title
@@ -577,6 +580,7 @@ void NewsBlendModel::setVisibleRead()
         }
     }
 
+
     emit readChanged(items);
 }
 
@@ -622,9 +626,10 @@ void NewsBlendModel::removeReadItems(const QString& feedSource)
                 (feedSource.isEmpty() || item->feedSource == feedSource))
         {
             Item::Ptr item = myItems.takeAt(pos);
-            myItemMap.remove(FullId(item->feedSource, item->uid));
-
-            --myTotalCounts[feedSource];
+            if (myItemMap.remove(FullId(item->feedSource, item->uid)))
+            {
+                --myTotalCounts[item->feedSource];
+            }
         }
         else
         {

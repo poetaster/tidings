@@ -390,8 +390,8 @@ NewsModel {
         _sourcesQueue.push(source);
         if (! busy)
         {
-            lastRefresh = new Date();
             _loadNext();
+            lastRefresh = new Date();
         }
     }
 
