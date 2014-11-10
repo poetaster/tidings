@@ -38,15 +38,31 @@ function _migrate(tx) {
         _createSchema(tx);
     } else {
         // perform schema migration
-        if (revision < 1) { _migrateRev1(tx); }
-        if (revision < 2) { _migrateRev2(tx); }
-        if (revision < 3) { _migrateRev3(tx); }
-        if (revision < 4) { _migrateRev4(tx); }
-        if (revision < 5) { _migrateRev5(tx); }
-        if (revision < 6) { _migrateRev6(tx); }
-        if (revision < 7) { _migrateRev7(tx); }
-        if (revision < 8) { _migrateRev8(tx); }
-        if (revision < 9) { _migrateRev9(tx); }
+        switch (revision) {
+        case 1:
+            _migrateRev2(tx);
+            // fall through
+        case 2:
+            _migrateRev3(tx);
+            // fall through
+        case 3:
+            _migrateRev4(tx);
+            // fall through
+        case 4:
+            _migrateRev5(tx);
+            // fall through
+        case 5:
+            _migrateRev6(tx);
+            // fall through
+        case 6:
+            _migrateRev7(tx);
+            // fall through
+        case 7:
+            _migrateRev8(tx);
+            // fall through
+        case 8:
+            _migrateRev9(tx);
+        }
     }
 
     // set the new revision
@@ -57,21 +73,6 @@ function _migrate(tx) {
         console.log("Updating database revision to " + _REVISION);
         tx.executeSql("UPDATE status SET value = ? WHERE keyname = ?",
                       [_REVISION, "revision"]);
-    }
-}
-
-/* Migrates to Rev 1.
- */
-function _migrateRev1(tx)
-{
-    tx.executeSql("ALTER TABLE sources ADD COLUMN sourceid INT DEFAULT 0");
-    var res = tx.executeSql("SELECT url FROM sources");
-    var nextId = 0;
-    for (var i = 0; i < res.rows.length; i++) {
-        var url = res.rows.item(i).url;
-        tx.executeSql("UPDATE sources SET sourceid = ? WHERE url = ?",
-                      [nextId, url]);
-        nextId++;
     }
 }
 
