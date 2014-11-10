@@ -38,14 +38,31 @@ function _migrate(tx) {
         _createSchema(tx);
     } else {
         // perform schema migration
-        if (revision < 2) { _migrateRev2(tx); }
-        if (revision < 3) { _migrateRev3(tx); }
-        if (revision < 4) { _migrateRev4(tx); }
-        if (revision < 5) { _migrateRev5(tx); }
-        if (revision < 6) { _migrateRev6(tx); }
-        if (revision < 7) { _migrateRev7(tx); }
-        if (revision < 8) { _migrateRev8(tx); }
-        if (revision < 9) { _migrateRev9(tx); }
+        switch (revision) {
+        case 1:
+            _migrateRev2(tx);
+            // fall through
+        case 2:
+            _migrateRev3(tx);
+            // fall through
+        case 3:
+            _migrateRev4(tx);
+            // fall through
+        case 4:
+            _migrateRev5(tx);
+            // fall through
+        case 5:
+            _migrateRev6(tx);
+            // fall through
+        case 6:
+            _migrateRev7(tx);
+            // fall through
+        case 7:
+            _migrateRev8(tx);
+            // fall through
+        case 8:
+            _migrateRev9(tx);
+        }
     }
 
     // set the new revision
