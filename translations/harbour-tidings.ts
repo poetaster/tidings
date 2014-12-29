@@ -148,9 +148,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="312"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="318"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="322"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="313"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="319"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="323"/>
         <source>Error with %1:
 %2</source>
         <translation type="unfinished"></translation>

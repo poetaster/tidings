@@ -299,6 +299,7 @@ NewsModel {
         {
             currentlyLoading = "";
             busy = false;
+            _updateStats();
         }
     }
 
@@ -339,10 +340,15 @@ NewsModel {
                 var newItem = _loadItem(feedModel, index);
                 if (newItem)
                 {
+                    var body = newItem.encoded.length > 0 ? newItem.encoded
+                                                          : newItem.description;
+                    newItem["description"] = null;
+                    newItem["encoded"] = null;
                     var tuple = {
                         "url": newItem.source,
                         "uid": newItem.uid,
-                        "document": json.toJson(newItem)
+                        "document": json.toJson(newItem),
+                        "body": body
                     };
                     newItems.push(tuple);
                 }
@@ -460,15 +466,23 @@ NewsModel {
     function itemBody(source, uid)
     {
         console.log("itemBody: " + source + ", " + uid);
-        var jsonDoc = Database.cachedItem(source, uid);
-        console.log(jsonDoc);
-        if (jsonDoc !== "")
+        var body = Database.itemBody(source, uid);
+        if (body !== "")
         {
-            var item = json.fromJson(jsonDoc);
-            return htmlFilter.filter(item.encoded.length > 0 ? item.encoded
-                                                             : item.description);
+            return htmlFilter.filter(body);
         }
-        return "";
+        else
+        {
+            // handle legacy items
+            var jsonDoc = Database.cachedItem(source, uid);
+            if (jsonDoc !== "")
+            {
+                var item = json.fromJson(jsonDoc);
+                return htmlFilter.filter(item.encoded.length > 0 ? item.encoded
+                                                                 : item.description);
+            }
+            return "";
+        }
     }
 
     Component.onCompleted: {

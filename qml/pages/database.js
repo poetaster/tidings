@@ -6,7 +6,7 @@
  * call it in _migrate.
  * Update _createSchema with the schema modifications.
  */
-var _REVISION = 9;
+var _REVISION = 10;
 
 var _database = Sql.LocalStorage.openDatabaseSync("TidingsDB", "1.0",
                                                   "Tidings Persisted Settings");
@@ -26,7 +26,7 @@ function _migrate(tx) {
                             ["revision"]);
     var revision = 0;
     if (res.rows.length >= 1) {
-        revision = res.rows.item(0).value;
+        revision = Math.floor(res.rows.item(0).value);
     }
 
     console.log("Found database revision " + revision);
@@ -62,6 +62,9 @@ function _migrate(tx) {
             // fall through
         case 8:
             _migrateRev9(tx);
+            // fall through
+        case 9:
+            _migrateRev10(tx);
         }
     }
 
@@ -149,6 +152,17 @@ function _migrateRev9(tx)
                   ")");
 }
 
+/* Migrates to Rev 10, where we added a table for the item bodies.
+ */
+function _migrateRev10(tx)
+{
+    tx.executeSql("CREATE TABLE bodies (" +
+                  "  url TEXT," +
+                  "  uid TEXT," +
+                  "  body TEXT" +
+                  ")");
+}
+
 /* Creates the initial schema.
  */
 function _createSchema(tx)
@@ -176,6 +190,12 @@ function _createSchema(tx)
                   "  url TEXT," +
                   "  uid TEXT," +
                   "  document TEXT" +
+                  ")");
+
+    tx.executeSql("CREATE TABLE bodies (" +
+                  "  url TEXT," +
+                  "  uid TEXT," +
+                  "  body TEXT" +
                   ")");
 
     tx.executeSql("CREATE TABLE config (" +
@@ -265,6 +285,8 @@ function removeSource(sourceId) {
                           [url]);
             tx.executeSql("DELETE FROM shelf WHERE url = ?",
                           [url]);
+            tx.executeSql("DELETE FROM bodies WHERE url = ?",
+                          [url]);
         }
 
         tx.executeSql("DELETE FROM sources WHERE sourceid = ?",
@@ -286,6 +308,9 @@ function cacheItems(items)
             tx.executeSql("INSERT INTO offlineCache (url, uid, document) " +
                           "VALUES (?, ?, ?)",
                           [items[i].url, items[i].uid, items[i].document]);
+            tx.executeSql("INSERT INTO bodies (url, uid, body) " +
+                          "VALUES (?, ?, ?)",
+                          [items[i].url, items[i].uid, items[i].body]);
         }
     }
 
@@ -299,6 +324,8 @@ function uncacheReadItems()
     function f(tx)
     {
         tx.executeSql("DELETE FROM offlineCache " +
+                      "WHERE url || uid IN (SELECT url || uid FROM read)");
+        tx.executeSql("DELETE FROM bodies " +
                       "WHERE url || uid IN (SELECT url || uid FROM read)");
     }
 
@@ -555,6 +582,29 @@ function cachedItem(url, uid)
             {
                 console.log("not found");
             }
+        }
+    }
+
+    _database.transaction(f);
+    return result;
+}
+
+/* Returns the body data of the given feed item.
+ */
+function itemBody(url, uid)
+{
+    var result = "";
+
+    function f(tx)
+    {
+        // the body is in the bodies table, if it is not a legacy item
+        var res = tx.executeSql("SELECT body FROM bodies " +
+                                "WHERE url = ? AND uid = ?",
+                                [url, uid]);
+
+        if (res.rows.length)
+        {
+            result = res.rows.item(0).body;
         }
     }
 

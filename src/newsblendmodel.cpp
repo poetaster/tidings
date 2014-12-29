@@ -507,6 +507,7 @@ void NewsBlendModel::setShelved(int idx, bool value)
         emit shelvedChanged(idx);
         emit dataChanged(index(idx), index(idx),
                          QVector<int>() << IsShelvedRole);
+        setRead(idx, ! value);
     }
 }
 
@@ -621,14 +622,14 @@ void NewsBlendModel::removeReadItems(const QString& feedSource)
     while (pos < myItems.size())
     {
         Item::Ptr item = myItems.at(pos);
-        if (item->isRead &&
-                ! item->isShelved &&
-                (feedSource.isEmpty() || item->feedSource == feedSource))
+        if (item->isRead && ! item->isShelved &&
+            (feedSource.isEmpty() || item->feedSource == feedSource))
         {
-            Item::Ptr item = myItems.takeAt(pos);
-            if (myItemMap.remove(FullId(item->feedSource, item->uid)))
+            Item::Ptr itemToRemove = myItems.takeAt(pos);
+            if (myItemMap.remove(FullId(itemToRemove->feedSource, itemToRemove->uid)))
             {
-                --myTotalCounts[item->feedSource];
+                qDebug() << "removed item" << itemToRemove->title;
+                --myTotalCounts[itemToRemove->feedSource];
             }
         }
         else
