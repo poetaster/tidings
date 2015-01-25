@@ -91,6 +91,14 @@
     </message>
 </context>
 <context>
+    <name>ImagePage</name>
+    <message>
+        <location filename="../qml/pages/ImagePage.qml" line="18"/>
+        <source>Save to gallery</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>LicensePage</name>
     <message>
         <location filename="../qml/pages/LicensePage.qml" line="18"/>
@@ -105,17 +113,17 @@
         <translation type="obsolete">Audio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="83"/>
+        <location filename="../qml/pages/MediaItem.qml" line="84"/>
         <source>Image</source>
         <translation type="unfinished">Images</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="85"/>
+        <location filename="../qml/pages/MediaItem.qml" line="86"/>
         <source>Video</source>
         <translation type="unfinished">Vidéo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="87"/>
+        <location filename="../qml/pages/MediaItem.qml" line="88"/>
         <source>PDF document</source>
         <translation type="unfinished">Document PDF</translation>
     </message>
@@ -401,7 +409,7 @@
         <translation type="vanished">Fermer la vue web</translation>
     </message>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="40"/>
+        <location filename="../qml/pages/WebPage.qml" line="32"/>
         <source>Open in browser</source>
         <translation>Ouvrir dans le navigateur</translation>
     </message>

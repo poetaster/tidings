@@ -10,6 +10,7 @@ ListItem {
     property int length
 
     property bool _isAudio: mimeType.substring(0, 6) === "audio/"
+    property bool _isImage: mimeType.substring(0, 6) === "image/"
 
     function _toTime(s)
     {
@@ -103,6 +104,13 @@ ListItem {
             {
                 audioProxy.play();
             }
+        }
+        else if (_isImage)
+        {
+            var props = {
+                "url": item.url
+            }
+            pageStack.push(Qt.resolvedUrl("ImagePage.qml"), props);
         }
         else
         {

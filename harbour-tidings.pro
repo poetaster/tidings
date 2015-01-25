@@ -54,7 +54,8 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/FeedItem.qml \
     qml/pages/SplashPage.qml \
     qml/pages/SettingsPage.qml \
-    qml/pages/MediaItem.qml
+    qml/pages/MediaItem.qml \
+    qml/pages/ImagePage.qml
 
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-tidings-ru_RU.ts
