@@ -45,6 +45,10 @@ Page {
         }
     }
 
+    RemorsePopup {
+        id: remorse
+    }
+
     SilicaGridView {
         id: gridview
 
@@ -100,7 +104,11 @@ Page {
 
                 onClicked: {
                     pulleyMenu._action = function() {
-                        newsBlendModel.setAllRead();
+                        remorse.execute(qsTr("All read"),
+                                        function()
+                                        {
+                                            newsBlendModel.setAllRead();
+                                        } );
                     };
                 }
             }
@@ -164,7 +172,17 @@ Page {
 
             function setFeedRead()
             {
-                newsBlendModel.setFeedRead(item.url, true);
+                function closure(item, newsBlendModel)
+                {
+                    return function f()
+                    {
+                        newsBlendModel.setFeedRead(item.url, true);
+                    }
+                }
+
+                var remorseItem = remorseComponent.createObject(itemContent);
+                remorseItem.execute(itemContent, qsTr("All read"),
+                                    closure(item, newsBlendModel));
             }
 
             function forgetRead()

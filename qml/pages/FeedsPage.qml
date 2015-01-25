@@ -55,6 +55,10 @@ Page {
         }
     }
 
+    RemorsePopup {
+        id: remorse
+    }
+
     SilicaListView {
         id: listview
 
@@ -93,7 +97,11 @@ Page {
 
                 onClicked: {
                     pulleyMenu._action = function() {
-                        newsBlendModel.setVisibleRead();
+                        remorse.execute(qsTr("All read"),
+                                        function()
+                                        {
+                                            newsBlendModel.setVisibleRead();
+                                        } );
                     };
                 }
             }
