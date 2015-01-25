@@ -30,6 +30,10 @@ Item {
         rescaleTimer.restart();
     }
 
+    onTextChanged: {
+        rescaleTimer.restart();
+    }
+
     Label {
         id: layoutLabel
 

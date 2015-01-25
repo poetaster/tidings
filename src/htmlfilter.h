@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QStringList>
 
 class HtmlFilter : public QObject
 {
@@ -11,6 +12,7 @@ public:
     explicit HtmlFilter(QObject* parent = 0);
 
     Q_INVOKABLE QString filter(const QString& html) const;
+    Q_INVOKABLE QStringList getImages(const QString& html) const;
 };
 
 #endif // HTMLFILTER_H

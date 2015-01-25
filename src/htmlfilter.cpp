@@ -2,7 +2,7 @@
 
 #include <QMap>
 #include <QRegExp>
-#include <QStringList>
+#include <QSet>
 #include <QDebug>
 
 namespace
@@ -207,3 +207,28 @@ QString HtmlFilter::filter(const QString& html) const
     return s;
 }
 
+QStringList HtmlFilter::getImages(const QString& html) const
+{
+    QSet<QString> links;
+
+    int offset = 0;
+    int pos = 0;
+
+    while (true)
+    {
+        const QString tagData = findTag(html.mid(offset), pos);
+        if (tagData.isEmpty())
+        {
+            break;
+        }
+
+        Tag tag(tagData);
+        if (tag.name() == "IMG" && tag.isOpening())
+        {
+            links << tag.attribute("SRC");
+        }
+        offset += pos + tagData.size();
+    }
+
+    return links.toList();
+}

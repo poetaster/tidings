@@ -365,6 +365,23 @@ Page {
                 }
             }//Repeater
 
+            SectionHeader {
+                visible: imagesRepeater.count > 0
+                text: qsTr("Resources")
+            }
+
+            Repeater {
+                id: imagesRepeater
+                model: htmlFilter.getImages(body.text)
+
+                delegate: MediaItem {
+                    width: column.width
+                    url: modelData
+                    mimeType: "image/x-unknown"
+                    length: -1
+                }
+            }//Repeater
+
             Item {
                 width: 1
                 height: Theme.paddingLarge
