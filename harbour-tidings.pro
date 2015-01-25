@@ -15,7 +15,8 @@ SOURCES += \
     src/harbour-tidings.cpp \
     src/feedloader.cpp \
     src/newsblendmodel.cpp \
-    src/htmlfilter.cpp
+    src/htmlfilter.cpp \
+    src/urlloader.cpp
 
 OTHER_FILES += qml/harbour-tidings.qml \
     qml/cover/CoverPage.qml \
@@ -67,4 +68,5 @@ HEADERS += \
     src/json.h \
     src/newsblendmodel.h \
     src/htmlfilter.h \
-    src/dateparser.h
+    src/dateparser.h \
+    src/urlloader.h

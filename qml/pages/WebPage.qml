@@ -1,82 +1,78 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.tidings 1.0
 
 Page {
     id: root
     objectName: "WebPage"
 
+    property string title
     property string url
-
-    // work around Silica bug: don't let webview enable forward navigation
-    onForwardNavigationChanged: {
-        if (forwardNavigation)
-            forwardNavigation = false;
-    }
 
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
-    Loader {
-        id: loader
+    UrlLoader {
+        id: urlLoader
+        source: root.status === PageStatus.Active ? root.url : ""
 
-        anchors.fill: parent
-        sourceComponent: parent.status === PageStatus.Active ? webComponent : undefined
+        onDataChanged: {
+            if (source !== "")
+            {
+                body.text = htmlFilter.filter(data);
+            }
+        }
     }
 
-    Component {
-        id: webComponent
+    SilicaFlickable {
+        anchors.fill: parent
+        contentHeight: column.implicitHeight
 
-        SilicaWebView {
-            id: webview
+        PullDownMenu {
+            MenuItem {
+                text: qsTr("Open in browser")
 
-            header: PageHeader {
-                title: webview.title
-            }
-
-            PullDownMenu {
-                // people have trouble getting back the page navigation
-                // by zooming out (Silica is bit buggy, too), so offer a menu
-                // option for going back
-                MenuItem {
-                    text: qsTr("Close web view")
-
-                    onClicked: {
-                        root.backNavigation = true;
-                        pageStack.navigateBack(PageStackAction.Animated);
-                    }
-                }
-
-                MenuItem {
-                    text: qsTr("Open in browser")
-
-                    onClicked: {
-                        Qt.openUrlExternally(root.url);
-                    }
+                onClicked: {
+                    Qt.openUrlExternally(root.url);
                 }
             }
-
-            Component.onCompleted: {
-                try
-                {
-                    experimental.userAgent =
-                            "Mozilla/5.0 (Maemo; Linux; Jolla; Sailfish; Mobile) " +
-                            "AppleWebKit/534.13 (KHTML, like Gecko) " +
-                            "NokiaBrowser/8.5.0 Mobile Safari/534.13";
-                }
-                catch (err)
-                {
-
-                }
-            }
-
-            url: root.url
         }
 
+        Column {
+            id: column
+            width: parent.width
+
+            PageHeader {
+                title: root.title
+            }
+
+            RescalingRichText {
+                id: body
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.leftMargin: Theme.paddingLarge
+                anchors.rightMargin: Theme.paddingLarge
+
+                color: Theme.primaryColor
+                fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
+
+                onLinkActivated: {
+                    var props = {
+                        "url": link
+                    }
+                    pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
+                                                  props);
+                }
+
+            }
+        }
+
+
+        ScrollDecorator { }
     }
 
     BusyIndicator {
-        running: loader.item ? loader.item.loading : false
+        running: urlLoader.loading
         anchors.centerIn: parent
         size: BusyIndicatorSize.Large
     }
-
 }

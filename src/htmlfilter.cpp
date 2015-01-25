@@ -176,6 +176,24 @@ QString HtmlFilter::filter(const QString& html) const
         bool replaceTag = false;
 
         Tag tag(tagData);
+
+        if (tag.name() == "LINK")
+        {
+            dropTag = true;
+        }
+
+        if (tag.hasAttribute("ID"))
+        {
+            tag.setAttribute("ID", QString());
+            replaceTag = true;
+        }
+
+        if (tag.hasAttribute("CLASS"))
+        {
+            tag.setAttribute("CLASS", QString());
+            replaceTag = true;
+        }
+
         if (tag.hasAttribute("STYLE"))
         {
             QString style = tag.attribute("STYLE");
@@ -187,16 +205,16 @@ QString HtmlFilter::filter(const QString& html) const
             replaceTag = true;
         }
 
-        if (replaceTag)
+        if (dropTag)
+        {
+            s.replace(offset + pos, tagData.size(), "");
+            offset += pos;
+        }
+        else if (replaceTag)
         {
             const QString& newTag = tag.toString();
             s.replace(offset + pos, tagData.size(), newTag);
             offset += pos + newTag.size();
-        }
-        else if (dropTag)
-        {
-            s.replace(offset + pos, tagData.size(), "");
-            offset += pos;
         }
         else
         {

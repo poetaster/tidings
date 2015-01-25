@@ -89,7 +89,8 @@ Page {
         if (status === PageStatus.Active && itemData.link !== "")
         {
             var props = {
-                "url": itemData.link
+                "url": itemData.link,
+                "title": itemData.title
             }
             _attachedWebView = pageStack.pushAttached(Qt.resolvedUrl("WebPage.qml"), props);
         }

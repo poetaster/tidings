@@ -22,6 +22,7 @@
 #include "htmlfilter.h"
 #include "json.h"
 #include "newsblendmodel.h"
+#include "urlloader.h"
 
 /* Clears the web cache, because Qt 5.2 WebView chokes on caches from
  * older Qt versions.
@@ -80,6 +81,7 @@ int main(int argc, char *argv[])
     app->installTranslator(appTranslator);
 
     qmlRegisterType<FeedLoader>("harbour.tidings", 1, 0, "FeedLoader");
+    qmlRegisterType<UrlLoader>("harbour.tidings", 1, 0, "UrlLoader");
     qmlRegisterType<NewsBlendModel>("harbour.tidings", 1, 0, "NewsModel");
 
     DateParser dateParser;
