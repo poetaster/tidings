@@ -513,7 +513,7 @@ void NewsBlendModel::setShelved(int idx, bool value)
 
 void NewsBlendModel::setRead(int idx, bool value)
 {
-    if (idx >= 0 && idx < myItems.size() && ! myItems[idx]->isShelved)
+    if (idx >= 0 && idx < myItems.size())
     {
         myItems[idx]->isRead = value;
         myUnreadCounts[myItems[idx]->feedSource] += value ? -1 : 1;

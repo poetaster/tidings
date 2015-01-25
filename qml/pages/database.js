@@ -345,6 +345,7 @@ function setItemsRead(items)
         for (var i = 0; i < items.length; ++i)
         {
             var value = items[i].value;
+            console.log("set read: " + items[i].url + items[i].uid + " = " + value);
             if (value)
             {
                 tx.executeSql("INSERT INTO read (url, uid, read) VALUES (?, ?, ?)",
@@ -507,6 +508,7 @@ function shelveItem(url, uid)
 {
     function f(tx)
     {
+        console.log("set shelved: " + url + uid + " = true");
         tx.executeSql("INSERT INTO shelf (url, uid, document) " +
                       "SELECT url, uid, document FROM offlineCache " +
                       "WHERE url = ? AND uid = ?",
@@ -524,6 +526,7 @@ function unshelveItem(url, uid)
 {
     function f(tx)
     {
+        console.log("set shelved: " + url + uid + " = false");
         tx.executeSql("INSERT INTO offlineCache (url, uid, document) " +
                       "SELECT url, uid, document FROM shelf " +
                       "WHERE url = ? AND uid = ?",

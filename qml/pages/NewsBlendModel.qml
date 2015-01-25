@@ -342,8 +342,11 @@ NewsModel {
                 {
                     var body = newItem.encoded.length > 0 ? newItem.encoded
                                                           : newItem.description;
+
+                    // do not store the body in the item
                     newItem["description"] = null;
                     newItem["encoded"] = null;
+
                     var tuple = {
                         "url": newItem.source,
                         "uid": newItem.uid,
