@@ -91,7 +91,7 @@ ListItem {
         }
     }
 
-    height: Theme.itemSizeLarge
+    contentHeight: Theme.itemSizeLarge
 
     onClicked: {
         if (_isAudio)
@@ -210,7 +210,7 @@ ListItem {
         id: mediaIcon
 
         anchors.left: parent.left
-        anchors.leftMargin: Theme.paddingLarge
+        //anchors.leftMargin: Theme.paddingLarge
         width: height
         height: parent.height
         asynchronous: true

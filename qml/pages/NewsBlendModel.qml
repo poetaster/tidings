@@ -472,7 +472,7 @@ NewsModel {
         var body = Database.itemBody(source, uid);
         if (body !== "")
         {
-            return htmlFilter.filter(body);
+            return htmlFilter.filter(body, source);
         }
         else
         {
@@ -482,7 +482,8 @@ NewsModel {
             {
                 var item = json.fromJson(jsonDoc);
                 return htmlFilter.filter(item.encoded.length > 0 ? item.encoded
-                                                                 : item.description);
+                                                                 : item.description,
+                                         source);
             }
             return "";
         }

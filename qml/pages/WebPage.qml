@@ -11,14 +11,24 @@ Page {
 
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
+    onStatusChanged: {
+        console.log("status changed -> " + status + " / " + PageStatus.Active);
+        console.log("urlLoader.source = " + urlLoader.source);
+        if (status === PageStatus.Active && urlLoader.source == "")
+        {
+            console.log("loading");
+            urlLoader.source = root.url;
+        }
+    }
+
     UrlLoader {
         id: urlLoader
-        source: root.status === PageStatus.Active ? root.url : ""
+        source: ""
 
         onDataChanged: {
-            if (source !== "")
+            if (source != "")
             {
-                body.text = htmlFilter.filter(data);
+                body.text = htmlFilter.filter(data, source);
             }
         }
     }
@@ -63,6 +73,42 @@ Page {
                                                   props);
                 }
 
+            }
+
+            Item {
+                width: 1
+                height: Theme.paddingLarge
+            }
+
+            ListItem {
+                property var _images: htmlFilter.getImages(body.text)
+
+                visible: _images.length > 0
+
+                width: column.width
+                contentHeight: Theme.itemSizeLarge
+
+                Image {
+                    id: arrowIcon
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingLarge
+                    source: "image://theme/icon-m-right"
+                }
+
+                Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: arrowIcon.right
+                    anchors.leftMargin: Theme.paddingMedium
+                    text: qsTr("Resources")
+                }
+
+                onClicked: {
+                    var props = {
+                        "images": _images
+                    }
+                    pageStack.push(Qt.resolvedUrl("ResourcesPage.qml"), props);
+                }
             }
         }
 

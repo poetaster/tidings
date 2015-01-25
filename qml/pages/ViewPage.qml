@@ -345,6 +345,7 @@ Page {
             }
 
             Item {
+                visible: enclosureRepeater.count > 0
                 width: 1
                 height: Theme.paddingLarge
             }
@@ -359,13 +360,51 @@ Page {
                 model: itemData.enclosures
 
                 delegate: MediaItem {
-                    width: column.width
+                    x: 2
+                    width: column.width - 2
                     url: modelData.url
                     mimeType: modelData.type
                     length: modelData.length
                 }
             }//Repeater
 
+            Item {
+                width: 1
+                height: Theme.paddingLarge
+            }
+
+            ListItem {
+                property var _images: htmlFilter.getImages(body.text)
+
+                visible: _images.length > 0
+
+                width: column.width
+                contentHeight: Theme.itemSizeLarge
+
+                Image {
+                    id: arrowIcon
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: Theme.paddingLarge
+                    source: "image://theme/icon-m-right"
+                }
+
+                Label {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: arrowIcon.right
+                    anchors.leftMargin: Theme.paddingMedium
+                    text: qsTr("Resources")
+                }
+
+                onClicked: {
+                    var props = {
+                        "images": _images
+                    }
+                    pageStack.push(Qt.resolvedUrl("ResourcesPage.qml"), props);
+                }
+            }
+
+            /*
             SectionHeader {
                 visible: imagesRepeater.count > 0
                 text: qsTr("Resources")
@@ -387,6 +426,7 @@ Page {
                 width: 1
                 height: Theme.paddingLarge
             }
+            */
         }
 
         ScrollDecorator { }

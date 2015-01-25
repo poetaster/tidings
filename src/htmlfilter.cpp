@@ -3,6 +3,7 @@
 #include <QMap>
 #include <QRegExp>
 #include <QSet>
+#include <QUrl>
 #include <QDebug>
 
 namespace
@@ -149,6 +150,18 @@ QString Tag::toString() const
     return out;
 }
 
+QString resolveUrl(const QString& url1, const QString& url2)
+{
+    if (url2.startsWith("http://") || url2.startsWith("https://"))
+    {
+        return url2;
+    }
+    else
+    {
+        return QUrl(url1).resolved(url2).toString();
+    }
+}
+
 }
 
 HtmlFilter::HtmlFilter(QObject* parent)
@@ -157,7 +170,7 @@ HtmlFilter::HtmlFilter(QObject* parent)
 
 }
 
-QString HtmlFilter::filter(const QString& html) const
+QString HtmlFilter::filter(const QString& html, const QString& url) const
 {
     QString s = html;
 
@@ -176,6 +189,20 @@ QString HtmlFilter::filter(const QString& html) const
         bool replaceTag = false;
 
         Tag tag(tagData);
+
+        if (tag.name() == "IMG" && tag.hasAttribute("SRC"))
+        {
+            QString imgUrl = tag.attribute("SRC");
+            tag.setAttribute("SRC", resolveUrl(url, imgUrl));
+            replaceTag = true;
+        }
+
+        if (tag.name() == "A" && tag.hasAttribute("HREF"))
+        {
+            QString href = tag.attribute("HREF");
+            tag.setAttribute("HREF", resolveUrl(url, href));
+            replaceTag = true;
+        }
 
         if (tag.name() == "LINK")
         {

@@ -11,7 +11,7 @@ class HtmlFilter : public QObject
 public:
     explicit HtmlFilter(QObject* parent = 0);
 
-    Q_INVOKABLE QString filter(const QString& html) const;
+    Q_INVOKABLE QString filter(const QString& html, const QString& url) const;
     Q_INVOKABLE QStringList getImages(const QString& html) const;
 };
 

@@ -91,14 +91,6 @@
     </message>
 </context>
 <context>
-    <name>ImagePage</name>
-    <message>
-        <location filename="../qml/pages/ImagePage.qml" line="18"/>
-        <source>Save to gallery</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>LicensePage</name>
     <message>
         <location filename="../qml/pages/LicensePage.qml" line="18"/>
@@ -162,6 +154,19 @@
         <location filename="../qml/pages/NewsBlendModel.qml" line="323"/>
         <source>Error with %1:
 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ResourcesPage</name>
+    <message>
+        <location filename="../qml/pages/ResourcesPage.qml" line="20"/>
+        <source>Resources</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ResourcesPage.qml" line="25"/>
+        <source>Embedded images</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -387,12 +392,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="354"/>
+        <location filename="../qml/pages/ViewPage.qml" line="355"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="371"/>
+        <location filename="../qml/pages/ViewPage.qml" line="396"/>
         <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>
@@ -400,8 +405,13 @@
 <context>
     <name>WebPage</name>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="32"/>
+        <location filename="../qml/pages/WebPage.qml" line="42"/>
         <source>Open in browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/WebPage.qml" line="103"/>
+        <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
