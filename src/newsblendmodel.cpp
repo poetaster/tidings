@@ -507,13 +507,14 @@ void NewsBlendModel::setShelved(int idx, bool value)
         emit shelvedChanged(idx);
         emit dataChanged(index(idx), index(idx),
                          QVector<int>() << IsShelvedRole);
-        setRead(idx, ! value);
     }
 }
 
 void NewsBlendModel::setRead(int idx, bool value)
 {
-    if (idx >= 0 && idx < myItems.size())
+    if (idx >= 0 &&
+        idx < myItems.size() &&
+        myItems[idx]->isRead != value)
     {
         myItems[idx]->isRead = value;
         myUnreadCounts[myItems[idx]->feedSource] += value ? -1 : 1;
@@ -533,8 +534,7 @@ void NewsBlendModel::setFeedRead(const QString& feedSource, bool value)
     foreach (Item::Ptr item, myItemMap.values())
     {
         if (item->feedSource == feedSource &&
-            item->isRead != value &&
-            ! item->isShelved)
+            item->isRead != value)
         {
             QVariantMap entry;
             entry["url"] = item->feedSource;
@@ -566,7 +566,7 @@ void NewsBlendModel::setVisibleRead()
     for (int i = 0; i < count(); ++i)
     {
         Item::Ptr item = myItems.at(i);
-        if (! item->isRead && ! item->isShelved)
+        if (! item->isRead)
         {
             QVariantMap entry;
             entry["url"] = item->feedSource;

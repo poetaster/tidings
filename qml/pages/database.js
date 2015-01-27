@@ -323,10 +323,13 @@ function uncacheReadItems()
 {
     function f(tx)
     {
+        // shelved items are not in the offline cache
         tx.executeSql("DELETE FROM offlineCache " +
                       "WHERE url || uid IN (SELECT url || uid FROM read)");
+        // don't delete from bodies what is shelved
         tx.executeSql("DELETE FROM bodies " +
-                      "WHERE url || uid IN (SELECT url || uid FROM read)");
+                      "WHERE url || uid IN (SELECT url || uid FROM read) AND " +
+                      "      url || uid NOT IN (SELECT url || uid FROM shelf)");
     }
 
     _database.transaction(f);
