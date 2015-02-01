@@ -1,166 +1,53 @@
 #include "htmlfilter.h"
+#include "htmlsed.h"
 
-#include <QMap>
-#include <QRegExp>
-#include <QSet>
-#include <QUrl>
 #include <QDebug>
 
 namespace
 {
 
-const QRegExp RE_TAG("<[^>]+>");
-const QRegExp RE_TAG_NAME("[a-zA-Z0-9]+[\\s/>]");
-const QRegExp RE_TAG_ATTRIBUTE("[a-zA-Z0-9]+\\s*=\\s*(\"[^\"]*\"|'[^']*'|[^\\s\"']*)");
+const QString RE_STYLE_COLOR("color:\\s*[^\\s;\"']+;?");
+const QString RE_STYLE_FONT_SIZE("font-size:\\s*\\d+[a-zA-Z]*;?");
 
-const QRegExp RE_STYLE_COLOR("color:\\s*[^\\s;\"']+;?");
-const QRegExp RE_STYLE_FONT_SIZE("font-size:\\s*\\d+[a-zA-Z]*;?");
-
-QString findTag(const QString& html, int& pos)
-{
-    QRegExp tag(RE_TAG);
-    pos = tag.indexIn(html);
-    if (pos != -1)
-    {
-        int length = tag.matchedLength();
-        return html.mid(pos, length);
-    }
-    else
-    {
-        return QString();
-    }
-}
-
-class Tag
+class TagModifier : public HtmlSed::Modifier
 {
 public:
-    Tag(const QString& data);
-
-    bool isOpening() const { return myIsOpening; }
-    bool isClosing() const { return myIsClosing; }
-    QString name() const { return myName; }
-    QStringList attributes() const { return myAttributes.keys(); }
-    bool hasAttribute(const QString& attr) const
+    void modifyTag(HtmlSed::Tag& tag)
     {
-        return myAttributes.contains(attr.toUpper());
+        if (tag.name() == "VIDEO")
+        {
+            tag.setName("IMG");
+            const QString src = tag.attribute("SRC");
+            tag.setSurroundings("<A HREF=\"" + src + "\">",
+                                "</A>");
+            tag.setAttribute("SRC", tag.attribute("POSTER"));
+        }
     }
-    QString attribute(const QString& attr)
-    {
-        return myAttributes.value(attr.toUpper());
-    }
-    void setAttribute(const QString& attr, const QString& value)
-    {
-        myAttributes[attr.toUpper()] = value;
-    }
-    QString toString() const;
-
-private:
-    bool myIsOpening;
-    bool myIsClosing;
-    QString myName;
-    QMap<QString, QString> myAttributes;
 };
 
-Tag::Tag(const QString& data)
-    : myIsOpening(false)
-    , myIsClosing(false)
+class ImageCollector : public HtmlSed::Modifier
 {
-    qDebug() << "TAG" << data;
-
-    if (data.trimmed().startsWith("</"))
+public:
+    void modifyTag(HtmlSed::Tag& tag)
     {
-        myIsClosing = true;
-    }
-    else
-    {
-        myIsOpening = true;
-    }
-    if (data.trimmed().endsWith("/>"))
-    {
-        myIsClosing = true;
-    }
-
-
-    QRegExp tagName(RE_TAG_NAME);
-    int pos = tagName.indexIn(data);
-
-    if (pos == -1)
-    {
-        return;
-    }
-
-    int length = tagName.matchedLength();
-    myName = data.mid(pos, tagName.matchedLength() - 1).trimmed().toUpper();
-    qDebug() << "NAME" << myName;
-
-    int offset = pos + length;
-
-    QRegExp tagAttribute(RE_TAG_ATTRIBUTE);
-    while (true)
-    {
-        int attrPos = tagAttribute.indexIn(data.mid(offset));
-        if (attrPos == -1)
+        if (tag.attribute("WIDTH") == "1" || tag.attribute("HEIGHT") == "1")
         {
-            break;
+            // don't collect those damn tracking pixels...
         }
-        const QString attr = data.mid(offset + attrPos,
-                                      tagAttribute.matchedLength());
-        if (attr.isEmpty())
+        else if (tag.hasAttribute("SRC"))
         {
-            break;
-        }
-        offset += attrPos + tagAttribute.matchedLength();
-        qDebug() << "ATTR" << attr;
-
-        int splitPos = attr.indexOf('=');
-        if (splitPos != -1)
-        {
-            const QString attrName = attr.left(splitPos).trimmed().toUpper();
-            QString attrValue = attr.mid(splitPos + 1).trimmed();
-            if (attrValue.startsWith("'") || attrValue.startsWith("\""))
-            {
-                attrValue = attrValue.mid(1, attrValue.size() - 2);
-            }
-            myAttributes[attrName] = attrValue;
+            myImages << tag.attribute("SRC");
         }
     }
 
-}
-
-QString Tag::toString() const
-{
-    QString out = "<";
-    if (! myIsOpening && myIsClosing)
+    QSet<QString> images() const
     {
-        out += "/";
-    }
-    out += myName;
-
-    foreach (const QString& attr, myAttributes.keys())
-    {
-        out += " " + attr + "=\"" + myAttributes.value(attr) + "\"";
+        return myImages;
     }
 
-    if (myIsOpening && myIsClosing)
-    {
-        out += "/";
-    }
-    out += ">";
-
-    return out;
-}
-
-QString resolveUrl(const QString& url1, const QString& url2)
-{
-    if (url2.startsWith("http://") || url2.startsWith("https://"))
-    {
-        return url2;
-    }
-    else
-    {
-        return QUrl(url1).resolved(url2).toString();
-    }
-}
+private:
+    QSet<QString> myImages;
+};
 
 }
 
@@ -172,108 +59,45 @@ HtmlFilter::HtmlFilter(QObject* parent)
 
 QString HtmlFilter::filter(const QString& html, const QString& url) const
 {
-    QString s = html;
+    TagModifier modifier;
 
-    int offset = 0;
-    int pos = 0;
-
-    while (true)
-    {
-        const QString tagData = findTag(s.mid(offset), pos);
-        if (tagData.isEmpty())
-        {
-            break;
-        }
-
-        bool dropTag = false;
-        bool replaceTag = false;
-
-        Tag tag(tagData);
-
-        if (tag.name() == "IMG" && tag.hasAttribute("SRC"))
-        {
-            QString imgUrl = tag.attribute("SRC");
-            tag.setAttribute("SRC", resolveUrl(url, imgUrl));
-            replaceTag = true;
-        }
-
-        if (tag.name() == "A" && tag.hasAttribute("HREF"))
-        {
-            QString href = tag.attribute("HREF");
-            tag.setAttribute("HREF", resolveUrl(url, href));
-            replaceTag = true;
-        }
-
-        if (tag.name() == "LINK")
-        {
-            dropTag = true;
-        }
-
-        if (tag.hasAttribute("ID"))
-        {
-            tag.setAttribute("ID", QString());
-            replaceTag = true;
-        }
-
-        if (tag.hasAttribute("CLASS"))
-        {
-            tag.setAttribute("CLASS", QString());
-            replaceTag = true;
-        }
-
-        if (tag.hasAttribute("STYLE"))
-        {
-            QString style = tag.attribute("STYLE");
-            qDebug() << "STYLE BEFORE" << style;
-            style.replace(RE_STYLE_COLOR, "");
-            style.replace(RE_STYLE_FONT_SIZE, "");
-            qDebug() << "STYLE AFTER" << style;
-            tag.setAttribute("STYLE", style);
-            replaceTag = true;
-        }
-
-        if (dropTag)
-        {
-            s.replace(offset + pos, tagData.size(), "");
-            offset += pos;
-        }
-        else if (replaceTag)
-        {
-            const QString& newTag = tag.toString();
-            s.replace(offset + pos, tagData.size(), newTag);
-            offset += pos + newTag.size();
-        }
-        else
-        {
-            offset += pos + tagData.size();
-        }
-    }
-
-    return s;
+    //qDebug() << "BEFORE" << html;
+    HtmlSed htmlSed(html);
+    htmlSed.dropTag("HTML");
+    htmlSed.dropTag("BODY");
+    htmlSed.dropTagWithContents("SCRIPT");
+    htmlSed.dropTagWithContents("HEAD");
+    htmlSed.dropTag("FONT");
+    htmlSed.dropTag("LINK");
+    htmlSed.dropTagWithContents("FORM");
+    htmlSed.dropTagWithContents("NAV");
+    htmlSed.dropTag("HEADER");
+    htmlSed.dropTagWithContents("FOOTER");
+    htmlSed.dropTag("INPUT");
+    htmlSed.dropTag("ASIDE");
+    htmlSed.replaceTag("TABLE", "<P>", true, false);
+    htmlSed.replaceTag("TABLE", "</P>", false, true);
+    htmlSed.dropTag("THEAD");
+    htmlSed.dropTag("TBODY");
+    htmlSed.replaceTag("TR", "<BLOCKQUOTE>", true, false);
+    htmlSed.replaceTag("TR", "</BLOCKQUOTE>", false, true);
+    htmlSed.replaceTag("TD", "<BR>");
+    htmlSed.surroundTag("IMG", "<BR>", "");
+    htmlSed.replaceAttribute("", "STYLE", RE_STYLE_COLOR, "");
+    htmlSed.replaceAttribute("", "STYLE", RE_STYLE_FONT_SIZE, "");
+    htmlSed.resolveUrl("IMG", "SRC", url);
+    htmlSed.resolveUrl("A", "HREF", url);
+    htmlSed.modifyTag("VIDEO", &modifier);
+    //qDebug() << "AFTER" << htmlSed.toString();
+    return htmlSed.toString();
 }
 
 QStringList HtmlFilter::getImages(const QString& html) const
 {
-    QSet<QString> links;
+    ImageCollector collector;
 
-    int offset = 0;
-    int pos = 0;
-
-    while (true)
-    {
-        const QString tagData = findTag(html.mid(offset), pos);
-        if (tagData.isEmpty())
-        {
-            break;
-        }
-
-        Tag tag(tagData);
-        if (tag.name() == "IMG" && tag.isOpening())
-        {
-            links << tag.attribute("SRC");
-        }
-        offset += pos + tagData.size();
-    }
-
-    return links.toList();
+    HtmlSed htmlSed(html);
+    htmlSed.modifyTag("IMG", &collector);
+    htmlSed.toString();
+    return collector.images().toList();
 }

@@ -16,6 +16,8 @@ Page {
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
 
+    property bool _activated
+
     function previousItem() {
         listview.currentIndex = listview.currentIndex - 1;
     }
@@ -86,13 +88,19 @@ Page {
     }
 
     onStatusChanged: {
-        if (status === PageStatus.Active && itemData.link !== "")
+        if (status === PageStatus.Active)
         {
-            var props = {
-                "url": itemData.link,
-                "title": itemData.title
+            if (itemData.link !== "")
+            {
+                var props = {
+                    "url": itemData.link,
+                    "title": itemData.title
+                }
+                _attachedWebView = pageStack.pushAttached(
+                            Qt.resolvedUrl("WebPage.qml"), props);
             }
-            _attachedWebView = pageStack.pushAttached(Qt.resolvedUrl("WebPage.qml"), props);
+
+            page._activated = true;
         }
     }
 
@@ -332,7 +340,8 @@ Page {
 
                 color: Theme.primaryColor
                 fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
-                text: newsBlendModel.itemBody(itemData.source, itemData.uid)
+                text: page._activated ? newsBlendModel.itemBody(itemData.source, itemData.uid)
+                                      : ""
 
                 onLinkActivated: {
                     var props = {
@@ -345,35 +354,13 @@ Page {
             }
 
             Item {
-                visible: enclosureRepeater.count > 0
-                width: 1
-                height: Theme.paddingLarge
-            }
-
-            SectionHeader {
-                visible: enclosureRepeater.count > 0
-                text: qsTr("Media")
-            }
-
-            Repeater {
-                id: enclosureRepeater
-                model: itemData.enclosures
-
-                delegate: MediaItem {
-                    x: 2
-                    width: column.width - 2
-                    url: modelData.url
-                    mimeType: modelData.type
-                    length: modelData.length
-                }
-            }//Repeater
-
-            Item {
+                visible: resourcesItem.visible
                 width: 1
                 height: Theme.paddingLarge
             }
 
             ListItem {
+                id: resourcesItem
                 property var _images: htmlFilter.getImages(body.text)
 
                 visible: _images.length > 0
@@ -404,29 +391,30 @@ Page {
                 }
             }
 
-            /*
-            SectionHeader {
-                visible: imagesRepeater.count > 0
-                text: qsTr("Resources")
-            }
-
-            Repeater {
-                id: imagesRepeater
-                model: htmlFilter.getImages(body.text)
-
-                delegate: MediaItem {
-                    width: column.width
-                    url: modelData
-                    mimeType: "image/x-unknown"
-                    length: -1
-                }
-            }//Repeater
-
             Item {
+                visible: enclosureRepeater.count > 0
                 width: 1
                 height: Theme.paddingLarge
             }
-            */
+
+            SectionHeader {
+                visible: enclosureRepeater.count > 0
+                text: qsTr("Media")
+            }
+
+            Repeater {
+                id: enclosureRepeater
+                model: itemData.enclosures
+
+                delegate: MediaItem {
+                    x: 2
+                    width: column.width - 2
+                    url: modelData.url
+                    mimeType: modelData.type
+                    length: modelData.length
+                }
+            }//Repeater
+
         }
 
         ScrollDecorator { }

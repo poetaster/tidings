@@ -81,6 +81,7 @@ Page {
             }
 
             ListItem {
+                id: resourcesItem
                 property var _images: htmlFilter.getImages(body.text)
 
                 visible: _images.length > 0
@@ -110,6 +111,7 @@ Page {
                     pageStack.push(Qt.resolvedUrl("ResourcesPage.qml"), props);
                 }
             }
+
         }
 
 

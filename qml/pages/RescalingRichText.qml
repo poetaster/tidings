@@ -23,7 +23,8 @@ Item {
 
     signal linkActivated(string link)
 
-    height: contentLabel.height * scaling
+    height: contentLabel.sourceComponent !== null ? contentLabel.height * scaling
+                                                  : 0
     clip: true
 
     onWidthChanged: {
