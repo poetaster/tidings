@@ -9,6 +9,10 @@ ApplicationWindow
     property alias feedName: sourcesModel.names
     property alias feedColor: sourcesModel.colors
 
+    property string imagePlaceholder: configLoadImages.booleanValue
+                                      ? ""
+                                      : Qt.resolvedUrl("pages/placeholder.png")
+
     SourcesModel {
         id: sourcesModel
 
@@ -82,6 +86,12 @@ ApplicationWindow
         id: configShowPreviewImages
         key: "feed-preview-images"
         value: "1"
+    }
+
+    ConfigValue {
+        id: configLoadImages
+        key: "view-load-images"
+        value: "0"
     }
 
     ConfigValue {

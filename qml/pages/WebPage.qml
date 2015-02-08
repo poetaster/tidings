@@ -9,6 +9,8 @@ Page {
     property string title
     property string url
 
+    property string _htmlData
+
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
     onStatusChanged: {
@@ -28,7 +30,10 @@ Page {
         onDataChanged: {
             if (source != "")
             {
-                body.text = htmlFilter.filter(data, source);
+                _htmlData = data;
+                body.text = htmlFilter.filter(_htmlData,
+                                              source,
+                                              imagePlaceholder);
             }
         }
     }
@@ -38,6 +43,14 @@ Page {
         contentHeight: column.implicitHeight
 
         PullDownMenu {
+            MenuItem {
+                text: "Toggle Source Code"
+
+                onClicked: {
+                    body.showSource = ! body.showSource;
+                }
+            }
+
             MenuItem {
                 text: qsTr("Open in browser")
 
@@ -50,6 +63,28 @@ Page {
         Column {
             id: column
             width: parent.width
+
+            ListItem {
+                visible: ! configLoadImages.booleanValue
+                width: parent.width
+                contentHeight: Theme.itemSizeLarge
+                highlighted: true
+
+                Label {
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: Theme.paddingLarge
+                    font.underline: true
+                    text: qsTr("Load images")
+                }
+
+                onClicked: {
+                    body.text = htmlFilter.filter(body.text,
+                                                  root.url,
+                                                  "");
+                    visible = false;
+                }
+            }
 
             PageHeader {
                 title: root.title
@@ -82,7 +117,7 @@ Page {
 
             ListItem {
                 id: resourcesItem
-                property var _images: htmlFilter.getImages(body.text)
+                property var _images: htmlFilter.getImages(_htmlData)
 
                 visible: _images.length > 0
 

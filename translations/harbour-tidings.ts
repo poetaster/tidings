@@ -189,21 +189,31 @@
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="43"/>
-        <source>Tinted items</source>
+        <source>Load images automatically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="44"/>
+        <source>If disabled, embedded images are not loaded automatically.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="61"/>
+        <source>Tinted items</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="62"/>
         <source>If enabled, items have their background tinted in their tag color.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="80"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="98"/>
         <source>Font scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="71"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="89"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -347,57 +357,62 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="69"/>
+        <location filename="../qml/pages/ViewPage.qml" line="72"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="71"/>
+        <location filename="../qml/pages/ViewPage.qml" line="74"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="73"/>
+        <location filename="../qml/pages/ViewPage.qml" line="76"/>
         <source>Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="75"/>
+        <location filename="../qml/pages/ViewPage.qml" line="78"/>
         <source>PDF document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="182"/>
+        <location filename="../qml/pages/ViewPage.qml" line="196"/>
         <source>Previous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="183"/>
+        <location filename="../qml/pages/ViewPage.qml" line="197"/>
         <source>Already at the beginning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="213"/>
+        <location filename="../qml/pages/ViewPage.qml" line="227"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="214"/>
+        <location filename="../qml/pages/ViewPage.qml" line="228"/>
         <source>Already at the end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="315"/>
+        <location filename="../qml/pages/ViewPage.qml" line="280"/>
+        <source>Load images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="350"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="402"/>
+        <location filename="../qml/pages/ViewPage.qml" line="438"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="383"/>
+        <location filename="../qml/pages/ViewPage.qml" line="419"/>
         <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>
@@ -405,12 +420,17 @@
 <context>
     <name>WebPage</name>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="42"/>
+        <location filename="../qml/pages/WebPage.qml" line="55"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="104"/>
+        <location filename="../qml/pages/WebPage.qml" line="78"/>
+        <source>Load images</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/WebPage.qml" line="139"/>
         <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>

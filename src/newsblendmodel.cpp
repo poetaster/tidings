@@ -618,6 +618,20 @@ void NewsBlendModel::setAllRead()
 void NewsBlendModel::removeReadItems(const QString& feedSource)
 {
     beginResetModel();
+    foreach (Item::Ptr item, myItemMap.values())
+    {
+        if (item->isRead && ! item->isShelved &&
+                (feedSource.isEmpty() || item->feedSource == feedSource))
+        {
+            if (myItemMap.remove(FullId(item->feedSource, item->uid)))
+            {
+                qDebug() << "removed item" << item->title;
+                --myTotalCounts[item->feedSource];
+            }
+        }
+    }
+
+    /*
     int pos = 0;
     while (pos < myItems.size())
     {
@@ -637,12 +651,23 @@ void NewsBlendModel::removeReadItems(const QString& feedSource)
             ++pos;
         }
     }
+    */
     endResetModel();
 }
 
 void NewsBlendModel::removeFeedItems(const QString& feedSource)
 {
     beginResetModel();
+    foreach (Item::Ptr item, myItemMap)
+    {
+        if (item->feedSource == feedSource)
+        {
+            myItems.removeOne(item);
+            myItemMap.remove(FullId(item->feedSource, item->uid));
+        }
+    }
+
+    /*
     int pos = 0;
     while (pos < myItems.size())
     {
@@ -656,6 +681,7 @@ void NewsBlendModel::removeFeedItems(const QString& feedSource)
             ++pos;
         }
     }
+    */
     myTotalCounts.remove(feedSource);
     myUnreadCounts.remove(feedSource);
     endResetModel();

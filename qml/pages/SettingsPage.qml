@@ -40,6 +40,24 @@ Page {
 
             TextSwitch {
                 width: parent.width
+                text: qsTr("Load images automatically")
+                description: qsTr("If disabled, embedded images are not loaded automatically.")
+                automaticCheck: false
+                checked: configLoadImages.booleanValue
+
+                onClicked: {
+                    configLoadImages.value =
+                            configLoadImages.booleanValue ? "0" : "1";
+                }
+            }
+
+            Item {
+                width: 1
+                height: Theme.paddingLarge
+            }
+
+            TextSwitch {
+                width: parent.width
                 text: qsTr("Tinted items")
                 description: qsTr("If enabled, items have their background tinted in their tag color.")
                 automaticCheck: false

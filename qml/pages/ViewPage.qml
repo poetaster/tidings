@@ -18,6 +18,9 @@ Page {
 
     property bool _activated
 
+    property string _htmlData
+
+
     function previousItem() {
         listview.currentIndex = listview.currentIndex - 1;
     }
@@ -109,12 +112,23 @@ Page {
         {
             if (_attachedWebView)
             {
+                _attachedWebView.title = itemData.link;
                 _attachedWebView.url = itemData.link;
             }
 
             navigationState.openedItem(listview.currentIndex);
             if (! itemData.read && ! itemData.shelved) {
                 newsBlendModel.setRead(listview.currentIndex, true);
+            }
+
+            _htmlData = newsBlendModel.itemBody(itemData.source, itemData.uid);
+            body.text = htmlFilter.filter(_htmlData,
+                                          itemData.source,
+                                          imagePlaceholder);
+
+            if (! configLoadImages.booleanValue)
+            {
+                btnLoadImages.visible = true;
             }
         }
     }
@@ -251,6 +265,27 @@ Page {
                 NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
             }
 
+            ListItem {
+                id: btnLoadImages
+                visible: ! configLoadImages.booleanValue
+                width: parent.width
+                contentHeight: Theme.itemSizeLarge
+                highlighted: true
+
+                Label {
+                    anchors.left: parent.left
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.leftMargin: Theme.paddingLarge
+                    font.underline: true
+                    text: qsTr("Load images")
+                }
+
+                onClicked: {
+                    body.text = htmlFilter.replace(body.text, imagePlaceholder + "?", "");
+                    visible = false;
+                }
+            }
+
             PageHeader {
                 id: pageHeader
                 title: feedName[itemData.source]
@@ -340,8 +375,10 @@ Page {
 
                 color: Theme.primaryColor
                 fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
-                text: page._activated ? newsBlendModel.itemBody(itemData.source, itemData.uid)
-                                      : ""
+
+                text: htmlFilter.filter(newsBlendModel.itemBody(itemData.source, itemData.uid),
+                                        itemData.source,
+                                        btnLoadImages.visible ? imagePlaceholder : "");
 
                 onLinkActivated: {
                     var props = {
@@ -354,14 +391,13 @@ Page {
             }
 
             Item {
-                visible: resourcesItem.visible
                 width: 1
                 height: Theme.paddingLarge
             }
 
             ListItem {
                 id: resourcesItem
-                property var _images: htmlFilter.getImages(body.text)
+                property var _images: htmlFilter.getImages(_htmlData)
 
                 visible: _images.length > 0
 

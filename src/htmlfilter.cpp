@@ -9,20 +9,42 @@ namespace
 const QString RE_STYLE_COLOR("color:\\s*[^\\s;\"']+;?");
 const QString RE_STYLE_FONT_SIZE("font-size:\\s*\\d+[a-zA-Z]*;?");
 
-class TagModifier : public HtmlSed::Modifier
+class VideoModifier : public HtmlSed::Modifier
 {
 public:
     void modifyTag(HtmlSed::Tag& tag)
     {
-        if (tag.name() == "VIDEO")
+        tag.setName("IMG");
+        const QString src = tag.attribute("SRC");
+        tag.setSurroundings("<A HREF=\"" + src + "\">",
+                            "</A>");
+        tag.setAttribute("SRC", tag.attribute("POSTER"));
+    }
+};
+
+class ImageModifier : public HtmlSed::Modifier
+{
+public:
+    ImageModifier(const QString& imagePlaceholder)
+        : myPlaceholder(imagePlaceholder)
+    { }
+    void modifyTag(HtmlSed::Tag& tag)
+    {
+        if (tag.attribute("WIDTH") == "1" || tag.attribute("HEIGHT") == "1")
         {
-            tag.setName("IMG");
-            const QString src = tag.attribute("SRC");
-            tag.setSurroundings("<A HREF=\"" + src + "\">",
-                                "</A>");
-            tag.setAttribute("SRC", tag.attribute("POSTER"));
+            // remove those damn tracking pixels...
+            tag.replaceWith("");
+        }
+        else if (myPlaceholder.size())
+        {
+            tag.setAttribute("SRC",
+                             QString("%1?%2")
+                             .arg(myPlaceholder)
+                             .arg(tag.attribute("SRC")));
         }
     }
+private:
+    QString myPlaceholder;
 };
 
 class ImageCollector : public HtmlSed::Modifier
@@ -57,15 +79,19 @@ HtmlFilter::HtmlFilter(QObject* parent)
 
 }
 
-QString HtmlFilter::filter(const QString& html, const QString& url) const
+QString HtmlFilter::filter(const QString& html,
+                           const QString& url,
+                           const QString& imagePlaceHolder) const
 {
-    TagModifier modifier;
+    VideoModifier videoModifier;
+    ImageModifier imageModifier(imagePlaceHolder);
 
-    //qDebug() << "BEFORE" << html;
+    qDebug() << "BEFORE" << html;
     HtmlSed htmlSed(html);
     htmlSed.dropTag("HTML");
     htmlSed.dropTag("BODY");
     htmlSed.dropTagWithContents("SCRIPT");
+    htmlSed.dropTagWithContents("NOSCRIPT");
     htmlSed.dropTagWithContents("HEAD");
     htmlSed.dropTag("FONT");
     htmlSed.dropTag("LINK");
@@ -82,12 +108,14 @@ QString HtmlFilter::filter(const QString& html, const QString& url) const
     htmlSed.replaceTag("TR", "<BLOCKQUOTE>", true, false);
     htmlSed.replaceTag("TR", "</BLOCKQUOTE>", false, true);
     htmlSed.replaceTag("TD", "<BR>");
-    htmlSed.surroundTag("IMG", "<BR>", "");
+    htmlSed.surroundTag("LI", "", "&nbsp;", true, false);
     htmlSed.replaceAttribute("", "STYLE", RE_STYLE_COLOR, "");
     htmlSed.replaceAttribute("", "STYLE", RE_STYLE_FONT_SIZE, "");
-    htmlSed.resolveUrl("IMG", "SRC", url);
     htmlSed.resolveUrl("A", "HREF", url);
-    htmlSed.modifyTag("VIDEO", &modifier);
+    //htmlSed.resolveUrl("IMG", "SRC", url);
+    htmlSed.modifyTag("IMG", &imageModifier);
+    htmlSed.modifyTag("VIDEO", &videoModifier);
+
     //qDebug() << "AFTER" << htmlSed.toString();
     return htmlSed.toString();
 }

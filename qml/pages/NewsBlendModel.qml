@@ -376,6 +376,7 @@ NewsModel {
     {
         // remove all read, but not shelved items
         listModel.removeReadItems();
+        _updateStats();
 
         for (var i = 0; i < sources.length; i++)
         {
@@ -395,6 +396,7 @@ NewsModel {
     {
         // remove all read, but not shelved items from that source
         listModel.removeReadItems(source.url);
+        _updateStats();
 
         _sourcesQueue.push(source);
         if (! busy)
@@ -472,7 +474,7 @@ NewsModel {
         var body = Database.itemBody(source, uid);
         if (body !== "")
         {
-            return htmlFilter.filter(body, source);
+            return body;
         }
         else
         {
@@ -481,9 +483,8 @@ NewsModel {
             if (jsonDoc !== "")
             {
                 var item = json.fromJson(jsonDoc);
-                return htmlFilter.filter(item.encoded.length > 0 ? item.encoded
-                                                                 : item.description,
-                                         source);
+                return item.encoded.length > 0 ? item.encoded
+                                               : item.description;
             }
             return "";
         }

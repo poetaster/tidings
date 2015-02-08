@@ -29,6 +29,8 @@ Page {
             anchors.fill: parent
             fillMode: Image.PreserveAspectFit
             smooth: true
+            sourceSize.width: width * 2
+            sourceSize.height: height * 2
             source: root.url
         }
     }
