@@ -430,7 +430,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="139"/>
+        <location filename="../qml/pages/WebPage.qml" line="137"/>
         <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>

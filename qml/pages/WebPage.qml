@@ -79,9 +79,7 @@ Page {
                 }
 
                 onClicked: {
-                    body.text = htmlFilter.filter(body.text,
-                                                  root.url,
-                                                  "");
+                    body.text = htmlFilter.replace(body.text, imagePlaceholder + "?", "");
                     visible = false;
                 }
             }

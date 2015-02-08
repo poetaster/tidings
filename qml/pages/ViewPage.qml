@@ -112,7 +112,7 @@ Page {
         {
             if (_attachedWebView)
             {
-                _attachedWebView.title = itemData.link;
+                _attachedWebView.title = itemData.title;
                 _attachedWebView.url = itemData.link;
             }
 
