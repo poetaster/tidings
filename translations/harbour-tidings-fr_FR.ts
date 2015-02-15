@@ -366,62 +366,62 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="72"/>
+        <location filename="../qml/pages/ViewPage.qml" line="70"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="74"/>
+        <location filename="../qml/pages/ViewPage.qml" line="72"/>
         <source>Image</source>
         <translation>Images</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="76"/>
+        <location filename="../qml/pages/ViewPage.qml" line="74"/>
         <source>Video</source>
         <translation>Vidéo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="78"/>
+        <location filename="../qml/pages/ViewPage.qml" line="76"/>
         <source>PDF document</source>
         <translation>Document PDF</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="196"/>
+        <location filename="../qml/pages/ViewPage.qml" line="197"/>
         <source>Previous</source>
         <translation>Précédent</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="197"/>
+        <location filename="../qml/pages/ViewPage.qml" line="198"/>
         <source>Already at the beginning</source>
         <translation>Premier article</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="227"/>
+        <location filename="../qml/pages/ViewPage.qml" line="228"/>
         <source>Next</source>
         <translation>Suivant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="228"/>
+        <location filename="../qml/pages/ViewPage.qml" line="229"/>
         <source>Already at the end</source>
         <translation type="unfinished">Dernier article</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="280"/>
+        <location filename="../qml/pages/ViewPage.qml" line="281"/>
         <source>Load images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="350"/>
+        <location filename="../qml/pages/ViewPage.qml" line="351"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished">(%1 secondes)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="438"/>
+        <location filename="../qml/pages/ViewPage.qml" line="436"/>
         <source>Media</source>
         <translation>Média</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="419"/>
+        <location filename="../qml/pages/ViewPage.qml" line="417"/>
         <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>
@@ -433,17 +433,17 @@
         <translation type="vanished">Fermer la vue web</translation>
     </message>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="55"/>
+        <location filename="../qml/pages/WebPage.qml" line="48"/>
         <source>Open in browser</source>
         <translation>Ouvrir dans le navigateur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="78"/>
+        <location filename="../qml/pages/WebPage.qml" line="72"/>
         <source>Load images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="137"/>
+        <location filename="../qml/pages/WebPage.qml" line="132"/>
         <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>

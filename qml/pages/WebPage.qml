@@ -9,8 +9,6 @@ Page {
     property string title
     property string url
 
-    property string _htmlData
-
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
     onStatusChanged: {
@@ -18,24 +16,19 @@ Page {
         console.log("urlLoader.source = " + urlLoader.source);
         if (status === PageStatus.Active && urlLoader.source == "")
         {
-            console.log("loading");
             urlLoader.source = root.url;
         }
     }
 
+    HtmlFilter {
+        id: htmlFilter
+        baseUrl: urlLoader.source
+        imageProxy: configLoadImages.booleanValue ? "" :  imagePlaceholder
+        html: urlLoader.data
+    }
+
     UrlLoader {
         id: urlLoader
-        source: ""
-
-        onDataChanged: {
-            if (source != "")
-            {
-                _htmlData = data;
-                body.text = htmlFilter.filter(_htmlData,
-                                              source,
-                                              imagePlaceholder);
-            }
-        }
     }
 
     SilicaFlickable {
@@ -65,6 +58,7 @@ Page {
             width: parent.width
 
             ListItem {
+                id: btnLoadImages
                 visible: ! configLoadImages.booleanValue
                 width: parent.width
                 contentHeight: Theme.itemSizeLarge
@@ -79,8 +73,8 @@ Page {
                 }
 
                 onClicked: {
-                    body.text = htmlFilter.replace(body.text, imagePlaceholder + "?", "");
                     visible = false;
+                    htmlFilter.imageProxy = "";
                 }
             }
 
@@ -97,6 +91,7 @@ Page {
 
                 color: Theme.primaryColor
                 fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
+                text: htmlFilter.htmlFiltered
 
                 onLinkActivated: {
                     var props = {
@@ -115,7 +110,7 @@ Page {
 
             ListItem {
                 id: resourcesItem
-                property var _images: htmlFilter.getImages(_htmlData)
+                property var _images: htmlFilter.images
 
                 visible: _images.length > 0
 
@@ -152,7 +147,7 @@ Page {
     }
 
     BusyIndicator {
-        running: urlLoader.loading
+        running: urlLoader.loading || htmlFilter.busy
         anchors.centerIn: parent
         size: BusyIndicatorSize.Large
     }

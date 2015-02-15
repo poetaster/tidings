@@ -9,7 +9,7 @@
 TARGET = harbour-tidings
 
 CONFIG += sailfishapp
-QT += xml
+QT += concurrent xml
 
 SOURCES += \
     src/harbour-tidings.cpp \

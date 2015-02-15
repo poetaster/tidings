@@ -81,17 +81,16 @@ int main(int argc, char *argv[])
     app->installTranslator(appTranslator);
 
     qmlRegisterType<FeedLoader>("harbour.tidings", 1, 0, "FeedLoader");
+    qmlRegisterType<HtmlFilter>("harbour.tidings", 1, 0, "HtmlFilter");
     qmlRegisterType<UrlLoader>("harbour.tidings", 1, 0, "UrlLoader");
     qmlRegisterType<NewsBlendModel>("harbour.tidings", 1, 0, "NewsModel");
 
     DateParser dateParser;
-    HtmlFilter htmlFilter;
     Json json;
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
     view->rootContext()->setContextProperty("appVersion", appVersion);
     view->rootContext()->setContextProperty("dateParser", &dateParser);
-    view->rootContext()->setContextProperty("htmlFilter", &htmlFilter);
     view->rootContext()->setContextProperty("json", &json);
 
     view->setSource(SailfishApp::pathTo("qml/harbour-tidings.qml"));

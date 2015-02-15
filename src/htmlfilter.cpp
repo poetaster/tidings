@@ -1,6 +1,8 @@
 #include "htmlfilter.h"
 #include "htmlsed.h"
 
+#include <QFuture>
+#include <QtConcurrent>
 #include <QDebug>
 
 namespace
@@ -37,10 +39,7 @@ public:
         }
         else if (myPlaceholder.size())
         {
-            tag.setAttribute("SRC",
-                             QString("%1?%2")
-                             .arg(myPlaceholder)
-                             .arg(tag.attribute("SRC")));
+            tag.setAttribute("SRC", myPlaceholder);
         }
     }
 private:
@@ -75,13 +74,62 @@ private:
 
 HtmlFilter::HtmlFilter(QObject* parent)
     : QObject(parent)
+    , myIsBusy(false)
 {
-
+    connect(&myFilteredFutureWatcher, SIGNAL(finished()),
+            this, SLOT(slotFilteredFinished()));
+    connect(&myImagesFutureWatcher, SIGNAL(finished()),
+            this, SLOT(slotImagesFinished()));
 }
 
-QString HtmlFilter::filter(const QString& html,
-                           const QString& url,
-                           const QString& imagePlaceHolder) const
+void HtmlFilter::setBaseUrl(const QString& baseUrl)
+{
+    myBaseUrl = baseUrl;
+    emit baseUrlChanged();
+    process();
+}
+
+void HtmlFilter::setImageProxy(const QString& imageProxy)
+{
+    myImageProxy = imageProxy;
+    emit imageProxyChanged();
+    process();
+}
+
+void HtmlFilter::setHtml(const QString& html)
+{
+    myHtml = html;
+    emit htmlChanged();
+
+    QFuture<QStringList> imagesFuture = QtConcurrent::run(this,
+                                                          &HtmlFilter::getImages,
+                                                          myHtml);
+    myImagesFutureWatcher.setFuture(imagesFuture);
+
+    process();
+}
+
+void HtmlFilter::process()
+{
+    if (myHtml.isEmpty())
+    {
+        return;
+    }
+
+    myIsBusy = true;
+    emit busyChanged();
+
+    QFuture<QString> filteredFuture = QtConcurrent::run(this,
+                                                        &HtmlFilter::filter,
+                                                        myHtml,
+                                                        myBaseUrl,
+                                                        myImageProxy);
+    myFilteredFutureWatcher.setFuture(filteredFuture);
+}
+
+QString HtmlFilter::filter(QString html,
+                           QString url,
+                           QString imagePlaceHolder) const
 {
     VideoModifier videoModifier;
     ImageModifier imageModifier(imagePlaceHolder);
@@ -128,4 +176,19 @@ QStringList HtmlFilter::getImages(const QString& html) const
     htmlSed.modifyTag("IMG", &collector);
     htmlSed.toString();
     return collector.images().toList();
+}
+
+void HtmlFilter::slotFilteredFinished()
+{
+    myHtmlFiltered = myFilteredFutureWatcher.future().result();
+    emit filtered();
+
+    myIsBusy = false;
+    emit busyChanged();
+}
+
+void HtmlFilter::slotImagesFinished()
+{
+    myImages = myImagesFutureWatcher.future().result();
+    emit imagesChanged();
 }

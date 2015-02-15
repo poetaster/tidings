@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import harbour.tidings 1.0
 
 Page {
     id: page
@@ -17,9 +18,6 @@ Page {
     property int _nextOfFeed: -1
 
     property bool _activated
-
-    property string _htmlData
-
 
     function previousItem() {
         listview.currentIndex = listview.currentIndex - 1;
@@ -121,15 +119,10 @@ Page {
                 newsBlendModel.setRead(listview.currentIndex, true);
             }
 
-            _htmlData = newsBlendModel.itemBody(itemData.source, itemData.uid);
-            body.text = htmlFilter.filter(_htmlData,
-                                          itemData.source,
-                                          imagePlaceholder);
-
-            if (! configLoadImages.booleanValue)
-            {
-                btnLoadImages.visible = true;
-            }
+            htmlFilter.imageProxy = configLoadImages.booleanValue
+                    ? ""
+                    : imagePlaceholder;
+            btnLoadImages.visible = ! configLoadImages.booleanValue;
         }
     }
 
@@ -149,6 +142,14 @@ Page {
         onNextItem: {
             nextItem();
         }
+    }
+
+    HtmlFilter {
+        id: htmlFilter
+        baseUrl: itemData ? itemData.source : ""
+        imageProxy: configLoadImages.booleanValue ? "" :  imagePlaceholder
+        html: itemData ? newsBlendModel.itemBody(itemData.source, itemData.uid)
+                       : ""
     }
 
     Rectangle {
@@ -281,8 +282,8 @@ Page {
                 }
 
                 onClicked: {
-                    body.text = htmlFilter.replace(body.text, imagePlaceholder + "?", "");
                     visible = false;
+                    htmlFilter.imageProxy = "";
                 }
             }
 
@@ -375,10 +376,7 @@ Page {
 
                 color: Theme.primaryColor
                 fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
-
-                text: htmlFilter.filter(newsBlendModel.itemBody(itemData.source, itemData.uid),
-                                        itemData.source,
-                                        btnLoadImages.visible ? imagePlaceholder : "");
+                text: htmlFilter.htmlFiltered
 
                 onLinkActivated: {
                     var props = {
@@ -397,7 +395,7 @@ Page {
 
             ListItem {
                 id: resourcesItem
-                property var _images: htmlFilter.getImages(_htmlData)
+                property var _images: htmlFilter.images
 
                 visible: _images.length > 0
 
