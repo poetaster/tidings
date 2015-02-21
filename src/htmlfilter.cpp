@@ -149,6 +149,9 @@ QString HtmlFilter::filter(QString html,
     htmlSed.dropTagWithContents("FOOTER");
     htmlSed.dropTag("INPUT");
     htmlSed.dropTag("ASIDE");
+    htmlSed.dropTag("B");
+    htmlSed.dropTag("I");
+    htmlSed.dropTag("DIV");
     htmlSed.replaceTag("TABLE", "<P>", true, false);
     htmlSed.replaceTag("TABLE", "</P>", false, true);
     htmlSed.dropTag("THEAD");

@@ -323,7 +323,7 @@ QString HtmlSed::toString() const
         const QString tagData = findTag(html.mid(offset), tagPosition);
         //const QString pcData = html.mid(offset, tagPosition);
 
-        qDebug() << "DATA" << tagData;
+        //qDebug() << "DATA" << tagData;
 
         if (tagData.isEmpty())
         {
