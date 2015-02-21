@@ -9,6 +9,8 @@ Page {
     property string title
     property string url
 
+    property bool _imagesLoaded
+
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
     onStatusChanged: {
@@ -57,23 +59,14 @@ Page {
             id: column
             width: parent.width
 
-            ListItem {
-                id: btnLoadImages
-                visible: ! configLoadImages.booleanValue
+            LoadImagesButton {
+                visible: ! configLoadImages.booleanValue &&
+                         ! _imagesLoaded &&
+                         htmlFilter.images.length > 0
                 width: parent.width
-                contentHeight: Theme.itemSizeLarge
-                highlighted: true
-
-                Label {
-                    anchors.left: parent.left
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.leftMargin: Theme.paddingLarge
-                    font.underline: true
-                    text: qsTr("Load images")
-                }
 
                 onClicked: {
-                    visible = false;
+                    _imagesLoaded = true;
                     htmlFilter.imageProxy = "";
                 }
             }

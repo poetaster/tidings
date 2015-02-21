@@ -58,7 +58,8 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/MediaItem.qml \
     qml/pages/ImagePage.qml \
     qml/pages/ResourcesPage.qml \
-    qml/pages/placeholder.png
+    qml/pages/placeholder.png \
+    qml/pages/LoadImagesButton.qml
 
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-tidings-ru_RU.ts

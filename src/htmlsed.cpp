@@ -317,6 +317,8 @@ QString HtmlSed::toString() const
 
     Tag previousTag("");
 
+    qDebug() << "Parsing" << html.size() << "bytes of HTML...";
+
     while (true)
     {
         // find the next tag, and the PCDATA up to that tag

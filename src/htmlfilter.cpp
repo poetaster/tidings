@@ -37,27 +37,13 @@ public:
             // remove those damn tracking pixels...
             tag.replaceWith("");
         }
-        else if (myPlaceholder.size())
-        {
-            tag.setAttribute("SRC", myPlaceholder);
-        }
-    }
-private:
-    QString myPlaceholder;
-};
-
-class ImageCollector : public HtmlSed::Modifier
-{
-public:
-    void modifyTag(HtmlSed::Tag& tag)
-    {
-        if (tag.attribute("WIDTH") == "1" || tag.attribute("HEIGHT") == "1")
-        {
-            // don't collect those damn tracking pixels...
-        }
-        else if (tag.hasAttribute("SRC"))
+        else
         {
             myImages << tag.attribute("SRC");
+            if (myPlaceholder.size())
+            {
+                tag.setAttribute("SRC", myPlaceholder);
+            }
         }
     }
 
@@ -67,6 +53,7 @@ public:
     }
 
 private:
+    QString myPlaceholder;
     QSet<QString> myImages;
 };
 
@@ -78,8 +65,6 @@ HtmlFilter::HtmlFilter(QObject* parent)
 {
     connect(&myFilteredFutureWatcher, SIGNAL(finished()),
             this, SLOT(slotFilteredFinished()));
-    connect(&myImagesFutureWatcher, SIGNAL(finished()),
-            this, SLOT(slotImagesFinished()));
 }
 
 void HtmlFilter::setBaseUrl(const QString& baseUrl)
@@ -101,11 +86,6 @@ void HtmlFilter::setHtml(const QString& html)
     myHtml = html;
     emit htmlChanged();
 
-    QFuture<QStringList> imagesFuture = QtConcurrent::run(this,
-                                                          &HtmlFilter::getImages,
-                                                          myHtml);
-    myImagesFutureWatcher.setFuture(imagesFuture);
-
     process();
 }
 
@@ -119,17 +99,18 @@ void HtmlFilter::process()
     myIsBusy = true;
     emit busyChanged();
 
-    QFuture<QString> filteredFuture = QtConcurrent::run(this,
-                                                        &HtmlFilter::filter,
-                                                        myHtml,
-                                                        myBaseUrl,
-                                                        myImageProxy);
+    QFuture<QPair<QString, QStringList> > filteredFuture =
+            QtConcurrent::run(this,
+                              &HtmlFilter::filter,
+                              myHtml,
+                              myBaseUrl,
+                              myImageProxy);
     myFilteredFutureWatcher.setFuture(filteredFuture);
 }
 
-QString HtmlFilter::filter(QString html,
-                           QString url,
-                           QString imagePlaceHolder) const
+QPair<QString, QStringList> HtmlFilter::filter(QString html,
+                                               QString url,
+                                               QString imagePlaceHolder) const
 {
     VideoModifier videoModifier;
     ImageModifier imageModifier(imagePlaceHolder);
@@ -168,30 +149,21 @@ QString HtmlFilter::filter(QString html,
     htmlSed.modifyTag("VIDEO", &videoModifier);
 
     //qDebug() << "AFTER" << htmlSed.toString();
-    return htmlSed.toString();
-}
-
-QStringList HtmlFilter::getImages(const QString& html) const
-{
-    ImageCollector collector;
-
-    HtmlSed htmlSed(html);
-    htmlSed.modifyTag("IMG", &collector);
-    htmlSed.toString();
-    return collector.images().toList();
+    QString filtered = htmlSed.toString();
+    QStringList images = imageModifier.images().toList();
+    images.sort(Qt::CaseInsensitive);
+    return QPair<QString, QStringList>(filtered, images);
 }
 
 void HtmlFilter::slotFilteredFinished()
 {
-    myHtmlFiltered = myFilteredFutureWatcher.future().result();
+    QPair<QString, QStringList> data =
+            myFilteredFutureWatcher.future().result();
+    myHtmlFiltered = data.first;
+    myImages = data.second;
     emit filtered();
+    emit imagesChanged();
 
     myIsBusy = false;
     emit busyChanged();
-}
-
-void HtmlFilter::slotImagesFinished()
-{
-    myImages = myImagesFutureWatcher.future().result();
-    emit imagesChanged();
 }

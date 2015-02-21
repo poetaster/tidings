@@ -18,10 +18,9 @@ class HtmlFilter : public QObject
 public:
     explicit HtmlFilter(QObject* parent = 0);
 
-    QString filter(QString html,
-                   QString url,
-                   QString imagePlaceHolder = QString()) const;
-    QStringList getImages(const QString& html) const;
+    QPair<QString, QStringList> filter(QString html,
+                                       QString url,
+                                       QString imagePlaceHolder = QString()) const;
 
 signals:
     void busyChanged();
@@ -33,7 +32,6 @@ signals:
 
 private slots:
     void slotFilteredFinished();
-    void slotImagesFinished();
 
 private:
     bool busy() const { return myIsBusy; }
@@ -61,8 +59,7 @@ private:
     QString myHtmlFiltered;
     QStringList myImages;
 
-    QFutureWatcher<QString> myFilteredFutureWatcher;
-    QFutureWatcher<QStringList> myImagesFutureWatcher;
+    QFutureWatcher<QPair<QString, QStringList> > myFilteredFutureWatcher;
 };
 
 #endif // HTMLFILTER_H

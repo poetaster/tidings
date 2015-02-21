@@ -99,6 +99,14 @@
     </message>
 </context>
 <context>
+    <name>LoadImagesButton</name>
+    <message>
+        <location filename="../qml/pages/LoadImagesButton.qml" line="13"/>
+        <source>Load images</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>MediaItem</name>
     <message>
         <source>Audio</source>
@@ -366,62 +374,57 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="70"/>
+        <location filename="../qml/pages/ViewPage.qml" line="71"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="72"/>
+        <location filename="../qml/pages/ViewPage.qml" line="73"/>
         <source>Image</source>
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="74"/>
+        <location filename="../qml/pages/ViewPage.qml" line="75"/>
         <source>Video</source>
         <translation>Видео</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="76"/>
+        <location filename="../qml/pages/ViewPage.qml" line="77"/>
         <source>PDF document</source>
         <translation>Документ PDF</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="197"/>
+        <location filename="../qml/pages/ViewPage.qml" line="198"/>
         <source>Previous</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="198"/>
+        <location filename="../qml/pages/ViewPage.qml" line="199"/>
         <source>Already at the beginning</source>
         <translation>Уже в начале</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="228"/>
+        <location filename="../qml/pages/ViewPage.qml" line="229"/>
         <source>Next</source>
         <translation>Далее</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="229"/>
+        <location filename="../qml/pages/ViewPage.qml" line="230"/>
         <source>Already at the end</source>
         <translation>Уже в конце</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="281"/>
-        <source>Load images</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ViewPage.qml" line="351"/>
+        <location filename="../qml/pages/ViewPage.qml" line="343"/>
         <source>(%1 seconds)</source>
         <translation>(%1 секунд)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="436"/>
+        <location filename="../qml/pages/ViewPage.qml" line="428"/>
         <source>Media</source>
         <translation>Медиа</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="417"/>
+        <location filename="../qml/pages/ViewPage.qml" line="409"/>
         <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>
@@ -433,17 +436,12 @@
         <translation type="vanished">Закрыть web view</translation>
     </message>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="48"/>
+        <location filename="../qml/pages/WebPage.qml" line="50"/>
         <source>Open in browser</source>
         <translation>Открыть в браузере</translation>
     </message>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="72"/>
-        <source>Load images</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/WebPage.qml" line="132"/>
+        <location filename="../qml/pages/WebPage.qml" line="125"/>
         <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>
