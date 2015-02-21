@@ -165,7 +165,7 @@ int NewsBlendModel::rowCount(const QModelIndex&) const
 
 QVariant NewsBlendModel::data(const QModelIndex& index, int role) const
 {
-    if (! index.isValid() || index.row() >= myItems.size())
+    if (! index.isValid() || index.row() >= count())
     {
         return QVariant();
     }
@@ -580,8 +580,6 @@ void NewsBlendModel::setVisibleRead()
             --myUnreadCounts[item->feedSource];
         }
     }
-
-
     emit readChanged(items);
 }
 
@@ -617,7 +615,6 @@ void NewsBlendModel::setAllRead()
 
 void NewsBlendModel::removeReadItems(const QString& feedSource)
 {
-    beginResetModel();
     foreach (Item::Ptr item, myItemMap.values())
     {
         if (item->isRead && ! item->isShelved &&
@@ -630,61 +627,21 @@ void NewsBlendModel::removeReadItems(const QString& feedSource)
             }
         }
     }
-
-    /*
-    int pos = 0;
-    while (pos < myItems.size())
-    {
-        Item::Ptr item = myItems.at(pos);
-        if (item->isRead && ! item->isShelved &&
-            (feedSource.isEmpty() || item->feedSource == feedSource))
-        {
-            Item::Ptr itemToRemove = myItems.takeAt(pos);
-            if (myItemMap.remove(FullId(itemToRemove->feedSource, itemToRemove->uid)))
-            {
-                qDebug() << "removed item" << itemToRemove->title;
-                --myTotalCounts[itemToRemove->feedSource];
-            }
-        }
-        else
-        {
-            ++pos;
-        }
-    }
-    */
-    endResetModel();
+    reinsertItems();
 }
 
 void NewsBlendModel::removeFeedItems(const QString& feedSource)
 {
-    beginResetModel();
     foreach (Item::Ptr item, myItemMap)
     {
         if (item->feedSource == feedSource)
         {
-            myItems.removeOne(item);
             myItemMap.remove(FullId(item->feedSource, item->uid));
         }
     }
-
-    /*
-    int pos = 0;
-    while (pos < myItems.size())
-    {
-        if (myItems.at(pos)->feedSource == feedSource)
-        {
-            Item::Ptr item = myItems.takeAt(pos);
-            myItemMap.remove(FullId(item->feedSource, item->uid));
-        }
-        else
-        {
-            ++pos;
-        }
-    }
-    */
     myTotalCounts.remove(feedSource);
     myUnreadCounts.remove(feedSource);
-    endResetModel();
+    reinsertItems();
 }
 
 int NewsBlendModel::previousOfFeed(int index) const
@@ -707,11 +664,12 @@ int NewsBlendModel::previousOfFeed(int index) const
 
 int NewsBlendModel::nextOfFeed(int index) const
 {
-    if (index < myItems.size())
+    int size = count();
+    if (index < size)
     {
         const QString feedSource = myItems.at(index)->feedSource;
         ++index;
-        while (index < myItems.size())
+        while (index < size)
         {
             if (myItems.at(index)->feedSource == feedSource)
             {
@@ -725,7 +683,7 @@ int NewsBlendModel::nextOfFeed(int index) const
 
 int NewsBlendModel::firstOfFeed(const QString& feedSource) const
 {
-    int size = myItems.size();
+    int size = count();
     for (int i = 0; i < size; ++i)
     {
         if (myItems.at(i)->feedSource == feedSource)
