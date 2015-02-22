@@ -79,7 +79,7 @@ ApplicationWindow
     ConfigValue {
         id: configFeedSorter
         key: "feed-sort-by"
-        value: "latestFirst"
+        value: "feedOnlyLatestFirst"
     }
 
     ConfigValue {

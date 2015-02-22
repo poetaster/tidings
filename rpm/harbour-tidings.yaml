@@ -1,5 +1,5 @@
 Name: harbour-tidings
-Summary: Bearer of tidings.
+Summary: RSS / Atom / Podcasts / Feed Reader
 Version: 0.6.0
 Release: 1
 Group: Qt/Qt
@@ -7,7 +7,7 @@ License: GPLv2
 Sources:
 - '%{name}-%{version}.tar.bz2'
 Description: |-
-  Tidings is a news feed aggregator for RSS, Atom, and OPML feeds. Always be up to date with the latest news of what matters to you on your mobile device.
+  Tidings is a news feed and podcast aggregator. Always be up to date with the latest news of what matters to you on your mobile device.
 Configure: none
 Builder: qtc5
 PkgConfigBR:
