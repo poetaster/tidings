@@ -115,24 +115,25 @@ QPair<QString, QStringList> HtmlFilter::filter(QString html,
     VideoModifier videoModifier;
     ImageModifier imageModifier(imagePlaceHolder);
 
-    qDebug() << "BEFORE" << html;
+    //qDebug() << "BEFORE" << html;
     HtmlSed htmlSed(html);
     htmlSed.dropTag("HTML");
     htmlSed.dropTag("BODY");
     htmlSed.dropTagWithContents("SCRIPT");
+    htmlSed.dropTagWithContents("STYLE");
     htmlSed.dropTagWithContents("NOSCRIPT");
     htmlSed.dropTagWithContents("HEAD");
     htmlSed.dropTag("FONT");
-    htmlSed.dropTag("LINK");
+    //htmlSed.dropTag("LINK");
     htmlSed.dropTagWithContents("FORM");
     htmlSed.dropTagWithContents("NAV");
     htmlSed.dropTag("HEADER");
     htmlSed.dropTagWithContents("FOOTER");
     htmlSed.dropTag("INPUT");
     htmlSed.dropTag("ASIDE");
-    htmlSed.dropTag("B");
-    htmlSed.dropTag("I");
-    htmlSed.dropTag("DIV");
+    //htmlSed.dropTag("B");
+    //htmlSed.dropTag("I");
+    //htmlSed.dropTag("DIV");
     htmlSed.replaceTag("TABLE", "<P>", true, false);
     htmlSed.replaceTag("TABLE", "</P>", false, true);
     htmlSed.dropTag("THEAD");
@@ -143,15 +144,23 @@ QPair<QString, QStringList> HtmlFilter::filter(QString html,
     htmlSed.surroundTag("LI", "", "&nbsp;", true, false);
     htmlSed.replaceAttribute("", "STYLE", RE_STYLE_COLOR, "");
     htmlSed.replaceAttribute("", "STYLE", RE_STYLE_FONT_SIZE, "");
+    htmlSed.replaceAttribute("", "CLASS", ".*", "");
     htmlSed.resolveUrl("A", "HREF", url);
-    //htmlSed.resolveUrl("IMG", "SRC", url);
+    htmlSed.resolveUrl("IMG", "SRC", url);
     htmlSed.modifyTag("IMG", &imageModifier);
     htmlSed.modifyTag("VIDEO", &videoModifier);
 
-    //qDebug() << "AFTER" << htmlSed.toString();
     QString filtered = htmlSed.toString();
+
+    if (filtered.size() > 1024 * 100)
+    {
+        qDebug() << "Article exceeds 100k after sanitizing. Cropping off.";
+        filtered = filtered.left(1024 * 100);
+    }
+
     QStringList images = imageModifier.images().toList();
     images.sort(Qt::CaseInsensitive);
+    //qDebug() << "AFTER" << filtered;
     return QPair<QString, QStringList>(filtered, images);
 }
 

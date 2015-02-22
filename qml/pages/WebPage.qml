@@ -9,8 +9,6 @@ Page {
     property string title
     property string url
 
-    property bool _imagesLoaded
-
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
     onStatusChanged: {
@@ -60,13 +58,11 @@ Page {
             width: parent.width
 
             LoadImagesButton {
-                visible: ! configLoadImages.booleanValue &&
-                         ! _imagesLoaded &&
+                visible: htmlFilter.imageProxy !== "" &&
                          htmlFilter.images.length > 0
                 width: parent.width
 
                 onClicked: {
-                    _imagesLoaded = true;
                     htmlFilter.imageProxy = "";
                 }
             }

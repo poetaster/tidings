@@ -19,12 +19,14 @@ public:
     public:
         Tag(const QString& data);
 
+        bool isModified() const { return myIsModified; }
         bool isOpening() const { return myIsOpening; }
         bool isClosing() const { return myIsClosing; }
         QString name() const { return myName; }
         void setName(const QString& name)
         {
             myName = name;
+            myIsModified = true;
         }
         QStringList attributes() const { return myAttributes.keys(); }
         bool hasAttribute(const QString& attr) const
@@ -38,21 +40,25 @@ public:
         void setAttribute(const QString& attr, const QString& value)
         {
             myAttributes[attr.toUpper()] = value;
+            myIsModified = true;
         }
         void replaceWith(const QString& replaceWith)
         {
             myReplaceWith = replaceWith;
             myIsReplaced = true;
+            myIsModified = true;
         }
         void setSurroundings(const QString& before, const QString& after)
         {
             myBeforeText = before;
             myAfterText = after;
+            myIsModified = true;
         }
 
         QString toString() const;
 
     private:
+        bool myIsModified;
         bool myIsOpening;
         bool myIsClosing;
         QString myName;

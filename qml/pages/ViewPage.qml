@@ -18,7 +18,6 @@ Page {
     property int _nextOfFeed: -1
 
     property bool _activated
-    property bool _imagesLoaded
 
     function previousItem() {
         listview.currentIndex = listview.currentIndex - 1;
@@ -123,7 +122,6 @@ Page {
             htmlFilter.imageProxy = configLoadImages.booleanValue
                     ? ""
                     : imagePlaceholder;
-            _imagesLoaded = false;
         }
     }
 
@@ -268,13 +266,11 @@ Page {
             }
 
             LoadImagesButton {
-                visible: ! configLoadImages.booleanValue &&
-                         ! _imagesLoaded &&
+                visible: htmlFilter.imageProxy !== "" &&
                          htmlFilter.images.length > 0
                 width: parent.width
 
                 onClicked: {
-                    _imagesLoaded = true;
                     htmlFilter.imageProxy = "";
                 }
             }

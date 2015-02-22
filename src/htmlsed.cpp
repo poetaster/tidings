@@ -6,7 +6,7 @@
 namespace
 {
 
-const QRegExp RE_TAG("<[^!>][^>]*>");
+QRegExp RE_TAG("<[^>][^>]*>");
 const QRegExp RE_TAG_NAME("[a-zA-Z0-9]+[\\s/>]");
 const QRegExp RE_TAG_ATTRIBUTE("[a-zA-Z0-9]+\\s*=\\s*(\"[^\"]*\"|'[^']*'|[^\\s\"']*)");
 
@@ -16,46 +16,45 @@ const QRegExp RE_TAG_ATTRIBUTE("[a-zA-Z0-9]+\\s*=\\s*(\"[^\"]*\"|'[^']*'|[^\\s\"
  * HTML comments (<!-- -->) are recognized as tags.
  * pos will be set to the start position of the tag in the string.
  */
-QString findTag(const QString& html, int& pos)
+QString findTag(const QString& html, int offset, int& pos)
 {
-    QRegExp tag(RE_TAG);
-    int tagPos = tag.indexIn(html);
-    int commentBeginPos = html.indexOf("<!--");
-
-    if (commentBeginPos != -1 && commentBeginPos < tagPos)
+    int bracketPos = html.indexOf("<", offset);
+    if (bracketPos == -1)
     {
-        int commentEndPos = html.indexOf("-->", commentBeginPos);
+        return QString();
+    }
+
+    if (html.mid(bracketPos, 4) == "<!--")
+    {
+        // it's a comment
+        int commentEndPos = html.indexOf("-->", bracketPos);
         if (commentEndPos != -1)
         {
-            pos = commentBeginPos;
-            int length = commentEndPos + 3 - commentBeginPos;
-            return html.mid(commentBeginPos, length);
-        }
-        else
-        {
-            return QString();
+            pos = bracketPos - offset;
+            int length = commentEndPos + 3 - bracketPos;
+            return html.mid(bracketPos, length);
         }
     }
     else
     {
-        if (tagPos != -1)
+        int endPos = html.indexOf(">", bracketPos);
+        if (endPos != -1)
         {
-            pos = tagPos;
-            int length = tag.matchedLength();
-            return html.mid(pos, length);
-        }
-        else
-        {
-            return QString();
+            pos = bracketPos - offset;
+            int length = endPos + 1 - bracketPos;
+            return html.mid(bracketPos, length);
         }
     }
+
+    return QString();
 }
 
 }
 
 
 HtmlSed::Tag::Tag(const QString& data)
-    : myIsOpening(false)
+    : myIsModified(false)
+    , myIsOpening(false)
     , myIsClosing(false)
     , myIsReplaced(false)
 {
@@ -309,6 +308,7 @@ void HtmlSed::modifyTag(const QString& tag,
 QString HtmlSed::toString() const
 {
     QString html = myHtml;
+    QString out;
 
     int offset = 0;
     int tagPosition = 0;
@@ -322,19 +322,25 @@ QString HtmlSed::toString() const
     while (true)
     {
         // find the next tag, and the PCDATA up to that tag
-        const QString tagData = findTag(html.mid(offset), tagPosition);
-        //const QString pcData = html.mid(offset, tagPosition);
+        const QString tagData = findTag(html, offset, tagPosition);
+        const QString pcData = html.mid(offset, tagData.isEmpty() ? -1 : tagPosition);
+        offset += tagPosition + tagData.size();
 
+        //qDebug() << "PCDATA" << pcData;
         //qDebug() << "DATA" << tagData;
+
+        if (contentStack.isEmpty())
+        {
+            out.append(pcData);
+        }
 
         if (tagData.isEmpty())
         {
             break;
         }
 
-        if (tagData.startsWith("<!--"))
+        if (tagData.startsWith("<!"))
         {
-            offset += tagData.size();
             continue;
         }
 
@@ -345,7 +351,6 @@ QString HtmlSed::toString() const
             ! previousTag.isClosing() &&
             (tag.name() != "SCRIPT" || ! tag.isClosing()))
         {
-            offset += tagData.size();
             continue;
         }
 
@@ -366,8 +371,8 @@ QString HtmlSed::toString() const
                     if (tag.isOpening())
                     {
                         //qDebug() << "begin content at" << tag.name() << (offset + tagPosition);
-                        contentStack << QPair<QString, int>(tag.name(),
-                                                            offset + tagPosition + tag.toString().size());
+                        contentStack << QPair<QString, int>(tag.name(), offset);
+
                     }
                     if (tag.isClosing() &&
                         contentStack.size() &&
@@ -376,22 +381,16 @@ QString HtmlSed::toString() const
                         //qDebug() << "end content at" << tag.name() << (offset + tagPosition);
                         QPair<QString, int> item = contentStack.takeLast();
                         QString contents = html.mid(item.second,
-                                                    offset + tagPosition - item.second);
+                                                    offset - tagData.size() - item.second);
                         //qDebug() << "contents" << contents;
                         contents.replace(rule.regExp,
                                          rule.replaceWith);
                         //qDebug() << "replaced contents" << contents;
 
-                        //qDebug() << "html at" << html.mid(item.second, offset + tagPosition - item.second);
-                        html.replace(item.second,
-                                     offset + tagPosition - item.second,
-                                     contents);
-                        offset = item.second + contents.size();
-                        tagPosition = 0;
+                        out.append(contents);
                     }
-                    break;
                 }
-                else if (rule.mode == Rule::RESOLVE_URL)
+                else if (rule.mode == Rule::RESOLVE_URL && tag.isOpening())
                 {
                     // resolve URL
                     QString url = tag.attribute(rule.attribute);
@@ -399,7 +398,6 @@ QString HtmlSed::toString() const
                         url.startsWith("https://"))
                     {
                         // do nothing
-                        break;
                     }
                     else
                     {
@@ -448,15 +446,23 @@ QString HtmlSed::toString() const
 
         }//if in rule set
 
-        const QString newTagData = tag.toString();
-        html.replace(offset + tagPosition,
-                     tagData.size(),
-                     newTagData);
-        offset += tagPosition + newTagData.size();
+        if (contentStack.isEmpty())
+        {
+            if (tag.isModified())
+            {
+                out.append(tag.toString());
+            }
+            else
+            {
+                out.append(tagData);
+            }
+        }
 
         previousTag = tag;
 
     }//while
 
-    return html;
+    qDebug() << "Done parsing HTML.";
+
+    return out;
 }
