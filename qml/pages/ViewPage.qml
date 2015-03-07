@@ -381,6 +381,32 @@ Page {
                 height: Theme.paddingLarge
             }
 
+            /*
+            ListItem {
+                width: parent.width
+
+                Image {
+                    id: shareIcon
+                    x: Theme.paddingLarge
+                    anchors.verticalCenter: parent.verticalCenter
+                    source: "image://theme/icon-l-share" +
+                            (parent.highlighted ? "?highlighted" : "")
+                }
+
+                Label {
+                    anchors.left: shareIcon.right
+                    anchors.leftMargin: Theme.paddingMedium
+                    anchors.verticalCenter: parent.verticalCenter
+                    color: parent.highlighted ? Theme.highlightColor : Theme.primaryColor
+                    text: qsTr("Share this")
+                }
+
+                onClicked: {
+                    Qt.openUrlExternally("mailto:friend@email.com?title='Shared from Tidings'");
+                }
+            }
+            */
+
             ListItem {
                 id: resourcesItem
                 property var _images: htmlFilter.images

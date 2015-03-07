@@ -11,6 +11,8 @@ namespace
 const QString RE_STYLE_COLOR("color:\\s*[^\\s;\"']+;?");
 const QString RE_STYLE_FONT_SIZE("font-size:\\s*\\d+[a-zA-Z]*;?");
 
+const QRegExp NO_DIGIT("[^\\d]");
+
 class VideoModifier : public HtmlSed::Modifier
 {
 public:
@@ -32,6 +34,20 @@ public:
     { }
     void modifyTag(HtmlSed::Tag& tag)
     {
+        // fix invalid width / height that can crash QML Text
+        if (tag.hasAttribute("WIDTH"))
+        {
+            tag.setAttribute("WIDTH",
+                             tag.attribute("WIDTH")
+                                .replace(NO_DIGIT, ""));
+        }
+        if (tag.hasAttribute("HEIGHT"))
+        {
+            tag.setAttribute("HEIGHT",
+                             tag.attribute("HEIGHT")
+                                .replace(NO_DIGIT, ""));
+        }
+
         if (tag.attribute("WIDTH") == "1" || tag.attribute("HEIGHT") == "1")
         {
             // remove those damn tracking pixels...
@@ -124,16 +140,15 @@ QPair<QString, QStringList> HtmlFilter::filter(QString html,
     htmlSed.dropTagWithContents("NOSCRIPT");
     htmlSed.dropTagWithContents("HEAD");
     htmlSed.dropTag("FONT");
-    //htmlSed.dropTag("LINK");
     htmlSed.dropTagWithContents("FORM");
     htmlSed.dropTagWithContents("NAV");
     htmlSed.dropTag("HEADER");
     htmlSed.dropTagWithContents("FOOTER");
     htmlSed.dropTag("INPUT");
+    htmlSed.dropTag("ARTICLE");
     htmlSed.dropTag("ASIDE");
-    //htmlSed.dropTag("B");
-    //htmlSed.dropTag("I");
-    //htmlSed.dropTag("DIV");
+    htmlSed.replaceTag("DIV", "<P>", true, false);
+    htmlSed.replaceTag("DIV", "</P>", false, true);
     htmlSed.replaceTag("TABLE", "<P>", true, false);
     htmlSed.replaceTag("TABLE", "</P>", false, true);
     htmlSed.dropTag("THEAD");
@@ -150,7 +165,7 @@ QPair<QString, QStringList> HtmlFilter::filter(QString html,
     htmlSed.modifyTag("IMG", &imageModifier);
     htmlSed.modifyTag("VIDEO", &videoModifier);
 
-    QString filtered = htmlSed.toString();
+    QString filtered = htmlSed.toString().trimmed();
 
     if (filtered.size() > 1024 * 100)
     {

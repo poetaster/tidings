@@ -410,12 +410,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="424"/>
+        <location filename="../qml/pages/ViewPage.qml" line="450"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="405"/>
+        <location filename="../qml/pages/ViewPage.qml" line="431"/>
         <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>
