@@ -4,7 +4,8 @@ import Sailfish.Silica 1.0
 Page {
     objectName: "ResourcesPage"
 
-    property var images
+    property variant resources
+    property variant _images: resources.images
 
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
@@ -27,7 +28,7 @@ Page {
 
             Repeater {
                 id: imagesRepeater
-                model: images
+                model: _images
 
                 delegate: MediaItem {
                     width: column.width

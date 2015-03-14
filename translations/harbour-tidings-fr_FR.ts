@@ -177,12 +177,12 @@
         <translation type="obsolete">Média</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResourcesPage.qml" line="20"/>
+        <location filename="../qml/pages/ResourcesPage.qml" line="21"/>
         <source>Resources</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ResourcesPage.qml" line="25"/>
+        <location filename="../qml/pages/ResourcesPage.qml" line="26"/>
         <source>Embedded images</source>
         <translation type="unfinished"></translation>
     </message>
@@ -374,76 +374,82 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="70"/>
+        <location filename="../qml/pages/ViewPage.qml" line="68"/>
         <source>Audio</source>
         <translation>Audio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="72"/>
+        <location filename="../qml/pages/ViewPage.qml" line="70"/>
         <source>Image</source>
         <translation>Images</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="74"/>
+        <location filename="../qml/pages/ViewPage.qml" line="72"/>
         <source>Video</source>
         <translation>Vidéo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="76"/>
+        <location filename="../qml/pages/ViewPage.qml" line="74"/>
         <source>PDF document</source>
         <translation>Document PDF</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="196"/>
+        <location filename="../qml/pages/ViewPage.qml" line="205"/>
         <source>Previous</source>
         <translation>Précédent</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="197"/>
+        <location filename="../qml/pages/ViewPage.qml" line="206"/>
         <source>Already at the beginning</source>
         <translation>Premier article</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="227"/>
+        <location filename="../qml/pages/ViewPage.qml" line="236"/>
         <source>Next</source>
         <translation>Suivant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="228"/>
+        <location filename="../qml/pages/ViewPage.qml" line="237"/>
         <source>Already at the end</source>
         <translation type="unfinished">Dernier article</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="339"/>
+        <location filename="../qml/pages/ViewPage.qml" line="348"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished">(%1 secondes)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="450"/>
-        <source>Media</source>
-        <translation>Média</translation>
+        <location filename="../qml/pages/ViewPage.qml" line="418"/>
+        <source>Short article</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="431"/>
-        <source>Resources</source>
+        <location filename="../qml/pages/ViewPage.qml" line="450"/>
+        <source>Website</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="419"/>
+        <source>Full article</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="496"/>
+        <source>Media</source>
+        <translation>Média</translation>
     </message>
 </context>
 <context>
     <name>WebPage</name>
     <message>
+        <location filename="../qml/pages/WebPage.qml" line="36"/>
         <source>Close web view</source>
-        <translation type="vanished">Fermer la vue web</translation>
+        <translation>Fermer la vue web</translation>
     </message>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="48"/>
+        <location filename="../qml/pages/WebPage.qml" line="45"/>
         <source>Open in browser</source>
         <translation>Ouvrir dans le navigateur</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/WebPage.qml" line="121"/>
-        <source>Resources</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

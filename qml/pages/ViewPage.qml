@@ -11,8 +11,6 @@ Page {
                                ? listview.currentItem.data
                                : null
 
-    property Page _attachedWebView
-
     property int _currentIndex: listview.currentIndex
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
@@ -94,11 +92,11 @@ Page {
             if (itemData.link !== "")
             {
                 var props = {
-                    "url": itemData.link,
-                    "title": itemData.title
-                }
-                _attachedWebView = pageStack.pushAttached(
-                            Qt.resolvedUrl("WebPage.qml"), props);
+                    "resources": resources
+                };
+
+                pageStack.pushAttached(Qt.resolvedUrl("ResourcesPage.qml"),
+                                       props);
             }
 
             page._activated = true;
@@ -108,17 +106,12 @@ Page {
     onItemDataChanged: {
         if (itemData)
         {
-            if (_attachedWebView)
-            {
-                _attachedWebView.title = itemData.title;
-                _attachedWebView.url = itemData.link;
-            }
-
             navigationState.openedItem(listview.currentIndex);
             if (! itemData.read && ! itemData.shelved) {
                 newsBlendModel.setRead(listview.currentIndex, true);
             }
 
+            urlLoader.source = "";
             htmlFilter.imageProxy = configLoadImages.booleanValue
                     ? ""
                     : imagePlaceholder;
@@ -143,12 +136,28 @@ Page {
         }
     }
 
+    QtObject {
+        id: resources
+        property string link: itemData ? itemData.link : ""
+        property variant images: htmlFilter.images
+    }
+
+    QtObject {
+        id: contentProvider
+        property string data: urlLoader.source != "" ? urlLoader.data
+                                                     : itemData ? newsBlendModel.itemBody(itemData.source, itemData.uid)
+                                                                : ""
+    }
+
+    UrlLoader {
+        id: urlLoader
+    }
+
     HtmlFilter {
         id: htmlFilter
         baseUrl: itemData ? itemData.source : ""
         imageProxy: configLoadImages.booleanValue ? "" :  imagePlaceholder
-        html: itemData ? newsBlendModel.itemBody(itemData.source, itemData.uid)
-                       : ""
+        html: contentProvider.data
     }
 
     Rectangle {
@@ -381,6 +390,75 @@ Page {
                 height: Theme.paddingLarge
             }
 
+            Row {
+                visible: ! urlLoader.loading && ! htmlFilter.busy
+                width: column.width
+                height: Theme.itemSizeLarge
+
+                ListItem {
+                    id: fullArticleButton
+                    width: parent.width / 2
+                    contentHeight: parent.height
+
+                    property bool _isFull: urlLoader.source != ""
+
+                    Image {
+                        id: fullArticleIcon
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.paddingLarge
+                        source: fullArticleButton._isFull ? "image://theme/icon-m-up"
+                                                          : "image://theme/icon-m-down"
+                    }
+
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: fullArticleIcon.right
+                        anchors.leftMargin: Theme.paddingMedium
+                        text: fullArticleButton._isFull ? qsTr("Short article")
+                                                        : qsTr("Full article")
+                    }
+
+                    onClicked: {
+                        if (_isFull)
+                        {
+                            urlLoader.source = "";
+                        }
+                        else
+                        {
+                            urlLoader.source = itemData.link;
+                        }
+                    }
+                }
+
+                ListItem {
+                    width: parent.width / 2
+                    contentHeight: parent.height
+
+                    Image {
+                        id: arrowIcon
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: Theme.paddingLarge
+                        source: "image://theme/icon-m-region"
+                    }
+
+                    Label {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: arrowIcon.right
+                        anchors.leftMargin: Theme.paddingMedium
+                        text: qsTr("Website")
+                    }
+
+                    onClicked: {
+                        var props = {
+                            "url": itemData.link
+                        }
+                        pageStack.push(Qt.resolvedUrl("WebPage.qml"), props);
+                    }
+                }
+            }
+
             /*
             ListItem {
                 width: parent.width
@@ -406,38 +484,6 @@ Page {
                 }
             }
             */
-
-            ListItem {
-                id: resourcesItem
-                property var _images: htmlFilter.images
-
-                visible: _images.length > 0
-
-                width: column.width
-                contentHeight: Theme.itemSizeLarge
-
-                Image {
-                    id: arrowIcon
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: parent.left
-                    anchors.leftMargin: Theme.paddingLarge
-                    source: "image://theme/icon-m-right"
-                }
-
-                Label {
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.left: arrowIcon.right
-                    anchors.leftMargin: Theme.paddingMedium
-                    text: qsTr("Resources")
-                }
-
-                onClicked: {
-                    var props = {
-                        "images": _images
-                    }
-                    pageStack.push(Qt.resolvedUrl("ResourcesPage.qml"), props);
-                }
-            }
 
             Item {
                 visible: enclosureRepeater.count > 0
@@ -468,4 +514,9 @@ Page {
         ScrollDecorator { }
     }
 
+    BusyIndicator {
+        running: urlLoader.loading || htmlFilter.busy
+        anchors.centerIn: parent
+        size: BusyIndicatorSize.Large
+    }
 }
