@@ -84,7 +84,7 @@ Dialog {
                                   "#5d00e5", "#0077e7", "#01a9e7",
                                   "#00cce7", "#00e696", "#00e600",
                                   "#99e600", "#e3e601", "#e5bc00",
-                                  "#e78601"];
+                                  "#e78601", "#ffffff", "#000000"];
                     var props = { "colors": colors };
 
                     var dlg = pageStack.push("Sailfish.Silica.ColorPickerDialog", props);
