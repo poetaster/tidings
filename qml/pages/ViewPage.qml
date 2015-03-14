@@ -391,7 +391,10 @@ Page {
             }
 
             Row {
-                visible: ! urlLoader.loading && ! htmlFilter.busy
+                visible: ! urlLoader.loading &&
+                         ! htmlFilter.busy &&
+                         itemData &&
+                         itemData.link !== ""
                 width: column.width
                 height: Theme.itemSizeLarge
 

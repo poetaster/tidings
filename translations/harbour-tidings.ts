@@ -410,22 +410,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="418"/>
+        <location filename="../qml/pages/ViewPage.qml" line="421"/>
         <source>Short article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="450"/>
+        <location filename="../qml/pages/ViewPage.qml" line="453"/>
         <source>Website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="419"/>
+        <location filename="../qml/pages/ViewPage.qml" line="422"/>
         <source>Full article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="496"/>
+        <location filename="../qml/pages/ViewPage.qml" line="499"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>

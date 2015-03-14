@@ -48,7 +48,8 @@ public:
                                 .replace(NO_DIGIT, ""));
         }
 
-        if (tag.attribute("WIDTH") == "1" || tag.attribute("HEIGHT") == "1")
+        if (tag.attribute("WIDTH") == "0" || tag.attribute("HEIGHT") == "0" ||
+            tag.attribute("WIDTH") == "1" || tag.attribute("HEIGHT") == "1")
         {
             // remove those damn tracking pixels...
             tag.replaceWith("");
