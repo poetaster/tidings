@@ -433,12 +433,12 @@
 <context>
     <name>WebPage</name>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="36"/>
+        <location filename="../qml/pages/WebPage.qml" line="41"/>
         <source>Close web view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/WebPage.qml" line="45"/>
+        <location filename="../qml/pages/WebPage.qml" line="50"/>
         <source>Open in browser</source>
         <translation type="unfinished"></translation>
     </message>
