@@ -140,6 +140,7 @@ QPair<QString, QStringList> HtmlFilter::filter(QString html,
     htmlSed.dropTagWithContents("STYLE");
     htmlSed.dropTagWithContents("NOSCRIPT");
     htmlSed.dropTagWithContents("HEAD");
+    htmlSed.dropTag("LINK"); // why does this tag exist outside HEAD (tweakers.nl)
     htmlSed.dropTag("FONT");
     htmlSed.dropTagWithContents("FORM");
     htmlSed.dropTagWithContents("NAV");
