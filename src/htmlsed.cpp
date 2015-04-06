@@ -6,7 +6,6 @@
 namespace
 {
 
-QRegExp RE_TAG("<[^>][^>]*>");
 const QRegExp RE_TAG_NAME("[a-zA-Z0-9]+[\\s/>]");
 const QRegExp RE_TAG_ATTRIBUTE("[a-zA-Z0-9]+\\s*=\\s*(\"[^\"]*\"|'[^']*'|[^\\s\"']*)");
 
@@ -56,6 +55,7 @@ HtmlSed::Tag::Tag(const QString& data)
     : myIsModified(false)
     , myIsOpening(false)
     , myIsClosing(false)
+    , myIsHidden(false)
     , myIsReplaced(false)
 {
     //qDebug() << "TAG" << data;
@@ -164,23 +164,19 @@ void HtmlSed::Rule::replaceTag(const QString& t,
 
 void HtmlSed::Rule::replaceAttribute(const QString& t,
                                      const QString& a,
-                                     const QRegExp& r,
                                      const QString& w)
 {
     mode = REPLACE_ATTRIBUTE;
     tag = t;
     attribute = a;
-    regExp = r;
     replaceWith = w;
 }
 
 void HtmlSed::Rule::replaceContents(const QString& t,
-                                    const QRegExp& r,
                                     const QString& w)
 {
     mode = REPLACE_CONTENTS;
     tag = t;
-    regExp = r;
     replaceWith = w;
 }
 
@@ -248,24 +244,20 @@ void HtmlSed::replaceTag(const QString& tagToReplace,
 
 void HtmlSed::replaceAttribute(const QString& tagToReplace,
                                const QString& attributeToReplace,
-                               const QString& regExp,
                                const QString& replaceWith)
 {
     Rule rule;
     rule.replaceAttribute(tagToReplace,
                           attributeToReplace,
-                          QRegExp(regExp),
                           replaceWith);
     addRule(tagToReplace, rule);
 }
 
 void HtmlSed::replaceContents(const QString& enclosingTag,
-                              const QString& regExp,
                               const QString& replaceWith)
 {
     Rule rule;
     rule.replaceContents(enclosingTag,
-                         QRegExp(regExp),
                          replaceWith);
     addRule(enclosingTag, rule);
 }
@@ -313,12 +305,11 @@ QString HtmlSed::toString() const
     int offset = 0;
     int tagPosition = 0;
 
-    QList<QPair<QString, int> > contentStack;
-
     Tag previousTag("");
 
     qDebug() << "Parsing" << html.size() << "bytes of HTML...";
 
+    QList<Tag> tagStack;
     while (true)
     {
         // find the next tag, and the PCDATA up to that tag
@@ -329,7 +320,25 @@ QString HtmlSed::toString() const
         //qDebug() << "PCDATA" << pcData;
         //qDebug() << "DATA" << tagData;
 
-        if (contentStack.isEmpty())
+        /*
+        qDebug() << "Tag Stack:";
+        foreach (const Tag& t, tagStack)
+        {
+            qDebug() << " -" << t.toString() << "hidden" << t.isHidden();
+        }
+        */
+
+        bool isHidden = false;
+        foreach (const Tag& t, tagStack)
+        {
+            if (t.isHidden())
+            {
+                isHidden = true;
+                break;
+            }
+        }
+
+        if (! isHidden)
         {
             out.append(pcData);
         }
@@ -354,9 +363,8 @@ QString HtmlSed::toString() const
             continue;
         }
 
-
         // apply the rules
-        if (myRuleSet.contains(tag.name()) || myRuleSet.contains(QString()))
+        if (! isHidden && (myRuleSet.contains(tag.name()) || myRuleSet.contains(QString())))
         {
             QList<Rule> rules = myRuleSet.value(tag.name(),
                                                          QList<Rule>()) +
@@ -370,24 +378,10 @@ QString HtmlSed::toString() const
                     // replace contents
                     if (tag.isOpening())
                     {
-                        //qDebug() << "begin content at" << tag.name() << (offset + tagPosition);
-                        contentStack << QPair<QString, int>(tag.name(), offset);
-
-                    }
-                    if (tag.isClosing() &&
-                        contentStack.size() &&
-                        contentStack.last().first == tag.name())
-                    {
-                        //qDebug() << "end content at" << tag.name() << (offset + tagPosition);
-                        QPair<QString, int> item = contentStack.takeLast();
-                        QString contents = html.mid(item.second,
-                                                    offset - tagData.size() - item.second);
-                        //qDebug() << "contents" << contents;
-                        contents.replace(rule.regExp,
-                                         rule.replaceWith);
-                        //qDebug() << "replaced contents" << contents;
-
-                        out.append(contents);
+                        tag.setHidden(true);
+                        isHidden = true;
+                        out.append(rule.replaceWith);
+                        break;
                     }
                 }
                 else if (rule.mode == Rule::RESOLVE_URL && tag.isOpening())
@@ -414,23 +408,22 @@ QString HtmlSed::toString() const
                     {
                         QString value = tag.attribute(rule.attribute);
                         tag.setAttribute(rule.attribute,
-                                         value.replace(rule.regExp,
-                                                       rule.replaceWith));
+                                         rule.replaceWith);
                     }
                 }
                 else if (rule.mode == Rule::REPLACE_TAG)
                 {
                     // replace tag
-                    if (rule.openingTag && tag.isOpening() ||
-                        rule.closingTag && tag.isClosing())
+                    if ((rule.openingTag && tag.isOpening()) ||
+                        (rule.closingTag && tag.isClosing()))
                     {
                         tag.replaceWith(rule.replaceWith);
                     }
                 }
                 else if (rule.mode == Rule::SURROUND_TAG)
                 {
-                    if (rule.openingTag && tag.isOpening() ||
-                        rule.closingTag && tag.isClosing())
+                    if ((rule.openingTag && tag.isOpening()) ||
+                        (rule.closingTag && tag.isClosing()))
                     {
                         tag.setSurroundings(rule.replaceWith,
                                             rule.replaceWithAfter);
@@ -443,10 +436,26 @@ QString HtmlSed::toString() const
 
             }//foreach rule
 
-
         }//if in rule set
 
-        if (contentStack.isEmpty())
+        // maintain tag stack
+        if (tag.isOpening())
+        {
+            tagStack << tag;
+        }
+        if (tag.isClosing())
+        {
+            while (tagStack.size())
+            {
+                Tag t = tagStack.takeLast();
+                if (t.name() == tag.name())
+                {
+                    break;
+                }
+            }
+        }
+
+        if (! isHidden)
         {
             if (tag.isModified())
             {

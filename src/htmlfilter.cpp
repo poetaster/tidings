@@ -8,15 +8,39 @@
 namespace
 {
 
-const QString RE_STYLE_COLOR("color:\\s*[^\\s;\"']+;?");
-const QString RE_STYLE_FONT_SIZE("font-size:\\s*\\d+[a-zA-Z]*;?");
-
+const QRegExp RE_STYLE_COLOR("color:\\s*[^\\s;\"']+;?");
+const QRegExp RE_STYLE_FONT_SIZE("font-size:\\s*\\d+[a-zA-Z]*;?");
+const QRegExp RE_STYLE_DISPLAY_NONE("display:\\s*none;?");
 const QRegExp NO_DIGIT("[^\\d]");
+
+class GenericModifier : public HtmlSed::Modifier
+{
+public:
+    virtual void modifyTag(HtmlSed::Tag& tag)
+    {
+        tag.removeAttribute("CLASS");
+
+        if (tag.hasAttribute("STYLE"))
+        {
+            if (tag.attribute("STYLE").contains(RE_STYLE_DISPLAY_NONE))
+            {
+                tag.setHidden(true);
+            }
+            else
+            {
+                QString style = tag.attribute("STYLE");
+                style.replace(RE_STYLE_COLOR, QString())
+                     .replace(RE_STYLE_FONT_SIZE, QString());
+                tag.setAttribute("STYLE", style);
+            }
+        }
+    }
+};
 
 class VideoModifier : public HtmlSed::Modifier
 {
 public:
-    void modifyTag(HtmlSed::Tag& tag)
+    virtual void modifyTag(HtmlSed::Tag& tag)
     {
         tag.setName("IMG");
         const QString src = tag.attribute("SRC");
@@ -32,7 +56,7 @@ public:
     ImageModifier(const QString& imagePlaceholder)
         : myPlaceholder(imagePlaceholder)
     { }
-    void modifyTag(HtmlSed::Tag& tag)
+    virtual void modifyTag(HtmlSed::Tag& tag)
     {
         // fix invalid width / height that can crash QML Text
         if (tag.hasAttribute("WIDTH"))
@@ -72,6 +96,34 @@ public:
 private:
     QString myPlaceholder;
     QSet<QString> myImages;
+};
+
+class IFrameModifier : public HtmlSed::Modifier
+{
+public:
+    virtual void modifyTag(HtmlSed::Tag& tag)
+    {
+        if (tag.hasAttribute("SRC"))
+        {
+            const QString src = tag.attribute("SRC");
+            if (src.startsWith("http://www.youtube.") ||
+                    src.startsWith("https://www.youtube."))
+            {
+                // this is probably an embedded YouTube video
+                tag.replaceWith(
+                            QString("<P><A HREF=\"%1\">[YouTube Video]</A></P>")
+                            .arg(src));
+            }
+            else
+            {
+                tag.replaceWith("");
+            }
+        }
+        else
+        {
+            tag.replaceWith("");
+        }
+    }
 };
 
 }
@@ -129,8 +181,10 @@ QPair<QString, QStringList> HtmlFilter::filter(QString html,
                                                QString url,
                                                QString imagePlaceHolder) const
 {
-    VideoModifier videoModifier;
+    GenericModifier genericModifier;
+    IFrameModifier iframeModifier;
     ImageModifier imageModifier(imagePlaceHolder);
+    VideoModifier videoModifier;
 
     //qDebug() << "BEFORE" << html;
     HtmlSed htmlSed(html);
@@ -138,7 +192,6 @@ QPair<QString, QStringList> HtmlFilter::filter(QString html,
     htmlSed.dropTag("BODY");
     htmlSed.dropTagWithContents("SCRIPT");
     htmlSed.dropTagWithContents("STYLE");
-    htmlSed.dropTagWithContents("NOSCRIPT");
     htmlSed.dropTagWithContents("HEAD");
     htmlSed.dropTag("LINK"); // why does this tag exist outside HEAD (tweakers.nl)
     htmlSed.dropTag("FONT");
@@ -159,11 +212,11 @@ QPair<QString, QStringList> HtmlFilter::filter(QString html,
     htmlSed.replaceTag("TR", "</BLOCKQUOTE>", false, true);
     htmlSed.replaceTag("TD", "<BR>");
     htmlSed.surroundTag("LI", "", "&nbsp;", true, false);
-    htmlSed.replaceAttribute("", "STYLE", RE_STYLE_COLOR, "");
-    htmlSed.replaceAttribute("", "STYLE", RE_STYLE_FONT_SIZE, "");
-    htmlSed.replaceAttribute("", "CLASS", ".*", "");
     htmlSed.resolveUrl("A", "HREF", url);
     htmlSed.resolveUrl("IMG", "SRC", url);
+
+    htmlSed.modifyTag("", &genericModifier);
+    htmlSed.modifyTag("IFRAME", &iframeModifier);
     htmlSed.modifyTag("IMG", &imageModifier);
     htmlSed.modifyTag("VIDEO", &videoModifier);
 

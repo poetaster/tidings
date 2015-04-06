@@ -22,6 +22,11 @@ public:
         bool isModified() const { return myIsModified; }
         bool isOpening() const { return myIsOpening; }
         bool isClosing() const { return myIsClosing; }
+        bool isHidden() const { return myIsHidden; }
+        void setHidden(bool value)
+        {
+            myIsHidden = value;
+        }
         QString name() const { return myName; }
         void setName(const QString& name)
         {
@@ -42,6 +47,10 @@ public:
             myAttributes[attr.toUpper()] = value;
             myIsModified = true;
         }
+        void removeAttribute(const QString& attr)
+        {
+            myAttributes.remove(attr.toUpper());
+        }
         void replaceWith(const QString& replaceWith)
         {
             myReplaceWith = replaceWith;
@@ -61,6 +70,7 @@ public:
         bool myIsModified;
         bool myIsOpening;
         bool myIsClosing;
+        bool myIsHidden;
         QString myName;
         QMap<QString, QString> myAttributes;
         bool myIsReplaced;
@@ -85,11 +95,9 @@ public:
 
     void replaceAttribute(const QString& tagToReplace,
                           const QString& attributeToReplace,
-                          const QString& regExp,
                           const QString& replaceWith);
 
     void replaceContents(const QString& enclosingTag,
-                         const QString& regExp,
                          const QString& replaceWith);
 
     void surroundTag(const QString& tag,
@@ -105,8 +113,7 @@ public:
 
     void dropTagWithContents(const QString& tagToDrop)
     {
-        replaceTag(tagToDrop, QString());
-        replaceContents(tagToDrop, ".*", QString());
+        replaceContents(tagToDrop, "[hidden:" + tagToDrop + "]");
     }
 
     void resolveUrl(const QString& tagToResolve,
@@ -136,16 +143,14 @@ private:
 
         void replaceAttribute(const QString& t,
                               const QString& a,
-                              const QRegExp& r,
                               const QString& w);
 
         void replaceContents(const QString& t,
-                                            const QRegExp& r,
-                                            const QString& w);
+                             const QString& w);
 
         void resolveUrl(const QString& t,
-                                       const QString& a,
-                                       const QString& u);
+                        const QString& a,
+                        const QString& u);
 
         void surroundTag(const QString& t,
                          const QString& b,
@@ -159,7 +164,6 @@ private:
         Mode mode;
         QString tag;
         QString attribute;
-        QRegExp regExp;
         QString replaceWith;
         QString replaceWithAfter;
         QString resolveBaseUrl;
