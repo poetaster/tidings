@@ -5,6 +5,8 @@ Page {
 
     property var _callback
 
+    allowedOrientations: Orientation.All
+
     Component.onDestruction: {
         if (_callback)
         {

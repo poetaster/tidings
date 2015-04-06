@@ -9,9 +9,13 @@ ApplicationWindow
     property alias feedName: sourcesModel.names
     property alias feedColor: sourcesModel.colors
 
+    property bool bigScreen: width * height > 2000000
+
     property string imagePlaceholder: configLoadImages.booleanValue
                                       ? ""
                                       : Qt.resolvedUrl("pages/placeholder.png")
+
+    allowedOrientations: Orientation.All
 
     SourcesModel {
         id: sourcesModel
@@ -140,6 +144,10 @@ ApplicationWindow
 
         autoLoad: false
         autoPlay: false
+    }
+
+    Downloader {
+        id: downloader
     }
 
     Notification {

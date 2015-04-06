@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Item {
-    property SilicaListView flickable: parent
+    property Item flickable: parent
     property int threshold: 500
     property bool _activeUp
     property bool _activeDown

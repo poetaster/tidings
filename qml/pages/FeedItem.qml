@@ -79,6 +79,7 @@ BackgroundItem {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.bottom: parent.bottom
+        width: height
         fillMode: Image.PreserveAspectFit
         source: Qt.resolvedUrl("../cover/overlay.png")
         opacity: 0.1
@@ -144,6 +145,7 @@ BackgroundItem {
         truncationMode: TruncationMode.Fade
     }
 
+    /*
     Label {
         id: timeLabel
         anchors.left: parent.left
@@ -159,6 +161,7 @@ BackgroundItem {
               ? Format.formatDate(timestamp, Formatter.DurationElapsed)
               : ""
     }
+    */
 
     BusyIndicator {
         id: busyIndicator

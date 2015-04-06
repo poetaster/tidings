@@ -5,8 +5,12 @@ Page {
     id: page
     objectName: "SplashPage"
 
+    allowedOrientations: Orientation.All
+
     Image {
         id: icon
+        width: parent.width / 5
+        height: width
         anchors.centerIn: parent
         source: Qt.resolvedUrl("../tidings.png")
         smooth: true

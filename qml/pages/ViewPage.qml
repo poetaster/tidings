@@ -6,7 +6,7 @@ Page {
     id: page
     objectName: "ViewPage"
 
-    property ListView listview
+    property GridView listview
     property variant itemData: listview.currentItem !== null
                                ? listview.currentItem.data
                                : null
@@ -16,6 +16,9 @@ Page {
     property int _nextOfFeed: -1
 
     property bool _activated
+
+    property real _pageMargin: (width > height || bigScreen) ? Theme.paddingLarge * 2
+                                                             : Theme.paddingLarge
 
     function previousItem() {
         listview.currentIndex = listview.currentIndex - 1;
@@ -292,8 +295,8 @@ Page {
             Item {
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.leftMargin: Theme.paddingLarge
-                anchors.rightMargin: Theme.paddingLarge
+                anchors.leftMargin: _pageMargin
+                anchors.rightMargin: _pageMargin
                 height: childrenRect.height
 
                 Label {
@@ -325,6 +328,9 @@ Page {
                     anchors.right: parent.right
                     source: itemData.shelved ? "image://theme/icon-l-favorite"
                                              : "image://theme/icon-l-star"
+                    width: bigScreen ? Theme.itemSizeSmall
+                                     : Theme.itemSizeSmall
+                    height: width
 
                     MouseArea {
                         anchors.fill: parent
@@ -340,8 +346,8 @@ Page {
                 visible: itemData.mediaDuration > 0
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.leftMargin: Theme.paddingLarge
-                anchors.rightMargin: Theme.paddingLarge
+                anchors.leftMargin: _pageMargin
+                anchors.rightMargin: _pageMargin
                 horizontalAlignment: Text.AlignLeft
                 color: Theme.highlightColor
                 font.pixelSize: Theme.fontSizeExtraSmall * (configFontScale.value / 100.0)
@@ -351,8 +357,8 @@ Page {
             Label {
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.leftMargin: Theme.paddingLarge
-                anchors.rightMargin: Theme.paddingLarge
+                anchors.leftMargin: _pageMargin
+                anchors.rightMargin: _pageMargin
                 horizontalAlignment: Text.AlignLeft
                 color: Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall * (configFontScale.value / 100.0)
@@ -368,8 +374,8 @@ Page {
                 id: body
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.leftMargin: Theme.paddingLarge
-                anchors.rightMargin: Theme.paddingLarge
+                anchors.leftMargin: _pageMargin
+                anchors.rightMargin: _pageMargin
 
                 color: Theme.primaryColor
                 fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
@@ -409,7 +415,7 @@ Page {
                         id: fullArticleIcon
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
-                        anchors.leftMargin: Theme.paddingLarge
+                        anchors.leftMargin: _pageMargin
                         source: fullArticleButton._isFull ? "image://theme/icon-m-up"
                                                           : "image://theme/icon-m-down"
                     }
@@ -442,7 +448,7 @@ Page {
                         id: arrowIcon
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
-                        anchors.leftMargin: Theme.paddingLarge
+                        anchors.leftMargin: _pageMargin
                         source: "image://theme/icon-m-region"
                     }
 

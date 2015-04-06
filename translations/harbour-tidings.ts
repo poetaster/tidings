@@ -4,32 +4,32 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="14"/>
+        <location filename="../qml/pages/AboutPage.qml" line="16"/>
         <source>About Tidings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="39"/>
+        <location filename="../qml/pages/AboutPage.qml" line="43"/>
         <source>A feed aggregator</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="52"/>
+        <location filename="../qml/pages/AboutPage.qml" line="56"/>
         <source>Version %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="74"/>
+        <location filename="../qml/pages/AboutPage.qml" line="78"/>
         <source>Tidings is open source software licensed under the terms of </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="75"/>
+        <location filename="../qml/pages/AboutPage.qml" line="79"/>
         <source>the GNU General Public License.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="85"/>
+        <location filename="../qml/pages/AboutPage.qml" line="89"/>
         <source>View license</source>
         <translation type="unfinished"></translation>
     </message>
@@ -54,46 +54,54 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="70"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="74"/>
         <source>%1 items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="88"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="92"/>
         <source>Sort by: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="96"/>
         <location filename="../qml/pages/FeedsPage.qml" line="100"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="104"/>
         <source>All read</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="110"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="114"/>
         <source>Abort refreshing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="111"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="115"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="126"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="130"/>
         <source>Stop Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="236"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="240"/>
         <source>Pull down to add feeds.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ImagePage</name>
+    <message>
+        <location filename="../qml/pages/ImagePage.qml" line="19"/>
+        <source>Save to gallery</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>LicensePage</name>
     <message>
-        <location filename="../qml/pages/LicensePage.qml" line="18"/>
+        <location filename="../qml/pages/LicensePage.qml" line="20"/>
         <source>License</source>
         <translation type="unfinished"></translation>
     </message>
@@ -168,60 +176,55 @@
 <context>
     <name>ResourcesPage</name>
     <message>
-        <location filename="../qml/pages/ResourcesPage.qml" line="21"/>
+        <location filename="../qml/pages/ResourcesPage.qml" line="33"/>
         <source>Resources</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ResourcesPage.qml" line="26"/>
-        <source>Embedded images</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>SettingsPage</name>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="15"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="17"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="25"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="27"/>
         <source>Show preview images</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="26"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="28"/>
         <source>Hiding the preview images saves network traffic. This switch does not affect embedded images in the item view.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="43"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="45"/>
         <source>Load images automatically</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="44"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="46"/>
         <source>If disabled, embedded images are not loaded automatically.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="61"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="63"/>
         <source>Tinted items</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="62"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="64"/>
         <source>If enabled, items have their background tinted in their tag color.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="98"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="100"/>
         <source>Font scale:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="89"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="91"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -229,7 +232,7 @@
 <context>
     <name>SortSelectorPage</name>
     <message>
-        <location filename="../qml/pages/SortSelectorPage.qml" line="22"/>
+        <location filename="../qml/pages/SortSelectorPage.qml" line="24"/>
         <source>Sort by</source>
         <translation type="unfinished"></translation>
     </message>
@@ -237,62 +240,67 @@
 <context>
     <name>SourceEditDialog</name>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="29"/>
-        <source>Save</source>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="31"/>
+        <source>Edit feed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="33"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="32"/>
+        <source>New feed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="36"/>
         <source>Feed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="39"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="42"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="40"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="43"/>
         <source>Enter name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="47"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="50"/>
         <source>Feed URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="48"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="51"/>
         <source>Enter URL</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="78"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="81"/>
         <source>Color tag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="107"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="110"/>
         <source>Database</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="118"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="121"/>
         <source>Clearing the read status will cause all available items to be reloaded the next time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="129"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="132"/>
         <source>Clear read status</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="149"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="152"/>
         <source>Deleting will remove the feed and all of its items from the database.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="160"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="163"/>
         <source>Delete</source>
         <translation type="unfinished"></translation>
     </message>
@@ -300,56 +308,56 @@
 <context>
     <name>SourcesPage</name>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="70"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="71"/>
         <source>Feeds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="87"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="88"/>
         <source>About Tidings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="95"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="96"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="103"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="107"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="184"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="347"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="104"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="108"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="185"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="348"/>
         <source>All read</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="117"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="118"/>
         <source>Abort refreshing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="118"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="337"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="119"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="338"/>
         <source>Refresh</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="133"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="134"/>
         <source>Stop Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="200"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="201"/>
         <source>Clearing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="217"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="218"/>
         <source>Deleting</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="357"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="358"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -357,7 +365,7 @@
 <context>
     <name>SplashPage</name>
     <message>
-        <location filename="../qml/pages/SplashPage.qml" line="23"/>
+        <location filename="../qml/pages/SplashPage.qml" line="27"/>
         <source>Loading items...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -365,67 +373,67 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="68"/>
+        <location filename="../qml/pages/ViewPage.qml" line="71"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="70"/>
+        <location filename="../qml/pages/ViewPage.qml" line="73"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="72"/>
+        <location filename="../qml/pages/ViewPage.qml" line="75"/>
         <source>Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="74"/>
+        <location filename="../qml/pages/ViewPage.qml" line="77"/>
         <source>PDF document</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="205"/>
+        <location filename="../qml/pages/ViewPage.qml" line="208"/>
         <source>Previous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="206"/>
+        <location filename="../qml/pages/ViewPage.qml" line="209"/>
         <source>Already at the beginning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="236"/>
+        <location filename="../qml/pages/ViewPage.qml" line="239"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="237"/>
+        <location filename="../qml/pages/ViewPage.qml" line="240"/>
         <source>Already at the end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="348"/>
+        <location filename="../qml/pages/ViewPage.qml" line="354"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="421"/>
+        <location filename="../qml/pages/ViewPage.qml" line="427"/>
         <source>Short article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="453"/>
+        <location filename="../qml/pages/ViewPage.qml" line="459"/>
         <source>Website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="422"/>
+        <location filename="../qml/pages/ViewPage.qml" line="428"/>
         <source>Full article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="499"/>
+        <location filename="../qml/pages/ViewPage.qml" line="505"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>

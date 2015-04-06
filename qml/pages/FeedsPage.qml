@@ -15,7 +15,7 @@ Page {
         }
     }
 
-    allowedOrientations: Orientation.Landscape | Orientation.Portrait
+    allowedOrientations: Orientation.All
 
     Connections {
         target: navigationState
@@ -59,10 +59,14 @@ Page {
         id: remorse
     }
 
-    SilicaListView {
+    //SilicaListView {
+    SilicaGridView {
         id: listview
 
         anchors.fill: parent
+        cellWidth: width > height ? width / 2 : width
+        cellHeight: bigScreen ? Theme.itemSizeExtraLarge
+                              : Theme.itemSizeLarge
 
         model: newsBlendModel
 
@@ -137,8 +141,8 @@ Page {
 
             property variant data: model
 
-            width: listview.width
-            contentHeight: Theme.itemSizeExtraLarge
+            width: listview.cellWidth
+            contentHeight: listview.cellHeight
             clip: true
 
             Rectangle {
@@ -166,7 +170,7 @@ Page {
                 id: feedLabel
                 anchors.left: shelveIcon.visible ? shelveIcon.right : parent.left
                 anchors.right: picture.visible ? picture.left : parent.right
-                anchors.leftMargin: shelveIcon.visible ? Theme.paddingSmall : Theme.paddingMedium
+                anchors.leftMargin: bigScreen ? Theme.paddingLarge : shelveIcon.visible ? Theme.paddingSmall : Theme.paddingMedium
                 anchors.rightMargin: Theme.paddingMedium
                 color: feedItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall

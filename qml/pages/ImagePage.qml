@@ -6,6 +6,7 @@ Page {
     objectName: "ImagePage"
 
     property string url
+    property string name: "unnamed.dat"
 
     allowedOrientations: Orientation.Landscape | Orientation.Portrait
 
@@ -13,16 +14,14 @@ Page {
         anchors.fill: parent
         contentHeight: height
 
-        /*
         PullDownMenu {
             MenuItem {
                 text: qsTr("Save to gallery")
                 onClicked: {
-                    console.log("Save to gallery");
+                    downloader.downloadToGallery(url, name);
                 }
             }
         }
-        */
 
         Image {
             id: image
@@ -32,6 +31,12 @@ Page {
             sourceSize.width: width * 2
             sourceSize.height: height * 2
             source: root.url
+
+            BusyIndicator {
+                running: parent.status === Image.Loading
+                anchors.centerIn: parent
+                size: BusyIndicatorSize.Medium
+            }
         }
     }
 

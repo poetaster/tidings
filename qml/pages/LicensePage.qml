@@ -4,6 +4,8 @@ import "license.js" as License
 
 Page {
 
+    allowedOrientations: Orientation.All
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.height

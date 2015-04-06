@@ -52,7 +52,8 @@ Page {
     SilicaGridView {
         id: gridview
 
-        property int itemsPerRow: page.width > page.height ? 5 : 3
+        property int itemsPerRow: bigScreen ? (page.width > page.height ? 6 : 4)
+                                            : (page.width > page.height ? 5 : 3)
         property int expandedIndex: -1
         property int minOffsetIndex: expandedIndex !== -1
                                      ? expandedIndex + itemsPerRow - (expandedIndex % itemsPerRow)
@@ -60,7 +61,7 @@ Page {
 
 
         cellWidth: width / itemsPerRow
-        cellHeight: cellWidth
+        cellHeight: cellWidth * (3 / 4)
 
         model: sourcesModel.count + 1
 
@@ -219,7 +220,7 @@ Page {
             }
 
             width: gridview.cellWidth
-            height: gridview.cellWidth + contextMenu.height
+            height: gridview.cellHeight + contextMenu.height
             z: isExpanded ? 1000 : 1
 
             FeedItem {

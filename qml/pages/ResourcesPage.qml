@@ -2,13 +2,49 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
+    id: page
     objectName: "ResourcesPage"
 
     property variant resources
     property variant _images: resources.images
 
-    allowedOrientations: Orientation.Landscape | Orientation.Portrait
+    property bool _activated
 
+    allowedOrientations: Orientation.All
+
+    onStatusChanged: {
+        if (status === PageStatus.Active)
+        {
+            _activated = true;
+        }
+    }
+
+    SilicaGridView {
+        id: gridView
+
+        anchors.fill: parent
+        cellWidth: width > height ? width / 2 : width
+        cellHeight: bigScreen ? Theme.itemSizeExtraLarge
+                              : Theme.itemSizeLarge
+
+        model: _images
+
+        header: PageHeader {
+            title: qsTr("Resources")
+        }
+
+        delegate: MediaItem {
+            width: gridView.cellWidth
+            contentHeight: gridView.cellHeight
+            url: page._activated ? modelData : ""
+            mimeType: "image/x-unknown"
+            length: -1
+        }
+
+        ScrollDecorator { }
+    }
+
+    /*
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.implicitHeight
@@ -32,7 +68,7 @@ Page {
 
                 delegate: MediaItem {
                     width: column.width
-                    url: modelData
+                    url: page._activated ? modelData : ""
                     mimeType: "image/x-unknown"
                     length: -1
                 }
@@ -41,4 +77,5 @@ Page {
 
         ScrollDecorator { }
     }
+    */
 }

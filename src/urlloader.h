@@ -16,6 +16,8 @@ class UrlLoader : public QObject
     Q_ENUMS(FeedType)
     Q_PROPERTY(QUrl source READ source WRITE setSource
                NOTIFY sourceChanged)
+    Q_PROPERTY(QString destination READ destination WRITE setDestination
+               NOTIFY destinationChanged)
     Q_PROPERTY(QString data READ data NOTIFY dataChanged)
     Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged)
 public:
@@ -23,8 +25,11 @@ public:
 
     Q_INVOKABLE void abort();
 
+    Q_INVOKABLE QString galleryPath(const QString& name);
+
 signals:
     void sourceChanged();
+    void destinationChanged();
     void dataChanged();
     void loadingChanged();
     void success();
@@ -34,9 +39,14 @@ private:
     QUrl source() const { return mySource; }
     void setSource(const QUrl& source);
 
+    QString destination() const { return myDestination; }
+    void setDestination(const QString& destination);
+
     QString data() const { return myData; }
 
     bool loading() const { return myIsLoading; }
+
+    void readData(QNetworkReply* reply);
 
 private slots:
     void slotSslErrors(QNetworkReply* reply, const QList<QSslError>& errors);
@@ -47,6 +57,7 @@ private:
     QNetworkReply* myCurrentReply;
 
     QUrl mySource;
+    QString myDestination;
     QString myData;
     bool myIsLoading;
 };

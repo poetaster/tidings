@@ -2,17 +2,24 @@
 
 #include "appversion.h"
 
+#include <QDir>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QFile>
 #include <QNetworkAccessManager>
 #include <QNetworkReply>
 #include <QNetworkRequest>
+#include <QRegExp>
+#include <QStandardPaths>
 #include <QStringList>
+#include <QTextCodec>
 
 #include <QDebug>
 
 namespace
 {
+
+const QRegExp RE_CHARSET("charset\\s*=\\s*([a-zA-Z0-9\\-]+)");
 
 QString nodeText(const QDomNode& node, QStringList path, bool& exists)
 {
@@ -45,6 +52,19 @@ QString nodeText(const QDomNode& node, QStringList path, bool& exists)
     return QString();
 }
 
+QString getCharset(const QString& contentType)
+{
+    int pos = RE_CHARSET.indexIn(contentType);
+    if (pos != -1)
+    {
+        return RE_CHARSET.cap(1);
+    }
+    else
+    {
+        return QString();
+    }
+}
+
 }
 
 UrlLoader::UrlLoader(QObject* parent)
@@ -67,6 +87,12 @@ void UrlLoader::abort()
     {
         myCurrentReply->abort();
     }
+}
+
+QString UrlLoader::galleryPath(const QString& name)
+{
+    return QDir(QStandardPaths::writableLocation(
+                    QStandardPaths::PicturesLocation)).absoluteFilePath(name);
 }
 
 void UrlLoader::setSource(const QUrl& source)
@@ -104,6 +130,12 @@ void UrlLoader::setSource(const QUrl& source)
     myCurrentReply = myNetworkAccessManager->get(req);
     connect(myCurrentReply, SIGNAL(finished()),
             this, SLOT(slotGotReply()));
+}
+
+void UrlLoader::setDestination(const QString& destination)
+{
+    myDestination = destination;
+    emit destinationChanged();
 }
 
 void UrlLoader::slotSslErrors(QNetworkReply* reply,
@@ -163,9 +195,7 @@ void UrlLoader::slotGotReply()
     {
     case QNetworkReply::NoError:
     {
-        myData = reply->readAll();
-        emit dataChanged();
-        emit success();
+        readData(reply);
         break;
     }
 
@@ -178,4 +208,54 @@ void UrlLoader::slotGotReply()
     reply->deleteLater();
     myIsLoading = false;
     emit loadingChanged();
+}
+
+void UrlLoader::readData(QNetworkReply* reply)
+{
+    if (myDestination.isEmpty())
+    {
+        const QByteArray data = reply->readAll();
+
+        const QString charSet =
+                getCharset(reply->header(QNetworkRequest::ContentTypeHeader)
+                           .toString());
+
+        qDebug() << "Character Set:" << charSet;
+        if (charSet.size())
+        {
+            QTextCodec* codec = QTextCodec::codecForName(charSet.toLatin1());
+            if (codec)
+            {
+                myData = codec->toUnicode(data);
+            }
+            else
+            {
+                myData = data;
+            }
+        }
+        else
+        {
+            myData = data;
+        }
+
+        emit dataChanged();
+        emit success();
+    }
+    else
+    {
+        QFile fd(myDestination);
+        if (fd.open(QIODevice::WriteOnly))
+        {
+            while (! reply->atEnd())
+            {
+                fd.write(reply->read(0xffff));
+            }
+            emit success();
+            qDebug() << "File saved to" << myDestination;
+        }
+        else
+        {
+            emit error(QString("Could not write file: %1").arg(myDestination));
+        }
+    }
 }

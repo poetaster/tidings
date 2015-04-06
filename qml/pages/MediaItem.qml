@@ -91,7 +91,10 @@ ListItem {
         }
     }
 
-    contentHeight: Theme.itemSizeLarge
+    /*
+    contentHeight: bigScreen ? Theme.itemSizeExtraLarge
+                             : Theme.itemSizeLarge
+                             */
 
     onClicked: {
         if (_isAudio)
@@ -108,7 +111,8 @@ ListItem {
         else if (_isImage)
         {
             var props = {
-                "url": item.url
+                "url": item.url,
+                "name": _urlFilename(item.url)
             }
             pageStack.push(Qt.resolvedUrl("ImagePage.qml"), props);
         }
@@ -222,6 +226,12 @@ ListItem {
                            : audioProxy.playing ? "image://theme/icon-l-pause"
                                                 : "image://theme/icon-l-play"
         clip: true
+
+        BusyIndicator {
+            running: parent.status === Image.Loading
+            anchors.centerIn: parent
+            size: BusyIndicatorSize.Medium
+        }
     }
 
     Label {

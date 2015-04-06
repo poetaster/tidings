@@ -11,6 +11,8 @@ Dialog {
     property bool editOnly
     property Item item
 
+    allowedOrientations: Orientation.All
+
     canAccept: inputName.text !== ""
                && inputUrl.text !== ""
 
@@ -26,7 +28,8 @@ Dialog {
             anchors.right: parent.right
 
             DialogHeader {
-                title: qsTr("Save")
+                title: editOnly ? qsTr("Edit feed")
+                                : qsTr("New feed")
             }
 
             SectionHeader {

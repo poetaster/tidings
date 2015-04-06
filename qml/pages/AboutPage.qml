@@ -4,6 +4,8 @@ import Sailfish.Silica 1.0
 Page {
     objectName: "AboutPage"
 
+    allowedOrientations: Orientation.All
+
     Column {
         anchors.left: parent.left
         anchors.right: parent.right
@@ -20,6 +22,8 @@ Page {
         }
 
         Image {
+            width: parent.width / 5
+            height: width
             anchors.horizontalCenter: parent.horizontalCenter
             source: Qt.resolvedUrl("../tidings.png")
             smooth: true
