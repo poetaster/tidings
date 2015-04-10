@@ -34,6 +34,12 @@ public:
                 tag.setAttribute("STYLE", style);
             }
         }
+
+        if (tag.name() == "A" && tag.isOpening() &&
+                (! tag.hasAttribute("HREF") || tag.attribute("HREF").startsWith("#")))
+        {
+            tag.setHidden(true);
+        }
     }
 };
 

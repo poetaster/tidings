@@ -113,7 +113,7 @@ public:
 
     void dropTagWithContents(const QString& tagToDrop)
     {
-        replaceContents(tagToDrop, "[hidden:" + tagToDrop + "]");
+        replaceContents(tagToDrop, QString());
     }
 
     void resolveUrl(const QString& tagToResolve,

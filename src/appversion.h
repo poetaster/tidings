@@ -5,7 +5,7 @@
 
 namespace
 {
-const QString appVersion("0.6.1");
+const QString appVersion("0.6.2");
 }
 
 #endif // APPVERSION_H

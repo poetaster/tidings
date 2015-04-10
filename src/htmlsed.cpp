@@ -10,7 +10,6 @@ const QRegExp RE_TAG_NAME("[a-zA-Z0-9]+[\\s/>]");
 const QRegExp RE_TAG_ATTRIBUTE("[a-zA-Z0-9]+\\s*=\\s*(\"[^\"]*\"|'[^']*'|[^\\s\"']*)");
 
 
-
 /* Finds and returns the next tag in the given HTML string.
  * HTML comments (<!-- -->) are recognized as tags.
  * pos will be set to the start position of the tag in the string.
@@ -85,6 +84,14 @@ HtmlSed::Tag::Tag(const QString& data)
     int length = tagName.matchedLength();
     myName = data.mid(pos, tagName.matchedLength() - 1).trimmed().toUpper();
     //qDebug() << "NAME" << myName;
+
+    if (myName == "IMG" ||
+            myName == "BR" ||
+            myName == "HR")
+    {
+        myIsClosing = true;
+    }
+
 
     int offset = pos + length;
 
@@ -379,17 +386,18 @@ QString HtmlSed::toString() const
                     if (tag.isOpening())
                     {
                         tag.setHidden(true);
-                        isHidden = true;
                         out.append(rule.replaceWith);
-                        break;
                     }
                 }
-                else if (rule.mode == Rule::RESOLVE_URL && tag.isOpening())
+                else if (rule.mode == Rule::RESOLVE_URL &&
+                         tag.isOpening() &&
+                         tag.hasAttribute(rule.attribute))
                 {
                     // resolve URL
                     QString url = tag.attribute(rule.attribute);
                     if (url.startsWith("http://") ||
-                        url.startsWith("https://"))
+                        url.startsWith("https://") ||
+                        url.startsWith("#"))
                     {
                         // do nothing
                     }
@@ -432,6 +440,13 @@ QString HtmlSed::toString() const
                 else if (rule.mode == Rule::MODIFY_TAG)
                 {
                     rule.tagModifier->modifyTag(tag);
+                }
+
+                // if the tag is now hidden then exit
+                if (tag.isHidden())
+                {
+                    isHidden = true;
+                    break;
                 }
 
             }//foreach rule
