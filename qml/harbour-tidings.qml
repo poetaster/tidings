@@ -110,6 +110,12 @@ ApplicationWindow
         value: "100"
     }
 
+    ConfigValue {
+        id: configFontScaleWebEnabled
+        key: "font-scale-web-enabled"
+        value: "0"
+    }
+
     Timer {
         id: initTimer
         interval: 500

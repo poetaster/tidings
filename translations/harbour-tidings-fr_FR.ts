@@ -233,6 +233,16 @@
         <translation>Taille du texte</translation>
     </message>
     <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="121"/>
+        <source>Apply font scale to web view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="122"/>
+        <source>If enabled, the font scale settings apply to the web view.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SettingsPage.qml" line="91"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
         <translation>Ce réglage permet de changer la taille du texte dans l&apos;affichage des nouvelles</translation>

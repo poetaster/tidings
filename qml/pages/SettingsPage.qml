@@ -116,6 +116,19 @@ Page {
                 }
             }
 
+            TextSwitch {
+                width: parent.width
+                text: qsTr("Apply font scale to web view")
+                description: qsTr("If enabled, the font scale settings apply to the web view.")
+                automaticCheck: false
+                checked: configFontScaleWebEnabled.booleanValue
+
+                onClicked: {
+                    configFontScaleWebEnabled.value =
+                            configFontScaleWebEnabled.booleanValue ? "0" : "1";
+                }
+            }
+
         }//Column
 
     }
