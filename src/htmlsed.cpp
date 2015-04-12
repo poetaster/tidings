@@ -8,6 +8,8 @@ namespace
 
 const QRegExp RE_TAG_NAME("[a-zA-Z0-9]+[\\s/>]");
 const QRegExp RE_TAG_ATTRIBUTE("[a-zA-Z0-9]+\\s*=\\s*(\"[^\"]*\"|'[^']*'|[^\\s\"']*)");
+// regex to verify proper quoting in a HTML tag
+const QRegExp RE_QUOTES("([^\"']*(\"[^\"]*\"|'[^']*')?[^\"']*)*");
 
 
 /* Finds and returns the next tag in the given HTML string.
@@ -35,6 +37,32 @@ QString findTag(const QString& html, int offset, int& pos)
     }
     else
     {
+        int searchPos = bracketPos;
+        while (true)
+        {
+            int endPos = html.indexOf(">", searchPos);
+            if (endPos != -1)
+            {
+                int length = endPos + 1 - bracketPos;
+                const QString part = html.mid(bracketPos, length);
+                if (RE_QUOTES.exactMatch(part))
+                {
+                    pos = bracketPos - offset;
+                    return part;
+                }
+                else
+                {
+                    searchPos = endPos + 1;
+                }
+            }
+            else
+            {
+                // reached EOF
+                break;
+            }
+        }
+
+        /*
         int endPos = html.indexOf(">", bracketPos);
         if (endPos != -1)
         {
@@ -42,6 +70,7 @@ QString findTag(const QString& html, int offset, int& pos)
             int length = endPos + 1 - bracketPos;
             return html.mid(bracketPos, length);
         }
+        */
     }
 
     return QString();

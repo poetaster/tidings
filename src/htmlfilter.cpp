@@ -217,6 +217,7 @@ QPair<QString, QStringList> HtmlFilter::filter(QString html,
     htmlSed.replaceTag("TR", "<BLOCKQUOTE>", true, false);
     htmlSed.replaceTag("TR", "</BLOCKQUOTE>", false, true);
     htmlSed.replaceTag("TD", "<BR>");
+    htmlSed.replaceTag("A", "</A> ", false, true);
     htmlSed.surroundTag("LI", "", "&nbsp;", true, false);
     htmlSed.resolveUrl("A", "HREF", url);
     htmlSed.resolveUrl("IMG", "SRC", url);
