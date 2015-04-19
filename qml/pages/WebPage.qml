@@ -13,7 +13,7 @@ Page {
             forwardNavigation = false;
     }
 
-    allowedOrientations: Orientation.Landscape | Orientation.Portrait
+    allowedOrientations: Orientation.All
 
     Loader {
         id: loader

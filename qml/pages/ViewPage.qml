@@ -80,7 +80,7 @@ Page {
         }
     }
 
-    allowedOrientations: Orientation.Landscape | Orientation.Portrait
+    allowedOrientations: Orientation.All
 
     Component.onCompleted: {
         navigationState.openedItem(listview.currentIndex);

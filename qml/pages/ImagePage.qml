@@ -8,7 +8,7 @@ Page {
     property string url
     property string name: "unnamed.dat"
 
-    allowedOrientations: Orientation.Landscape | Orientation.Portrait
+    allowedOrientations: Orientation.All
 
     SilicaFlickable {
         anchors.fill: parent
@@ -31,13 +31,15 @@ Page {
             sourceSize.width: width * 2
             sourceSize.height: height * 2
             source: root.url
+            asynchronous: true
 
             BusyIndicator {
                 running: parent.status === Image.Loading
                 anchors.centerIn: parent
-                size: BusyIndicatorSize.Medium
+                size: BusyIndicatorSize.Large
             }
         }
     }
+
 
 }

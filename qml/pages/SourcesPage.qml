@@ -10,7 +10,7 @@ Page {
     property var cycleThumbnailSources: []
     property int cycleIndex
 
-    allowedOrientations: Orientation.Landscape | Orientation.Portrait
+    allowedOrientations: Orientation.All
 
     onStatusChanged: {
         if (status === PageStatus.Active && ! feedsPage) {
