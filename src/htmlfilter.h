@@ -18,9 +18,9 @@ class HtmlFilter : public QObject
 public:
     explicit HtmlFilter(QObject* parent = 0);
 
-    QPair<QString, QStringList> filter(QString html,
-                                       QString url,
-                                       QString imagePlaceHolder = QString()) const;
+    QPair<QString, QStringList> filter(const QString& html,
+                                       const QString& url,
+                                       const QString& imagePlaceHolder = QString()) const;
 
 signals:
     void busyChanged();
@@ -53,6 +53,7 @@ private:
 
 private:
     bool myIsBusy;
+    bool myProcessingRequested;
     QString myBaseUrl;
     QString myImageProxy;
     QString myHtml;

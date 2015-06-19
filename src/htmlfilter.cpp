@@ -137,6 +137,7 @@ public:
 HtmlFilter::HtmlFilter(QObject* parent)
     : QObject(parent)
     , myIsBusy(false)
+    , myProcessingRequested(false)
 {
     connect(&myFilteredFutureWatcher, SIGNAL(finished()),
             this, SLOT(slotFilteredFinished()));
@@ -171,21 +172,32 @@ void HtmlFilter::process()
         return;
     }
 
+    if (myIsBusy)
+    {
+        myProcessingRequested = true;
+        return;
+    }
+    else
+    {
+        myProcessingRequested = false;
+    }
+
     myIsBusy = true;
     emit busyChanged();
 
     QFuture<QPair<QString, QStringList> > filteredFuture =
             QtConcurrent::run(this,
                               &HtmlFilter::filter,
-                              myHtml,
-                              myBaseUrl,
-                              myImageProxy);
+                              // make explicit copies
+                              QString::fromUtf16(myHtml.utf16()),
+                              QString::fromUtf16(myBaseUrl.utf16()),
+                              QString::fromUtf16(myImageProxy.utf16()));
     myFilteredFutureWatcher.setFuture(filteredFuture);
 }
 
-QPair<QString, QStringList> HtmlFilter::filter(QString html,
-                                               QString url,
-                                               QString imagePlaceHolder) const
+QPair<QString, QStringList> HtmlFilter::filter(const QString& html,
+                                               const QString& url,
+                                               const QString& imagePlaceHolder) const
 {
     GenericModifier genericModifier;
     IFrameModifier iframeModifier;
@@ -252,4 +264,9 @@ void HtmlFilter::slotFilteredFinished()
 
     myIsBusy = false;
     emit busyChanged();
+
+    if (myProcessingRequested)
+    {
+        process();
+    }
 }
