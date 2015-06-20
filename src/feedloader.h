@@ -14,7 +14,7 @@ class FeedLoader : public QObject
 {
     Q_OBJECT
     Q_ENUMS(FeedType)
-    Q_PROPERTY(QUrl source READ source WRITE setSource
+    Q_PROPERTY(QString source READ source WRITE setSource
                NOTIFY sourceChanged)
     Q_PROPERTY(FeedType type READ type NOTIFY dataChanged)
     Q_PROPERTY(QUrl logo READ logo NOTIFY dataChanged)
@@ -41,8 +41,8 @@ signals:
     void error(const QString& details);
 
 private:
-    QUrl source() const { return mySource; }
-    void setSource(const QUrl& source);
+    QString source() const { return mySource; }
+    void setSource(const QString& source);
 
     FeedType type() const { return myType; }
     QUrl logo() const { return myLogo; }
@@ -60,7 +60,7 @@ private:
     QNetworkAccessManager* myNetworkAccessManager;
     QNetworkReply* myCurrentReply;
 
-    QUrl mySource;
+    QString mySource;
     QString myData;
     bool myIsLoading;
     FeedType myType;

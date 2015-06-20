@@ -53,7 +53,6 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/BackgroundWorker.qml \
     qml/pages/FeedStats.qml \
     qml/pages/FeedItem.qml \
-    qml/pages/SplashPage.qml \
     qml/pages/SettingsPage.qml \
     qml/pages/MediaItem.qml \
     qml/pages/ImagePage.qml \

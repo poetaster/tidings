@@ -415,36 +415,65 @@ NewsModel {
             feedInfo.setLoading(sources[i].url, true);
         }
 
-        function f1(rows)
+        var mode = 0;
+        var offset = 0;
+        var batchSize = 500;
+
+        function loader()
         {
+            var rows;
             var jsons = [];
-            for (var i = 0; i < rows.length; ++i)
+            var i;
+
+            if (mode === 0)
             {
-                jsons.push(rows.item(i).document);
+                rows = Database.batchLoadCached(offset, batchSize);
+                for (i = 0; i < rows.length; ++i)
+                {
+                    jsons.push(rows.item(i).document);
+                }
+                loadItems(jsons, false);
+                if (rows.length < batchSize)
+                {
+                    ++mode;
+                    offset = 0;
+                }
+                else
+                {
+                    offset += batchSize;
+                }
+                return true;
             }
-            loadItems(jsons, false);
-        }
-
-        Database.batchLoadCached(1000, f1);
-
-        function f2(rows)
-        {
-            var jsons = [];
-            for (var i = 0; i < rows.length; ++i)
+            else if (mode === 1)
             {
-                jsons.push(rows.item(i).document);
+                rows = Database.batchLoadShelved(offset, batchSize);
+                for (i = 0; i < rows.length; ++i)
+                {
+                    jsons.push(rows.item(i).document);
+                }
+                loadItems(jsons, true);
+                if (rows.length < batchSize)
+                {
+                    ++mode;
+                }
+                else
+                {
+                    offset += batchSize;
+                }
+                return true;
             }
-            loadItems(jsons, true);
+            else
+            {
+                for (i = 0; i < sources.length; ++i)
+                {
+                    feedInfo.setLoading(sources[i].url, false);
+                }
+                _updateStats();
+                return false;
+            }
         }
 
-        Database.batchLoadShelved(1000, f2);
-
-        for (i = 0; i < sources.length; ++i)
-        {
-            feedInfo.setLoading(sources[i].url, false);
-        }
-
-        _updateStats();
+        _backgroundWorker.execute(loader);
     }
 
     /* Aborts loading.

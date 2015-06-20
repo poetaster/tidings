@@ -445,7 +445,7 @@ Page {
                     contentHeight: parent.height
 
                     Image {
-                        id: arrowIcon
+                        id: webIcon
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: _pageMargin
@@ -454,7 +454,7 @@ Page {
 
                     Label {
                         anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: arrowIcon.right
+                        anchors.left: webIcon.right
                         anchors.leftMargin: Theme.paddingMedium
                         text: qsTr("Website")
                     }

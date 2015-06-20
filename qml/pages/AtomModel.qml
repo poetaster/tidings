@@ -1,4 +1,4 @@
-/* Copyright (C) 2013, 2014 Martin Grimme  <martin.grimme _AT_ gmail.com>
+/* Copyright (C) 2013 - 2015 Martin Grimme  <martin.grimme _AT_ gmail.com>
  *
  * This file was apapted from WeRSS
  * Copyright (C) 2010, 2011 Martin Grimme  <martin.grimme _AT_ gmail.com>
@@ -27,7 +27,7 @@ XmlListModel {
 
     XmlRole { name: "uid"; query: "atom:id/string()" }
     XmlRole { name: "title"; query: "atom:title/string()" }
-    XmlRole { name: "link"; query: "atom:link[@rel='alternate']/@href/string()" }
+    XmlRole { name: "link"; query: "atom:link/@href/string()" }
     XmlRole { name: "description"; query: "atom:summary/string()" }
     XmlRole { name: "encoded"; query: "atom:content/string()" }
     XmlRole { name: "dateString"; query: "atom:updated/string()" }

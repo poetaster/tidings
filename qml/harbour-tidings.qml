@@ -123,7 +123,6 @@ ApplicationWindow
 
         onTriggered: {
             newsBlendModel.loadPersistedItems();
-            pageStack.replace(sourcesPage);
         }
     }
 
@@ -160,14 +159,8 @@ ApplicationWindow
         id: notification
     }
 
-    initialPage: splashPage
+    initialPage: sourcesPage
     cover: coverPage
-
-    Component {
-        id: splashPage
-
-        SplashPage { }
-    }
 
     Component {
         id: sourcesPage

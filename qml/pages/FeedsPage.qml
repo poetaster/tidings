@@ -201,7 +201,11 @@ Page {
                 maximumLineCount: 2
                 opacity: (model.read && ! model.shelved) ? 0.5 : 1
                 textFormat: Text.StyledText
-                text: model.title
+                text: {
+                    var t = model.title;
+                    return t.replace("&", "&amp;");
+                }
+
             }
 
             Image {

@@ -85,7 +85,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="240"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="244"/>
         <source>Pull down to add feeds.</source>
         <translation>Потяните вниз, чтобы добавить подписки.</translation>
     </message>
@@ -386,14 +386,6 @@
     </message>
 </context>
 <context>
-    <name>SplashPage</name>
-    <message>
-        <location filename="../qml/pages/SplashPage.qml" line="27"/>
-        <source>Loading items...</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ViewPage</name>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="71"/>
@@ -456,7 +448,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="505"/>
+        <location filename="../qml/pages/ViewPage.qml" line="486"/>
+        <source>Share</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="529"/>
         <source>Media</source>
         <translation>Медиа</translation>
     </message>

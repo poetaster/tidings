@@ -69,7 +69,7 @@ void FeedLoader::abort()
     }
 }
 
-void FeedLoader::setSource(const QUrl& source)
+void FeedLoader::setSource(const QString& source)
 {
     abort();
 

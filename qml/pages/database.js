@@ -453,8 +453,26 @@ function cachedCounts()
     return result;
 }
 
-/* Loads the cached items in batches via a callback.
+/* Loads the cached items in batches.
  */
+function batchLoadCached(offset, batchSize)
+{
+    var result;
+
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT document FROM offlineCache " +
+                                "ORDER BY uid LIMIT " + batchSize +
+                                " OFFSET " + offset);
+        console.log("offset " + offset + " count " + res.rows.length);
+        result = res.rows;
+    }
+
+    _database.transaction(f);
+    return result;
+}
+
+/* Loads the cached items in batches via a callback.
 function batchLoadCached(batchSize, callback)
 {
     function f(tx)
@@ -478,9 +496,28 @@ function batchLoadCached(batchSize, callback)
 
     _database.transaction(f);
 }
+*/
+
+/* Loads the shelved items in batches.
+ */
+function batchLoadShelved(offset, batchSize)
+{
+    var result;
+
+    function f(tx)
+    {
+        var res = tx.executeSql("SELECT document FROM shelf " +
+                                "ORDER BY uid LIMIT " + batchSize +
+                                " OFFSET " + offset);
+        console.log("offset " + offset + " count " + res.rows.length);
+        result = res.rows;
+    }
+
+    _database.transaction(f);
+    return result;
+}
 
 /* Loads the shelved items in batches via a callback.
- */
 function batchLoadShelved(batchSize, callback)
 {
     function f(tx)
@@ -504,6 +541,7 @@ function batchLoadShelved(batchSize, callback)
 
     _database.transaction(f);
 }
+*/
 
 /* Shelves the given item.
  */
