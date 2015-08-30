@@ -73,6 +73,14 @@ ListModel {
         colorsChanged();
     }
 
+    function savePositions()
+    {
+        for (var i = 0; i < count; i++)
+        {
+            Database.setPosition(get(i).sourceId, i);
+        }
+    }
+
     Component.onCompleted: {
         var items = Database.sources();
 

@@ -303,6 +303,7 @@ Page {
                 onPressedButtonsChanged: {
                     if (pressedButtons === 0 && page.editMode === 2)
                     {
+                        sourcesModel.savePositions();
                         page.editMode = 1;
                     }
                 }

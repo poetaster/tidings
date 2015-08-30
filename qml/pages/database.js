@@ -6,7 +6,7 @@
  * call it in _migrate.
  * Update _createSchema with the schema modifications.
  */
-var _REVISION = 10;
+var _REVISION = 11;
 
 var _database = Sql.LocalStorage.openDatabaseSync("TidingsDB", "1.0",
                                                   "Tidings Persisted Settings");
@@ -65,6 +65,9 @@ function _migrate(tx) {
             // fall through
         case 9:
             _migrateRev10(tx);
+            // fall through
+        case 10:
+            _migrateRev11(tx);
         }
     }
 
@@ -163,6 +166,13 @@ function _migrateRev10(tx)
                   ")");
 }
 
+/* Migrates to Rev 11, where we added a sorting position to the feed sources.
+ */
+function _migrateRev11(tx)
+{
+    tx.executeSql("ALTER TABLE sources ADD COLUMN position INT DEFAULT 0");
+}
+
 /* Creates the initial schema.
  */
 function _createSchema(tx)
@@ -171,7 +181,8 @@ function _createSchema(tx)
                   "  sourceid INT," +
                   "  name TEXT," +
                   "  url TEXT," +
-                  "  color VARCHAR(9)" +
+                  "  color VARCHAR(9)," +
+                  "  position INT" +
                   ")");
 
     tx.executeSql("CREATE TABLE read (" +
@@ -211,13 +222,15 @@ function _createSchema(tx)
 
 /* Returns the feed sources.
  */
-function sources() {
+function sources()
+{
 
     var result = [];
 
     function f(tx) {
-        var res = tx.executeSql("SELECT sourceid, name, url, color "
-                                + "FROM sources");
+        var res = tx.executeSql("SELECT sourceid, name, url, color " +
+                                "FROM sources " +
+                                "ORDER BY position");
         for (var i = 0; i < res.rows.length; i++)
         {
             var item = res.rows.item(i);
@@ -239,17 +252,17 @@ function sources() {
 function addSource(name, url, color) {
 
     var nextId = 0;
+    var position = 0;
 
     function f(tx) {
-        var res = tx.executeSql("SELECT max(sourceid) as sourceid FROM sources");
+        var res = tx.executeSql("SELECT max(sourceid) as sourceid, count(*) as size FROM sources");
         if (res.rows.length) {
             nextId = res.rows.item(0).sourceid + 1;
-        } else {
-            nextId = 0;
+            position = res.rows.item(0).size;
         }
         tx.executeSql("INSERT INTO sources (sourceid, name, url, color) "
-                      + "VALUES (?, ?, ?, ?)",
-                      [nextId, name, url, color]);
+                      + "VALUES (?, ?, ?, ?, ?)",
+                      [nextId, name, url, color, position]);
     }
 
     _database.transaction(f);
@@ -258,9 +271,11 @@ function addSource(name, url, color) {
 
 /* Changes a feed source.
  */
-function changeSource(sourceId, name, url, color) {
+function changeSource(sourceId, name, url, color)
+{
 
-    function f(tx) {
+    function f(tx)
+    {
         tx.executeSql("UPDATE sources SET name = ?, url = ?, color = ? "
                       + "WHERE sourceid = ?",
                       [name, url, color, sourceId]);
@@ -269,15 +284,32 @@ function changeSource(sourceId, name, url, color) {
     _database.transaction(f);
 }
 
+/* Sets the position of a feed source.
+ */
+function setPosition(sourceId, position)
+{
+    function f(tx)
+    {
+        tx.executeSql("UPDATE sources SET position = ? "
+                      + "WHERE sourceid = ?",
+                      [position, sourceId]);
+    }
+
+    _database.transaction(f);
+}
+
 /* Removes a feed source.
  */
-function removeSource(sourceId) {
+function removeSource(sourceId)
+{
 
-    function f(tx) {
+    function f(tx)
+    {
         var res = tx.executeSql("SELECT url FROM sources WHERE sourceid = ?",
                                 [sourceId]);
 
-        if (res.rows.length) {
+        if (res.rows.length)
+        {
             var url = res.rows.item(0).url;
             tx.executeSql("DELETE FROM offlineCache WHERE url = ?",
                           [url]);
