@@ -16,6 +16,10 @@ Dialog {
     canAccept: inputName.text !== ""
                && inputUrl.text !== ""
 
+    RemorsePopup {
+        id: remorse
+    }
+
     SilicaFlickable {
         anchors.fill: parent
         contentHeight: column.implicitHeight
@@ -131,8 +135,11 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Clear read status")
                 onClicked: {
-                    dialog.item.forgetRead();
-                    dialog.close();
+                    remorse.execute(qsTr("Clearing"),
+                                    function()
+                                    {
+                                        dialog.item.forgetRead();
+                                    });
                 }
             }
 
@@ -162,8 +169,12 @@ Dialog {
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Delete")
                 onClicked: {
-                    dialog.item.remove();
-                    dialog.close();
+                    remorse.execute(qsTr("Delete"),
+                                    function()
+                                    {
+                                        dialog.item.remove();
+                                        dialog.close();
+                                    });
                 }
             }
 

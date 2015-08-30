@@ -10,7 +10,26 @@ Page {
     property var cycleThumbnailSources: []
     property int cycleIndex
 
+    // edit modes:
+    //   0: none
+    //   1: edit feeds
+    //   2: move feeds
+    property int editMode: 0
+    property int editedIndex: 0
+
+    function titleText(editMode)
+    {
+        if (editMode === 0)
+            return qsTr("Feeds");
+        else if (editMode === 1 || editMode === 2)
+            return qsTr("Manage feeds")
+        else
+            return "";
+    }
+
     allowedOrientations: Orientation.All
+
+    forwardNavigation: editMode === 0
 
     onStatusChanged: {
         if (status === PageStatus.Active && ! feedsPage) {
@@ -45,36 +64,37 @@ Page {
         }
     }
 
-    RemorsePopup {
-        id: remorse
-    }
-
     SilicaGridView {
         id: gridview
 
         property int itemsPerRow: bigScreen ? (page.width > page.height ? 6 : 4)
                                             : (page.width > page.height ? 5 : 3)
-        property int expandedIndex: -1
-        property int minOffsetIndex: expandedIndex !== -1
-                                     ? expandedIndex + itemsPerRow - (expandedIndex % itemsPerRow)
-                                     : 0
-
 
         cellWidth: width / itemsPerRow
         cellHeight: cellWidth * (3 / 4)
 
         model: sourcesModel.count + 1
 
-        anchors.fill: parent
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: parent.height - bottomBar.y
+
+        clip: true
+
+        interactive: page.editMode !== 2
 
         header: PageHeader {
-            title: qsTr("Feeds")
+            title: titleText(page.editMode)
         }
 
         PullDownMenu {
             id: pulleyMenu
 
             property var _action
+
+            visible: page.editMode !== 2
 
             onActiveChanged: {
                 if (! active && _action)
@@ -97,20 +117,6 @@ Page {
 
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
-                }
-            }
-
-            MenuItem {
-                text: qsTr("All read")
-
-                onClicked: {
-                    pulleyMenu._action = function() {
-                        remorse.execute(qsTr("All read"),
-                                        function()
-                                        {
-                                            newsBlendModel.setAllRead();
-                                        } );
-                    };
                 }
             }
 
@@ -143,12 +149,6 @@ Page {
         delegate: Item {
             id: listItem
 
-            property bool isExpanded: contextMenu.active &&
-                                      gridview.expandedIndex === index
-
-            property real yOffset: index >= gridview.minOffsetIndex ? contextMenu.height
-                                                                    : 0
-
             property variant item: index < sourcesModel.count ? sourcesModel.get(index)
                                                               : null
 
@@ -171,65 +171,47 @@ Page {
                 newsBlendModel.refresh(item);
             }
 
-            function setFeedRead()
-            {
-                function closure(item, newsBlendModel)
-                {
-                    return function f()
-                    {
-                        newsBlendModel.setFeedRead(item.url, true);
-                    }
-                }
-
-                var remorseItem = remorseComponent.createObject(itemContent);
-                remorseItem.execute(itemContent, qsTr("All read"),
-                                    closure(item, newsBlendModel));
-            }
-
             function forgetRead()
             {
-                function closure(item, sourcesModel, newsBlendModel)
-                {
-                    return function f()
-                    {
-                        sourcesModel.forgetSourceRead(item.url);
-                        newsBlendModel.setFeedRead(item.url, false);
-                    }
-                }
-
-                var remorseItem = remorseComponent.createObject(itemContent);
-                remorseItem.execute(itemContent, qsTr("Clearing"),
-                                    closure(item, sourcesModel, newsBlendModel));
-
+                sourcesModel.forgetSourceRead(item.url);
+                newsBlendModel.setFeedRead(item.url, false);
             }
 
             function remove()
             {
-                function closure(item, sourcesModel, newsBlendModel)
-                {
-                    return function f()
-                    {
-                        newsBlendModel.removeFeedItems(item.url);
-                        sourcesModel.removeSource(item.sourceId);
-                    }
-                }
-
-                var remorseItem = remorseComponent.createObject(itemContent);
-                remorseItem.execute(itemContent, qsTr("Deleting"),
-                                    closure(item, sourcesModel, newsBlendModel));
+                newsBlendModel.removeFeedItems(item.url);
+                sourcesModel.removeSource(item.sourceId);
             }
 
             width: gridview.cellWidth
-            height: gridview.cellHeight + contextMenu.height
-            z: isExpanded ? 1000 : 1
+            height: gridview.cellHeight
+
+            onItemChanged: {
+                if (item && ! itemContent.loadingStatus)
+                {
+                    itemContent.loadThumbnails();
+                }
+            }
 
             FeedItem {
                 id: itemContent
                 visible: index < sourcesModel.count
 
-                y: parent.yOffset
-                width: parent.width
-                height: gridview.cellHeight
+                anchors.fill: parent
+
+                opacity: (page.editMode === 2 && page.editedIndex === index) ? 0 : 1
+                scale: page.editMode === 0 ? 1 : 0.7
+
+                function loadThumbnails()
+                {
+                    thumbnails = newsBlendModel.thumbnailsOfFeed(item.url);
+                    logo = newsBlendModel.logoOfFeed(item.url);
+                }
+
+                Behavior on scale {
+                    enabled: page.editMode !== 2
+                    NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
+                }
 
                 // always update the feedInfo when the page becomes visible
                 property variant feedInfo: ((page.status === PageStatus.Active ||
@@ -264,44 +246,127 @@ Page {
                                 page.cycleIndex = page.cycleThumbnailSources.pop();
                             }
                         }
-                    }
-                }
-
-                Component.onCompleted: {
-                    if (item)
-                    {
-                        thumbnails = newsBlendModel.thumbnailsOfFeed(item.url);
-                        logo = newsBlendModel.logoOfFeed(item.url);
-                    }
+                    }                    
                 }
 
                 onLoadingStatusChanged: {
                     if (! loadingStatus)
                     {
-                        thumbnails = newsBlendModel.thumbnailsOfFeed(item.url);
-                        logo = newsBlendModel.logoOfFeed(item.url);
+                        loadThumbnails();
                     }
                 }
 
                 onClicked: {
-                    if (totalCount !== 0)
+                    if (page.editMode === 0 && totalCount !== 0)
                     {
                         newsBlendModel.selectedFeed = item.url;
                         feedsPage.positionAtFirst(item.url);
                         pageStack.navigateForward();
                     }
+                    else if (page.editMode === 1)
+                    {
+                        parent.edit();
+                    }
+                    else if (page.editMode === 3)
+                    {
+                        parent.refresh();
+                    }
+                    else if (page.editMode === 4)
+                    {
+                        parent.setFeedRead();
+                    }
                 }
 
                 onPressAndHold: {
-                    gridview.expandedIndex = index;
-                    contextMenu.show(listItem);
+                    if (page.editMode === 0)
+                    {
+                        page.editMode = 1;
+                    }
+                    else if (page.editMode === 1)
+                    {
+                        page.editMode = 2;
+                        page.editedIndex = index;
+                        floatingItem.item = sourcesModel.get(index);
+                        floatingItem.grabOffsetX = mouse.x;
+                        floatingItem.grabOffsetY = mouse.y;
+
+                        floatingItem.thumbnails = thumbnails;
+                        floatingItem.logo = logo;
+                        floatingItem._thumbnailOffset = _thumbnailOffset;
+
+                        var screenCoords = mapToItem(gridview, mouse.x, mouse.y);
+                        floatingItem.x = screenCoords.x - floatingItem.grabOffsetX;
+                        floatingItem.y = screenCoords.y - floatingItem.grabOffsetY;
+                    }
+                }
+
+                onPressedButtonsChanged: {
+                    if (pressedButtons === 0 && page.editMode === 2)
+                    {
+                        page.editMode = 1;
+                    }
+                }
+
+                onPositionChanged: {
+                    if (page.editMode === 2)
+                    {
+                        var screenCoords = mapToItem(gridview, mouse.x, mouse.y);
+
+                        var newIndex = gridview.indexAt(gridview.contentX + screenCoords.x,
+                                                        gridview.contentY + screenCoords.y);
+
+                        if (newIndex !== -1 &&
+                                newIndex < sourcesModel.count &&
+                                newIndex !== page.editedIndex)
+                        {
+                            sourcesModel.moveItem(page.editedIndex, newIndex);
+                            page.editedIndex = newIndex;
+                            gridview.positionViewAtIndex(Math.min(gridview.count, newIndex + gridview.itemsPerRow), GridView.Contain);
+                            gridview.positionViewAtIndex(Math.max(0, newIndex - gridview.itemsPerRow), GridView.Contain);
+                        }
+                        floatingItem.x = screenCoords.x - floatingItem.grabOffsetX;
+                        floatingItem.y = screenCoords.y - floatingItem.grabOffsetY;
+                    }
+                }
+            }
+
+            Rectangle {
+                scale: (itemContent.visible && page.editMode === 1) ? 1
+                                                                    : 0.05
+                visible: scale > 0.1
+
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.margins: Theme.paddingSmall
+
+                width: Theme.itemSizeSmall * 0.6
+                height: width
+                radius: width / 2
+                color: refreshBtn.pressed ? Theme.rgba(Theme.highlightColor, 0.4)
+                                          : Theme.rgba(Theme.primaryColor, 0.4)
+
+                Behavior on scale {
+                    NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
+                }
+
+                Image {
+                    anchors.centerIn: parent
+                    source: "image://theme/icon-m-refresh"
+                }
+
+                MouseArea {
+                    id: refreshBtn
+                    anchors.fill: parent
+                    onClicked: {
+                        listItem.refresh();
+                    }
                 }
             }
 
             // [add feed] item
             MouseArea {
-                visible: ! itemContent.visible
-                y: parent.yOffset
+                visible: ! itemContent.visible && page.editMode === 1
+
                 width: parent.width
                 height: gridview.cellHeight
 
@@ -320,54 +385,64 @@ Page {
             }
         }
 
-        ScrollDecorator { }
+        // floating item
+        FeedItem {
+            id: floatingItem
+            visible: page.editMode === 2
 
-        ContextMenu {
-            id: contextMenu
-            property var _action
+            property var item: null
+            property real grabOffsetX: 0
+            property real grabOffsetY: 0
 
-            onActiveChanged: {
-                if (! active && _action)
-                {
-                    _action();
-                    _action = null;
-                }
-            }
+            width: gridview.cellWidth
+            height: gridview.cellHeight
 
-            MenuItem {
-                text: qsTr("Refresh")
+            // always update the feedInfo when the page becomes visible
+            property variant feedInfo: ((page.status === PageStatus.Active ||
+                                         Qt.application.active) &&
+                                        item &&
+                                        newsBlendModel.feedInfo)
+                                       ? newsBlendModel.feedInfo.stats[item.url]
+                                       : null
 
-                onClicked: {
-                    contextMenu._action = function() {
-                        contextMenu.parent.refresh();
-                    };
-                }
-            }
+            property bool loadingStatus: feedInfo ? feedInfo.loading : false
 
-            MenuItem {
-                text: qsTr("All read")
-
-                onClicked: {
-                    contextMenu._action = function() {
-                        contextMenu.parent.setFeedRead();
-                    };
-                }
-            }
-
-            MenuItem {
-                text: qsTr("Edit")
-
-                onClicked: {
-                    contextMenu.parent.edit();
-                }
-            }
+            name: item ? item.name : ""
+            timestamp: (feedInfo && feedInfo.lastRefresh)
+                       ? feedInfo.lastRefresh
+                       : function() { return new Date(0); }()
+            colorTag: item ? item.color : "black"
+            totalCount: feedInfo ? feedInfo.count : 0
+            unreadCount: feedInfo ? feedInfo.unreadCount : 0
+            busy: feedInfo ? feedInfo.loading : false
         }
 
-        Component {
-            id: remorseComponent
+        ScrollDecorator { }
+    }
 
-            RemorseItem {
-                wrapMode: Text.Wrap
+    Rectangle {
+        id: bottomBar
+
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        y: page.editMode === 1 ? parent.height - height
+                               : parent.height
+        height: Theme.itemSizeMedium
+        visible: y < parent.height
+
+        color: "black"
+
+        Behavior on y {
+            NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
+        }
+
+        Button {
+            anchors.centerIn: parent
+            text: "Done"
+
+            onClicked: {
+                page.editMode = 0;
             }
         }
 

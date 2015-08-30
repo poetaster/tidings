@@ -263,67 +263,73 @@
         <translation type="vanished">Enregistrer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="31"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="35"/>
         <source>Edit feed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="32"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="36"/>
         <source>New feed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="36"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="40"/>
         <source>Feed</source>
         <translation>Flux</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="42"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="46"/>
         <source>Name</source>
         <translation>Titre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="43"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="47"/>
         <source>Enter name</source>
         <translation>Saisissez le titre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="50"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="54"/>
         <source>Feed URL</source>
         <translation>URL du flux</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="51"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="55"/>
         <source>Enter URL</source>
         <translation>Entrez l&apos;URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="81"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="85"/>
         <source>Color tag</source>
         <translation>Couleur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="110"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="114"/>
         <source>Database</source>
         <translation>Données</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="121"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="125"/>
         <source>Clearing the read status will cause all available items to be reloaded the next time.</source>
         <translation>Effacer le statut &quot;lu&quot; va recharger toutes les nouvelles à la prochaine actualisation.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="132"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="136"/>
         <source>Clear read status</source>
         <translation>Effacer le statut &quot;lu&quot;</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="152"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="138"/>
+        <source>Clearing</source>
+        <translation type="unfinished">Effacement</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="159"/>
         <source>Deleting will remove the feed and all of its items from the database.</source>
         <translation>Supprimer va effacer toutes les données relatives à ce flux.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="163"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="170"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="172"/>
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
@@ -331,58 +337,55 @@
 <context>
     <name>SourcesPage</name>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="71"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="23"/>
         <source>Feeds</source>
         <translation>Flux</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="88"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="108"/>
         <source>About Tidings</source>
         <translation>À propos de Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="96"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="116"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="104"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="108"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="185"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="348"/>
         <source>All read</source>
-        <translation>Marquer tous comme &quot;lu&quot;</translation>
+        <translation type="vanished">Marquer tous comme &quot;lu&quot;</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="118"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="25"/>
+        <source>Manage feeds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="124"/>
         <source>Abort refreshing</source>
         <translation>Annuler l&apos;actualisation</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="119"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="338"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="125"/>
         <source>Refresh</source>
         <translation>Actualiser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="134"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="140"/>
         <source>Stop Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="201"/>
         <source>Clearing</source>
-        <translation>Effacement</translation>
+        <translation type="vanished">Effacement</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="218"/>
         <source>Deleting</source>
-        <translation>Suppression</translation>
+        <translation type="vanished">Suppression</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="358"/>
         <source>Edit</source>
-        <translation>Éditer</translation>
+        <translation type="vanished">Éditer</translation>
     </message>
 </context>
 <context>
@@ -455,12 +458,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="486"/>
-        <source>Share</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ViewPage.qml" line="529"/>
+        <location filename="../qml/pages/ViewPage.qml" line="505"/>
         <source>Media</source>
         <translation>Média</translation>
     </message>

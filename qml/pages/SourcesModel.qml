@@ -63,6 +63,16 @@ ListModel {
         Database.forgetSourceRead(sourceId);
     }
 
+    function moveItem(from, to)
+    {
+        move(from, to, 1);
+
+        modelChanged();
+        countChanged();
+        namesChanged();
+        colorsChanged();
+    }
+
     Component.onCompleted: {
         var items = Database.sources();
 

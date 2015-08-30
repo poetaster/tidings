@@ -25,6 +25,10 @@ BackgroundItem {
 
     clip: true
 
+    onThumbnailsChanged: {
+        _thumbnailOffset = 0;
+    }
+
     SequentialAnimation {
         id: cycleThumbnailsAnimation
 
