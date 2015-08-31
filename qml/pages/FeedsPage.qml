@@ -72,6 +72,13 @@ Page {
 
         header: PageHeader {
             title: qsTr("%1 items").arg(newsBlendModel.count)
+
+            MouseArea {
+                anchors.fill: parent
+                onClicked: {
+                    pageStack.push(Qt.resolvedUrl("SortSelectorPage.qml"));
+                }
+            }
         }
 
         PullDownMenu {
@@ -110,6 +117,7 @@ Page {
                 }
             }
 
+            /*
             MenuItem {
                 text: newsBlendModel.busy ? qsTr("Abort refreshing")
                                           : qsTr("Refresh")
@@ -124,6 +132,7 @@ Page {
                     };
                 }
             }
+            */
 
             MenuItem {
                 visible: audioPlayer.playing

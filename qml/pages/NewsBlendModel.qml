@@ -374,15 +374,17 @@ NewsModel {
      */
     function refreshAll()
     {
+        for (var i = 0; i < sources.length; ++i)
+        {
+            feedInfo.setLoading(sources[i].url, true);
+            console.log("Source: " + sources[i].url);
+            _sourcesQueue.push(sources[i]);
+        }
+
         // remove all read, but not shelved items
         listModel.removeReadItems();
         _updateStats();
 
-        for (var i = 0; i < sources.length; i++)
-        {
-            console.log("Source: " + sources[i].url);
-            _sourcesQueue.push(sources[i]);
-        }
         if (! busy)
         {
             _loadNext();
@@ -394,6 +396,8 @@ NewsModel {
      */
     function refresh(source)
     {
+        feedInfo.setLoading(source.url, true);
+
         // remove all read, but not shelved items from that source
         listModel.removeReadItems(source.url);
         _updateStats();

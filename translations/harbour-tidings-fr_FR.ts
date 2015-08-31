@@ -59,33 +59,31 @@
         <translation>%1 éléments</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="92"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="99"/>
         <source>Sort by: %1</source>
         <translation>Trier par : %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="100"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="104"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="107"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="111"/>
         <source>All read</source>
         <translation>Marquer comme lus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="114"/>
         <source>Abort refreshing</source>
-        <translation>Annuler l&apos;actualisation</translation>
+        <translation type="vanished">Annuler l&apos;actualisation</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="115"/>
         <source>Refresh</source>
-        <translation>Actualiser</translation>
+        <translation type="vanished">Actualiser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="130"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="139"/>
         <source>Stop Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="244"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
         <source>Pull down to add feeds.</source>
         <translation>Glisser vers le bas pour ajouter un flux</translation>
     </message>
@@ -342,38 +340,42 @@
         <translation>Flux</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="108"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="25"/>
+        <source>Manage feeds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="112"/>
         <source>About Tidings</source>
         <translation>À propos de Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="116"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="120"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="129"/>
+        <source>Refresh all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="144"/>
+        <source>Stop Audio</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>All read</source>
         <translation type="vanished">Marquer tous comme &quot;lu&quot;</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="25"/>
-        <source>Manage feeds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="124"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="128"/>
         <source>Abort refreshing</source>
         <translation>Annuler l&apos;actualisation</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="125"/>
         <source>Refresh</source>
-        <translation>Actualiser</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="140"/>
-        <source>Stop Audio</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Actualiser</translation>
     </message>
     <message>
         <source>Clearing</source>

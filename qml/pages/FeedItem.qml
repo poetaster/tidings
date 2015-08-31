@@ -121,6 +121,7 @@ BackgroundItem {
 
     Label {
         id: unreadCountLabel
+        visible: ! busy
         anchors.centerIn: parent
         font.pixelSize: Theme.fontSizeHuge
         color: feedItem.highlighted ? Theme.highlightColor : Theme.primaryColor
@@ -170,6 +171,6 @@ BackgroundItem {
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
-        size: BusyIndicatorSize.Medium
+        size: bigScreen ? BusyIndicatorSize.Large : BusyIndicatorSize.Medium
     }
 }

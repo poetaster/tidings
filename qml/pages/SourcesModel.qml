@@ -75,10 +75,12 @@ ListModel {
 
     function savePositions()
     {
+        var sourceIds = [];
         for (var i = 0; i < count; i++)
         {
-            Database.setPosition(get(i).sourceId, i);
+            sourceIds.push(get(i).sourceId);
         }
+        Database.setPositions(sourceIds);
     }
 
     Component.onCompleted: {

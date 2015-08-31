@@ -260,7 +260,7 @@ function addSource(name, url, color) {
             nextId = res.rows.item(0).sourceid + 1;
             position = res.rows.item(0).size;
         }
-        tx.executeSql("INSERT INTO sources (sourceid, name, url, color) "
+        tx.executeSql("INSERT INTO sources (sourceid, name, url, color, position) "
                       + "VALUES (?, ?, ?, ?, ?)",
                       [nextId, name, url, color, position]);
     }
@@ -284,15 +284,18 @@ function changeSource(sourceId, name, url, color)
     _database.transaction(f);
 }
 
-/* Sets the position of a feed source.
+/* Sets the positions of the feed sources.
  */
-function setPosition(sourceId, position)
+function setPositions(sourceIds)
 {
     function f(tx)
     {
-        tx.executeSql("UPDATE sources SET position = ? "
-                      + "WHERE sourceid = ?",
-                      [position, sourceId]);
+        for (var i = 0; i < sourceIds.length; ++i)
+        {
+            tx.executeSql("UPDATE sources SET position = ? "
+                          + "WHERE sourceid = ?",
+                          [i, sourceIds[i]]);
+        }
     }
 
     _database.transaction(f);

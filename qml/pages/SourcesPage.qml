@@ -41,7 +41,8 @@ Page {
     Timer {
         running: Qt.application.active &&
                  page.status === PageStatus.Active &&
-                 configShowPreviewImages.booleanValue
+                 configShowPreviewImages.booleanValue &&
+                 page.editMode !== 2
         interval: 2000
         repeat: true
 
@@ -73,15 +74,11 @@ Page {
         cellWidth: width / itemsPerRow
         cellHeight: cellWidth * (3 / 4)
 
-        model: sourcesModel.count + 1
+        model: {
+            return Math.ceil((sourcesModel.count + 1) / itemsPerRow) * itemsPerRow;
+        }
 
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: parent.height - bottomBar.y
-
-        clip: true
+        anchors.fill: parent
 
         interactive: page.editMode !== 2
 
@@ -122,7 +119,7 @@ Page {
 
             MenuItem {
                 text: newsBlendModel.busy ? qsTr("Abort refreshing")
-                                          : qsTr("Refresh")
+                                          : qsTr("Refresh all")
 
                 onClicked: {
                     pulleyMenu._action = function() {
@@ -193,6 +190,29 @@ Page {
                 }
             }
 
+            MouseArea {
+                visible: index >= sourcesModel.count || page.editMode === 1
+                anchors.fill: parent
+
+                onPressAndHold: {
+                    if (page.editMode === 0)
+                    {
+                        page.editMode = 1;
+                    }
+                    else if (page.editMode === 1)
+                    {
+                        page.editMode = 0;
+                    }
+                }
+
+                onClicked: {
+                    if (page.editMode === 1)
+                    {
+                        page.editMode = 0;
+                    }
+                }
+            }
+
             FeedItem {
                 id: itemContent
                 visible: index < sourcesModel.count
@@ -200,7 +220,7 @@ Page {
                 anchors.fill: parent
 
                 opacity: (page.editMode === 2 && page.editedIndex === index) ? 0 : 1
-                scale: page.editMode === 0 ? 1 : 0.7
+                scale: page.editMode === 0 ? 1 : 0.66
 
                 function loadThumbnails()
                 {
@@ -286,10 +306,16 @@ Page {
                     {
                         page.editMode = 2;
                         page.editedIndex = index;
-                        floatingItem.item = sourcesModel.get(index);
+
                         floatingItem.grabOffsetX = mouse.x;
                         floatingItem.grabOffsetY = mouse.y;
 
+                        floatingItem.name = name;
+                        floatingItem.timestamp = timestamp;
+                        floatingItem.colorTag = colorTag;
+                        floatingItem.totalCount = totalCount;
+                        floatingItem.unreadCount = unreadCount;
+                        floatingItem.busy = busy;
                         floatingItem.thumbnails = thumbnails;
                         floatingItem.logo = logo;
                         floatingItem._thumbnailOffset = _thumbnailOffset;
@@ -303,7 +329,6 @@ Page {
                 onPressedButtonsChanged: {
                     if (pressedButtons === 0 && page.editMode === 2)
                     {
-                        sourcesModel.savePositions();
                         page.editMode = 1;
                     }
                 }
@@ -322,8 +347,9 @@ Page {
                         {
                             sourcesModel.moveItem(page.editedIndex, newIndex);
                             page.editedIndex = newIndex;
-                            gridview.positionViewAtIndex(Math.min(gridview.count, newIndex + gridview.itemsPerRow), GridView.Contain);
-                            gridview.positionViewAtIndex(Math.max(0, newIndex - gridview.itemsPerRow), GridView.Contain);
+
+                            //gridview.positionViewAtIndex(Math.min(gridview.count, newIndex + gridview.itemsPerRow), GridView.Contain);
+                            //gridview.positionViewAtIndex(Math.max(0, newIndex - gridview.itemsPerRow), GridView.Contain);
                         }
                         floatingItem.x = screenCoords.x - floatingItem.grabOffsetX;
                         floatingItem.y = screenCoords.y - floatingItem.grabOffsetY;
@@ -331,10 +357,11 @@ Page {
                 }
             }
 
-            Rectangle {
+            // [refresh] button
+            MouseArea {
                 scale: (itemContent.visible && page.editMode === 1) ? 1
                                                                     : 0.05
-                visible: scale > 0.1
+                visible: scale > 0.1 && ! itemContent.busy
 
                 anchors.top: parent.top
                 anchors.right: parent.right
@@ -342,34 +369,42 @@ Page {
 
                 width: Theme.itemSizeSmall * 0.6
                 height: width
-                radius: width / 2
-                color: refreshBtn.pressed ? Theme.rgba(Theme.highlightColor, 0.4)
-                                          : Theme.rgba(Theme.primaryColor, 0.4)
 
                 Behavior on scale {
                     NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
                 }
 
-                Image {
-                    anchors.centerIn: parent
-                    source: "image://theme/icon-m-refresh"
+                Rectangle {
+                    anchors.fill: parent
+                    radius: width / 2
+                    color: parent.pressed ? Theme.rgba(Theme.highlightColor, 0.2)
+                                          : Theme.rgba(Theme.primaryColor, 0.2)
                 }
 
-                MouseArea {
-                    id: refreshBtn
-                    anchors.fill: parent
-                    onClicked: {
-                        listItem.refresh();
-                    }
+                Image {
+                    anchors.centerIn: parent
+                    source: "image://theme/icon-m-refresh?" +
+                            (parent.pressed ? Theme.highlightColor : Theme.primaryColor)
+
+                }
+
+                onClicked: {
+                    listItem.refresh();
                 }
             }
 
-            // [add feed] item
+            // [add feed] button
             MouseArea {
-                visible: ! itemContent.visible && page.editMode === 1
+                scale: (index === sourcesModel.count && page.editMode === 1) ? 1
+                                                                             : 0.05
+                visible: scale > 0.1
 
                 width: parent.width
                 height: gridview.cellHeight
+
+                Behavior on scale {
+                    NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
+                }
 
                 Image {
                     anchors.centerIn: parent
@@ -391,61 +426,39 @@ Page {
             id: floatingItem
             visible: page.editMode === 2
 
-            property var item: null
             property real grabOffsetX: 0
             property real grabOffsetY: 0
 
             width: gridview.cellWidth
             height: gridview.cellHeight
-
-            // always update the feedInfo when the page becomes visible
-            property variant feedInfo: ((page.status === PageStatus.Active ||
-                                         Qt.application.active) &&
-                                        item &&
-                                        newsBlendModel.feedInfo)
-                                       ? newsBlendModel.feedInfo.stats[item.url]
-                                       : null
-
-            property bool loadingStatus: feedInfo ? feedInfo.loading : false
-
-            name: item ? item.name : ""
-            timestamp: (feedInfo && feedInfo.lastRefresh)
-                       ? feedInfo.lastRefresh
-                       : function() { return new Date(0); }()
-            colorTag: item ? item.color : "black"
-            totalCount: feedInfo ? feedInfo.count : 0
-            unreadCount: feedInfo ? feedInfo.unreadCount : 0
-            busy: feedInfo ? feedInfo.loading : false
         }
 
         ScrollDecorator { }
     }
 
-    Rectangle {
-        id: bottomBar
-
+    MouseArea {
+        visible: gridview.contentHeight < parent.height
         anchors.left: parent.left
         anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: parent.height - gridview.contentHeight
 
-        y: page.editMode === 1 ? parent.height - height
-                               : parent.height
-        height: Theme.itemSizeMedium
-        visible: y < parent.height
-
-        color: "black"
-
-        Behavior on y {
-            NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
-        }
-
-        Button {
-            anchors.centerIn: parent
-            text: "Done"
-
-            onClicked: {
+        onPressAndHold: {
+            if (page.editMode === 0)
+            {
+                page.editMode = 1;
+            }
+            else if (page.editMode === 1)
+            {
                 page.editMode = 0;
             }
         }
 
+        onClicked: {
+            if (page.editMode === 1)
+            {
+                page.editMode = 0;
+            }
+        }
     }
 }

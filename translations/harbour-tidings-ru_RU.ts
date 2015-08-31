@@ -59,33 +59,31 @@
         <translation>Новости: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="92"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="99"/>
         <source>Sort by: %1</source>
         <translation>Сорт. по: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="100"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="104"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="107"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="111"/>
         <source>All read</source>
         <translation>Прочитано</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="114"/>
         <source>Abort refreshing</source>
-        <translation>Отменить обновление</translation>
+        <translation type="vanished">Отменить обновление</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="115"/>
         <source>Refresh</source>
-        <translation>Обновить</translation>
+        <translation type="vanished">Обновить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="130"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="139"/>
         <source>Stop Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="244"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
         <source>Pull down to add feeds.</source>
         <translation>Потяните вниз, чтобы добавить подписки.</translation>
     </message>
@@ -342,13 +340,28 @@
         <translation>Ленты</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="108"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="25"/>
+        <source>Manage feeds</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="112"/>
         <source>About Tidings</source>
         <translation>О Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="116"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="120"/>
         <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="129"/>
+        <source>Refresh all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="144"/>
+        <source>Stop Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -356,24 +369,13 @@
         <translation type="vanished">Прочитано</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="25"/>
-        <source>Manage feeds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="124"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="128"/>
         <source>Abort refreshing</source>
         <translation>Отменить обновление</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="125"/>
         <source>Refresh</source>
-        <translation>Обновить</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="140"/>
-        <source>Stop Audio</source>
-        <translation type="unfinished"></translation>
+        <translation type="vanished">Обновить</translation>
     </message>
     <message>
         <source>Deleting</source>

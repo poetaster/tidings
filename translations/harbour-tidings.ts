@@ -59,33 +59,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="92"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="99"/>
         <source>Sort by: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="100"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="104"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="107"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="111"/>
         <source>All read</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="114"/>
-        <source>Abort refreshing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="115"/>
-        <source>Refresh</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="130"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="139"/>
         <source>Stop Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="244"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
         <source>Pull down to add feeds.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -329,32 +319,32 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="108"/>
-        <source>About Tidings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="116"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../qml/pages/SourcesPage.qml" line="25"/>
         <source>Manage feeds</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="124"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="112"/>
+        <source>About Tidings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="120"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="128"/>
         <source>Abort refreshing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="125"/>
-        <source>Refresh</source>
+        <location filename="../qml/pages/SourcesPage.qml" line="129"/>
+        <source>Refresh all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="140"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="144"/>
         <source>Stop Audio</source>
         <translation type="unfinished"></translation>
     </message>
