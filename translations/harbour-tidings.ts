@@ -324,27 +324,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="112"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="158"/>
         <source>About Tidings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="120"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="166"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="128"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="174"/>
         <source>Abort refreshing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="129"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="175"/>
         <source>Refresh all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="144"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="190"/>
         <source>Stop Audio</source>
         <translation type="unfinished"></translation>
     </message>

@@ -38,6 +38,13 @@ Page {
         }
     }
 
+    onEditModeChanged: {
+        if (editMode === 0)
+        {
+            sourcesModel.savePositions();
+        }
+    }
+
     Timer {
         running: Qt.application.active &&
                  page.status === PageStatus.Active &&
@@ -65,6 +72,25 @@ Page {
         }
     }
 
+    MouseArea {
+        visible: page.editMode !== 0
+        anchors.fill: parent
+
+        onPressAndHold: {
+            if (page.editMode === 1)
+            {
+                page.editMode = 0;
+            }
+        }
+
+        onClicked: {
+            if (page.editMode === 1)
+            {
+                page.editMode = 0;
+            }
+        }
+    }
+
     SilicaGridView {
         id: gridview
 
@@ -79,11 +105,38 @@ Page {
         }
 
         anchors.fill: parent
+        anchors.leftMargin: page.editMode === 0 ? 0 : Theme.paddingLarge
 
         interactive: page.editMode !== 2
 
+        Behavior on anchors.leftMargin {
+            NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
+        }
+
         header: PageHeader {
             title: titleText(page.editMode)
+
+            MouseArea {
+                anchors.fill: parent
+
+                onPressAndHold: {
+                    if (page.editMode === 0)
+                    {
+                        page.editMode = 1;
+                    }
+                    else if (page.editMode === 1)
+                    {
+                        page.editMode = 0;
+                    }
+                }
+
+                onClicked: {
+                    if (page.editMode === 1)
+                    {
+                        page.editMode = 0;
+                    }
+                }
+            }
         }
 
         PullDownMenu {
