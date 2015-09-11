@@ -129,6 +129,19 @@ Page {
                 }
             }
 
+            TextSwitch {
+                width: parent.width
+                text: qsTr("Show hints")
+                description: qsTr("If enabled, hints will guide you using the application.")
+                automaticCheck: false
+                checked: configHintsEnabled.booleanValue
+
+                onClicked: {
+                    configHintsEnabled.value =
+                            configHintsEnabled.booleanValue ? "0" : "1";
+                }
+            }
+
         }//Column
 
     }

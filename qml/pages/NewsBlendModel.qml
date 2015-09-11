@@ -493,7 +493,10 @@ NewsModel {
         _rdfModel.source = "";
         _opmlModel.source = "";
 
-        feedInfo.setLoading(_feedLoader.source, false);
+        for (var i = 0; i < sources.length; ++i)
+        {
+            feedInfo.setLoading(sources[i].url, false);
+        }
         busy = false;
 
         _updateStats();

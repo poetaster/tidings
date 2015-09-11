@@ -528,4 +528,10 @@ Page {
         anchors.centerIn: parent
         size: BusyIndicatorSize.Large
     }
+
+    HintLoader {
+        hint: articleHint
+        when: configHintsEnabled.booleanValue &&
+              page.status === PageStatus.Active
+    }
 }

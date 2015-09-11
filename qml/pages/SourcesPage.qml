@@ -338,15 +338,7 @@ Page {
                     }
                     else if (page.editMode === 1)
                     {
-                        parent.edit();
-                    }
-                    else if (page.editMode === 3)
-                    {
                         parent.refresh();
-                    }
-                    else if (page.editMode === 4)
-                    {
-                        parent.setFeedRead();
                     }
                 }
 
@@ -410,17 +402,17 @@ Page {
                 }
             }
 
-            // [refresh] button
+            // [edit] button
             MouseArea {
                 scale: (itemContent.visible && page.editMode === 1) ? 1
                                                                     : 0.05
-                visible: scale > 0.1 && ! itemContent.busy
+                visible: scale > 0.1
 
                 anchors.top: parent.top
                 anchors.right: parent.right
                 anchors.margins: Theme.paddingSmall
 
-                width: Theme.itemSizeSmall * 0.6
+                width: editIcon.width + Theme.paddingSmall
                 height: width
 
                 Behavior on scale {
@@ -429,20 +421,21 @@ Page {
 
                 Rectangle {
                     anchors.fill: parent
-                    radius: width / 2
+                    radius: 6
                     color: parent.pressed ? Theme.rgba(Theme.highlightColor, 0.2)
                                           : Theme.rgba(Theme.primaryColor, 0.2)
                 }
 
                 Image {
+                    id: editIcon
                     anchors.centerIn: parent
-                    source: "image://theme/icon-m-refresh?" +
+                    source: "image://theme/icon-m-edit?" +
                             (parent.pressed ? Theme.highlightColor : Theme.primaryColor)
 
                 }
 
                 onClicked: {
-                    listItem.refresh();
+                    listItem.edit();
                 }
             }
 
@@ -514,4 +507,18 @@ Page {
             }
         }
     }
+
+    HintLoader {
+        hint: feedsHint
+        when: configHintsEnabled.booleanValue &&
+              page.status === PageStatus.Active
+    }
+
+    HintLoader {
+        hint: manageFeedsHint
+        when: configHintsEnabled.booleanValue &&
+              page.status === PageStatus.Active &&
+              page.editMode === 1
+    }
+
 }

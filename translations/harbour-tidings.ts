@@ -81,6 +81,14 @@
     </message>
 </context>
 <context>
+    <name>HintLoader</name>
+    <message>
+        <location filename="../qml/pages/HintLoader.qml" line="142"/>
+        <source>No more hints? Disable them in Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ImagePage</name>
     <message>
         <location filename="../qml/pages/ImagePage.qml" line="19"/>
@@ -221,6 +229,16 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="122"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="134"/>
+        <source>Show hints</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="135"/>
+        <source>If enabled, hints will guide you using the application.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -427,6 +445,84 @@
     <message>
         <location filename="../qml/pages/WebPage.qml" line="50"/>
         <source>Open in browser</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>harbour-tidings</name>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="170"/>
+        <source>Feeds overview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="171"/>
+        <source>- Shows all your subscribed feeds.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="172"/>
+        <source>- Pull down to refresh all.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="173"/>
+        <source>- Tap and hold to add or manage feeds.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="178"/>
+        <source>Managing mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="179"/>
+        <source>- Tap on a feed to refresh.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="180"/>
+        <source>- Tap on the edit button to edit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="181"/>
+        <source>- Tap and hold on a feed to move position.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="182"/>
+        <source>- Tap on free space to leave managing mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="187"/>
+        <source>Articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="188"/>
+        <source>- Tap on the page header to change sorting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="189"/>
+        <source>- Pull down to mark all as read.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="194"/>
+        <source>Article view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="195"/>
+        <source>- Tap on the title to open in external browser.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="196"/>
+        <source>- Tap on the star symbol to keep this article.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

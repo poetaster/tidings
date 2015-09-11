@@ -116,6 +116,12 @@ ApplicationWindow
         value: "0"
     }
 
+    ConfigValue {
+        id: configHintsEnabled
+        key: "hints-enabled"
+        value: "1"
+    }
+
     Timer {
         id: initTimer
         interval: 500
@@ -157,6 +163,37 @@ ApplicationWindow
 
     Notification {
         id: notification
+    }
+
+    Hint {
+        id: feedsHint
+        title: qsTr("Feeds overview")
+        items: [qsTr("- Shows all your subscribed feeds."),
+                qsTr("- Pull down to refresh all."),
+                qsTr("- Tap and hold to add or manage feeds.")]
+    }
+
+    Hint {
+        id: manageFeedsHint
+        title: qsTr("Managing mode")
+        items: [qsTr("- Tap on a feed to refresh."),
+                qsTr("- Tap on the edit button to edit."),
+                qsTr("- Tap and hold on a feed to move position."),
+                qsTr("- Tap on free space to leave managing mode.")]
+    }
+
+    Hint {
+        id: articlesListHint
+        title: qsTr("Articles")
+        items: [qsTr("- Tap on the page header to change sorting."),
+                qsTr("- Pull down to mark all as read.")]
+    }
+
+    Hint {
+        id: articleHint
+        title: qsTr("Article view")
+        items: [qsTr("- Tap on the title to open in external browser."),
+                qsTr("- Tap on the star symbol to keep this article.")]
     }
 
     initialPage: sourcesPage

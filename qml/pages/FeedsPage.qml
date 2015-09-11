@@ -297,6 +297,11 @@ Page {
             truncationMode: TruncationMode.Fade
             text: newsBlendModel.currentlyLoading
         }
+    }
 
+    HintLoader {
+        hint: articlesListHint
+        when: configHintsEnabled.booleanValue &&
+              page.status === PageStatus.Active
     }
 }
