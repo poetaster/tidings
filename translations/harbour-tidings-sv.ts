@@ -343,27 +343,27 @@
         <translation>Hantera flöden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="158"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="203"/>
         <source>About Tidings</source>
         <translation>Om Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="166"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="211"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="174"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="219"/>
         <source>Abort refreshing</source>
         <translation>Avbryt uppdatering</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="175"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="220"/>
         <source>Refresh all</source>
         <translation>Uppdatera alla</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="190"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="235"/>
         <source>Stop Audio</source>
         <translation>Stoppa ljud</translation>
     </message>
@@ -431,7 +431,7 @@
         <translation>Hel artikel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="525"/>
+        <location filename="../qml/pages/ViewPage.qml" line="505"/>
         <source>Media</source>
         <translation>Media</translation>
     </message>
@@ -533,4 +533,3 @@
     </message>
 </context>
 </TS>
-
