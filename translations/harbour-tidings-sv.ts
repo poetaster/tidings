@@ -61,21 +61,13 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="99"/>
         <source>Sort by: %1</source>
-        <translation>Sortering: %1</translation>
+        <translation>Sortera efter: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="107"/>
         <location filename="../qml/pages/FeedsPage.qml" line="111"/>
         <source>All read</source>
         <translation>Alla lästa</translation>
-    </message>
-    <message>
-        <source>Abort refreshing</source>
-        <translation type="vanished">Avbryt uppdatering</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="vanished">Uppdatera</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="139"/>
@@ -93,7 +85,7 @@
     <message>
         <location filename="../qml/pages/HintLoader.qml" line="142"/>
         <source>No more hints? Disable them in Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga fler tips? Inaktivera i Inställningar.</translation>
     </message>
 </context>
 <context>
@@ -143,32 +135,32 @@
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="36"/>
         <source>Latest first</source>
-        <translation>Senast först</translation>
+        <translation>Senaste först</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="42"/>
         <source>Oldest first</source>
-        <translation>Äldst först</translation>
+        <translation>Äldsta först</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="48"/>
         <source>Feed, then latest first</source>
-        <translation>Flöde, sen senast först</translation>
+        <translation>Flöde, sedan senast först</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="54"/>
         <source>Feed, then oldest first</source>
-        <translation>Flöde, sen äldst först</translation>
+        <translation>Flöde, sedan äldst först</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="60"/>
         <source>Current feed only, latest first</source>
-        <translation>Aktuellt flöde, senast först</translation>
+        <translation>Endast aktuellt flöde, senast först</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="66"/>
         <source>Current feed only, oldest first</source>
-        <translation>Aktuellt flöde, äldst först</translation>
+        <translation>Endast aktuellt flöde, äldst först</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="277"/>
@@ -243,12 +235,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="134"/>
         <source>Show hints</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa tips</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="135"/>
         <source>If enabled, hints will guide you using the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vid aktivering guidar tipsen dig när du använder programmet.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="91"/>
@@ -319,12 +311,12 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="136"/>
         <source>Clear read status</source>
-        <translation>Rensa läst-status</translation>
+        <translation>Rensa lässtatus</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="138"/>
         <source>Clearing</source>
-        <translation type="unfinished">Rensar</translation>
+        <translation>Rensning</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="159"/>
@@ -348,52 +340,32 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="25"/>
         <source>Manage feeds</source>
-        <translation type="unfinished"></translation>
+        <translation>Hantera flöden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="203"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="158"/>
         <source>About Tidings</source>
         <translation>Om Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="211"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="166"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="220"/>
-        <source>Refresh all</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>All read</source>
-        <translation type="vanished">Alla lästa</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="219"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="174"/>
         <source>Abort refreshing</source>
         <translation>Avbryt uppdatering</translation>
     </message>
     <message>
-        <source>Refresh</source>
-        <translation type="vanished">Uppdatera</translation>
+        <location filename="../qml/pages/SourcesPage.qml" line="175"/>
+        <source>Refresh all</source>
+        <translation>Uppdatera alla</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="235"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="190"/>
         <source>Stop Audio</source>
         <translation>Stoppa ljud</translation>
-    </message>
-    <message>
-        <source>Clearing</source>
-        <translation type="vanished">Rensar</translation>
-    </message>
-    <message>
-        <source>Deleting</source>
-        <translation type="vanished">Tar bort</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="vanished">Redigera</translation>
     </message>
 </context>
 <context>
@@ -459,11 +431,7 @@
         <translation>Hel artikel</translation>
     </message>
     <message>
-        <source>Share</source>
-        <translation type="vanished">Dela</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ViewPage.qml" line="505"/>
+        <location filename="../qml/pages/ViewPage.qml" line="525"/>
         <source>Media</source>
         <translation>Media</translation>
     </message>
@@ -486,82 +454,83 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="181"/>
         <source>Feeds overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Flödesöversikt</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="182"/>
         <source>- Shows all your subscribed feeds.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Visar alla prenumererade flöden.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="183"/>
         <source>- Pull down to refresh all.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Dra neråt för att uppdatera alla.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="184"/>
         <source>- Tap and hold to add or manage feeds.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Långtryck för att lägga till eller hantera flödes.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="189"/>
         <source>Managing mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Hanteringsläge</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="190"/>
         <source>- Tap on a feed to refresh.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tryck på ett flöde för att uppdatera.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="191"/>
         <source>- Tap on the edit button to edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tryck på Redigera för att ändra.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="192"/>
         <source>- Tap and hold on a feed to move position.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Långtryck på ett flöde för att andra position.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="193"/>
         <source>- Tap on empty space to leave managing mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tryck på ett tomt utrymme för att lämna hanteringsläget.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="198"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Artiklar</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="199"/>
         <source>- Tap on the page header to change sorting.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tryck på sidhuvudet för att ändra sortering.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="200"/>
         <source>- Pull down to mark all as read.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Dra neråt för att markera alla som lästa.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="205"/>
         <source>Article view</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikelvy</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="206"/>
         <source>- Tap on the title to open in external browser.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tryck på rubriken för att öppna i extern webbläsare.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="207"/>
         <source>- Tap on the star symbol to keep this article.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tryck på stjärnsymbolen för att behålla denna artikel.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="224"/>
         <source>Loading from cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Inläsning från cache</translation>
     </message>
 </context>
 </TS>
+
