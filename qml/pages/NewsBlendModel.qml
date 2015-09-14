@@ -22,6 +22,9 @@ NewsModel {
     // the time of the last refresh
     property variant lastRefresh
 
+    // flag indicating that this model ready
+    property bool ready: false
+
     // flag indicating that this model is busy
     property bool busy: false
 
@@ -83,22 +86,18 @@ NewsModel {
             {
             case FeedLoader.RSS2:
                 console.log("RSS2 format detected");
-                _rssModel.xml = "";
                 _rssModel.xml = data;
                 break;
             case FeedLoader.RDF:
                 console.log("RDF format defected");
-                _rdfModel.xml = "";
                 _rdfModel.xml = data;
                 break;
             case FeedLoader.Atom:
                 console.log("Atom format detected");
-                _atomModel.xml = "";
                 _atomModel.xml = data;
                 break;
             case FeedLoader.OPML:
                 console.log("OPML format detected");
-                _opmlModel.xml = "";
                 _opmlModel.xml = data;
                 break;
             default:
@@ -120,83 +119,48 @@ NewsModel {
     // worker for running tasks in the background
     property BackgroundWorker _backgroundWorker: BackgroundWorker { }
 
-
-    property RssModel _rssModel: RssModel {
-        onStatusChanged: {
-            if (source)
-            {
-                console.log("RssModel.status = " + status + " (" + source + ")");
-                if (status === XmlListModel.Error)
-                {
-                    _handleError(errorString());
-                    _loadNext();
-                }
-                else if (status === XmlListModel.Ready)
-                {
-                    _loadFromFeed(_rssModel);
-                }
-            }
-        }
+    property FeedParser _atomModel: FeedParser {
+        parserUrl: Qt.resolvedUrl("AtomModel.qml")
+        onParserStatusChanged: _handleParserResult(this)
     }
 
-    property RssModel _rdfModel: RdfModel {
-        onStatusChanged: {
-            if (source)
-            {
-                console.log("RdfModel.status = " + status + " (" + source + ")");
-                if (status === XmlListModel.Error)
-                {
-                    _handleError(errorString());
-                    _loadNext();
-                }
-                else if (status === XmlListModel.Ready)
-                {
-                    _loadFromFeed(_rdfModel);
-                }
-            }
-        }
+    property FeedParser _opmlModel: FeedParser {
+        parserUrl: Qt.resolvedUrl("OpmlModel.qml")
+        onParserStatusChanged: _handleParserResult(this)
     }
 
-    property AtomModel _atomModel: AtomModel {
-        onStatusChanged: {
-            if (source)
-            {
-                console.log("AtomModel.status = " + status + " (" + source + ")");
-                if (status === XmlListModel.Error)
-                {
-                    _handleError(errorString());
-                    _loadNext();
-                }
-                else if (status === XmlListModel.Ready)
-                {
-                    _loadFromFeed(_atomModel);
-                }
-            }
-        }
+    property FeedParser _rdfModel: FeedParser {
+        parserUrl: Qt.resolvedUrl("RdfModel.qml")
+        onParserStatusChanged: _handleParserResult(this)
     }
 
-    property OpmlModel _opmlModel: OpmlModel {
-        onStatusChanged: {
-            if (source)
-            {
-                console.log("OpmlModel.status = " + status + " (" + source + ")");
-                if (status === XmlListModel.Error)
-                {
-                    _handleError(errorString());
-                    _loadNext();
-                }
-                else if (status === XmlListModel.Ready)
-                {
-                    _loadFromFeed(_opmlModel);
-                }
-            }
-        }
+    property FeedParser _rssModel: FeedParser {
+        parserUrl: Qt.resolvedUrl("RssModel.qml")
+        onParserStatusChanged: _handleParserResult(this)
     }
+
 
     // queue of feed sources to process
     property var _sourcesQueue: []
 
     signal error(string details)
+
+    function _handleParserResult(parser)
+    {
+        console.log(parser.parserUrl + " status = " + parser.parserStatus);
+        if (parser.xml)
+        {
+            if (parser.parserStatus === XmlListModel.Error)
+            {
+                _handleError(parser.errorString());
+                _loadNext();
+            }
+            else if (parser.parserStatus === XmlListModel.Ready)
+            {
+                _loadFromFeed(parser.item);
+            }
+        }
+    }
 
     function _getFeedSorter(key)
     {
@@ -473,6 +437,7 @@ NewsModel {
                     feedInfo.setLoading(sources[i].url, false);
                 }
                 _updateStats();
+                ready = true;
                 return false;
             }
         }
@@ -488,10 +453,10 @@ NewsModel {
         _feedLoader.abort();
         _backgroundWorker.abort();
 
-        _atomModel.source = "";
-        _rssModel.source = "";
-        _rdfModel.source = "";
-        _opmlModel.source = "";
+        _atomModel.xml = "";
+        _rssModel.xml = "";
+        _rdfModel.xml = "";
+        _opmlModel.xml = "";
 
         for (var i = 0; i < sources.length; ++i)
         {
@@ -526,9 +491,11 @@ NewsModel {
         }
     }
 
-    Component.onCompleted: {
+    function tidyCache()
+    {
+        console.log("Clearing read items from cache");
         Database.uncacheReadItems();
-        Database.forgetRead(3600 * 24 * 90);
+        Database.forgetRead(3600 * 24 * 500);
     }
 
     onShelvedChanged: {

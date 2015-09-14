@@ -6,6 +6,8 @@ import "cover"
 
 ApplicationWindow
 {
+    id: appWin
+
     property alias feedName: sourcesModel.names
     property alias feedColor: sourcesModel.colors
 
@@ -27,18 +29,6 @@ ApplicationWindow
             }
             newsBlendModel.sources = sources;
         }
-
-        Component.onCompleted: {
-            if (count === 0) {
-                // add example feeds
-                addSource("Engadget",
-                          "http://www.engadget.com/rss.xml",
-                          "#ff0000");
-                addSource("JollaUsers.com",
-                          "http://jollausers.com/feed/",
-                          "#ffa000");
-            }
-        }
     }
 
     NewsBlendModel {
@@ -47,6 +37,13 @@ ApplicationWindow
         onError: {
             console.log("Error: " + details);
             notification.show(details);
+        }
+
+        onReadyChanged: {
+            if (ready)
+            {
+                pageStack.replace(Qt.resolvedUrl("pages/SourcesPage.qml"));
+            }
         }
     }
 
@@ -128,7 +125,21 @@ ApplicationWindow
         running: true
 
         onTriggered: {
-            newsBlendModel.loadPersistedItems();
+            if (sourcesModel.count === 0)
+            {
+                // add example feeds
+                sourcesModel.addSource("Engadget",
+                                       "http://www.engadget.com/rss.xml",
+                                       "#ff0000");
+                sourcesModel.addSource("JollaUsers.com",
+                                       "http://jollausers.com/feed/",
+                                       "#ffa000");
+            }
+            else
+            {
+                newsBlendModel.tidyCache();
+                newsBlendModel.loadPersistedItems();
+            }
         }
     }
 
@@ -179,7 +190,7 @@ ApplicationWindow
         items: [qsTr("- Tap on a feed to refresh."),
                 qsTr("- Tap on the edit button to edit."),
                 qsTr("- Tap and hold on a feed to move position."),
-                qsTr("- Tap on free space to leave managing mode.")]
+                qsTr("- Tap on empty space to leave managing mode.")]
     }
 
     Hint {
@@ -196,13 +207,23 @@ ApplicationWindow
                 qsTr("- Tap on the star symbol to keep this article.")]
     }
 
-    initialPage: sourcesPage
+    initialPage: splashPage
     cover: coverPage
 
     Component {
-        id: sourcesPage
+        id: splashPage
 
-        SourcesPage { }
+        Page {
+            allowedOrientations: Orientation.All
+
+            Label {
+                anchors.centerIn: parent
+                horizontalAlignment: Text.AlignHCenter
+                font.pixelSize: Theme.fontSizeExtraLarge
+                color: Theme.highlightColor
+                text: qsTr("Loading from cache")
+            }
+        }
     }
 
     Component {

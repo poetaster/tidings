@@ -24,6 +24,7 @@ class NewsBlendModel : public QAbstractListModel
     Q_PROPERTY(QString selectedFeed READ selectedFeed WRITE setSelectedFeed
                NOTIFY selectedFeedChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(int totalCount READ totalCount NOTIFY countChanged)
 public:
     struct Enclosure
     {
@@ -41,7 +42,6 @@ public:
         QString feedSource;
         QDateTime date;
         QString title;
-        QString body;
 
         QString link;
 
@@ -140,6 +140,7 @@ private:
     void setSelectedFeed(const QString& selectedFeed);
 
     int count() const { return rowCount(QModelIndex()); }
+    int totalCount() const { return myItems.size(); }
 
     QList<Enclosure> findEnclosures(const QVariantMap& itemData) const;
     QString findThumbnail(const QVariantMap& itemData) const;

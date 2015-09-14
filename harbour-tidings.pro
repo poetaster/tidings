@@ -61,7 +61,8 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/LoadImagesButton.qml \
     qml/pages/Downloader.qml \
     qml/pages/Hint.qml \
-    qml/pages/HintLoader.qml
+    qml/pages/HintLoader.qml \
+    qml/pages/FeedParser.qml
 
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-tidings-ru_RU.ts

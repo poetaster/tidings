@@ -75,6 +75,7 @@ ListModel {
 
     function savePositions()
     {
+        console.log("Saving feed positions");
         var sourceIds = [];
         for (var i = 0; i < count; i++)
         {
@@ -84,6 +85,7 @@ ListModel {
     }
 
     Component.onCompleted: {
+        console.log("Setting up feeds");
         var items = Database.sources();
 
         for (var i = 0; i < items.length; i++) {

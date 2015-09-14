@@ -96,7 +96,6 @@ NewsBlendModel::NewsBlendModel(QObject* parent)
     myRolenames[DateRole] = "date";
 
     myRolenames[TitleRole] = "title";
-    myRolenames[BodyRole] = "body";
 
     myRolenames[LinkRole] = "link";
 
@@ -121,6 +120,7 @@ void NewsBlendModel::reinsertItems()
         insertItem(item, false);
     }
     endResetModel();
+    emit countChanged();
 }
 
 void NewsBlendModel::setSortMode(SortMode mode)
@@ -182,8 +182,6 @@ QVariant NewsBlendModel::data(const QModelIndex& index, int role) const
         return item->date;
     case TitleRole:
         return item->title;
-    case BodyRole:
-        return item->body;
     case LinkRole:
         return item->link;
     case MediaDurationRole:

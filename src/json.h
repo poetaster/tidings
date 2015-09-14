@@ -14,7 +14,17 @@ class Json : public QObject
 public:
     Q_INVOKABLE QString toJson(const QVariant& obj) const
     {
-        QJsonDocument doc = QJsonDocument::fromVariant(obj);
+        // reduce amount of data to save
+        QVariantMap map = obj.toMap();
+        foreach (const QString& key, map.keys())
+        {
+            if (map.value(key).toString().isEmpty())
+            {
+                map.remove(key);
+            }
+        }
+
+        QJsonDocument doc = QJsonDocument::fromVariant(map);
         return QString::fromUtf8(doc.toJson());
     }
 

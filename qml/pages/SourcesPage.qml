@@ -144,7 +144,7 @@ Page {
 
             property var _action
 
-            visible: page.editMode !== 2
+            visible: page.editMode === 0
 
             onActiveChanged: {
                 if (! active && _action)
@@ -483,18 +483,15 @@ Page {
     }
 
     MouseArea {
-        visible: gridview.contentHeight < parent.height
+        visible: page.editMode !== 0 &&
+                 gridview.contentHeight < parent.height
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: parent.height - gridview.contentHeight
 
         onPressAndHold: {
-            if (page.editMode === 0)
-            {
-                page.editMode = 1;
-            }
-            else if (page.editMode === 1)
+            if (page.editMode === 1)
             {
                 page.editMode = 0;
             }
@@ -508,10 +505,12 @@ Page {
         }
     }
 
+
     HintLoader {
         hint: feedsHint
         when: configHintsEnabled.booleanValue &&
-              page.status === PageStatus.Active
+              page.status === PageStatus.Active &&
+              newsBlendModel.ready
     }
 
     HintLoader {

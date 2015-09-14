@@ -8,6 +8,7 @@ QtObject {
     property string _previousValue: value
 
     Component.onCompleted: {
+        console.log("Reading config value: " + key);
         var deflt = value;
         _previousValue = Database.configGet(key, deflt);
         value = _previousValue;
@@ -16,6 +17,7 @@ QtObject {
     onValueChanged: {
         if (value !== _previousValue)
         {
+            console.log("Storing config value: " + key);
             _previousValue = value;
             Database.configSet(key, value);
         }
