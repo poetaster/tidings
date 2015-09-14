@@ -343,27 +343,27 @@
         <translation>Feeds verwalten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="204"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="203"/>
         <source>About Tidings</source>
         <translation>Über Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="212"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="211"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="220"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="219"/>
         <source>Abort refreshing</source>
         <translation>Aktualisierung abbrechen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="221"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="220"/>
         <source>Refresh all</source>
         <translation>Alle aktualisieren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="236"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="235"/>
         <source>Stop Audio</source>
         <translation>Audio stoppen</translation>
     </message>

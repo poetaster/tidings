@@ -363,22 +363,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="204"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="203"/>
         <source>About Tidings</source>
         <translation>О Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="212"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="211"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="221"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="220"/>
         <source>Refresh all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="236"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="235"/>
         <source>Stop Audio</source>
         <translation type="unfinished"></translation>
     </message>
@@ -387,7 +387,7 @@
         <translation type="vanished">Прочитано</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="220"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="219"/>
         <source>Abort refreshing</source>
         <translation>Отменить обновление</translation>
     </message>
