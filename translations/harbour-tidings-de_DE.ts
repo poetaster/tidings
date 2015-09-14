@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>AboutPage</name>
     <message>
@@ -81,6 +81,14 @@
     </message>
 </context>
 <context>
+    <name>HintLoader</name>
+    <message>
+        <location filename="../qml/pages/HintLoader.qml" line="142"/>
+        <source>No more hints? Disable them in Settings.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ImagePage</name>
     <message>
         <location filename="../qml/pages/ImagePage.qml" line="19"/>
@@ -125,39 +133,39 @@
 <context>
     <name>NewsBlendModel</name>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="33"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="36"/>
         <source>Latest first</source>
         <translation>Neuste zuerst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="39"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="42"/>
         <source>Oldest first</source>
         <translation>Älteste zuerst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="45"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="48"/>
         <source>Feed, then latest first</source>
         <translation>Feed, dann neuste zuerst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="51"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="54"/>
         <source>Feed, then oldest first</source>
         <translation>Feed, dann älteste zuerst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="57"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="60"/>
         <source>Current feed only, latest first</source>
         <translation>Nur aktueller Feed, neuste zuerst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="63"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="66"/>
         <source>Current feed only, oldest first</source>
         <translation>Nur aktueller Feed, älteste zuerst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="313"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="319"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="323"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="277"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="283"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="287"/>
         <source>Error with %1:
 %2</source>
         <translation>Fehler bei %1:
@@ -223,6 +231,16 @@
         <location filename="../qml/pages/SettingsPage.qml" line="122"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
         <translation>Wenn aktiviert, gilt die Schriftgrößenskalierung auch für die Web-Ansicht.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="134"/>
+        <source>Show hints</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="135"/>
+        <source>If enabled, hints will guide you using the application.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="91"/>
@@ -429,6 +447,89 @@
         <location filename="../qml/pages/WebPage.qml" line="50"/>
         <source>Open in browser</source>
         <translation>Im Browser öffnen</translation>
+    </message>
+</context>
+<context>
+    <name>harbour-tidings</name>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="181"/>
+        <source>Feeds overview</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="182"/>
+        <source>- Shows all your subscribed feeds.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="183"/>
+        <source>- Pull down to refresh all.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="184"/>
+        <source>- Tap and hold to add or manage feeds.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="189"/>
+        <source>Managing mode</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="190"/>
+        <source>- Tap on a feed to refresh.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="191"/>
+        <source>- Tap on the edit button to edit.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="192"/>
+        <source>- Tap and hold on a feed to move position.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="193"/>
+        <source>- Tap on empty space to leave managing mode.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="198"/>
+        <source>Articles</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="199"/>
+        <source>- Tap on the page header to change sorting.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="200"/>
+        <source>- Pull down to mark all as read.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="205"/>
+        <source>Article view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="206"/>
+        <source>- Tap on the title to open in external browser.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="207"/>
+        <source>- Tap on the star symbol to keep this article.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="224"/>
+        <source>Loading from cache</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>
