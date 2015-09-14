@@ -351,17 +351,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="158"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="204"/>
         <source>About Tidings</source>
         <translation>Om Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="166"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="212"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="175"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="221"/>
         <source>Refresh all</source>
         <translation type="unfinished"></translation>
     </message>
@@ -370,7 +370,7 @@
         <translation type="vanished">Alla lästa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="174"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="220"/>
         <source>Abort refreshing</source>
         <translation>Avbryt uppdatering</translation>
     </message>
@@ -379,7 +379,7 @@
         <translation type="vanished">Uppdatera</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="190"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="236"/>
         <source>Stop Audio</source>
         <translation>Stoppa ljud</translation>
     </message>

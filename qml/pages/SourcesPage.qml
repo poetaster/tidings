@@ -100,9 +100,8 @@ Page {
         cellWidth: width / itemsPerRow
         cellHeight: cellWidth * (3 / 4)
 
-        model: {
-            return Math.ceil((sourcesModel.count + 1) / itemsPerRow) * itemsPerRow;
-        }
+        // pad rows with clickable empty items
+        model: Math.ceil(sourcesModel.count / itemsPerRow) * itemsPerRow;
 
         anchors.fill: parent
         anchors.leftMargin: page.editMode === 0 ? 0 : Theme.paddingLarge
@@ -135,6 +134,52 @@ Page {
                     {
                         page.editMode = 0;
                     }
+                }
+            }
+        }
+
+        footer: MouseArea {
+            visible: page.editMode !== 0
+            width: gridview.width
+            height: visible ? gridview.cellHeight : 0
+
+            // [add feed] button
+            MouseArea {
+                scale: page.editMode === 1 ? 1 : 0.05
+                visible: scale > 0.1
+
+                width: gridview.cellWidth
+                height: gridview.cellHeight
+
+                Behavior on scale {
+                    NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
+                }
+
+                Image {
+                    anchors.centerIn: parent
+                    source: "image://theme/icon-l-add?" +
+                            (parent.pressed ? Theme.highlightColor : Theme.primaryColor)
+                }
+
+                onClicked: {
+                    var props = {
+                        "url": "http://"
+                    };
+                    var dlg = pageStack.push("SourceEditDialog.qml", props);
+                }
+            }
+
+            onPressAndHold: {
+                if (page.editMode === 1)
+                {
+                    page.editMode = 0;
+                }
+            }
+
+            onClicked: {
+                if (page.editMode === 1)
+                {
+                    page.editMode = 0;
                 }
             }
         }
@@ -436,33 +481,6 @@ Page {
 
                 onClicked: {
                     listItem.edit();
-                }
-            }
-
-            // [add feed] button
-            MouseArea {
-                scale: (index === sourcesModel.count && page.editMode === 1) ? 1
-                                                                             : 0.05
-                visible: scale > 0.1
-
-                width: parent.width
-                height: gridview.cellHeight
-
-                Behavior on scale {
-                    NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
-                }
-
-                Image {
-                    anchors.centerIn: parent
-                    source: "image://theme/icon-l-add?" +
-                            (parent.pressed ? Theme.highlightColor : Theme.primaryColor)
-                }
-
-                onClicked: {
-                    var props = {
-                        "url": "http://"
-                    };
-                    var dlg = pageStack.push("SourceEditDialog.qml", props);
                 }
             }
         }
