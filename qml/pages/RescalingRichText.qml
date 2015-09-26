@@ -10,6 +10,7 @@ import Sailfish.Silica 1.0
 Item {
     id: root
 
+    property bool active: true
     property string text
     property color color
     property real fontSize: Theme.fontSizeSmall
@@ -17,8 +18,10 @@ Item {
 
     property real scaling: 1
 
+    property int _scaledFor: 0
+
     property string _style: "<style>" +
-                            "a:link { color:" + Theme.highlightColor + " }" +
+                            "a:link { color:" + Theme.highlightColor + "; }" +
                             "</style>"
 
     signal linkActivated(string link)
@@ -28,65 +31,82 @@ Item {
     clip: true
 
     onWidthChanged: {
-        rescaleTimer.restart();
+        if (active)
+        {
+            layoutLabel.recalc();
+        }
     }
 
     onTextChanged: {
-        rescaleTimer.restart();
+        _scaledFor = 0;
+        if (active)
+        {
+            layoutLabel.recalc();
+        }
+    }
+
+    onActiveChanged: {
+        if (active)
+        {
+            layoutLabel.recalc();
+        }
     }
 
     Label {
         id: layoutLabel
 
-        visible: false
-        width: parent.width
-        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-        textFormat: Text.RichText
-
-        // tiny font so that only images are relevant
-        text: "<style>* { font-size: 1px }</style>" + parent.text
-
-        onContentWidthChanged: {
-            console.log("contentWidth: " + contentWidth);
-            rescaleTimer.restart();
+        function recalc()
+        {
+            if (Math.ceil(parent.width) !== _scaledFor)
+            {
+                _scaledFor = Math.ceil(parent.width);
+                text = "";
+                width = parent.width;
+                // tiny font so that only images are relevant
+                text = "<style>* { font-size: 1px; }</style>" + parent.text;
+            }
         }
-    }
 
-    Loader {
-        id: contentLabel
-        sourceComponent: rescaleTimer.running ? null : labelComponent
-    }
+        visible: false
+        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        textFormat: root.showSource ? Text.PlainText : Text.RichText
 
-    Component {
-        id: labelComponent
+        Component.onCompleted: {
+            if (active)
+            {
+                recalc();
+            }
+        }
 
-        Label {
-            width: root.width / scaling
-            scale: scaling
+        onPaintedWidthChanged: {
+            if (paintedWidth > 0)
+            {
+                var contentWidth = Math.floor(paintedWidth);
+                scaling = Math.min(1, parent.width / (paintedWidth + 0.0));
+                console.log("scaling: " + scaling + " width: " + root.width);
 
-            transformOrigin: Item.TopLeft
-            color: root.color
-            font.pixelSize: root.fontSize / scaling
-            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-            textFormat: root.showSource ? Text.PlainText : Text.RichText
-            smooth: true
-
-            text: _style + root.text
-
-            onLinkActivated: {
-                root.linkActivated(link);
+                contentLabel.text = "";
+                contentLabel.width = root.width / scaling;
+                contentLabel.font.pixelSize = root.fontSize / scaling;
+                contentLabel.scale = scaling;
+                contentLabel.text = _style + root.text;
             }
         }
     }
 
-    Timer {
-        id: rescaleTimer
-        interval: 100
+    Label {
+        id: contentLabel
 
-        onTriggered: {
-            var contentWidth = Math.floor(layoutLabel.contentWidth);
-            scaling = Math.min(1, parent.width / (layoutLabel.contentWidth + 0.0));
-            console.log("scaling: " + scaling);
+        scale: scaling
+
+        transformOrigin: Item.TopLeft
+        color: root.color
+        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+        textFormat: root.showSource ? Text.PlainText : Text.RichText
+        smooth: true
+
+        onLinkActivated: {
+            root.linkActivated(link);
         }
     }
 }

@@ -335,8 +335,23 @@ Page {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            newsBlendModel.setShelved(listview.currentIndex, ! itemData.shelved);
+                            shelveTimer.itemIndex = listview.currentIndex;
+                            shelveTimer.shelved = ! itemData.shelved;
+                            //newsBlendModel.setShelved(listview.currentIndex, ! itemData.shelved);
                             itemData.shelved = ! itemData.shelved;
+                            shelveTimer.start();
+                        }
+                    }
+
+                    Timer {
+                        id: shelveTimer
+                        interval: 10
+
+                        property int itemIndex
+                        property bool shelved
+
+                        onTriggered: {
+                            newsBlendModel.setShelved(itemIndex, shelved);
                         }
                     }
                 }
@@ -372,6 +387,9 @@ Page {
 
             RescalingRichText {
                 id: body
+
+                active: page.status === PageStatus.Active
+
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.leftMargin: _pageMargin
