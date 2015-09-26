@@ -68,7 +68,11 @@ Page {
                     temp.splice(i, 1);
                 }
             }
-            page.cycleIndex = cycleThumbnailSources.pop();
+
+            if (cycleThumbnailSources.length > 0)
+            {
+                page.cycleIndex = cycleThumbnailSources.pop();
+            }
         }
     }
 
@@ -272,6 +276,7 @@ Page {
                     "color": item.color,
                     "sourceId": item.sourceId,
                     "editOnly": true,
+                    "mayDelete": sourcesModel.count > 1,
                     "item": listItem
                 }
                 pageStack.push("SourceEditDialog.qml", props);

@@ -141,11 +141,8 @@ ApplicationWindow
                                        "http://jollausers.com/feed/",
                                        "#ffa000");
             }
-            else
-            {
-                newsBlendModel.tidyCache();
-                newsBlendModel.loadPersistedItems();
-            }
+            newsBlendModel.tidyCache();
+            newsBlendModel.loadPersistedItems();
         }
     }
 

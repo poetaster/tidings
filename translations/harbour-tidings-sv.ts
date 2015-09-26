@@ -259,73 +259,73 @@
 <context>
     <name>SourceEditDialog</name>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="35"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="36"/>
         <source>Edit feed</source>
         <translation>Redigera flöde</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="36"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="37"/>
         <source>New feed</source>
         <translation>Nytt flöde</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="40"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="41"/>
         <source>Feed</source>
         <translation>Flöde</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="46"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="47"/>
         <source>Name</source>
         <translation>Namn</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="47"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="48"/>
         <source>Enter name</source>
         <translation>Ange namn</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="54"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="55"/>
         <source>Feed URL</source>
         <translation>Flödes-URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="55"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="56"/>
         <source>Enter URL</source>
         <translation>Ange URL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="85"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="86"/>
         <source>Color tag</source>
         <translation>Färgtagg</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="114"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="115"/>
         <source>Database</source>
         <translation>Databas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="125"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="126"/>
         <source>Clearing the read status will cause all available items to be reloaded the next time.</source>
         <translation>Rensning av läst-status, orsakar ny inläsning av samtliga tillgängliga objekt nästa gång.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="136"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="137"/>
         <source>Clear read status</source>
         <translation>Rensa lässtatus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="138"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="139"/>
         <source>Clearing</source>
         <translation>Rensning</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="159"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="160"/>
         <source>Deleting will remove the feed and all of its items from the database.</source>
         <translation>Borttagning tar bort flödet och alla dess objekt från databasen.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourceEditDialog.qml" line="170"/>
         <location filename="../qml/pages/SourceEditDialog.qml" line="172"/>
+        <location filename="../qml/pages/SourceEditDialog.qml" line="174"/>
         <source>Delete</source>
         <translation>Ta bort</translation>
     </message>
@@ -343,33 +343,33 @@
         <translation>Hantera flöden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="207"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="211"/>
         <source>About Tidings</source>
         <translation>Om Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="215"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="219"/>
         <source>Settings</source>
         <translation>Inställningar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="223"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="226"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="227"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="230"/>
         <source>All read</source>
         <translation type="unfinished">Alla lästa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="235"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="239"/>
         <source>Abort refreshing</source>
         <translation>Avbryt uppdatering</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="236"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="240"/>
         <source>Refresh all</source>
         <translation>Uppdatera alla</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="251"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="255"/>
         <source>Stop Audio</source>
         <translation>Stoppa ljud</translation>
     </message>
@@ -458,82 +458,82 @@
 <context>
     <name>harbour-tidings</name>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="187"/>
+        <location filename="../qml/harbour-tidings.qml" line="184"/>
         <source>Feeds overview</source>
         <translation>Flödesöversikt</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="188"/>
+        <location filename="../qml/harbour-tidings.qml" line="185"/>
         <source>- Shows all your subscribed feeds.</source>
         <translation>- Visar alla prenumererade flöden.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="189"/>
+        <location filename="../qml/harbour-tidings.qml" line="186"/>
         <source>- Pull down to refresh all.</source>
         <translation>- Dra neråt för att uppdatera alla.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="190"/>
+        <location filename="../qml/harbour-tidings.qml" line="187"/>
         <source>- Tap and hold to add or manage feeds.</source>
         <translation>- Långtryck för att lägga till eller hantera flödes.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="195"/>
+        <location filename="../qml/harbour-tidings.qml" line="192"/>
         <source>Managing mode</source>
         <translation>Hanteringsläge</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="196"/>
+        <location filename="../qml/harbour-tidings.qml" line="193"/>
         <source>- Tap on a feed to refresh.</source>
         <translation>- Tryck på ett flöde för att uppdatera.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="197"/>
+        <location filename="../qml/harbour-tidings.qml" line="194"/>
         <source>- Tap on the edit button to edit.</source>
         <translation>- Tryck på Redigera för att ändra.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="198"/>
+        <location filename="../qml/harbour-tidings.qml" line="195"/>
         <source>- Tap and hold on a feed to move position.</source>
         <translation>- Långtryck på ett flöde för att andra position.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="199"/>
+        <location filename="../qml/harbour-tidings.qml" line="196"/>
         <source>- Tap on empty space to leave managing mode.</source>
         <translation>- Tryck på ett tomt utrymme för att lämna hanteringsläget.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="204"/>
+        <location filename="../qml/harbour-tidings.qml" line="201"/>
         <source>Articles</source>
         <translation>Artiklar</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="205"/>
+        <location filename="../qml/harbour-tidings.qml" line="202"/>
         <source>- Tap on the page header to change sorting.</source>
         <translation>- Tryck på sidhuvudet för att ändra sortering.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="206"/>
+        <location filename="../qml/harbour-tidings.qml" line="203"/>
         <source>- Pull down to mark all as read.</source>
         <translation>- Dra neråt för att markera alla som lästa.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="211"/>
+        <location filename="../qml/harbour-tidings.qml" line="208"/>
         <source>Article view</source>
         <translation>Artikelvy</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="212"/>
+        <location filename="../qml/harbour-tidings.qml" line="209"/>
         <source>- Tap on the title to open in external browser.</source>
         <translation>- Tryck på rubriken för att öppna i extern webbläsare.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="213"/>
+        <location filename="../qml/harbour-tidings.qml" line="210"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation>- Tryck på stjärnsymbolen för att behålla denna artikel.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="230"/>
+        <location filename="../qml/harbour-tidings.qml" line="227"/>
         <source>Loading from cache</source>
         <translation>Inläsning från cache</translation>
     </message>

@@ -9,6 +9,7 @@ Dialog {
     property alias url: inputUrl.text
     property alias color: swatch.color
     property bool editOnly
+    property bool mayDelete
     property Item item
 
     allowedOrientations: Orientation.All
@@ -166,6 +167,7 @@ Dialog {
 
             Button {
                 visible: editOnly
+                enabled: mayDelete
                 anchors.horizontalCenter: parent.horizontalCenter
                 text: qsTr("Delete")
                 onClicked: {
