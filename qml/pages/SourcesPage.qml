@@ -91,6 +91,10 @@ Page {
         }
     }
 
+    RemorsePopup {
+        id: remorse
+    }
+
     SilicaGridView {
         id: gridview
 
@@ -212,6 +216,18 @@ Page {
 
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
+                }
+            }
+
+            MenuItem {
+                text: qsTr("All read")
+
+                onClicked: {
+                    remorse.execute(qsTr("All read"),
+                                    function()
+                                    {
+                                        newsBlendModel.setAllRead();
+                                    } );
                 }
             }
 
@@ -457,7 +473,7 @@ Page {
                 anchors.right: parent.right
                 anchors.margins: Theme.paddingSmall
 
-                width: editIcon.width + Theme.paddingSmall
+                width: editIcon.width + 2 * Theme.paddingSmall
                 height: width
 
                 Behavior on scale {
@@ -474,7 +490,7 @@ Page {
                 Image {
                     id: editIcon
                     anchors.centerIn: parent
-                    source: "image://theme/icon-m-edit?" +
+                    source: "image://theme/icon-s-edit?" +
                             (parent.pressed ? Theme.highlightColor : Theme.primaryColor)
 
                 }

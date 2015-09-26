@@ -95,8 +95,8 @@ Page {
             }
 
             MenuItem {
-                //enabled: ! newsBlendModel.busy
                 text: qsTr("Sort by: %1").arg(newsBlendModel.feedSorter.name)
+                elide: Text.ElideRight
 
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SortSelectorPage.qml"));
@@ -116,23 +116,6 @@ Page {
                     };
                 }
             }
-
-            /*
-            MenuItem {
-                text: newsBlendModel.busy ? qsTr("Abort refreshing")
-                                          : qsTr("Refresh")
-
-                onClicked: {
-                    pulleyMenu._action = function() {
-                        if (newsBlendModel.busy) {
-                            newsBlendModel.abort();
-                        } else {
-                            newsBlendModel.refreshAll();
-                        }
-                    };
-                }
-            }
-            */
 
             MenuItem {
                 visible: audioPlayer.playing
