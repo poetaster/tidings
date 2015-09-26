@@ -17,6 +17,7 @@
 #include <QDebug>
 
 #include "appversion.h"
+#include "database.h"
 #include "dateparser.h"
 #include "feedloader.h"
 #include "htmlfilter.h"
@@ -80,6 +81,7 @@ int main(int argc, char *argv[])
     appTranslator->load("harbour-tidings-" + QLocale::system().name(), SailfishApp::pathTo("translations").path());
     app->installTranslator(appTranslator);
 
+    qmlRegisterType<Database>("harbour.tidings", 1, 0, "Database");
     qmlRegisterType<FeedLoader>("harbour.tidings", 1, 0, "FeedLoader");
     qmlRegisterType<HtmlFilter>("harbour.tidings", 1, 0, "HtmlFilter");
     qmlRegisterType<UrlLoader>("harbour.tidings", 1, 0, "UrlLoader");

@@ -9,7 +9,7 @@
 TARGET = harbour-tidings
 
 CONFIG += sailfishapp
-QT += concurrent xml
+QT += concurrent sql xml
 
 SOURCES += \
     src/harbour-tidings.cpp \
@@ -17,7 +17,8 @@ SOURCES += \
     src/newsblendmodel.cpp \
     src/htmlfilter.cpp \
     src/urlloader.cpp \
-    src/htmlsed.cpp
+    src/htmlsed.cpp \
+    src/database.cpp
 
 OTHER_FILES += qml/harbour-tidings.qml \
     qml/cover/CoverPage.qml \
@@ -80,4 +81,5 @@ HEADERS += \
     src/htmlfilter.h \
     src/dateparser.h \
     src/urlloader.h \
-    src/htmlsed.h
+    src/htmlsed.h \
+    src/database.h

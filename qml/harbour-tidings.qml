@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtMultimedia 5.0
+import harbour.tidings 1.0
 import "pages"
 import "cover"
 
@@ -18,6 +19,10 @@ ApplicationWindow
                                       : Qt.resolvedUrl("pages/placeholder.png")
 
     allowedOrientations: Orientation.All
+
+    Database {
+        id: _database
+    }
 
     SourcesModel {
         id: sourcesModel
@@ -42,6 +47,7 @@ ApplicationWindow
         onReadyChanged: {
             if (ready)
             {
+                _database.vacuum();
                 pageStack.replace(Qt.resolvedUrl("pages/SourcesPage.qml"));
             }
         }
