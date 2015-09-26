@@ -15,8 +15,8 @@ Database::Database(QObject* parent)
     if (! db.isEmpty())
     {
         myDb.setDatabaseName(db);
+        myDb.open();
     }
-    myDb.open();
 }
 
 QString Database::locateDatabase()
