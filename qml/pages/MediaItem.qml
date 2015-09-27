@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import "database.js" as Database
 
 ListItem {
     id: item
@@ -150,7 +149,7 @@ ListItem {
                     }
                     else
                     {
-                        audioPlayer.seek(Math.max(0, Database.audioBookmark(audioProxy.source) - 3000));
+                        audioPlayer.seek(Math.max(0, database.audioBookmark(audioProxy.source) - 3000));
                     }
                 }
             }
@@ -167,8 +166,8 @@ ListItem {
                 // save bookmark before switching to another podcast
                 if (audioPlayer.playing)
                 {
-                    Database.setAudioBookmark(audioPlayer.source,
-                                              audioPlayer.position);
+                    database.setAudioBookmark(audioPlayer.source,
+                                               audioPlayer.position);
                 }
 
                 audioPlayer.stop();
@@ -182,7 +181,7 @@ ListItem {
         {
             if (_active)
             {
-                Database.setAudioBookmark(source, audioPlayer.position);
+                database.setAudioBookmark(source, audioPlayer.position);
                 audioPlayer.pause();
             }
         }
@@ -254,7 +253,7 @@ ListItem {
         color: Theme.secondaryColor
         text: ! slider.visible ? _mediaTypeName(item.mimeType)
                                : audioProxy.playing ? _toTime(slider.sliderValue)
-                                                    : _toTime(Database.audioBookmark(audioProxy.source))
+                                                    : _toTime(database.audioBookmark(audioProxy.source))
     }
     Label {
         id: label2

@@ -70,14 +70,6 @@
         <translation>Marquer comme lus</translation>
     </message>
     <message>
-        <source>Abort refreshing</source>
-        <translation type="vanished">Annuler l&apos;actualisation</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="vanished">Actualiser</translation>
-    </message>
-    <message>
         <location filename="../qml/pages/FeedsPage.qml" line="122"/>
         <source>Stop Audio</source>
         <translation type="unfinished"></translation>
@@ -123,21 +115,17 @@
 <context>
     <name>MediaItem</name>
     <message>
-        <source>Audio</source>
-        <translation type="obsolete">Audio</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/MediaItem.qml" line="84"/>
+        <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Image</source>
         <translation type="unfinished">Images</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="86"/>
+        <location filename="../qml/pages/MediaItem.qml" line="85"/>
         <source>Video</source>
         <translation type="unfinished">Vidéo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="88"/>
+        <location filename="../qml/pages/MediaItem.qml" line="87"/>
         <source>PDF document</source>
         <translation type="unfinished">Document PDF</translation>
     </message>
@@ -145,39 +133,39 @@
 <context>
     <name>NewsBlendModel</name>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="36"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="35"/>
         <source>Latest first</source>
         <translation>Plus récents d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="42"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="41"/>
         <source>Oldest first</source>
         <translation>Plus anciens d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="48"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="47"/>
         <source>Feed, then latest first</source>
         <translation>Flux, puis les plus récents d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="54"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="53"/>
         <source>Feed, then oldest first</source>
         <translation>Flux, puis les plus anciens d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="60"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="59"/>
         <source>Current feed only, latest first</source>
         <translation>Seulement le flux choisi, les plus récents d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="66"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="65"/>
         <source>Current feed only, oldest first</source>
         <translation>Seulement le flux choisi, les plus anciens d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="277"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="283"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="287"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="276"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="282"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="286"/>
         <source>Error with %1:
 %2</source>
         <translation>Erreur - %1 :
@@ -186,10 +174,6 @@
 </context>
 <context>
     <name>ResourcesPage</name>
-    <message>
-        <source>Media</source>
-        <translation type="obsolete">Média</translation>
-    </message>
     <message>
         <location filename="../qml/pages/ResourcesPage.qml" line="33"/>
         <source>Resources</source>
@@ -274,10 +258,6 @@
 </context>
 <context>
     <name>SourceEditDialog</name>
-    <message>
-        <source>Save</source>
-        <translation type="vanished">Enregistrer</translation>
-    </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="36"/>
         <source>Edit feed</source>
@@ -392,29 +372,6 @@
         <location filename="../qml/pages/SourcesPage.qml" line="239"/>
         <source>Abort refreshing</source>
         <translation>Annuler l&apos;actualisation</translation>
-    </message>
-    <message>
-        <source>Refresh</source>
-        <translation type="vanished">Actualiser</translation>
-    </message>
-    <message>
-        <source>Clearing</source>
-        <translation type="vanished">Effacement</translation>
-    </message>
-    <message>
-        <source>Deleting</source>
-        <translation type="vanished">Suppression</translation>
-    </message>
-    <message>
-        <source>Edit</source>
-        <translation type="vanished">Éditer</translation>
-    </message>
-</context>
-<context>
-    <name>SplashPage</name>
-    <message>
-        <source>Loading items...</source>
-        <translation type="vanished">Chargement des nouvelles</translation>
     </message>
 </context>
 <context>

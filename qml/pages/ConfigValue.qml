@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import "database.js" as Database
 
 QtObject {
     property string key
@@ -10,7 +9,7 @@ QtObject {
     Component.onCompleted: {
         console.log("Reading config value: " + key);
         var deflt = value;
-        _previousValue = Database.configGet(key, deflt);
+        _previousValue = database.configGet(key, deflt);
         value = _previousValue;
     }
 
@@ -19,7 +18,7 @@ QtObject {
         {
             console.log("Storing config value: " + key);
             _previousValue = value;
-            Database.configSet(key, value);
+            database.configSet(key, value);
         }
     }
 }

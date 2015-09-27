@@ -33,7 +33,6 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/WebPage.qml \
     qml/pages/FavIcon.qml \
     qml/pages/favicon.js \
-    qml/pages/database.js \
     qml/pages/SourcesModel.qml \
     qml/pages/SourceEditDialog.qml \
     qml/pages/NewsBlendModel.qml \

@@ -21,7 +21,7 @@ ApplicationWindow
     allowedOrientations: Orientation.All
 
     Database {
-        id: _database
+        id: database
     }
 
     SourcesModel {
@@ -47,7 +47,7 @@ ApplicationWindow
         onReadyChanged: {
             if (ready)
             {
-                _database.vacuum();
+                database.vacuum();
                 pageStack.replace(Qt.resolvedUrl("pages/SourcesPage.qml"));
             }
         }

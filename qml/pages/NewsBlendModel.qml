@@ -2,7 +2,6 @@ import QtQuick 2.0
 import QtQuick.XmlListModel 2.0
 import Sailfish.Silica 1.0
 import harbour.tidings 1.0
-import "database.js" as Database
 
 /* List model that blends various feed models together.
  */
@@ -222,8 +221,8 @@ NewsModel {
             return null;
         }
 
-        if (Database.isRead(item.source, item.uid) &&
-            ! Database.isShelved(item.source, item.uid))
+        if (database.isRead(item.source, item.uid) &&
+            ! database.isShelved(item.source, item.uid))
         {
             // read items are gone
             return null;
@@ -324,7 +323,7 @@ NewsModel {
             }
             else
             {
-                Database.cacheItems(newItems);
+                database.cacheItems(newItems);
                 _updateStats();
                 _loadNext();
                 return false;
@@ -395,10 +394,10 @@ NewsModel {
 
             if (mode === 0)
             {
-                rows = Database.batchLoadCached(offset, batchSize);
+                rows = database.batchLoadCached(offset, batchSize);
                 for (i = 0; i < rows.length; ++i)
                 {
-                    jsons.push(rows.item(i).document);
+                    jsons.push(rows[i]);
                 }
                 loadItems(jsons, false);
                 if (rows.length < batchSize)
@@ -414,10 +413,10 @@ NewsModel {
             }
             else if (mode === 1)
             {
-                rows = Database.batchLoadShelved(offset, batchSize);
+                rows = database.batchLoadShelved(offset, batchSize);
                 for (i = 0; i < rows.length; ++i)
                 {
-                    jsons.push(rows.item(i).document);
+                    jsons.push(rows[i]);
                 }
                 loadItems(jsons, true);
                 if (rows.length < batchSize)
@@ -472,7 +471,7 @@ NewsModel {
     function itemBody(source, uid)
     {
         console.log("itemBody: " + source + ", " + uid);
-        var body = Database.itemBody(source, uid);
+        var body = database.itemBody(source, uid);
         if (body !== "")
         {
             return body;
@@ -480,7 +479,7 @@ NewsModel {
         else
         {
             // handle legacy items
-            var jsonDoc = Database.cachedItem(source, uid);
+            var jsonDoc = database.cachedItem(source, uid);
             if (jsonDoc !== "")
             {
                 var item = json.fromJson(jsonDoc);
@@ -494,25 +493,25 @@ NewsModel {
     function tidyCache()
     {
         console.log("Clearing read items from cache");
-        Database.uncacheReadItems();
-        Database.forgetRead(3600 * 24 * 500);
+        database.uncacheReadItems();
+        database.forgetRead(3600 * 24 * 500);
     }
 
     onShelvedChanged: {
         if (listModel.isShelved(index))
         {
-            Database.shelveItem(getAttribute(index, "source"),
+            database.shelveItem(getAttribute(index, "source"),
                                 getAttribute(index, "uid"));
         }
         else
         {
-            Database.unshelveItem(getAttribute(index, "source"),
+            database.unshelveItem(getAttribute(index, "source"),
                                   getAttribute(index, "uid"));
         }
     }
 
     onReadChanged: {
-        Database.setItemsRead(items);
+        database.setItemsRead(items);
         _updateStats();
     }
 

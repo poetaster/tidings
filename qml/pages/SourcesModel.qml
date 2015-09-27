@@ -1,5 +1,4 @@
 import QtQuick 2.0
-import "database.js" as Database
 
 ListModel {
 
@@ -9,7 +8,7 @@ ListModel {
     signal modelChanged
 
     function addSource(name, url, color) {
-        var sourceId = Database.addSource(name, url, color);
+        var sourceId = database.addSource(name, url, color);
         append({
                    "sourceId": sourceId,
                    "name": name,
@@ -25,7 +24,7 @@ ListModel {
     }
 
     function changeSource(sourceId, name, url, color) {
-        Database.changeSource(sourceId, name, url, color);
+        database.changeSource(sourceId, name, url, color);
         for (var i = 0; i < count; i++) {
             if (get(i).sourceId === sourceId) {
                 get(i).name = name;
@@ -45,7 +44,7 @@ ListModel {
     }
 
     function removeSource(sourceId) {
-        Database.removeSource(sourceId);
+        database.removeSource(sourceId);
         for (var i = 0; i < count; i++) {
             if (get(i).sourceId === sourceId) {
                 remove(i);
@@ -60,7 +59,7 @@ ListModel {
 
     function forgetSourceRead(sourceId)
     {
-        Database.forgetSourceRead(sourceId);
+        database.forgetSourceRead(sourceId);
     }
 
     function moveItem(from, to)
@@ -81,12 +80,12 @@ ListModel {
         {
             sourceIds.push(get(i).sourceId);
         }
-        Database.setPositions(sourceIds);
+        database.setPositions(sourceIds);
     }
 
     Component.onCompleted: {
         console.log("Setting up feeds");
-        var items = Database.sources();
+        var items = database.sources();
 
         for (var i = 0; i < items.length; i++) {
             console.log(items[i].sourceId + " " + items[i].name);

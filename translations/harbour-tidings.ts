@@ -115,17 +115,17 @@
 <context>
     <name>MediaItem</name>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="84"/>
+        <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Image</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="86"/>
+        <location filename="../qml/pages/MediaItem.qml" line="85"/>
         <source>Video</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/MediaItem.qml" line="88"/>
+        <location filename="../qml/pages/MediaItem.qml" line="87"/>
         <source>PDF document</source>
         <translation type="unfinished"></translation>
     </message>
@@ -133,39 +133,39 @@
 <context>
     <name>NewsBlendModel</name>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="36"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="35"/>
         <source>Latest first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="42"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="41"/>
         <source>Oldest first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="48"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="47"/>
         <source>Feed, then latest first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="54"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="53"/>
         <source>Feed, then oldest first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="60"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="59"/>
         <source>Current feed only, latest first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="66"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="65"/>
         <source>Current feed only, oldest first</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="277"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="283"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="287"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="276"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="282"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="286"/>
         <source>Error with %1:
 %2</source>
         <translation type="unfinished"></translation>
