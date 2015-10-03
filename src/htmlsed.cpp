@@ -11,6 +11,112 @@ const QRegExp RE_TAG_ATTRIBUTE("[a-zA-Z0-9]+\\s*=\\s*(\"[^\"]*\"|'[^']*'|[^\\s\"
 // regex to verify proper quoting in a HTML tag
 const QRegExp RE_QUOTES("([^\"']*(\"[^\"]*\"|'[^']*')?[^\"']*)*");
 
+// expressions to desperately try to make some sense out of malformed HTML code
+const QRegExp RE_ATTR_EQ_QUOTE_STRING_QUOTE("[a-zA-Z0-9\\-]+\\s*=\\s*\"[^\"]*\"");
+const QRegExp RE_ATTR_EQ_APOS_STRING_APOS("[a-zA-Z0-9\\-]+\\s*=\\s*\'[^\']*\'");
+const QRegExp RE_ATTR_EQ_STRING_QUOTE("[a-zA-Z0-9\\-]+\\s*=\\s*[^\"=]*\"");
+const QRegExp RE_ATTR_EQ_STRING_APOS("[a-zA-Z0-9\\-]+\\s*=\\s*[^\'=]*\'");
+const QRegExp RE_ATTR_EQ_NOSPACESTRING("[a-zA-Z0-9\\-]+\\s*=\\s*[^\\s]+");
+const QRegExp RE_ATTR_EQ("[a-zA-Z0-9\\-]+\\s*=\\s*");
+const QRegExp RE_ATTR_ONLY("[a-zA-Z0-9\\-]+\\s*");
+
+
+/* Attempts to repair a malformed tag.
+ * Hello Engadget, this is for your sloppy HTML code!
+ */
+QString repairMalformedTag(const QString& badCode)
+{
+    int offset = 0;
+    QString code = badCode;
+
+    // consume '<'
+    ++offset;
+
+    // consume white space
+    while (offset < code.size() && code.at(offset) == ' ')
+    {
+        ++offset;
+    }
+
+    // consume tag name, if any
+    while (offset < code.size() && code.at(offset).isLetterOrNumber())
+    {
+        ++offset;
+    }
+
+    while (offset < code.size())
+    {
+        // consume white space
+        while (offset < code.size() && code.at(offset) == ' ')
+        {
+            ++offset;
+        }
+
+        if (offset < code.size() && code.at(offset) == '/')
+        {
+            // closing tag
+            break;
+        }
+
+        if (RE_ATTR_EQ_QUOTE_STRING_QUOTE.indexIn(code, offset) == offset)
+        {
+            // clean
+            offset += RE_ATTR_EQ_QUOTE_STRING_QUOTE.matchedLength();
+        }
+        else if (RE_ATTR_EQ_APOS_STRING_APOS.indexIn(code, offset) == offset)
+        {
+            // clean
+            offset += RE_ATTR_EQ_APOS_STRING_APOS.matchedLength();
+        }
+        else if (RE_ATTR_EQ_STRING_QUOTE.indexIn(code, offset) == offset)
+        {
+            // missing first quote, insert it
+            int pos = code.indexOf('=', offset);
+            code = code.insert(pos + 1, '"');
+            offset += RE_ATTR_EQ_STRING_QUOTE.matchedLength() + 1;
+            qDebug() << "inserted missing first quote";
+        }
+        else if (RE_ATTR_EQ_STRING_APOS.indexIn(code, offset) == offset)
+        {
+            // missing first apostrophe, insert it
+            int pos = code.indexOf('=', offset);
+            code = code.insert(pos + 1, '\'');
+            offset += RE_ATTR_EQ_STRING_APOS.matchedLength() + 1;
+            qDebug() << "inserted missing first apostrophe";
+        }
+        else if (RE_ATTR_EQ_NOSPACESTRING.indexIn(code, offset) == offset)
+        {
+            // missing quotes, insert them
+            int pos = code.indexOf('=', offset);
+            code = code.insert(pos + 1, '"');
+            code = code.insert(offset + RE_ATTR_EQ_NOSPACESTRING.matchedLength() + 1, '"');
+            offset += RE_ATTR_EQ_NOSPACESTRING.matchedLength() + 2;
+            qDebug() << "inserted missing quotes";
+        }
+        else if (RE_ATTR_EQ.indexIn(code, offset) == offset)
+        {
+            // missing string, insert quotes
+            code = code.insert(RE_ATTR_EQ.matchedLength(), "\"\"");
+            offset += RE_ATTR_EQ.matchedLength() + 2;
+            qDebug() << "inserted missing string";
+        }
+        else if (RE_ATTR_ONLY.indexIn(code, offset) == offset)
+        {
+            // clean
+            offset += RE_ATTR_ONLY.matchedLength();
+        }
+        else
+        {
+            // what's that?
+            break;
+        }
+    }
+    if (code.size() != badCode.size())
+    {
+        qDebug() << "Repaired: " << badCode << "->" << code;
+    }
+    return code;
+}
 
 /* Finds and returns the next tag in the given HTML string.
  * HTML comments (<!-- -->) are recognized as tags.
@@ -41,10 +147,13 @@ QString findTag(const QString& html, int offset, int& pos)
         while (true)
         {
             int endPos = html.indexOf(">", searchPos);
+            //qDebug() << "endPos" << endPos << html.size();
             if (endPos != -1)
             {
                 int length = endPos + 1 - bracketPos;
-                const QString part = html.mid(bracketPos, length);
+                QString part = html.mid(bracketPos, length);
+                //qDebug() << part;
+                part = repairMalformedTag(part);
                 if (RE_QUOTES.exactMatch(part))
                 {
                     pos = bracketPos - offset;
