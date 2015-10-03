@@ -77,7 +77,7 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="236"/>
         <source>Pull down to add feeds.</source>
-        <translation>Herunterziehen um Feeds hinzuzufügen.</translation>
+        <translation>Ziehe herunter, um Feeds hinzuzufügen.</translation>
     </message>
 </context>
 <context>
@@ -85,7 +85,7 @@
     <message>
         <location filename="../qml/pages/HintLoader.qml" line="142"/>
         <source>No more hints? Disable them in Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Tipps mehr? In den Einstellungen deaktivieren.</translation>
     </message>
 </context>
 <context>
@@ -135,7 +135,7 @@
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="35"/>
         <source>Latest first</source>
-        <translation>Neuste zuerst</translation>
+        <translation>Neueste zuerst</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="41"/>
@@ -145,7 +145,7 @@
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="47"/>
         <source>Feed, then latest first</source>
-        <translation>Feed, dann neuste zuerst</translation>
+        <translation>Feed, dann neueste zuerst</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="53"/>
@@ -155,7 +155,7 @@
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="59"/>
         <source>Current feed only, latest first</source>
-        <translation>Nur aktueller Feed, neuste zuerst</translation>
+        <translation>Nur aktueller Feed, neueste zuerst</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="65"/>
@@ -235,12 +235,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="134"/>
         <source>Show hints</source>
-        <translation type="unfinished"></translation>
+        <translation>Tipps zeigen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="135"/>
         <source>If enabled, hints will guide you using the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Wenn aktiviert, führen Tipps durch die Bedienung der App.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="91"/>
@@ -356,7 +356,7 @@
         <location filename="../qml/pages/SourcesPage.qml" line="227"/>
         <location filename="../qml/pages/SourcesPage.qml" line="230"/>
         <source>All read</source>
-        <translation type="unfinished">Alles gelesen</translation>
+        <translation>Alle gelesen</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="239"/>
@@ -460,82 +460,82 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="184"/>
         <source>Feeds overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Feed-Übersicht</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="185"/>
         <source>- Shows all your subscribed feeds.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Zeigt alle deine abonnierten Feeds.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="186"/>
         <source>- Pull down to refresh all.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Ziehe herunter, um alle zu aktualisieren.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="187"/>
         <source>- Tap and hold to add or manage feeds.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Drücke und halte, um Feeds hinzuzufügen oder zu bearbeiten.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="192"/>
         <source>Managing mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Verwalten-Modus</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="193"/>
         <source>- Tap on a feed to refresh.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Drücke einen Feed, um ihn zu aktualisieren.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="194"/>
         <source>- Tap on the edit button to edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Drücke den Bearbeiten-Knopf, um zu bearbeiten.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="195"/>
         <source>- Tap and hold on a feed to move position.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Drücke und halte einen Feed, um ihn zu verschieben.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="196"/>
         <source>- Tap on empty space to leave managing mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Drücke eine leere Stelle, um den Verwalten-Modus zu verlassen.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="201"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikel</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="202"/>
         <source>- Tap on the page header to change sorting.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Drücke den Seitentitel, um die Sortierung zu ändern.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="203"/>
         <source>- Pull down to mark all as read.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Ziehe herunter, um alle als gelesen zu markieren.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="208"/>
         <source>Article view</source>
-        <translation type="unfinished"></translation>
+        <translation>Artikelansicht</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="209"/>
         <source>- Tap on the title to open in external browser.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Drücke den Titel, um im externen Browser zu laden.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="210"/>
         <source>- Tap on the star symbol to keep this article.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Drücke das Sternsymbol, um den Artikel zu behalten.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="227"/>
         <source>Loading from cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Lade aus dem Cache</translation>
     </message>
 </context>
 </TS>
