@@ -461,7 +461,7 @@ void Database::uncacheReadItems()
     QSqlQuery query;
     // shelved items are not in the offline cache
     query.exec("DELETE FROM offlineCache "
-               "WHERE url || uid IN (SELECT url || uid FROM read");
+               "WHERE url || uid IN (SELECT url || uid FROM read)");
     // don't delete from bodies what is shelved
     query.exec("DELETE FROM bodies "
                "WHERE url || uid IN (SELECT url || uid FROM read) AND "
