@@ -79,6 +79,12 @@ QString Database::locateDatabase() const
 
     if (! dataPaths.empty())
     {
+        // create path if necessary
+        if (! QDir(dataPaths.at(0)).mkpath("."))
+        {
+            qDebug() << "Failed to create database path" << dataPaths.at(0);
+            return QString();
+        }
         return QDir(dataPaths.at(0)).absoluteFilePath(DATABASE);
     }
     else
