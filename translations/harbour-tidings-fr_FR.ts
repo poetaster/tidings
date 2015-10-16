@@ -72,12 +72,12 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="122"/>
         <source>Stop Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter l'audio</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="236"/>
         <source>Pull down to add feeds.</source>
-        <translation>Glisser vers le bas pour ajouter un flux</translation>
+        <translation>Tirer vers le bas pour ajouter un flux</translation>
     </message>
 </context>
 <context>
@@ -85,7 +85,7 @@
     <message>
         <location filename="../qml/pages/HintLoader.qml" line="142"/>
         <source>No more hints? Disable them in Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous pouvez désactiver les astuces dans Réglages</translation>
     </message>
 </context>
 <context>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../qml/pages/ImagePage.qml" line="19"/>
         <source>Save to gallery</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder dans la galerie</translation>
     </message>
 </context>
 <context>
@@ -109,7 +109,7 @@
     <message>
         <location filename="../qml/pages/LoadImagesButton.qml" line="13"/>
         <source>Load images</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger les images</translation>
     </message>
 </context>
 <context>
@@ -117,17 +117,17 @@
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Image</source>
-        <translation type="unfinished">Images</translation>
+        <translation>Images</translation>
     </message>
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="85"/>
         <source>Video</source>
-        <translation type="unfinished">Vidéo</translation>
+        <translation>Vidéo</translation>
     </message>
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="87"/>
         <source>PDF document</source>
-        <translation type="unfinished">Document PDF</translation>
+        <translation>Document PDF</translation>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@
     <message>
         <location filename="../qml/pages/ResourcesPage.qml" line="33"/>
         <source>Resources</source>
-        <translation type="unfinished">Ressources</translation>
+        <translation>Ressources</translation>
     </message>
 </context>
 <context>
@@ -200,12 +200,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="45"/>
         <source>Load images automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger les images automatiquement</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="46"/>
         <source>If disabled, embedded images are not loaded automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactivé: les images intégrées ne sont pas chargées automatiquement.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="63"/>
@@ -225,22 +225,22 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="121"/>
         <source>Apply font scale to web view</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer la taille de police à la vue web</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="122"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activé: les réglages de la taille de police s'appliquent à la vue web.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="134"/>
         <source>Show hints</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer les astuces</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="135"/>
         <source>If enabled, hints will guide you using the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activé: des astuces vous aideront à utiliser l'application.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="91"/>
@@ -261,12 +261,12 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="36"/>
         <source>Edit feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer le flux</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="37"/>
         <source>New feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau flux</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="41"/>
