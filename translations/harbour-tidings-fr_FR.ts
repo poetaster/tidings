@@ -177,7 +177,7 @@
     <message>
         <location filename="../qml/pages/ResourcesPage.qml" line="33"/>
         <source>Resources</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ressources</translation>
     </message>
 </context>
 <context>
