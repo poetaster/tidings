@@ -72,12 +72,12 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="122"/>
         <source>Stop Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter l'audio</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="236"/>
         <source>Pull down to add feeds.</source>
-        <translation>Glisser vers le bas pour ajouter un flux</translation>
+        <translation>Tirer vers le bas pour ajouter un flux</translation>
     </message>
 </context>
 <context>
@@ -85,7 +85,7 @@
     <message>
         <location filename="../qml/pages/HintLoader.qml" line="142"/>
         <source>No more hints? Disable them in Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vous pouvez désactiver les astuces dans Réglages</translation>
     </message>
 </context>
 <context>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../qml/pages/ImagePage.qml" line="19"/>
         <source>Save to gallery</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder dans la galerie</translation>
     </message>
 </context>
 <context>
@@ -109,7 +109,7 @@
     <message>
         <location filename="../qml/pages/LoadImagesButton.qml" line="13"/>
         <source>Load images</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger les images</translation>
     </message>
 </context>
 <context>
@@ -117,17 +117,17 @@
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Image</source>
-        <translation type="unfinished">Images</translation>
+        <translation>Images</translation>
     </message>
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="85"/>
         <source>Video</source>
-        <translation type="unfinished">Vidéo</translation>
+        <translation>Vidéo</translation>
     </message>
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="87"/>
         <source>PDF document</source>
-        <translation type="unfinished">Document PDF</translation>
+        <translation>Document PDF</translation>
     </message>
 </context>
 <context>
@@ -177,7 +177,7 @@
     <message>
         <location filename="../qml/pages/ResourcesPage.qml" line="33"/>
         <source>Resources</source>
-        <translation type="unfinished"></translation>
+        <translation>Ressources</translation>
     </message>
 </context>
 <context>
@@ -200,12 +200,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="45"/>
         <source>Load images automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger les images automatiquement</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="46"/>
         <source>If disabled, embedded images are not loaded automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Désactivé: les images intégrées ne sont pas chargées automatiquement.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="63"/>
@@ -225,22 +225,22 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="121"/>
         <source>Apply font scale to web view</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer la taille de police à la vue web</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="122"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activé: les réglages de la taille de police s'appliquent à la vue web.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="134"/>
         <source>Show hints</source>
-        <translation type="unfinished"></translation>
+        <translation>Montrer les astuces</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="135"/>
         <source>If enabled, hints will guide you using the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Activé: des astuces vous aideront à utiliser l'application.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="91"/>
@@ -261,12 +261,12 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="36"/>
         <source>Edit feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Editer le flux</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="37"/>
         <source>New feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau flux</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="41"/>
@@ -316,7 +316,7 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="139"/>
         <source>Clearing</source>
-        <translation type="unfinished">Effacement</translation>
+        <translation>Effacement</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="160"/>
@@ -340,7 +340,7 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="25"/>
         <source>Manage feeds</source>
-        <translation type="unfinished"></translation>
+        <translation>Gérer les flux</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="211"/>
@@ -355,12 +355,12 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="240"/>
         <source>Refresh all</source>
-        <translation type="unfinished"></translation>
+        <translation>Tout rafraîchir</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="255"/>
         <source>Stop Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Arrêter l'audio</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="227"/>
@@ -414,27 +414,27 @@
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="240"/>
         <source>Already at the end</source>
-        <translation type="unfinished">Dernier article</translation>
+        <translation>Dernier article</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="369"/>
         <source>(%1 seconds)</source>
-        <translation type="unfinished">(%1 secondes)</translation>
+        <translation>(%1 secondes)</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="445"/>
         <source>Short article</source>
-        <translation type="unfinished"></translation>
+        <translation>Articlé réduit</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="477"/>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Site internet</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="446"/>
         <source>Full article</source>
-        <translation type="unfinished"></translation>
+        <translation>Article complet</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="523"/>
@@ -460,82 +460,82 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="184"/>
         <source>Feeds overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Présentation des flux</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="185"/>
         <source>- Shows all your subscribed feeds.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Présente tous les flux que vous suivez.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="186"/>
         <source>- Pull down to refresh all.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tirez vers le bas pour tout rafraîchir</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="187"/>
         <source>- Tap and hold to add or manage feeds.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Un appui long vous permet d'ajouter ou de gérer les flux.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="192"/>
         <source>Managing mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode de gestion</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="193"/>
         <source>- Tap on a feed to refresh.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tapez sur un flux pour le rafraïchir</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="194"/>
         <source>- Tap on the edit button to edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tapez sur le bouton "éditer" pour éditer le flux.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="195"/>
         <source>- Tap and hold on a feed to move position.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Un appui long sur un flux permet de le déplacer.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="196"/>
         <source>- Tap on empty space to leave managing mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tapez sur espace vide pour quitter le mode de gestion.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="201"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Articles</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="202"/>
         <source>- Tap on the page header to change sorting.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tapez sur le titre de la page pour changer l'ordre de tri.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="203"/>
         <source>- Pull down to mark all as read.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tirez vers le bas pour marquer tous les articles comme lus</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="208"/>
         <source>Article view</source>
-        <translation type="unfinished"></translation>
+        <translation>Page article</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="209"/>
         <source>- Tap on the title to open in external browser.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tapez sur le titre de l'article pour l'ouvrir dans un navigateur externe.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="210"/>
         <source>- Tap on the star symbol to keep this article.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Tapez sur l'étoile pour conserver cet article.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="227"/>
         <source>Loading from cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Chargement depuis le cache</translation>
     </message>
 </context>
 </TS>
