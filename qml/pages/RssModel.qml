@@ -32,7 +32,7 @@ XmlListModel {
     XmlRole { name: "link"; query: "link/string()" }
     XmlRole { name: "description"; query: "description/string()" }
     XmlRole { name: "encoded"; query: "content:encoded/string()" }
-    XmlRole { name: "dateString"; query: "pubDate/string()" }
+    XmlRole { name: "dateString"; query: "normalize-space(pubDate/string())" }
 
     XmlRole { name: "duration"; query: "media:content/@duration/string()" }
 
