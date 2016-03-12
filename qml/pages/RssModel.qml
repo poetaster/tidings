@@ -27,12 +27,12 @@ XmlListModel {
             "declare namespace content = 'http://purl.org/rss/1.0/modules/content/';" +
             "declare namespace itunes = 'http://www.itunes.com/DTDs/Podcast-1.0.dtd';"
 
-    XmlRole { name: "uid"; query: "guid/string()" }
-    XmlRole { name: "title"; query: "title/string()" }
-    XmlRole { name: "link"; query: "link/string()" }
+    XmlRole { name: "uid"; query: "normalize-space(guid/string())" }
+    XmlRole { name: "title"; query: "normalize-space(title/string())" }
+    XmlRole { name: "link"; query: "normalize-space(link/string())" }
     XmlRole { name: "description"; query: "description/string()" }
-    XmlRole { name: "encoded"; query: "content:encoded/string()" }
-    XmlRole { name: "dateString"; query: "pubDate/string()" }
+    XmlRole { name: "encoded"; query: "normalize-space(content:encoded/string())" }
+    XmlRole { name: "dateString"; query: "normalize-space(pubDate/string())" }
 
     XmlRole { name: "duration"; query: "media:content/@duration/string()" }
 
