@@ -61,7 +61,7 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="98"/>
         <source>Sort by: %1</source>
-        <translation>Сорт. по: %1</translation>
+        <translation>Тип сортировки: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="107"/>
@@ -135,32 +135,32 @@
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="35"/>
         <source>Latest first</source>
-        <translation>Новые в начале</translation>
+        <translation>Вначале новые статьи</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="41"/>
         <source>Oldest first</source>
-        <translation>Старые в начале</translation>
+        <translation>Вначале старые статьи</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="47"/>
         <source>Feed, then latest first</source>
-        <translation>Лента, затем новые в начале</translation>
+        <translation>Вначале новые, группировка по лентам</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="53"/>
         <source>Feed, then oldest first</source>
-        <translation>Лента, затем старые в начале</translation>
+        <translation>Вначале старые, группировка по лентам</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="59"/>
         <source>Current feed only, latest first</source>
-        <translation>Только текущая лента, новые в начале</translation>
+        <translation>Вначале новые, только текущая лента</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="65"/>
         <source>Current feed only, oldest first</source>
-        <translation>Только текущая лента, старые в начале</translation>
+        <translation>Вначале старые, только текущая лента</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="276"/>
@@ -195,7 +195,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="28"/>
         <source>Hiding the preview images saves network traffic. This switch does not affect embedded images in the item view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключение предварительного просмотра изображений экономит трафик. Эта опция не касается изображений, включённых в статью.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="45"/>
@@ -210,12 +210,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="63"/>
         <source>Tinted items</source>
-        <translation type="unfinished"></translation>
+        <translation>Статьи цвета ленты</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="64"/>
         <source>If enabled, items have their background tinted in their tag color.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Если включено, фон статьи соответствует цвету тэга ленты.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="100"/>
@@ -230,7 +230,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="122"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
-        <translation>Если включено, размер шрифта применяется к вебпросмотру</translation>
+        <translation>Если включено, размер шрифта применяется к вебпросмотру.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="134"/>
@@ -470,7 +470,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="186"/>
         <source>- Pull down to refresh all.</source>
-        <translation>- Потяните внис, чтобы все обновить.</translation>
+        <translation>- Потяните вниз, чтобы все обновить.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="187"/>
@@ -490,7 +490,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="194"/>
         <source>- Tap on the edit button to edit.</source>
-        <translation>- Нажмите на кнопку Редактирование для редактирования</translation>
+        <translation>- Нажмите на кнопку "Редактирование" для редактирования</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="195"/>
