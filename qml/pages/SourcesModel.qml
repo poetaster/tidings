@@ -25,23 +25,21 @@ ListModel {
 
     function changeSource(sourceId, name, url, color) {
         database.changeSource(sourceId, name, url, color);
-        set(sourceId-1,
-                {"name": name,
-                "url": url,
-                "color": color}
-            );
-//        for (var i = 0; i < count; i++) {
-//            if (get(i).sourceId === sourceId) {
-//               get(i).name = name;
-//               get(i).url = url;
-//                get(i).color = color;
-//
+
+        for (var i = 0; i < count; i++) {
+            if (get(i).sourceId === sourceId) {
+                set (i, {
+                         "sourceId": sourceId,
+                         "name": name,
+                         "url": url,
+                         "color": color})
+
                 names[url] = name;
                 colors[url] = color;
+                break;
+            }
+        }
 
-//                break;
-//            }
-//        }
 
         modelChanged();
         namesChanged();
@@ -59,6 +57,7 @@ ListModel {
 
         modelChanged();
         namesChanged();
+        countChanged();
         colorsChanged();
     }
 
