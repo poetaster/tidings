@@ -56,12 +56,12 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="74"/>
         <source>%1 items</source>
-        <translation>Новости: %1</translation>
+        <translation>Статьи: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="98"/>
         <source>Sort by: %1</source>
-        <translation>Сорт. по: %1</translation>
+        <translation>Тип сортировки: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="107"/>
@@ -72,12 +72,12 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="122"/>
         <source>Stop Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Заглушить звук</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="236"/>
         <source>Pull down to add feeds.</source>
-        <translation>Потяните вниз, чтобы добавить подписки.</translation>
+        <translation>Потяните вниз, чтобы добавить ленту.</translation>
     </message>
 </context>
 <context>
@@ -85,7 +85,7 @@
     <message>
         <location filename="../qml/pages/HintLoader.qml" line="142"/>
         <source>No more hints? Disable them in Settings.</source>
-        <translation type="unfinished"></translation>
+        <translation>Не нужны подсказки? Отключите их в Настройках.</translation>
     </message>
 </context>
 <context>
@@ -93,7 +93,7 @@
     <message>
         <location filename="../qml/pages/ImagePage.qml" line="19"/>
         <source>Save to gallery</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить в галерее</translation>
     </message>
 </context>
 <context>
@@ -109,7 +109,7 @@
     <message>
         <location filename="../qml/pages/LoadImagesButton.qml" line="13"/>
         <source>Load images</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузка изображений</translation>
     </message>
 </context>
 <context>
@@ -117,17 +117,17 @@
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Image</source>
-        <translation type="unfinished">Изображение</translation>
+        <translation>Изображение</translation>
     </message>
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="85"/>
         <source>Video</source>
-        <translation type="unfinished">Видео</translation>
+        <translation>Видео</translation>
     </message>
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="87"/>
         <source>PDF document</source>
-        <translation type="unfinished">Документ PDF</translation>
+        <translation>Документ PDF</translation>
     </message>
 </context>
 <context>
@@ -135,32 +135,32 @@
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="35"/>
         <source>Latest first</source>
-        <translation>Новые в начале</translation>
+        <translation>Вначале новые статьи</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="41"/>
         <source>Oldest first</source>
-        <translation>Старые в начале</translation>
+        <translation>Вначале старые статьи</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="47"/>
         <source>Feed, then latest first</source>
-        <translation>Лента, затем новые в начале</translation>
+        <translation>Вначале новые, группировка по лентам</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="53"/>
         <source>Feed, then oldest first</source>
-        <translation>Лента, затем старые в начале</translation>
+        <translation>Вначале старые, группировка по лентам</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="59"/>
         <source>Current feed only, latest first</source>
-        <translation>Только текущая лента, новые в начале</translation>
+        <translation>Вначале новые, только текущая лента</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="65"/>
         <source>Current feed only, oldest first</source>
-        <translation>Только текущая лента, старые в начале</translation>
+        <translation>Вначале старые, только текущая лента</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="276"/>
@@ -177,7 +177,7 @@
     <message>
         <location filename="../qml/pages/ResourcesPage.qml" line="33"/>
         <source>Resources</source>
-        <translation type="unfinished"></translation>
+        <translation>Ресурсы</translation>
     </message>
 </context>
 <context>
@@ -185,67 +185,67 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="17"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="27"/>
         <source>Show preview images</source>
-        <translation type="unfinished"></translation>
+        <translation>Предварительный просмотр изображений</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="28"/>
         <source>Hiding the preview images saves network traffic. This switch does not affect embedded images in the item view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключение предварительного просмотра изображений экономит трафик. Эта опция не касается изображений, включённых в статью.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="45"/>
         <source>Load images automatically</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить изображения автоматически</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="46"/>
         <source>If disabled, embedded images are not loaded automatically.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если выключено, не загружать изображения автоматически.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="63"/>
         <source>Tinted items</source>
-        <translation type="unfinished"></translation>
+        <translation>Статьи цвета ленты</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="64"/>
         <source>If enabled, items have their background tinted in their tag color.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Если включено, фон статьи соответствует цвету тэга ленты.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="100"/>
         <source>Font scale:</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер шрифта:</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="121"/>
         <source>Apply font scale to web view</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить размер шрифта к вебпросмотру</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="122"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если включено, размер шрифта применяется к вебпросмотру.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="134"/>
         <source>Show hints</source>
-        <translation type="unfinished"></translation>
+        <translation>Подсказки</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="135"/>
         <source>If enabled, hints will guide you using the application.</source>
-        <translation type="unfinished"></translation>
+        <translation>Если включено, показывать подсказки.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="91"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройка меняет размер шрифта при просмотре ленты.</translation>
     </message>
 </context>
 <context>
@@ -261,17 +261,17 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="36"/>
         <source>Edit feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактировать ленту</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="37"/>
         <source>New feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая лента</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="41"/>
         <source>Feed</source>
-        <translation type="unfinished"></translation>
+        <translation>Лента</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="47"/>
@@ -296,7 +296,7 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="86"/>
         <source>Color tag</source>
-        <translation>Цвет</translation>
+        <translation>Цвет тега</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="115"/>
@@ -306,28 +306,28 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="126"/>
         <source>Clearing the read status will cause all available items to be reloaded the next time.</source>
-        <translation type="unfinished"></translation>
+        <translation>Сброс статуса прочтения приведёт к тому, что все статьи будут загружены заново.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="137"/>
         <source>Clear read status</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить статус прочтения</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="139"/>
         <source>Clearing</source>
-        <translation type="unfinished"></translation>
+        <translation>Сброс</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="160"/>
         <source>Deleting will remove the feed and all of its items from the database.</source>
-        <translation type="unfinished"></translation>
+        <translation>Удаление ленты и всех её статей из базы</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="172"/>
         <location filename="../qml/pages/SourceEditDialog.qml" line="174"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
 </context>
 <context>
@@ -340,7 +340,7 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="25"/>
         <source>Manage feeds</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Управление лентами</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="211"/>
@@ -350,17 +350,17 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="219"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Настройки</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="240"/>
         <source>Refresh all</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Обновить всё</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="255"/>
         <source>Stop Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Заглушить звук</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="227"/>
@@ -424,17 +424,17 @@
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="445"/>
         <source>Short article</source>
-        <translation type="unfinished"></translation>
+        <translation>Статья вкратце</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="477"/>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Вебсайт</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="446"/>
         <source>Full article</source>
-        <translation type="unfinished"></translation>
+        <translation>Статья целиком</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="523"/>
@@ -447,7 +447,7 @@
     <message>
         <location filename="../qml/pages/WebPage.qml" line="41"/>
         <source>Close web view</source>
-        <translation>Закрыть web view</translation>
+        <translation>Закрыть вебпросмотр</translation>
     </message>
     <message>
         <location filename="../qml/pages/WebPage.qml" line="50"/>
@@ -465,77 +465,77 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="185"/>
         <source>- Shows all your subscribed feeds.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Показать все ленты, на которые подписаны.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="186"/>
         <source>- Pull down to refresh all.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Потяните вниз, чтобы все обновить.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="187"/>
         <source>- Tap and hold to add or manage feeds.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Нажмите и удерживайте, чтобы добавить или изменить ленты.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="192"/>
         <source>Managing mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим управления</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="193"/>
         <source>- Tap on a feed to refresh.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Нажмите на ленту для обновления.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="194"/>
         <source>- Tap on the edit button to edit.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Нажмите на кнопку "Редактирование" для редактирования</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="195"/>
         <source>- Tap and hold on a feed to move position.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Нажмите и подержите чтобы переместить на другое место.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="196"/>
         <source>- Tap on empty space to leave managing mode.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Нажмите на свободное место, что выйти из режима управления</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="201"/>
         <source>Articles</source>
-        <translation type="unfinished"></translation>
+        <translation>Статьи</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="202"/>
         <source>- Tap on the page header to change sorting.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Нажмите на заголовок страницы, чтобы изменить сортировку</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="203"/>
         <source>- Pull down to mark all as read.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Потяните вниз, чтобы отметить как прочтённое</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="208"/>
         <source>Article view</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотр статьи</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="209"/>
         <source>- Tap on the title to open in external browser.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Нажмите на заголовке, чтобы открыть статью в браузере.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="210"/>
         <source>- Tap on the star symbol to keep this article.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Нажмите на звёздочку, чтобы сохранить статью</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="227"/>
         <source>Loading from cache</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить из кэша</translation>
     </message>
 </context>
 </TS>
