@@ -301,7 +301,7 @@ Page {
 
                 Label {
                     anchors.left: parent.left
-                    anchors.right: shelveIcon.left
+                    anchors.right: copyIcon.left
                     anchors.rightMargin: Theme.paddingMedium
                     horizontalAlignment: Text.AlignLeft
                     color: Theme.highlightColor
@@ -355,7 +355,20 @@ Page {
                         }
                     }
                 }
+
+                IconButton {
+                    id: copyIcon
+                    anchors.right: shelveIcon.left
+                    icon.source: "image://theme/icon-m-clipboard"
+
+                    width: bigScreen ? Theme.itemSizeSmall
+                                     : Theme.itemSizeSmall
+                    height: width
+
+                    onClicked: Clipboard.text = itemData.link
+                }
             }
+
 
             Label {
                 visible: itemData.mediaDuration > 0
