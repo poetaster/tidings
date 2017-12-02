@@ -37,8 +37,8 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <location filename="../qml/cover/CoverPage.qml" line="106"/>
-        <location filename="../qml/cover/CoverPage.qml" line="185"/>
+        <location filename="../qml/cover/CoverPage.qml" line="108"/>
+        <location filename="../qml/cover/CoverPage.qml" line="187"/>
         <source>Refreshing</source>
         <translation>Uppdaterar</translation>
     </message>

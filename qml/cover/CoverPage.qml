@@ -53,8 +53,10 @@ CoverBackground {
 
     Image {
         visible: ! backgroundImage.visible
-        anchors.left: parent.left
+        width: parent.width
+        height: width
         anchors.bottom: parent.bottom
+        fillMode: Image.PreserveAspectCrop
         source: Qt.resolvedUrl("overlay.png")
         opacity: 0.1
     }
