@@ -171,6 +171,6 @@ BackgroundItem {
     BusyIndicator {
         id: busyIndicator
         anchors.centerIn: parent
-        size: bigScreen ? BusyIndicatorSize.Large : BusyIndicatorSize.Medium
+        size: BusyIndicatorSize.Medium
     }
 }

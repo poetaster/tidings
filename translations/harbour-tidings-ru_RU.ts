@@ -54,23 +54,23 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="74"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="73"/>
         <source>%1 items</source>
         <translation>Статьи: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="98"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="97"/>
         <source>Sort by: %1</source>
         <translation>Тип сортировки: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="107"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="111"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="106"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="110"/>
         <source>All read</source>
         <translation>Прочитано</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="122"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="121"/>
         <source>Stop Audio</source>
         <translation>Заглушить звук</translation>
     </message>
@@ -175,7 +175,7 @@
 <context>
     <name>ResourcesPage</name>
     <message>
-        <location filename="../qml/pages/ResourcesPage.qml" line="33"/>
+        <location filename="../qml/pages/ResourcesPage.qml" line="32"/>
         <source>Resources</source>
         <translation>Ресурсы</translation>
     </message>
@@ -343,33 +343,33 @@
         <translation type="unfinished">Управление лентами</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="211"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="210"/>
         <source>About Tidings</source>
         <translation>О Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="219"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="218"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="240"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="239"/>
         <source>Refresh all</source>
         <translation type="unfinished">Обновить всё</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="255"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="254"/>
         <source>Stop Audio</source>
         <translation>Заглушить звук</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="227"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="230"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="226"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="229"/>
         <source>All read</source>
         <translation>Прочитано</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="239"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="238"/>
         <source>Abort refreshing</source>
         <translation>Отменить обновление</translation>
     </message>
@@ -417,27 +417,27 @@
         <translation>Уже в конце</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="369"/>
+        <location filename="../qml/pages/ViewPage.qml" line="380"/>
         <source>(%1 seconds)</source>
         <translation>(%1 секунд)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="445"/>
+        <location filename="../qml/pages/ViewPage.qml" line="456"/>
         <source>Short article</source>
         <translation>Статья вкратце</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="477"/>
+        <location filename="../qml/pages/ViewPage.qml" line="488"/>
         <source>Website</source>
         <translation>Вебсайт</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="446"/>
+        <location filename="../qml/pages/ViewPage.qml" line="457"/>
         <source>Full article</source>
         <translation>Статья целиком</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="523"/>
+        <location filename="../qml/pages/ViewPage.qml" line="534"/>
         <source>Media</source>
         <translation>Медиа</translation>
     </message>
@@ -490,7 +490,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="194"/>
         <source>- Tap on the edit button to edit.</source>
-        <translation>- Нажмите на кнопку "Редактирование" для редактирования</translation>
+        <translation>- Нажмите на кнопку &quot;Редактирование&quot; для редактирования</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="195"/>

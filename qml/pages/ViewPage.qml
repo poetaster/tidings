@@ -17,8 +17,8 @@ Page {
 
     property bool _activated
 
-    property real _pageMargin: (width > height || bigScreen) ? Theme.paddingLarge * 2
-                                                             : Theme.paddingLarge
+    property real _pageMargin: (width > height) ? Theme.paddingLarge * 2
+                                                : Theme.paddingLarge
 
     function previousItem() {
         listview.currentIndex = listview.currentIndex - 1;
@@ -328,8 +328,7 @@ Page {
                     anchors.right: parent.right
                     source: itemData.shelved ? "image://theme/icon-l-favorite"
                                              : "image://theme/icon-l-star"
-                    width: bigScreen ? Theme.itemSizeSmall
-                                     : Theme.itemSizeSmall
+                    width: Theme.itemSizeSmall
                     height: width
 
                     MouseArea {
@@ -361,8 +360,7 @@ Page {
                     anchors.right: shelveIcon.left
                     icon.source: "image://theme/icon-m-clipboard"
 
-                    width: bigScreen ? Theme.itemSizeSmall
-                                     : Theme.itemSizeSmall
+                    width: Theme.itemSizeSmall
                     height: width
 
                     onClicked: Clipboard.text = itemData.link

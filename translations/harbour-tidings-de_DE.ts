@@ -54,23 +54,23 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="74"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="73"/>
         <source>%1 items</source>
         <translation>%1 Einträge</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="98"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="97"/>
         <source>Sort by: %1</source>
         <translation>Sortieren nach: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="107"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="111"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="106"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="110"/>
         <source>All read</source>
         <translation>Alles gelesen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="122"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="121"/>
         <source>Stop Audio</source>
         <translation>Audio stoppen</translation>
     </message>
@@ -175,7 +175,7 @@
 <context>
     <name>ResourcesPage</name>
     <message>
-        <location filename="../qml/pages/ResourcesPage.qml" line="33"/>
+        <location filename="../qml/pages/ResourcesPage.qml" line="32"/>
         <source>Resources</source>
         <translation>Ressourcen</translation>
     </message>
@@ -343,33 +343,33 @@
         <translation>Feeds verwalten</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="211"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="210"/>
         <source>About Tidings</source>
         <translation>Über Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="219"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="218"/>
         <source>Settings</source>
         <translation>Einstellungen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="227"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="230"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="226"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="229"/>
         <source>All read</source>
         <translation>Alle gelesen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="239"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="238"/>
         <source>Abort refreshing</source>
         <translation>Aktualisierung abbrechen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="240"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="239"/>
         <source>Refresh all</source>
         <translation>Alle aktualisieren</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="255"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="254"/>
         <source>Stop Audio</source>
         <translation>Audio stoppen</translation>
     </message>
@@ -417,27 +417,27 @@
         <translation>Bereits am Ende</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="369"/>
+        <location filename="../qml/pages/ViewPage.qml" line="380"/>
         <source>(%1 seconds)</source>
         <translation>(%1 Sekunden)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="445"/>
+        <location filename="../qml/pages/ViewPage.qml" line="456"/>
         <source>Short article</source>
         <translation>Kurzer Artikel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="477"/>
+        <location filename="../qml/pages/ViewPage.qml" line="488"/>
         <source>Website</source>
         <translation>Website</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="446"/>
+        <location filename="../qml/pages/ViewPage.qml" line="457"/>
         <source>Full article</source>
         <translation>Ganzer Artikel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="523"/>
+        <location filename="../qml/pages/ViewPage.qml" line="534"/>
         <source>Media</source>
         <translation>Medien</translation>
     </message>

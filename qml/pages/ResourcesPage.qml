@@ -24,8 +24,7 @@ Page {
 
         anchors.fill: parent
         cellWidth: width > height ? width / 2 : width
-        cellHeight: bigScreen ? Theme.itemSizeExtraLarge
-                              : Theme.itemSizeLarge
+        cellHeight: Theme.itemSizeLarge
 
         model: _images
 

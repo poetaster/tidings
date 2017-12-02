@@ -90,11 +90,6 @@ ListItem {
         }
     }
 
-    /*
-    contentHeight: bigScreen ? Theme.itemSizeExtraLarge
-                             : Theme.itemSizeLarge
-                             */
-
     onClicked: {
         if (_isAudio)
         {

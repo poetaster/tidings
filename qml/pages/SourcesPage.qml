@@ -102,8 +102,7 @@ Page {
     SilicaGridView {
         id: gridview
 
-        property int itemsPerRow: bigScreen ? (page.width > page.height ? 6 : 4)
-                                            : (page.width > page.height ? 5 : 3)
+        property int itemsPerRow: Math.floor(page.width / Theme.itemSizeHuge)
 
         cellWidth: width / itemsPerRow
         cellHeight: cellWidth * (3 / 4)

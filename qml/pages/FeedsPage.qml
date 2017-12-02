@@ -65,8 +65,7 @@ Page {
 
         anchors.fill: parent
         cellWidth: width > height ? width / 2 : width
-        cellHeight: bigScreen ? Theme.itemSizeExtraLarge
-                              : Theme.itemSizeLarge
+        cellHeight: Theme.itemSizeLarge
 
         model: newsBlendModel
 
@@ -162,7 +161,8 @@ Page {
                 id: feedLabel
                 anchors.left: shelveIcon.visible ? shelveIcon.right : parent.left
                 anchors.right: picture.visible ? picture.left : parent.right
-                anchors.leftMargin: bigScreen ? Theme.paddingLarge : shelveIcon.visible ? Theme.paddingSmall : Theme.paddingMedium
+                anchors.leftMargin: shelveIcon.visible ? Theme.paddingSmall
+                                                       : Theme.paddingMedium
                 anchors.rightMargin: Theme.paddingMedium
                 color: feedItem.highlighted ? Theme.secondaryHighlightColor : Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeExtraSmall

@@ -54,25 +54,25 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="74"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="73"/>
         <source>%1 items</source>
         <translation>%1 éléments</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="98"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="97"/>
         <source>Sort by: %1</source>
         <translation>Trier par : %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="107"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="111"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="106"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="110"/>
         <source>All read</source>
         <translation>Marquer comme lus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="122"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="121"/>
         <source>Stop Audio</source>
-        <translation>Arrêter l'audio</translation>
+        <translation>Arrêter l&apos;audio</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="236"/>
@@ -175,7 +175,7 @@
 <context>
     <name>ResourcesPage</name>
     <message>
-        <location filename="../qml/pages/ResourcesPage.qml" line="33"/>
+        <location filename="../qml/pages/ResourcesPage.qml" line="32"/>
         <source>Resources</source>
         <translation>Ressources</translation>
     </message>
@@ -230,7 +230,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="122"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
-        <translation>Activé: les réglages de la taille de police s'appliquent à la vue web.</translation>
+        <translation>Activé: les réglages de la taille de police s&apos;appliquent à la vue web.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="134"/>
@@ -240,7 +240,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="135"/>
         <source>If enabled, hints will guide you using the application.</source>
-        <translation>Activé: des astuces vous aideront à utiliser l'application.</translation>
+        <translation>Activé: des astuces vous aideront à utiliser l&apos;application.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="91"/>
@@ -343,33 +343,33 @@
         <translation>Gérer les flux</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="211"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="210"/>
         <source>About Tidings</source>
         <translation>À propos de Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="219"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="218"/>
         <source>Settings</source>
         <translation>Paramètres</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="240"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="239"/>
         <source>Refresh all</source>
         <translation>Tout rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="255"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="254"/>
         <source>Stop Audio</source>
-        <translation>Arrêter l'audio</translation>
+        <translation>Arrêter l&apos;audio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="227"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="230"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="226"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="229"/>
         <source>All read</source>
         <translation>Marquer tous comme &quot;lu&quot;</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="239"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="238"/>
         <source>Abort refreshing</source>
         <translation>Annuler l&apos;actualisation</translation>
     </message>
@@ -417,27 +417,27 @@
         <translation>Dernier article</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="369"/>
+        <location filename="../qml/pages/ViewPage.qml" line="380"/>
         <source>(%1 seconds)</source>
         <translation>(%1 secondes)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="445"/>
+        <location filename="../qml/pages/ViewPage.qml" line="456"/>
         <source>Short article</source>
         <translation>Articlé réduit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="477"/>
+        <location filename="../qml/pages/ViewPage.qml" line="488"/>
         <source>Website</source>
         <translation>Site internet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="446"/>
+        <location filename="../qml/pages/ViewPage.qml" line="457"/>
         <source>Full article</source>
         <translation>Article complet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="523"/>
+        <location filename="../qml/pages/ViewPage.qml" line="534"/>
         <source>Media</source>
         <translation>Média</translation>
     </message>
@@ -475,7 +475,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="187"/>
         <source>- Tap and hold to add or manage feeds.</source>
-        <translation>- Un appui long vous permet d'ajouter ou de gérer les flux.</translation>
+        <translation>- Un appui long vous permet d&apos;ajouter ou de gérer les flux.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="192"/>
@@ -490,7 +490,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="194"/>
         <source>- Tap on the edit button to edit.</source>
-        <translation>- Tapez sur le bouton "éditer" pour éditer le flux.</translation>
+        <translation>- Tapez sur le bouton &quot;éditer&quot; pour éditer le flux.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="195"/>
@@ -510,7 +510,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="202"/>
         <source>- Tap on the page header to change sorting.</source>
-        <translation>- Tapez sur le titre de la page pour changer l'ordre de tri.</translation>
+        <translation>- Tapez sur le titre de la page pour changer l&apos;ordre de tri.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="203"/>
@@ -525,12 +525,12 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="209"/>
         <source>- Tap on the title to open in external browser.</source>
-        <translation>- Tapez sur le titre de l'article pour l'ouvrir dans un navigateur externe.</translation>
+        <translation>- Tapez sur le titre de l&apos;article pour l&apos;ouvrir dans un navigateur externe.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="210"/>
         <source>- Tap on the star symbol to keep this article.</source>
-        <translation>- Tapez sur l'étoile pour conserver cet article.</translation>
+        <translation>- Tapez sur l&apos;étoile pour conserver cet article.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="227"/>
