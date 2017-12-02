@@ -207,6 +207,7 @@ ApplicationWindow
         id: articleHint
         title: qsTr("Article view")
         items: [qsTr("- Tap on the title to open in external browser."),
+                qsTr("- Tap on the clipboard symbol to copy the link address to the clipboard."),
                 qsTr("- Tap on the star symbol to keep this article.")]
     }
 

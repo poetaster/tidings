@@ -529,11 +529,16 @@
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="210"/>
+        <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
+        <translation>- Drücke das Klemmbrettsymbol, um den Link in die Zwischenablage zu kopieren.</translation>
+    </message>
+    <message>
+        <location filename="../qml/harbour-tidings.qml" line="211"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation>- Drücke das Sternsymbol, um den Artikel zu behalten.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="227"/>
+        <location filename="../qml/harbour-tidings.qml" line="228"/>
         <source>Loading from cache</source>
         <translation>Lade aus dem Cache</translation>
     </message>
