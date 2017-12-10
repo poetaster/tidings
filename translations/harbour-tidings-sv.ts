@@ -495,7 +495,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="195"/>
         <source>- Tap and hold on a feed to move position.</source>
-        <translation>- Långtryck på ett flöde för att andra position.</translation>
+        <translation>- Långtryck på ett flöde för att ändra position.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="196"/>
@@ -530,7 +530,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="210"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>Tryck på urklipssymbolen för att kopiera länkadressen till urklipp</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="211"/>
