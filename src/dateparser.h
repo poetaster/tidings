@@ -23,6 +23,8 @@ public:
 
             // non-numeric UTC offset representations
             QMap<QString, long int> timezones;
+            timezones["Z"] = 0;  // "Zulu time" has been used as an nautical
+                                 // alias to GMT since the 1950s
             timezones["UT"] = 0;
             timezones["GMT"] = 0;
             timezones["EST"] = -5 * 3600;
