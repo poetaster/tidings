@@ -83,3 +83,9 @@ HEADERS += \
     src/urlloader.h \
     src/htmlsed.h \
     src/database.h
+
+SAILFISHAPP_ICONS += 86x86 108x108 128x128
+
+DISTFILES += icons/86x86/harbour-tidings.png \
+    icons/108x108/harbour-tidings.png \
+    icons/128x128/harbour-tidings.png
