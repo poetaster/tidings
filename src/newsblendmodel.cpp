@@ -371,7 +371,52 @@ QString NewsBlendModel::findThumbnail(const QVariantMap& itemData) const
         }
     }
 
+    if (thumbnail.isEmpty())
+    {
+        // Atom feeds may have a thumbnail as link
+        int amount = qMin(itemData.value("linksAmount", 0).toInt(), 5);
+        for (int i = 1; i <= amount; ++i)
+        {
+            const QString href = itemData.value(QString("link_%1_href")
+                                                .arg(i)).toString();
+            const QString rel = itemData.value(QString("link_%1_rel")
+                                               .arg(i)).toString();
+            const QString type = itemData.value(QString("link_%1_type")
+                                                .arg(i)).toString();
+            if (rel == "enclosure" &&
+                    (type == "image/jpeg" ||
+                     type == "image/png"))
+            {
+                thumbnail = href;
+                break;
+            }
+        }
+    }
+
     return thumbnail;
+}
+
+QString NewsBlendModel::findLink(const QVariantMap& itemData) const
+{
+    QString link = itemData.value("link").toString();
+
+    if (link.isEmpty())
+    {
+        int amount = qMin(itemData.value("linksAmount", 0).toInt(), 5);
+        for (int i = 1; i <= amount; ++i)
+        {
+            const QString href = itemData.value(QString("link_%1_href")
+                                                .arg(i)).toString();
+            const QString rel = itemData.value(QString("link_%1_rel")
+                                               .arg(i)).toString();
+            if (rel == "alternate")
+            {
+                link = href;
+                break;
+            }
+        }
+    }
+    return link;
 }
 
 NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData) const
@@ -403,7 +448,7 @@ NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData)
             .replace("&uuml;", "ü")
             .replace("&amp;", "&");
 
-    item->link = itemData.value("link").toString();
+    item->link = findLink(itemData);
 
     item->mediaDuration = itemData.value("duration", 0).toLongLong();
     item->enclosures = findEnclosures(itemData);

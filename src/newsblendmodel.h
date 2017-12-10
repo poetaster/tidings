@@ -144,6 +144,7 @@ private:
 
     QList<Enclosure> findEnclosures(const QVariantMap& itemData) const;
     QString findThumbnail(const QVariantMap& itemData) const;
+    QString findLink(const QVariantMap& itemData) const;
 
     Item::Ptr parseItem(const QVariantMap& itemData) const;
     int insertItem(const Item::Ptr item, bool update = true);
