@@ -540,7 +540,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="228"/>
         <source>Loading from cache</source>
-        <translation>Загрузить из кэша</translation>
+        <translation>Загрузка из кэша</translation>
     </message>
 </context>
 </TS>
