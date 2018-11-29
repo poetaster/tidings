@@ -67,7 +67,7 @@
         <location filename="../qml/pages/FeedsPage.qml" line="106"/>
         <location filename="../qml/pages/FeedsPage.qml" line="110"/>
         <source>All read</source>
-        <translation>Прочитано</translation>
+        <translation>Все прочитано</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="121"/>
@@ -195,27 +195,27 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="28"/>
         <source>Hiding the preview images saves network traffic. This switch does not affect embedded images in the item view.</source>
-        <translation>Отключение предварительного просмотра изображений экономит трафик. Эта опция не касается изображений, включённых в статью.</translation>
+        <translation>Отключение предварительного просмотра изображений экономит трафик. Эта опция не касается изображений включённых в статью.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="45"/>
         <source>Load images automatically</source>
-        <translation>Загрузить изображения автоматически</translation>
+        <translation>Автозагрузка изображений</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="46"/>
         <source>If disabled, embedded images are not loaded automatically.</source>
-        <translation>Если выключено, не загружать изображения автоматически.</translation>
+        <translation>Если выключено, изображения в статьях не будут автоматически загружаться.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="63"/>
         <source>Tinted items</source>
-        <translation>Статьи цвета ленты</translation>
+        <translation>Статьи в цвете ленты</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="64"/>
         <source>If enabled, items have their background tinted in their tag color.</source>
-        <translation type="unfinished">Если включено, фон статьи соответствует цвету тэга ленты.</translation>
+        <translation>Если включено, фон при чтении статьи будет окрашен в цвет ленты.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="100"/>
@@ -225,12 +225,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="121"/>
         <source>Apply font scale to web view</source>
-        <translation>Применить размер шрифта к вебпросмотру</translation>
+        <translation>Применять размер шрифта к вебпросмотру</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="122"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
-        <translation>Если включено, размер шрифта применяется к вебпросмотру.</translation>
+        <translation>Если включено, настройка размера шрифта будет применяться к вебпросмотру.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="134"/>
@@ -245,7 +245,7 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="91"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
-        <translation>Настройка меняет размер шрифта при просмотре ленты.</translation>
+        <translation>Укажите размер шрифта при просмотре ленты.</translation>
     </message>
 </context>
 <context>
@@ -340,7 +340,7 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="25"/>
         <source>Manage feeds</source>
-        <translation type="unfinished">Управление лентами</translation>
+        <translation>Управление лентами</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="210"/>
@@ -350,12 +350,12 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="218"/>
         <source>Settings</source>
-        <translation type="unfinished">Настройки</translation>
+        <translation>Настройка</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="239"/>
         <source>Refresh all</source>
-        <translation type="unfinished">Обновить всё</translation>
+        <translation>Обновить всё</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="254"/>
@@ -366,7 +366,7 @@
         <location filename="../qml/pages/SourcesPage.qml" line="226"/>
         <location filename="../qml/pages/SourcesPage.qml" line="229"/>
         <source>All read</source>
-        <translation>Прочитано</translation>
+        <translation>Все прочитано</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="238"/>
@@ -460,7 +460,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="184"/>
         <source>Feeds overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Обзор лент</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="185"/>
@@ -525,17 +525,17 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="209"/>
         <source>- Tap on the title to open in external browser.</source>
-        <translation>- Нажмите на заголовке, чтобы открыть статью в браузере.</translation>
+        <translation>- Коснитесь заголовка, чтобы открыть статью в браузере.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="210"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
-        <translation type="unfinished"></translation>
+        <translation>- Коснитесь значка буфера обмена, чтобы скопировать адрес ссылки в буфер.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="211"/>
         <source>- Tap on the star symbol to keep this article.</source>
-        <translation>- Нажмите на звёздочку, чтобы сохранить статью</translation>
+        <translation>- Коснитесь символа звёздочки, чтобы сохранить статью</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="228"/>
