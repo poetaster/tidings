@@ -117,17 +117,17 @@
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Obrázek</translation>
     </message>
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="85"/>
         <source>Video</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Video</translation>
     </message>
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="87"/>
         <source>PDF document</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">PDF dokument</translation>
     </message>
 </context>
 <context>
