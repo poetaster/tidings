@@ -61,7 +61,7 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Theme.fontSizeExtraSmall
             color: Theme.secondaryColor
-            text: "Copyright © 2013 - 2017 Martin Grimme"
+            text: "Copyright © 2013 - 2019 Martin Grimme"
         }
 
         Item {
