@@ -182,7 +182,7 @@ Dialog {
 
         }//Column
 
-        ScrollDecorator { }
+        ScrollDecorator { color: palette.primaryColor }
 
     }//Flickable
 

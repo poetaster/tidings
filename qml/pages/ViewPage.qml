@@ -549,7 +549,7 @@ Page {
 
         }
 
-        ScrollDecorator { }
+        ScrollDecorator { color: palette.primaryColor }
     }
 
     BusyIndicator {

@@ -517,7 +517,7 @@ Page {
             height: gridview.cellHeight
         }
 
-        ScrollDecorator { }
+        ScrollDecorator { color: palette.primaryColor }
     }
 
     MouseArea {
