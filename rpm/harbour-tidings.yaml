@@ -1,7 +1,7 @@
 Name: harbour-tidings
 Summary: RSS / Atom / Podcasts / Feed Reader
 Version: 0.7.2
-Release: 1
+Release: 2
 Group: Qt/Qt
 License: GPLv2
 Sources:
@@ -20,17 +20,12 @@ Requires:
 - qt5-plugin-imageformat-ico
 - sailfishsilica-qt5
 - qt5-qtdeclarative-import-xmllistmodel
+
 Files:
-- '%{_datadir}/icons/hicolor/86x86/apps/%{name}.png'
-- '%{_datadir}/icons/hicolor/108x108/apps/%{name}.png'
-- '%{_datadir}/icons/hicolor/128x128/apps/%{name}.png'
-- '%{_datadir}/applications/%{name}.desktop'
-- '%{_datadir}/%{name}/qml'
-- '%{_bindir}'
-- /usr/bin
-- /usr/share/harbour-tidings
-- /usr/share/applications
-- /usr/share/icons/hicolor/86x86/apps
-- /usr/share/icons/hicolor/108x108/apps
-- /usr/share/icons/hicolor/128x128/apps
+  - '%{_bindir}'
+  - '%{_datadir}/%{name}'
+  - '%{_datadir}/applications/%{name}.desktop'
+  - '%{_datadir}/%{name}/qml'
+  - '%{_datadir}/icons/hicolor/*/apps/%{name}.png'
+
 PkgBR: []
