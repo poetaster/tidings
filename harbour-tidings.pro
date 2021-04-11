@@ -22,8 +22,6 @@ SOURCES += \
 
 OTHER_FILES += qml/harbour-tidings.qml \
     qml/cover/CoverPage.qml \
-    rpm/harbour-tidings.spec \
-    rpm/harbour-tidings.yaml \
     qml/pages/FeedsPage.qml \
     qml/pages/RssModel.qml \
     qml/pages/SourcesPage.qml \
@@ -39,8 +37,6 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/AboutPage.qml \
     qml/pages/LicensePage.qml \
     qml/pages/license.js \
-    qml/tidings.png \
-    harbour-tidings.desktop \
     qml/pages/FancyScroller.qml \
     qml/pages/Notification.qml \
     qml/pages/RdfModel.qml \
@@ -62,7 +58,11 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/Downloader.qml \
     qml/pages/Hint.qml \
     qml/pages/HintLoader.qml \
-    qml/pages/FeedParser.qml
+    qml/pages/FeedParser.qml \
+    qml/tidings.png \
+    harbour-tidings.desktop \
+    rpm/harbour-tidings.spec \
+    rpm/harbour-tidings.yaml
 
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-tidings-cs.ts
@@ -86,8 +86,9 @@ HEADERS += \
     src/htmlsed.h \
     src/database.h
 
-SAILFISHAPP_ICONS += 86x86 108x108 128x128
+SAILFISHAPP_ICONS += 86x86 108x108 128x128 172x172
 
 DISTFILES += icons/86x86/harbour-tidings.png \
     icons/108x108/harbour-tidings.png \
-    icons/128x128/harbour-tidings.png
+    icons/128x128/harbour-tidings.png \
+    icons/172x172/harbour-tidings.png
