@@ -61,7 +61,8 @@ Page {
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: Theme.fontSizeExtraSmall
             color: Theme.secondaryColor
-            text: "Copyright © 2013 - 2019 Martin Grimme"
+            text: qsTr("Copyright © 2013 - 2020 Martin Grimme ")
+                  + qsTr(" © 2021 Mark Washeim")
         }
 
         Item {

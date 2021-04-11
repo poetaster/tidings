@@ -19,17 +19,27 @@
         <translation>Versão %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="78"/>
+        <location filename="../qml/pages/AboutPage.qml" line="64"/>
+        <source>Copyright © 2013 - 2020 Martin Grimme </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="65"/>
+        <source> © 2021 Mark Washeim</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/AboutPage.qml" line="79"/>
         <source>Tidings is open source software licensed under the terms of </source>
         <translation>Tidings é um software de código aberto licenciado sob os</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="79"/>
+        <location filename="../qml/pages/AboutPage.qml" line="80"/>
         <source>the GNU General Public License.</source>
         <translation>termos da Licença Pública Geral GNU.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="89"/>
+        <location filename="../qml/pages/AboutPage.qml" line="90"/>
         <source>View license</source>
         <translation>Ver licença</translation>
     </message>
