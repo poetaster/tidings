@@ -101,7 +101,7 @@ Page {
         anchors.bottomMargin: Theme.paddingSmall
         color: Theme.secondaryColor
         font.pixelSize: Theme.fontSizeTiny
-        text: "https://github.com/pycage/tidings"
+        text: "https://github.com/poetaster/tidings"
     }
 
 }
