@@ -40,7 +40,7 @@ Page {
             length: -1
         }
 
-        ScrollDecorator { }
+        ScrollDecorator { color: palette.primaryColor }
     }
 
     /*
@@ -74,7 +74,7 @@ Page {
             }//Repeater
         }
 
-        ScrollDecorator { }
+        ScrollDecorator { color: palette.primaryColor }
     }
     */
 }

@@ -236,7 +236,7 @@ Page {
             text: qsTr("Pull down to add feeds.")
         }
 
-        ScrollDecorator { }
+        ScrollDecorator { color: palette.primaryColor }
     }
 
     FancyScroller {
