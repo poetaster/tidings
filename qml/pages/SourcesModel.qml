@@ -8,6 +8,7 @@ ListModel {
     signal modelChanged
 
     function addSource(name, url, color) {
+        url = url.trim();
         var sourceId = database.addSource(name, url, color);
         append({
                    "sourceId": sourceId,
@@ -24,6 +25,7 @@ ListModel {
     }
 
     function changeSource(sourceId, name, url, color) {
+        url = url.trim();
         database.changeSource(sourceId, name, url, color);
 
         for (var i = 0; i < count; i++) {
