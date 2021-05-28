@@ -118,7 +118,7 @@ void FeedLoader::analyzeFeed()
             myLogo = QUrl(nodeText(root, QStringList() << "channel"  << "icon", exists));
         }
         myType = RSS2; // and also the RSS 0.9x family
-        qDebug() << "logo exists" << exists << myLogo;
+        //qDebug() << "logo exists" << exists << myLogo;
     }
     else if (root.tagName() == "RDF")
     {
