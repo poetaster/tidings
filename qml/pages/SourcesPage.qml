@@ -248,6 +248,21 @@ Page {
                     };
                 }
             }
+            MenuItem {
+                text: newsBlendModel.busy ? qsTr("Abort refreshing")
+                                          : qsTr("All read & Refresh all")
+
+                onClicked: {
+                    pulleyMenu._action = function() {
+                        if (newsBlendModel.busy) {
+                            newsBlendModel.abort();
+                        } else {
+                            newsBlendModel.setAllRead();
+                            newsBlendModel.refreshAll();
+                        }
+                    };
+                }
+            }
 
             MenuItem {
                 visible: audioPlayer.playing

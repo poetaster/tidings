@@ -370,6 +370,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="238"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="252"/>
         <source>Abort refreshing</source>
         <translation type="unfinished">Zrušit aktualizaci</translation>
     </message>
@@ -379,7 +380,12 @@
         <translation type="unfinished">Aktualizovat vše</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="254"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="253"/>
+        <source>All read &amp; Refresh all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="269"/>
         <source>Stop Audio</source>
         <translation type="unfinished">Zastavit audio</translation>
     </message>

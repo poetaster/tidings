@@ -368,7 +368,12 @@
         <translation>Обновить всё</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="254"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="253"/>
+        <source>All read &amp; Refresh all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SourcesPage.qml" line="269"/>
         <source>Stop Audio</source>
         <translation>Заглушить звук</translation>
     </message>
@@ -380,6 +385,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="238"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="252"/>
         <source>Abort refreshing</source>
         <translation>Отменить обновление</translation>
     </message>
