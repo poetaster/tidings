@@ -42,6 +42,24 @@ Page {
 
             TextSwitch {
                 width: parent.width
+                text: qsTr("Enable 'All read & Refresh all'")
+                description: qsTr("Whether to show or hide the top menu item for 'All read & Refresh all'")
+                automaticCheck: false
+                checked: configEnableRefreshCombined.booleanValue
+
+                onClicked: {
+                    configEnableRefreshCombined.value =
+                            configEnableRefreshCombined.booleanValue ? "0" : "1";
+                }
+            }
+
+            Item {
+                width: 1
+                height: Theme.paddingLarge
+            }
+
+            TextSwitch {
+                width: parent.width
                 text: qsTr("Load images automatically")
                 description: qsTr("If disabled, embedded images are not loaded automatically.")
                 automaticCheck: false
