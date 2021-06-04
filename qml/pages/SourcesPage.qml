@@ -249,6 +249,7 @@ Page {
                 }
             }
             MenuItem {
+                visible: configEnableRefreshCombined.booleanValue
                 text: newsBlendModel.busy ? qsTr("Abort refreshing")
                                           : qsTr("All read & Refresh all")
 

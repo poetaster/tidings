@@ -96,6 +96,12 @@ ApplicationWindow
     }
 
     ConfigValue {
+        id: configEnableRefreshCombined
+        key: "menu-enable-refresh-combined"
+        value: "1"
+    }
+
+    ConfigValue {
         id: configLoadImages
         key: "view-load-images"
         value: "0"
