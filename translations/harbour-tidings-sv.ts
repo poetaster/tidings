@@ -21,12 +21,12 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="64"/>
         <source>Copyright © 2013 - 2020 Martin Grimme </source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright © 2013 - 2020 Martin Grimme </translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="65"/>
         <source> © 2021 Mark Washeim</source>
-        <translation type="unfinished"></translation>
+        <translation> © 2021 Mark Washeim</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="79"/>
@@ -210,12 +210,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="45"/>
         <source>Enable &apos;All read &amp; Refresh all&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera &quot;Alla lästa &amp; Uppdatera alla&quot;</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="46"/>
         <source>Whether to show or hide the top menu item for &apos;All read &amp; Refresh all&apos;</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa eller dölj toppmenyobjekt för &quot;Alla lästa &amp; Uppdatera alla&quot;</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="63"/>
@@ -376,7 +376,7 @@
         <location filename="../qml/pages/SourcesPage.qml" line="226"/>
         <location filename="../qml/pages/SourcesPage.qml" line="229"/>
         <source>All read</source>
-        <translation type="unfinished">Alla lästa</translation>
+        <translation>Alla lästa</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="238"/>
@@ -392,7 +392,7 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="254"/>
         <source>All read &amp; Refresh all</source>
-        <translation type="unfinished"></translation>
+        <translation>Alla lästa &amp; Uppdatera alla</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="270"/>
@@ -556,7 +556,7 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="216"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
-        <translation>Tryck på urklipssymbolen för att kopiera länkadressen till urklipp</translation>
+        <translation>- Tryck på urklipssymbolen för att kopiera länkadressen till urklipp.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="217"/>
