@@ -214,51 +214,61 @@
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="45"/>
+        <source>Enable &apos;All read &amp; Refresh all&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="46"/>
+        <source>Whether to show or hide the top menu item for &apos;All read &amp; Refresh all&apos;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="63"/>
         <source>Load images automatically</source>
         <translation>Carregar imagens automaticamente</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="46"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="64"/>
         <source>If disabled, embedded images are not loaded automatically.</source>
         <translation>Quando desabilitado impossibita o carregamento automático das imagens contenidas nos artigos.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="63"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="81"/>
         <source>Tinted items</source>
         <translation>Artigos coloridos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="64"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="82"/>
         <source>If enabled, items have their background tinted in their tag color.</source>
         <translation>Habilite para colorir o fundo de cada artigo com sua cor de etiqueta.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="100"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="118"/>
         <source>Font scale:</source>
         <translation>Escalar fonte:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="121"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="139"/>
         <source>Apply font scale to web view</source>
         <translation>Escalar fonte da visualização web</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="122"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="140"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
         <translation>Habilite para aplicar o mesmo fator de escala na visualização web.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="134"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="152"/>
         <source>Show hints</source>
         <translation>Mostar dicas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="135"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="153"/>
         <source>If enabled, hints will guide you using the application.</source>
         <translation>Habilite para que dicas sejam mostradas enquanto se usa o aplicativo.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="91"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="109"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
         <translation>Esta configuração muda o fator de escala da fonte na visualização do feed.</translation>
     </message>
@@ -375,7 +385,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="238"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="252"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="253"/>
         <source>Abort refreshing</source>
         <translation>Cancelar atualização</translation>
     </message>
@@ -385,12 +395,12 @@
         <translation>Atualizar tudo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="253"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="254"/>
         <source>All read &amp; Refresh all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="269"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="270"/>
         <source>Stop Audio</source>
         <translation>Parar áudio</translation>
     </message>
@@ -480,87 +490,87 @@
 <context>
     <name>harbour-tidings</name>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="184"/>
+        <location filename="../qml/harbour-tidings.qml" line="190"/>
         <source>Feeds overview</source>
         <translation>Visualização dos feeds</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="185"/>
+        <location filename="../qml/harbour-tidings.qml" line="191"/>
         <source>- Shows all your subscribed feeds.</source>
         <translation>- Mostra todos os feeds adicionados.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="186"/>
+        <location filename="../qml/harbour-tidings.qml" line="192"/>
         <source>- Pull down to refresh all.</source>
         <translation>- Deslize para baixo para atualizar feeds.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="187"/>
+        <location filename="../qml/harbour-tidings.qml" line="193"/>
         <source>- Tap and hold to add or manage feeds.</source>
         <translation>- Mantenha pressionado para adicionar e gerenciar feeds.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="192"/>
+        <location filename="../qml/harbour-tidings.qml" line="198"/>
         <source>Managing mode</source>
         <translation>Modo gerenciar feeds</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="193"/>
+        <location filename="../qml/harbour-tidings.qml" line="199"/>
         <source>- Tap on a feed to refresh.</source>
         <translation>- Toque em um feed para atualizar.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="194"/>
+        <location filename="../qml/harbour-tidings.qml" line="200"/>
         <source>- Tap on the edit button to edit.</source>
         <translation>- Toque no botão editar para editar.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="195"/>
+        <location filename="../qml/harbour-tidings.qml" line="201"/>
         <source>- Tap and hold on a feed to move position.</source>
         <translation>- Toque e segure em um feed para movê-lo.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="196"/>
+        <location filename="../qml/harbour-tidings.qml" line="202"/>
         <source>- Tap on empty space to leave managing mode.</source>
         <translation>- Toque em um espaço vazio para sair deste modo.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="201"/>
+        <location filename="../qml/harbour-tidings.qml" line="207"/>
         <source>Articles</source>
         <translation>Artigos</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="202"/>
+        <location filename="../qml/harbour-tidings.qml" line="208"/>
         <source>- Tap on the page header to change sorting.</source>
         <translation>- Toque no cabeçalho para mudar a ordem.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="203"/>
+        <location filename="../qml/harbour-tidings.qml" line="209"/>
         <source>- Pull down to mark all as read.</source>
         <translation>- Deslize para baixo para marcar todos como lidos.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="208"/>
+        <location filename="../qml/harbour-tidings.qml" line="214"/>
         <source>Article view</source>
         <translation>Visualização de artigo</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="209"/>
+        <location filename="../qml/harbour-tidings.qml" line="215"/>
         <source>- Tap on the title to open in external browser.</source>
         <translation>- Toque no título para abrí-lo em no navegador.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="210"/>
+        <location filename="../qml/harbour-tidings.qml" line="216"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
         <translation>- Toque no ícone da prancheta para copiar o link.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="211"/>
+        <location filename="../qml/harbour-tidings.qml" line="217"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation>- Toque na estrela para manter o artigo.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="228"/>
+        <location filename="../qml/harbour-tidings.qml" line="234"/>
         <source>Loading from cache</source>
         <translation>Carregando do cache</translation>
     </message>
