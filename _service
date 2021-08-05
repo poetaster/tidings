@@ -1,0 +1,6 @@
+ <services>
+   <service name="webhook">
+     <param name="repourl">https://github.com/poetaster/tidings.git</param>
+     <param name="branch">master</param>
+   </service>
+ </services>
