@@ -80,6 +80,16 @@ NewsModel {
         feedOnlyOldestFirstSorter
     ]
 
+    property variant feedSortersSingle: [
+        feedOnlyLatestFirstSorter,
+        feedOnlyOldestFirstSorter
+    ]
+
+    property variant feedSortersCombined: [
+        latestFirstSorter,
+        oldestFirstSorter
+    ]
+
     property FeedLoader _feedLoader: FeedLoader {
         property string feedName
 

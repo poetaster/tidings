@@ -18,7 +18,7 @@ Page {
         id: listview
 
         anchors.fill: parent
-        model: newsBlendModel.feedSorters
+        model: newsBlendModel.isBlendModeEnabled ? newsBlendModel.feedSortersCombined : newsBlendModel.feedSortersSingle
 
         header: PageHeader {
             title: qsTr("Sort by")
