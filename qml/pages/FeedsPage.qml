@@ -5,17 +5,13 @@ Page {
     id: page
     objectName: "FeedsPage"
 
-    function positionAtFirst(feedUrl)
-    {
-        var idx = newsBlendModel.firstOfFeed(feedUrl);
-        if (idx !== -1)
-        {
-            listview.positionViewAtIndex(idx,
-                                         ListView.Beginning);
+    allowedOrientations: Orientation.All
+
+    onStatusChanged: {
+        if (status == PageStatus.Deactivated) {
+            newsBlendModel.isBlendModeEnabled = true; // show all feeds again
         }
     }
-
-    allowedOrientations: Orientation.All
 
     Connections {
         target: navigationState
