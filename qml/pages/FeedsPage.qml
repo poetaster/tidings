@@ -149,12 +149,13 @@ Page {
                 color: feedColor[model.source]
             }
 
-            Image {
+            IconButton {
                 id: shelveIcon
                 anchors.left: parent.left
                 anchors.leftMargin: Theme.paddingSmall
-                visible: model.shelved
-                source: "image://theme/icon-s-favorite"
+                anchors.verticalCenter: parent.verticalCenter
+                icon.source: model.shelved ? "image://theme/icon-m-favorite-selected" : "image://theme/icon-m-favorite"
+                onClicked: newsBlendModel.setShelved(model.index, !model.shelved)
             }
 
             Label {
