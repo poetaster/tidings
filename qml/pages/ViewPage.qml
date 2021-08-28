@@ -15,7 +15,7 @@ Page {
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
 
-    property bool _activated
+    property bool _activated: true
 
     property real _pageMargin: (width > height) ? Theme.paddingLarge * 2
                                                 : Theme.paddingLarge
@@ -86,23 +86,6 @@ Page {
         navigationState.openedItem(listview.currentIndex);
         if (! itemData.read && ! itemData.shelved) {
             newsBlendModel.setRead(listview.currentIndex, true);
-        }
-    }
-
-    onStatusChanged: {
-        if (status === PageStatus.Active)
-        {
-            if (itemData.link !== "")
-            {
-                var props = {
-                    "resources": resources
-                };
-
-                pageStack.pushAttached(Qt.resolvedUrl("ResourcesPage.qml"),
-                                       props);
-            }
-
-            page._activated = true;
         }
     }
 
@@ -203,6 +186,13 @@ Page {
                     column.opacity = 0;
                 }
             }
+
+            MenuItem {
+                visible: itemData.link !== ""
+                text: qsTr("Resources")
+                onClicked: pageStack.push(Qt.resolvedUrl("ResourcesPage.qml"), { "resources": resources })
+            }
+
             MenuItem {
                 enabled: listview.currentIndex > 0
                 text: enabled ? qsTr("Previous")
