@@ -225,13 +225,9 @@ ApplicationWindow
 
         Page {
             allowedOrientations: Orientation.All
-
-            Label {
-                anchors.centerIn: parent
-                horizontalAlignment: Text.AlignHCenter
-                font.pixelSize: Theme.fontSizeExtraLarge
-                color: Theme.highlightColor
+            BusyLabel {
                 text: qsTr("Loading from cache")
+                running: true
             }
         }
     }
