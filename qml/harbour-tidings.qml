@@ -141,10 +141,10 @@ ApplicationWindow
             {
                 // add example feeds
                 sourcesModel.addSource("Engadget",
-                                       "http://www.engadget.com/rss.xml",
+                                       "https://www.engadget.com/rss.xml",
                                        "#ff0000");
                 sourcesModel.addSource("JollaUsers.com",
-                                       "http://jollausers.com/feed/",
+                                       "https://jollausers.com/feed/",
                                        "#ffa000");
             }
             newsBlendModel.tidyCache();
