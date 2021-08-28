@@ -413,8 +413,8 @@ Page {
                 onClicked: {
                     if (page.editMode === 0 && totalCount !== 0)
                     {
+                        newsBlendModel.isBlendModeEnabled = false; // show a single feed
                         newsBlendModel.selectedFeed = item.url;
-                        feedsPage.positionAtFirst(item.url);
                         pageStack.navigateForward();
                     }
                     else if (page.editMode === 1)

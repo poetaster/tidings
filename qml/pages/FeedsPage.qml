@@ -5,17 +5,23 @@ Page {
     id: page
     objectName: "FeedsPage"
 
-    function positionAtFirst(feedUrl)
-    {
-        var idx = newsBlendModel.firstOfFeed(feedUrl);
-        if (idx !== -1)
-        {
-            listview.positionViewAtIndex(idx,
-                                         ListView.Beginning);
-        }
-    }
-
     allowedOrientations: Orientation.All
+
+    onStatusChanged: {
+        if (status == PageStatus.Inactive && pageStack.currentPage.objectName == 'SourcesPage') {
+            // Show all feeds again if we returned to the root page, i.e. the
+            // feed sources overview page.
+            // WARNING: This inevitably breaks if it becomes possible to reach the
+            // combined news page from somewhere other than "SourcesPage".
+            newsBlendModel.isBlendModeEnabled = true;
+            listview.currentIndex = -1
+        }
+
+        // Uncomment to debug page changes.
+        // if (status == PageStatus.Inactive) {
+        //     console.log("FeedsPage inactive: status =", status, "depth =", pageStack.depth, "current = ", pageStack.currentPage.objectName)
+        // }
+    }
 
     Connections {
         target: navigationState
