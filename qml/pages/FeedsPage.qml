@@ -103,6 +103,11 @@ Page {
             }
 
             MenuItem {
+                text: newsBlendModel.unreadOnly ? qsTr("Show all entries") : qsTr("Only show unread")
+                onClicked: configShowOnlyUnread.value = (newsBlendModel.unreadOnly ? '0' : '1')
+            }
+
+            MenuItem {
                 text: qsTr("All read")
 
                 onClicked: {
@@ -232,8 +237,19 @@ Page {
         }
 
         ViewPlaceholder {
-            enabled: sourcesModel.count === 0
-            text: qsTr("Pull down to add feeds.")
+            enabled: sourcesModel.count === 0 || newsBlendModel.count === 0
+            text: {
+                if (sourcesModel.count === 0) qsTr("No entries")
+                else if (newsBlendModel.count === 0) {
+                    if (newsBlendModel.unreadOnly) qsTr("No unread entries")
+                    else qsTr("No entries")
+                }
+                else ''
+            }
+            hintText: {
+                if (sourcesModel.count === 0) qsTr("Pull down to add feeds.")
+                else qsTr("Pull down to refresh.")
+            }
         }
 
         ScrollDecorator { color: palette.primaryColor }

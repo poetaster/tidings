@@ -90,6 +90,12 @@ ApplicationWindow
     }
 
     ConfigValue {
+        id: configShowOnlyUnread
+        key: "filter-only-unread"
+        value: "0"
+    }
+
+    ConfigValue {
         id: configShowPreviewImages
         key: "feed-preview-images"
         value: "1"
