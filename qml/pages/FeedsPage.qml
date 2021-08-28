@@ -223,11 +223,7 @@ Page {
 
             onClicked: {
                 listview.currentIndex = index;
-                var props = {
-                    "index": index,
-                    "listview": listview
-                };
-                pageStack.push("ViewPage.qml", props);
+                pageStack.push("ViewPageProxy.qml", { "listview": listview });
             }
         }
 
