@@ -277,16 +277,6 @@ Page {
                 NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
             }
 
-            LoadImagesButton {
-                visible: htmlFilter.imageProxy !== "" &&
-                         htmlFilter.images.length > 0
-                width: parent.width
-
-                onClicked: {
-                    htmlFilter.imageProxy = "";
-                }
-            }
-
             PageHeader {
                 id: pageHeader
                 title: feedName[itemData.source]
@@ -395,6 +385,17 @@ Page {
                 width: 1
                 height: Theme.paddingMedium
             }
+
+            Button {
+                id: loadImagesButton
+                visible: htmlFilter.imageProxy !== "" &&
+                         htmlFilter.images.length > 0
+                text: qsTr("Load images")
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: htmlFilter.imageProxy = ""
+            }
+
+            Item { width: 1; height: Theme.paddingMedium; visible: loadImagesButton.visible }
 
             RescalingRichText {
                 id: body
