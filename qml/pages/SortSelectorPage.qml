@@ -41,15 +41,15 @@ Page {
             }
 
             onClicked: {
-                function closure(sorter)
+                function closure(sorter, targetConfig)
                 {
                     return function()
                     {
-                        configFeedSorter.value = sorter.key;
+                        targetConfig.value = sorter.key
                     }
                 }
 
-                _callback = closure(modelData);
+                _callback = closure(modelData, newsBlendModel.isBlendModeEnabled ? configAllFeedsSorter : configFeedSorter);
                 pageStack.pop();
             }
         }
