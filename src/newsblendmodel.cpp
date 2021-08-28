@@ -167,7 +167,7 @@ int NewsBlendModel::rowCount(const QModelIndex&) const
     if (mySortMode == FeedOnlyLatestFirst ||
             mySortMode == FeedOnlyOldestFirst)
     {
-        if (myUnreadOnly) return myUnreadCounts.value(mySelectedFeed, 0);
+        if (myUnreadOnly) return myItems.size();
         else return myTotalCounts.value(mySelectedFeed, 0);
     }
     else
