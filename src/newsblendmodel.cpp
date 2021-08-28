@@ -135,6 +135,18 @@ void NewsBlendModel::setSortMode(SortMode mode)
     }
 }
 
+void NewsBlendModel::setUnreadOnly(bool newUnreadOnly)
+{
+    if (newUnreadOnly != myUnreadOnly)
+    {
+        qDebug() << Q_FUNC_INFO << newUnreadOnly;
+        myUnreadOnly = newUnreadOnly;
+        reinsertItems();
+        emit unreadOnlyChanged();
+        emit countChanged();
+    }
+}
+
 void NewsBlendModel::setSelectedFeed(const QString& selectedFeed)
 {
     if (selectedFeed != mySelectedFeed)
@@ -155,7 +167,8 @@ int NewsBlendModel::rowCount(const QModelIndex&) const
     if (mySortMode == FeedOnlyLatestFirst ||
             mySortMode == FeedOnlyOldestFirst)
     {
-        return myTotalCounts.value(mySelectedFeed, 0);
+        if (myUnreadOnly) return myItems.size();
+        else return myTotalCounts.value(mySelectedFeed, 0);
     }
     else
     {
@@ -214,9 +227,10 @@ int NewsBlendModel::insertItem(const Item::Ptr item, bool update)
 {   
     int insertPos = -1;
 
-    if ((mySortMode == FeedOnlyLatestFirst ||
-         mySortMode == FeedOnlyOldestFirst) &&
-        item->feedSource != mySelectedFeed)
+    if ((myUnreadOnly && item->isRead) ||
+            ((mySortMode == FeedOnlyLatestFirst ||
+              mySortMode == FeedOnlyOldestFirst) &&
+             item->feedSource != mySelectedFeed))
     {
         return insertPos;
     }

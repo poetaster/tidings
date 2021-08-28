@@ -9,6 +9,8 @@ NewsModel {
     id: listModel
 
     sortMode: feedSorter.sortMode
+    unreadOnly: configShowOnlyUnread.booleanValue
+
 
     // the sorter for this model
     property FeedSorter feedSorter: _getFeedSorter(configFeedSorter.value)
