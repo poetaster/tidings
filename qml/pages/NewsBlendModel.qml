@@ -87,7 +87,9 @@ NewsModel {
 
     property variant feedSortersCombined: [
         latestFirstSorter,
-        oldestFirstSorter
+        oldestFirstSorter,
+        feedSourceLatestFirstSorter,
+        feedSourceOldestFirstSorter
     ]
 
     property FeedLoader _feedLoader: FeedLoader {
