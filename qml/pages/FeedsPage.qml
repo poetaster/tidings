@@ -239,16 +239,16 @@ Page {
         ViewPlaceholder {
             enabled: sourcesModel.count === 0 || newsBlendModel.count === 0
             text: {
-                if (sourcesModel.count === 0) qsTr("No entries")
+                if (sourcesModel.count === 0) return qsTr("No entries")
                 else if (newsBlendModel.count === 0) {
-                    if (newsBlendModel.unreadOnly) qsTr("No unread entries")
-                    else qsTr("No entries")
+                    if (newsBlendModel.unreadOnly) return qsTr("No unread entries")
+                    else return qsTr("No entries")
                 }
-                else ''
+                else return ''
             }
             hintText: {
-                if (sourcesModel.count === 0) qsTr("Pull down to add feeds.")
-                else qsTr("Pull down to refresh.")
+                if (sourcesModel.count === 0) return qsTr("Pull down to add feeds.")
+                else return qsTr("Pull down to refresh.")
             }
         }
 
