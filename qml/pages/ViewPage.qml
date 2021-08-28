@@ -2,9 +2,11 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.tidings 1.0
 
-Page {
+Item {
     id: page
     objectName: "ViewPage"
+
+    property int status: PageStatus.Active
 
     property GridView listview
     property variant itemData: listview.currentItem !== null
@@ -80,7 +82,7 @@ Page {
         }
     }
 
-    allowedOrientations: Orientation.All
+    // allowedOrientations: Orientation.All
 
     Component.onCompleted: {
         navigationState.openedItem(listview.currentIndex);
