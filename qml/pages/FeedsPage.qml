@@ -14,6 +14,7 @@ Page {
             // WARNING: This inevitably breaks if it becomes possible to reach the
             // combined news page from somewhere other than "SourcesPage".
             newsBlendModel.isBlendModeEnabled = true;
+            listview.currentIndex = -1
         }
 
         // Uncomment to debug page changes.
