@@ -21,6 +21,8 @@ class NewsBlendModel : public QAbstractListModel
     Q_ENUMS(SortMode)
     Q_PROPERTY(SortMode sortMode READ sortMode WRITE setSortMode
                NOTIFY sortModeChanged)
+    Q_PROPERTY(bool unreadOnly READ unreadOnly WRITE setUnreadOnly
+               NOTIFY unreadOnlyChanged)
     Q_PROPERTY(QString selectedFeed READ selectedFeed WRITE setSelectedFeed
                NOTIFY selectedFeedChanged)
     Q_PROPERTY(int count READ count NOTIFY countChanged)
@@ -125,6 +127,7 @@ public:
 
 signals:
     void sortModeChanged();
+    void unreadOnlyChanged();
     void selectedFeedChanged();
     void countChanged();
     void shelvedChanged(int index);
@@ -135,6 +138,9 @@ private:
 
     SortMode sortMode() const { return mySortMode; }
     void setSortMode(SortMode mode);
+
+    bool unreadOnly() const { return myUnreadOnly; }
+    void setUnreadOnly(bool newUnreadOnly);
 
     QString selectedFeed() const { return mySelectedFeed; }
     void setSelectedFeed(const QString& selectedFeed);
@@ -163,6 +169,7 @@ private:
 
     SortMode mySortMode;
     QString mySelectedFeed;
+    bool myUnreadOnly = {false};
 };
 
 #endif // NEWSBLENDMODEL_H
