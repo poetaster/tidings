@@ -64,30 +64,56 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="73"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="79"/>
         <source>%1 items</source>
         <translation>Статьи: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="97"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="103"/>
         <source>Sort by: %1</source>
         <translation>Тип сортировки: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="106"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="110"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="112"/>
+        <source>Show all entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FeedsPage.qml" line="112"/>
+        <source>Only show unread</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FeedsPage.qml" line="117"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="121"/>
         <source>All read</source>
         <translation>Все прочитано</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="121"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="132"/>
         <source>Stop Audio</source>
         <translation>Заглушить звук</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="236"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="245"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="248"/>
+        <source>No entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FeedsPage.qml" line="247"/>
+        <source>No unread entries</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
         <source>Pull down to add feeds.</source>
         <translation>Потяните вниз, чтобы добавить ленту.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FeedsPage.qml" line="254"/>
+        <source>Pull down to refresh.</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -143,39 +169,39 @@
 <context>
     <name>NewsBlendModel</name>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="35"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="42"/>
         <source>Latest first</source>
         <translation>Вначале новые статьи</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="41"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="48"/>
         <source>Oldest first</source>
         <translation>Вначале старые статьи</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="47"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="54"/>
         <source>Feed, then latest first</source>
         <translation>Вначале новые, группировка по лентам</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="53"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="60"/>
         <source>Feed, then oldest first</source>
         <translation>Вначале старые, группировка по лентам</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="59"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="66"/>
         <source>Current feed only, latest first</source>
         <translation>Вначале новые, только текущая лента</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="65"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="72"/>
         <source>Current feed only, oldest first</source>
         <translation>Вначале старые, только текущая лента</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="276"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="282"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="286"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="295"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="301"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="305"/>
         <source>Error with %1:
 %2</source>
         <translation>Ошибка с %1:
@@ -403,67 +429,77 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="71"/>
+        <location filename="../qml/pages/ViewPage.qml" line="73"/>
         <source>Audio</source>
         <translation>Аудио</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="73"/>
+        <location filename="../qml/pages/ViewPage.qml" line="75"/>
         <source>Image</source>
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="75"/>
+        <location filename="../qml/pages/ViewPage.qml" line="77"/>
         <source>Video</source>
         <translation>Видео</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="77"/>
+        <location filename="../qml/pages/ViewPage.qml" line="79"/>
         <source>PDF document</source>
         <translation>Документ PDF</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="208"/>
+        <location filename="../qml/pages/ViewPage.qml" line="194"/>
+        <source>Resources</source>
+        <translation type="unfinished">Ресурсы</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="200"/>
         <source>Previous</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="209"/>
+        <location filename="../qml/pages/ViewPage.qml" line="201"/>
         <source>Already at the beginning</source>
         <translation>Уже в начале</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="239"/>
+        <location filename="../qml/pages/ViewPage.qml" line="231"/>
         <source>Next</source>
         <translation>Далее</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="240"/>
+        <location filename="../qml/pages/ViewPage.qml" line="232"/>
         <source>Already at the end</source>
         <translation>Уже в конце</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="380"/>
+        <location filename="../qml/pages/ViewPage.qml" line="362"/>
         <source>(%1 seconds)</source>
         <translation>(%1 секунд)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="456"/>
+        <location filename="../qml/pages/ViewPage.qml" line="385"/>
+        <source>Load images</source>
+        <translation type="unfinished">Загрузка изображений</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="449"/>
         <source>Short article</source>
         <translation>Статья вкратце</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="488"/>
+        <location filename="../qml/pages/ViewPage.qml" line="481"/>
         <source>Website</source>
         <translation>Вебсайт</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="457"/>
+        <location filename="../qml/pages/ViewPage.qml" line="450"/>
         <source>Full article</source>
         <translation>Статья целиком</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="534"/>
+        <location filename="../qml/pages/ViewPage.qml" line="527"/>
         <source>Media</source>
         <translation>Медиа</translation>
     </message>
@@ -484,87 +520,87 @@
 <context>
     <name>harbour-tidings</name>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="190"/>
+        <location filename="../qml/harbour-tidings.qml" line="202"/>
         <source>Feeds overview</source>
         <translation>Обзор лент</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="191"/>
+        <location filename="../qml/harbour-tidings.qml" line="203"/>
         <source>- Shows all your subscribed feeds.</source>
         <translation>- Показать все ленты, на которые подписаны.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="192"/>
+        <location filename="../qml/harbour-tidings.qml" line="204"/>
         <source>- Pull down to refresh all.</source>
         <translation>- Потяните вниз, чтобы все обновить.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="193"/>
+        <location filename="../qml/harbour-tidings.qml" line="205"/>
         <source>- Tap and hold to add or manage feeds.</source>
         <translation>- Нажмите и удерживайте, чтобы добавить или изменить ленты.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="198"/>
+        <location filename="../qml/harbour-tidings.qml" line="210"/>
         <source>Managing mode</source>
         <translation>Режим управления</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="199"/>
+        <location filename="../qml/harbour-tidings.qml" line="211"/>
         <source>- Tap on a feed to refresh.</source>
         <translation>- Нажмите на ленту для обновления.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="200"/>
+        <location filename="../qml/harbour-tidings.qml" line="212"/>
         <source>- Tap on the edit button to edit.</source>
         <translation>- Нажмите на кнопку &quot;Редактирование&quot; для редактирования</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="201"/>
+        <location filename="../qml/harbour-tidings.qml" line="213"/>
         <source>- Tap and hold on a feed to move position.</source>
         <translation>- Нажмите и подержите чтобы переместить на другое место.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="202"/>
+        <location filename="../qml/harbour-tidings.qml" line="214"/>
         <source>- Tap on empty space to leave managing mode.</source>
         <translation>- Нажмите на свободное место, что выйти из режима управления</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="207"/>
+        <location filename="../qml/harbour-tidings.qml" line="219"/>
         <source>Articles</source>
         <translation>Статьи</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="208"/>
+        <location filename="../qml/harbour-tidings.qml" line="220"/>
         <source>- Tap on the page header to change sorting.</source>
         <translation>- Нажмите на заголовок страницы, чтобы изменить сортировку</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="209"/>
+        <location filename="../qml/harbour-tidings.qml" line="221"/>
         <source>- Pull down to mark all as read.</source>
         <translation>- Потяните вниз, чтобы отметить как прочтённое</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="214"/>
+        <location filename="../qml/harbour-tidings.qml" line="226"/>
         <source>Article view</source>
         <translation>Просмотр статьи</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="215"/>
+        <location filename="../qml/harbour-tidings.qml" line="227"/>
         <source>- Tap on the title to open in external browser.</source>
         <translation>- Коснитесь заголовка, чтобы открыть статью в браузере.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="216"/>
+        <location filename="../qml/harbour-tidings.qml" line="228"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
         <translation>- Коснитесь значка буфера обмена, чтобы скопировать адрес ссылки в буфер.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="217"/>
+        <location filename="../qml/harbour-tidings.qml" line="229"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation>- Коснитесь символа звёздочки, чтобы сохранить статью</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="234"/>
+        <location filename="../qml/harbour-tidings.qml" line="241"/>
         <source>Loading from cache</source>
         <translation>Загрузка из кэша</translation>
     </message>
