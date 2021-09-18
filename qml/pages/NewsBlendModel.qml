@@ -9,6 +9,8 @@ NewsModel {
     id: listModel
 
     sortMode: feedSorter.sortMode
+    unreadOnly: configShowOnlyUnread.booleanValue
+
 
     // whether to blend models or show a single feed
     // Must be set to "true" initially so the attached feeds page shows all
