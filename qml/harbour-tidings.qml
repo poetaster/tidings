@@ -84,6 +84,12 @@ ApplicationWindow
     }
 
     ConfigValue {
+        id: configAllFeedsSorter
+        key: "all-feeds-sort-by"
+        value: "latestFirst"
+    }
+
+    ConfigValue {
         id: configFeedSorter
         key: "feed-sort-by"
         value: "feedOnlyLatestFirst"
