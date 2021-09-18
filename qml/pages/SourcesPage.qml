@@ -170,7 +170,7 @@ Page {
 
                 onClicked: {
                     var props = {
-                        "url": "http://"
+                        "url": "https://"
                     };
                     var dlg = pageStack.push("SourceEditDialog.qml", props);
                 }
