@@ -76,12 +76,12 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="112"/>
         <source>Show all entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa alla poster</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="112"/>
         <source>Only show unread</source>
-        <translation type="unfinished"></translation>
+        <translation>visa endast olästa</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="117"/>
@@ -98,12 +98,12 @@
         <location filename="../qml/pages/FeedsPage.qml" line="245"/>
         <location filename="../qml/pages/FeedsPage.qml" line="248"/>
         <source>No entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga poster</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="247"/>
         <source>No unread entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Inga olästa poster</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="253"/>
@@ -113,7 +113,7 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="254"/>
         <source>Pull down to refresh.</source>
-        <translation type="unfinished"></translation>
+        <translation>Dra neråt för att uppdatera.</translation>
     </message>
 </context>
 <context>
@@ -451,7 +451,7 @@
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="194"/>
         <source>Resources</source>
-        <translation type="unfinished">Resurser</translation>
+        <translation>Resurser</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="200"/>
@@ -481,7 +481,7 @@
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="385"/>
         <source>Load images</source>
-        <translation type="unfinished">Läs in bilder</translation>
+        <translation>Läs in bilder</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="449"/>
