@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.1">
 <context>
     <name>AboutPage</name>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="16"/>
         <source>About Tidings</source>
-        <translation>Über Tidings</translation>
+        <translation>Tietoja</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="43"/>
         <source>A feed aggregator</source>
-        <translation>Ein Feed-Aggregator</translation>
+        <translation>Uutissyötteiden keräin</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="56"/>
         <source>Version %1</source>
-        <translation>Version %1</translation>
+        <translation>Versio %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="64"/>
         <source>Copyright © 2013 - 2020 Martin Grimme </source>
-        <translation type="unfinished"></translation>
+        <translation>Copyright © 2013 - 2020 Martin Grimme </translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="65"/>
         <source> © 2021 Mark Washeim</source>
-        <translation type="unfinished"></translation>
+        <translation> © 2021 Mark Washeim</translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="79"/>
         <source>Tidings is open source software licensed under the terms of </source>
-        <translation>Tidings ist Open-Source-Software lizensiert unter den Bedingungen der </translation>
+        <translation>Tidings on avoimen lähdekoodin sovellus, joka on julkaistu lisenssillä </translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="80"/>
@@ -41,7 +41,7 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="90"/>
         <source>View license</source>
-        <translation>Lizenz anzeigen</translation>
+        <translation>Näytä lisenssi</translation>
     </message>
 </context>
 <context>
@@ -50,7 +50,7 @@
         <location filename="../qml/cover/CoverPage.qml" line="108"/>
         <location filename="../qml/cover/CoverPage.qml" line="187"/>
         <source>Refreshing</source>
-        <translation>Aktualisiere</translation>
+        <translation>Päivitetään</translation>
     </message>
 </context>
 <context>
@@ -58,7 +58,7 @@
     <message>
         <location filename="../qml/pages/ExternalLinkDialog.qml" line="11"/>
         <source>Open in browser</source>
-        <translation>Im Browser öffnen</translation>
+        <translation>Avaa selaimessa</translation>
     </message>
 </context>
 <context>
@@ -66,54 +66,54 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="79"/>
         <source>%1 items</source>
-        <translation>%1 Einträge</translation>
+        <translation>%1 artikkelia</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="103"/>
         <source>Sort by: %1</source>
-        <translation>Sortieren nach: %1</translation>
+        <translation>Järjestys: %1</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="112"/>
         <source>Show all entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Näytä kaikki artikkelit</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="112"/>
         <source>Only show unread</source>
-        <translation type="unfinished"></translation>
+        <translation>Näytä vain lukemattomat</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="117"/>
         <location filename="../qml/pages/FeedsPage.qml" line="121"/>
         <source>All read</source>
-        <translation>Alles gelesen</translation>
+        <translation>Kaikki luettu</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="132"/>
         <source>Stop Audio</source>
-        <translation>Audio stoppen</translation>
+        <translation>Pysäytä ääni</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="245"/>
         <location filename="../qml/pages/FeedsPage.qml" line="248"/>
         <source>No entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei artikkeleita</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="247"/>
         <source>No unread entries</source>
-        <translation type="unfinished"></translation>
+        <translation>Ei lukemattomia artikkeleita</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="253"/>
         <source>Pull down to add feeds.</source>
-        <translation>Ziehe herunter, um Feeds hinzuzufügen.</translation>
+        <translation>Lisää syötteitä ylävalikosta.</translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="254"/>
         <source>Pull down to refresh.</source>
-        <translation type="unfinished"></translation>
+        <translation>Päivitä ylävalikosta.</translation>
     </message>
 </context>
 <context>
@@ -121,7 +121,7 @@
     <message>
         <location filename="../qml/pages/HintLoader.qml" line="142"/>
         <source>No more hints? Disable them in Settings.</source>
-        <translation>Keine Tipps mehr? In den Einstellungen deaktivieren.</translation>
+        <translation>Etkö halua enää vihjeitä? Ota ne pois käytöstä Asetuksista.</translation>
     </message>
 </context>
 <context>
@@ -129,7 +129,7 @@
     <message>
         <location filename="../qml/pages/ImagePage.qml" line="19"/>
         <source>Save to gallery</source>
-        <translation>In der Galerie speichern</translation>
+        <translation>Tallenna galleriaan</translation>
     </message>
 </context>
 <context>
@@ -137,7 +137,7 @@
     <message>
         <location filename="../qml/pages/LicensePage.qml" line="20"/>
         <source>License</source>
-        <translation>Lizenz</translation>
+        <translation>Lisenssi</translation>
     </message>
 </context>
 <context>
@@ -145,7 +145,7 @@
     <message>
         <location filename="../qml/pages/LoadImagesButton.qml" line="13"/>
         <source>Load images</source>
-        <translation>Bilder laden</translation>
+        <translation>Lataa kuvat</translation>
     </message>
 </context>
 <context>
@@ -153,7 +153,7 @@
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="83"/>
         <source>Image</source>
-        <translation>Bild</translation>
+        <translation>Kuva</translation>
     </message>
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="85"/>
@@ -163,7 +163,7 @@
     <message>
         <location filename="../qml/pages/MediaItem.qml" line="87"/>
         <source>PDF document</source>
-        <translation>PDF-Dokument</translation>
+        <translation>PDF-dokumentti</translation>
     </message>
 </context>
 <context>
@@ -171,32 +171,32 @@
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="42"/>
         <source>Latest first</source>
-        <translation>Neueste zuerst</translation>
+        <translation>Uusin ensin</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="48"/>
         <source>Oldest first</source>
-        <translation>Älteste zuerst</translation>
+        <translation>Vanhin ensin</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="54"/>
         <source>Feed, then latest first</source>
-        <translation>Feed, dann neueste zuerst</translation>
+        <translation>Syöte, sitten uusin ensin</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="60"/>
         <source>Feed, then oldest first</source>
-        <translation>Feed, dann älteste zuerst</translation>
+        <translation>Syöte, sitten vanhin ensin</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="66"/>
         <source>Current feed only, latest first</source>
-        <translation>Nur aktueller Feed, neueste zuerst</translation>
+        <translation>Vain nykyinen syöte, uusin ensin</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="72"/>
         <source>Current feed only, oldest first</source>
-        <translation>Nur aktueller Feed, älteste zuerst</translation>
+        <translation>Vain nykyinen syöte, vanhin ensin</translation>
     </message>
     <message>
         <location filename="../qml/pages/NewsBlendModel.qml" line="295"/>
@@ -204,7 +204,7 @@
         <location filename="../qml/pages/NewsBlendModel.qml" line="305"/>
         <source>Error with %1:
 %2</source>
-        <translation>Fehler bei %1:
+        <translation>Virhe syötteessä %1:
 %2</translation>
     </message>
 </context>
@@ -213,7 +213,7 @@
     <message>
         <location filename="../qml/pages/ResourcesPage.qml" line="32"/>
         <source>Resources</source>
-        <translation>Ressourcen</translation>
+        <translation>Resurssit</translation>
     </message>
 </context>
 <context>
@@ -221,77 +221,77 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="17"/>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="27"/>
         <source>Show preview images</source>
-        <translation>Vorschaubilder anzeigen</translation>
+        <translation>Näytä esikatselukuvat</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="28"/>
         <source>Hiding the preview images saves network traffic. This switch does not affect embedded images in the item view.</source>
-        <translation>Das Ausblenden der Vorschaubilder spart Netzwerkverkehr. Diese Einstellung wirkt sich nicht auf eingebettete Bilder in der Artikelansicht aus.</translation>
+        <translation>Esikatselukuvien piilottaminen säästää dataliikennettä. Tämä säädin ei vaikuta kuviin artikkeli-näkymässä.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="45"/>
         <source>Enable &apos;All read &amp; Refresh all&apos;</source>
-        <translation type="unfinished">Aktiviere &apos;Alles gelesen &amp; Alle Aktualiziern&apos;</translation>
+        <translation>Salli &apos;Kaikki luettu &amp; Päivitä kaikki&apos;</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="46"/>
         <source>Whether to show or hide the top menu item for &apos;All read &amp; Refresh all&apos;</source>
-        <translation type="unfinished">Ob &apos;Alles gelesen &amp; Alle aktualisieren&apos; angezeigt wird</translation>
+        <translation>Näytä ylävalikossa &apos;Kaikki luettu &amp; Päivitä kaikki&apos;</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="63"/>
         <source>Load images automatically</source>
-        <translation>Bilder automatisch laden</translation>
+        <translation>Lataa kuvat automaattisesti</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="64"/>
         <source>If disabled, embedded images are not loaded automatically.</source>
-        <translation>Wenn deaktiviert, werden eingebettete Bilder nicht automatisch geladen.</translation>
+        <translation>Kuvat ladataan automaattisesti kun artikkeli avataan.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="81"/>
         <source>Tinted items</source>
-        <translation>Einträge einfärben</translation>
+        <translation>Sävytä artikkelit</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="82"/>
         <source>If enabled, items have their background tinted in their tag color.</source>
-        <translation>Wenn aktiviert, wird der Hintergrund der Einträge ensprechend ihrer Einstellung eingefärbt.</translation>
+        <translation>Artikkelien taustat sävytetään niiden merkin värillä artikkelilistassa.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="118"/>
         <source>Font scale:</source>
-        <translation>Schriftskalierung:</translation>
+        <translation>Kirjasimen skaalaus:</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="139"/>
         <source>Apply font scale to web view</source>
-        <translation>Schriftskalierung auf die Web-Ansicht anwenden</translation>
+        <translation>Käytä kirjasimen skaalausta selain-näkymässä</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="140"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
-        <translation>Wenn aktiviert, gilt die Schriftgrößenskalierung auch für die Web-Ansicht.</translation>
+        <translation>Kirjasimen skaalaus asetusta käytetään myös selain-näkymässä.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="152"/>
         <source>Show hints</source>
-        <translation>Tipps zeigen</translation>
+        <translation>Näytä vihjeet</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="153"/>
         <source>If enabled, hints will guide you using the application.</source>
-        <translation>Wenn aktiviert, führen Tipps durch die Bedienung der App.</translation>
+        <translation>Vihjeet opastavat sinua sovelluksen käytössä.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="109"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
-        <translation>Diese Einstellung ändert die Skalierung der Schriftgröße in der Feed-Ansicht.</translation>
+        <translation>Tämä asetus muuttaa kirjasimen skaalausta syötteet-näkymässä.</translation>
     </message>
 </context>
 <context>
@@ -299,7 +299,7 @@
     <message>
         <location filename="../qml/pages/SortSelectorPage.qml" line="24"/>
         <source>Sort by</source>
-        <translation>Sortieren nach</translation>
+        <translation>Järjestys</translation>
     </message>
 </context>
 <context>
@@ -307,73 +307,73 @@
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="36"/>
         <source>Edit feed</source>
-        <translation>Feed bearbeiten</translation>
+        <translation>Muokkaa syötettä</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="37"/>
         <source>New feed</source>
-        <translation>Neuer Feed</translation>
+        <translation>Uusi syöte</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="41"/>
         <source>Feed</source>
-        <translation>Feed</translation>
+        <translation>Syöte</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="47"/>
         <source>Name</source>
-        <translation>Name</translation>
+        <translation>Nimi</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="48"/>
         <source>Enter name</source>
-        <translation>Name eingeben</translation>
+        <translation>Syötä nimi</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="55"/>
         <source>Feed URL</source>
-        <translation>Feed-URL</translation>
+        <translation>Syötteen URL-osoite</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="56"/>
         <source>Enter URL</source>
-        <translation>Feed-URL eingeben</translation>
+        <translation>Syötä URL-osoite</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="86"/>
         <source>Color tag</source>
-        <translation>Farbmarkierung</translation>
+        <translation>Merkin väri</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="115"/>
         <source>Database</source>
-        <translation>Datenbank</translation>
+        <translation>Tietokanta</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="126"/>
         <source>Clearing the read status will cause all available items to be reloaded the next time.</source>
-        <translation>Das Zurücksetzen des Lesestatus bewirkt, dass alle verfügbaren Einträge beim nächsten Mal neu geladen werden.</translation>
+        <translation>Luettu merkintöjen puhdistus aiheuttaa kaikkien saatavilla olevien artikkelien uudelleen latauksen.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="137"/>
         <source>Clear read status</source>
-        <translation>Lesestatus zurücksetzen</translation>
+        <translation>Puhdista luettu merkinnät</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="139"/>
         <source>Clearing</source>
-        <translation>Setze zurück</translation>
+        <translation>Puhdistetaan</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="160"/>
         <source>Deleting will remove the feed and all of its items from the database.</source>
-        <translation>Das Löschen wird den Feed und alle zugehörigen Einträge aus der Datenbank entfernen.</translation>
+        <translation>Syöte ja kaikki sen artikkelit poistetaan tietokannasta.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourceEditDialog.qml" line="172"/>
         <location filename="../qml/pages/SourceEditDialog.qml" line="174"/>
         <source>Delete</source>
-        <translation>Löschen</translation>
+        <translation>Poista</translation>
     </message>
 </context>
 <context>
@@ -381,49 +381,49 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="23"/>
         <source>Feeds</source>
-        <translation>Feeds</translation>
+        <translation>Syötteet</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="25"/>
         <source>Manage feeds</source>
-        <translation>Feeds verwalten</translation>
+        <translation>Hallitse syötteitä</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="210"/>
         <source>About Tidings</source>
-        <translation>Über Tidings</translation>
+        <translation>Tietoja</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="218"/>
         <source>Settings</source>
-        <translation>Einstellungen</translation>
+        <translation>Asetukset</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="226"/>
         <location filename="../qml/pages/SourcesPage.qml" line="229"/>
         <source>All read</source>
-        <translation>Alle gelesen</translation>
+        <translation>Kaikki luettu</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="238"/>
         <location filename="../qml/pages/SourcesPage.qml" line="253"/>
         <source>Abort refreshing</source>
-        <translation>Aktualisierung abbrechen</translation>
+        <translation>Keskeytä päivitys</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="239"/>
         <source>Refresh all</source>
-        <translation>Alle aktualisieren</translation>
+        <translation>Päivitä kaikki</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="254"/>
         <source>All read &amp; Refresh all</source>
-        <translation type="unfinished">Alles gelesen &amp; Alle aktualisieren</translation>
+        <translation>Kaikki luettu &amp; Päivitä kaikki</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="270"/>
         <source>Stop Audio</source>
-        <translation>Audio stoppen</translation>
+        <translation>Pysäytä ääni</translation>
     </message>
 </context>
 <context>
@@ -431,12 +431,12 @@
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="73"/>
         <source>Audio</source>
-        <translation>Audio</translation>
+        <translation>Ääni</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="75"/>
         <source>Image</source>
-        <translation>Bild</translation>
+        <translation>Kuva</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="77"/>
@@ -446,62 +446,62 @@
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="79"/>
         <source>PDF document</source>
-        <translation>PDF-Dokument</translation>
+        <translation>PDF-dokumentti</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="194"/>
         <source>Resources</source>
-        <translation type="unfinished">Ressourcen</translation>
+        <translation>Resurssit</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="200"/>
         <source>Previous</source>
-        <translation>Vorheriger</translation>
+        <translation>Edellinen</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="201"/>
         <source>Already at the beginning</source>
-        <translation>Bereits am Anfang</translation>
+        <translation>Ensimmäinen artikkeli</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="231"/>
         <source>Next</source>
-        <translation>Nächster</translation>
+        <translation>Seuraava</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="232"/>
         <source>Already at the end</source>
-        <translation>Bereits am Ende</translation>
+        <translation>Viimeinen artikkeli</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="362"/>
         <source>(%1 seconds)</source>
-        <translation>(%1 Sekunden)</translation>
+        <translation>(%1 sekuntia)</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="385"/>
         <source>Load images</source>
-        <translation type="unfinished">Bilder laden</translation>
+        <translation>Lataa kuvat</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="449"/>
         <source>Short article</source>
-        <translation>Kurzer Artikel</translation>
+        <translation>Lyhyt artikkeli</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="481"/>
         <source>Website</source>
-        <translation>Website</translation>
+        <translation>Web-sivu</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="450"/>
         <source>Full article</source>
-        <translation>Ganzer Artikel</translation>
+        <translation>Koko artikkeli</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="527"/>
         <source>Media</source>
-        <translation>Medien</translation>
+        <translation>Media</translation>
     </message>
 </context>
 <context>
@@ -509,12 +509,12 @@
     <message>
         <location filename="../qml/pages/WebPage.qml" line="41"/>
         <source>Close web view</source>
-        <translation>Web-Ansicht schließen</translation>
+        <translation>Sulje selain-näkymä</translation>
     </message>
     <message>
         <location filename="../qml/pages/WebPage.qml" line="50"/>
         <source>Open in browser</source>
-        <translation>Im Browser öffnen</translation>
+        <translation>Avaa selaimessa</translation>
     </message>
 </context>
 <context>
@@ -522,87 +522,87 @@
     <message>
         <location filename="../qml/harbour-tidings.qml" line="202"/>
         <source>Feeds overview</source>
-        <translation>Feed-Übersicht</translation>
+        <translation>Syötteiden yleiskuva</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="203"/>
         <source>- Shows all your subscribed feeds.</source>
-        <translation>- Zeigt alle deine abonnierten Feeds.</translation>
+        <translation>- Näyttää kaikki lisäämäsi syötteet</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="204"/>
         <source>- Pull down to refresh all.</source>
-        <translation>- Ziehe herunter, um alle zu aktualisieren.</translation>
+        <translation>- Päivitä kaikki syötteet ylävalikosta.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="205"/>
         <source>- Tap and hold to add or manage feeds.</source>
-        <translation>- Drücke und halte, um Feeds hinzuzufügen oder zu bearbeiten.</translation>
+        <translation>- Napauta ja pidä siirtyäksesi syötteiden hallinnointi-tilaan.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="210"/>
         <source>Managing mode</source>
-        <translation>Verwalten-Modus</translation>
+        <translation>Hallinnointi-tila</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="211"/>
         <source>- Tap on a feed to refresh.</source>
-        <translation>- Drücke einen Feed, um ihn zu aktualisieren.</translation>
+        <translation>- Napauta syötettä päivittääksesi.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="212"/>
         <source>- Tap on the edit button to edit.</source>
-        <translation>- Drücke den Bearbeiten-Knopf, um zu bearbeiten.</translation>
+        <translation>- Napauta muokkaa-painiketta muokataksesi syötettä.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="213"/>
         <source>- Tap and hold on a feed to move position.</source>
-        <translation>- Drücke und halte einen Feed, um ihn zu verschieben.</translation>
+        <translation>- Napauta ja pidä syötettä siirtääksesi sitä.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="214"/>
         <source>- Tap on empty space to leave managing mode.</source>
-        <translation>- Drücke eine leere Stelle, um den Verwalten-Modus zu verlassen.</translation>
+        <translation>- Napauta tyhjää tilaa poistuaksesi hallinnointi-tilasta.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="219"/>
         <source>Articles</source>
-        <translation>Artikel</translation>
+        <translation>Artikkelit</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="220"/>
         <source>- Tap on the page header to change sorting.</source>
-        <translation>- Drücke den Seitentitel, um die Sortierung zu ändern.</translation>
+        <translation>- Muuta järjestystä napauttamalla sivun otsikkoa.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="221"/>
         <source>- Pull down to mark all as read.</source>
-        <translation>- Ziehe herunter, um alle als gelesen zu markieren.</translation>
+        <translation>- Merkitse kaikki luetuiksi ylävalikosta.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="226"/>
         <source>Article view</source>
-        <translation>Artikelansicht</translation>
+        <translation>Artikkeli-näkymä</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="227"/>
         <source>- Tap on the title to open in external browser.</source>
-        <translation>- Drücke den Titel, um im externen Browser zu laden.</translation>
+        <translation>- Avaa ulkoisessa selaimessa napauttamalla otsikkoa.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="228"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
-        <translation>- Drücke das Klemmbrettsymbol, um den Link in die Zwischenablage zu kopieren.</translation>
+        <translation>Kopioi linkin osoite leikepöydälle napauttamalla leikepöydän kuvaketta.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="229"/>
         <source>- Tap on the star symbol to keep this article.</source>
-        <translation>- Drücke das Sternsymbol, um den Artikel zu behalten.</translation>
+        <translation>- Pitääksesi artikkelin napauta tähti-kuvaketta.</translation>
     </message>
     <message>
         <location filename="../qml/harbour-tidings.qml" line="241"/>
         <source>Loading from cache</source>
-        <translation>Lade aus dem Cache</translation>
+        <translation>Ladataan välimuistista</translation>
     </message>
 </context>
 </TS>
