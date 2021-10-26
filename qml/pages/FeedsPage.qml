@@ -46,10 +46,9 @@ Page {
             pageStack.pop(page, PageStackAction.Immediate);
             listview.currentIndex = 0;
             var props = {
-                "index": 0,
                 "listview": listview
             };
-            pageStack.push("ViewPage.qml", props);
+            pageStack.push("ViewPageProxy.qml", props);
         }
 
         onRefresh: {
