@@ -64,54 +64,54 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="79"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="85"/>
         <source>%1 items</source>
         <translation>%1 objekt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="103"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="109"/>
         <source>Sort by: %1</source>
         <translation>Sortera efter: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="112"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="118"/>
         <source>Show all entries</source>
         <translation>Visa alla poster</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="112"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="118"/>
         <source>Only show unread</source>
         <translation>visa endast olästa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="117"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="121"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="123"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="127"/>
         <source>All read</source>
         <translation>Alla lästa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="132"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="138"/>
         <source>Stop Audio</source>
         <translation>Stoppa ljud</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="245"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="248"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="251"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="254"/>
         <source>No entries</source>
         <translation>Inga poster</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="247"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
         <source>No unread entries</source>
         <translation>Inga olästa poster</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="259"/>
         <source>Pull down to add feeds.</source>
         <translation>Dra neråt för att lägga till flöden.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="254"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="260"/>
         <source>Pull down to refresh.</source>
         <translation>Dra neråt för att uppdatera.</translation>
     </message>
