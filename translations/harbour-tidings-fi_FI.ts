@@ -64,54 +64,54 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="85"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="88"/>
         <source>%1 items</source>
         <translation>%1 artikkelia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="109"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="112"/>
         <source>Sort by: %1</source>
         <translation>Järjestys: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="118"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="121"/>
         <source>Show all entries</source>
         <translation>Näytä kaikki artikkelit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="118"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="121"/>
         <source>Only show unread</source>
         <translation>Näytä vain lukemattomat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="123"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="127"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="126"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="130"/>
         <source>All read</source>
         <translation>Kaikki luettu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="138"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="141"/>
         <source>Stop Audio</source>
         <translation>Pysäytä ääni</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="251"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="254"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="255"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="258"/>
         <source>No entries</source>
         <translation>Ei artikkeleita</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="257"/>
         <source>No unread entries</source>
         <translation>Ei lukemattomia artikkeleita</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="259"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="263"/>
         <source>Pull down to add feeds.</source>
         <translation>Lisää syötteitä ylävalikosta.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="260"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="264"/>
         <source>Pull down to refresh.</source>
         <translation>Päivitä ylävalikosta.</translation>
     </message>
@@ -169,39 +169,39 @@
 <context>
     <name>NewsBlendModel</name>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="42"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="41"/>
         <source>Latest first</source>
         <translation>Uusin ensin</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="48"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="47"/>
         <source>Oldest first</source>
         <translation>Vanhin ensin</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="54"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="53"/>
         <source>Feed, then latest first</source>
         <translation>Syöte, sitten uusin ensin</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="60"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="59"/>
         <source>Feed, then oldest first</source>
         <translation>Syöte, sitten vanhin ensin</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="66"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="65"/>
         <source>Current feed only, latest first</source>
         <translation>Vain nykyinen syöte, uusin ensin</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="72"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="71"/>
         <source>Current feed only, oldest first</source>
         <translation>Vain nykyinen syöte, vanhin ensin</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="295"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="301"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="305"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="294"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="300"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="304"/>
         <source>Error with %1:
 %2</source>
         <translation>Virhe syötteessä %1:
@@ -429,79 +429,79 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="73"/>
+        <location filename="../qml/pages/ViewPage.qml" line="81"/>
         <source>Audio</source>
-        <translation>Ääni</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="75"/>
+        <location filename="../qml/pages/ViewPage.qml" line="83"/>
         <source>Image</source>
-        <translation>Kuva</translation>
+        <translation type="unfinished">Kuva</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="77"/>
+        <location filename="../qml/pages/ViewPage.qml" line="85"/>
         <source>Video</source>
-        <translation>Video</translation>
+        <translation type="unfinished">Video</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="79"/>
+        <location filename="../qml/pages/ViewPage.qml" line="87"/>
         <source>PDF document</source>
-        <translation>PDF-dokumentti</translation>
+        <translation type="unfinished">PDF-dokumentti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="194"/>
+        <location filename="../qml/pages/ViewPage.qml" line="204"/>
         <source>Resources</source>
-        <translation>Resurssit</translation>
+        <translation type="unfinished">Resurssit</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="200"/>
+        <location filename="../qml/pages/ViewPage.qml" line="210"/>
         <source>Previous</source>
-        <translation>Edellinen</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="201"/>
+        <location filename="../qml/pages/ViewPage.qml" line="211"/>
         <source>Already at the beginning</source>
-        <translation>Ensimmäinen artikkeli</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="231"/>
+        <location filename="../qml/pages/ViewPage.qml" line="241"/>
         <source>Next</source>
-        <translation>Seuraava</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="232"/>
+        <location filename="../qml/pages/ViewPage.qml" line="242"/>
         <source>Already at the end</source>
-        <translation>Viimeinen artikkeli</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="362"/>
+        <location filename="../qml/pages/ViewPage.qml" line="372"/>
         <source>(%1 seconds)</source>
-        <translation>(%1 sekuntia)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="385"/>
+        <location filename="../qml/pages/ViewPage.qml" line="395"/>
         <source>Load images</source>
-        <translation>Lataa kuvat</translation>
+        <translation type="unfinished">Lataa kuvat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="449"/>
+        <location filename="../qml/pages/ViewPage.qml" line="459"/>
         <source>Short article</source>
-        <translation>Lyhyt artikkeli</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="481"/>
-        <source>Website</source>
-        <translation>Web-sivu</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ViewPage.qml" line="450"/>
+        <location filename="../qml/pages/ViewPage.qml" line="460"/>
         <source>Full article</source>
-        <translation>Koko artikkeli</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="527"/>
+        <location filename="../qml/pages/ViewPage.qml" line="491"/>
+        <source>Website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="537"/>
         <source>Media</source>
-        <translation>Media</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
