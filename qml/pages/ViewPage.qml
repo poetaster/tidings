@@ -5,7 +5,7 @@ import harbour.tidings 1.0
 Item {
     id: page
     objectName: "ViewPage"
-
+    property int debug: 1
     property int status: PageStatus.Active
 
     property GridView listview
@@ -14,6 +14,7 @@ Item {
                                : null
 
     property int _currentIndex: listview.currentIndex
+
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
 
@@ -23,11 +24,18 @@ Item {
                                                 : Theme.paddingLarge
 
     function previousItem() {
-        listview.currentIndex = listview.currentIndex - 1;
+        if (listview.currentIndex > 0){
+           listview.currentIndex = listview.currentIndex - 1;
+            if (debug === 1) console.debug("Viewpage-: " + _currentIndex);
+        }
     }
 
     function nextItem() {
-        listview.currentIndex = listview.currentIndex + 1;
+        if (listview.currentIndex < listview.count){
+            listview.currentIndex = listview.currentIndex + 1;
+            if (debug === 1) console.debug("Viewpage+: " + _currentIndex);
+        }
+
     }
 
     function goToItem(idx) {
@@ -107,6 +115,8 @@ Item {
     }
 
     on_CurrentIndexChanged: {
+
+        if (debug === 1) console.debug("ViewPage changed, previous index: " + newsBlendModel.previousOfFeed(listview.currentIndex));
         _previousOfFeed = newsBlendModel.previousOfFeed(listview.currentIndex);
         _nextOfFeed = newsBlendModel.nextOfFeed(listview.currentIndex);
 

@@ -28,22 +28,22 @@ Page {
 
         onOpenedItem: {
             listview.positionViewAtIndex(index, ListView.Visible);
-            console.debug(index);
+            console.debug("FeedsPage Connections: " + index);
 
             coverAdaptor.page = (index + 1) + "/" +  newsBlendModel.count;
-            console.debug(coverAdaptor.page);
+            //console.debug(coverAdaptor.page);
 
             coverAdaptor.hasPrevious = index > 0;
-            console.debug(coverAdaptor.hasPrevious);
+            //console.debug(coverAdaptor.hasPrevious);
 
             coverAdaptor.hasNext = index < newsBlendModel.count - 1;
-            console.debug(coverAdaptor.hasNext);
+            //console.debug(coverAdaptor.hasNext);
 
             coverAdaptor.feedName = newsBlendModel.getAttribute(index, "name");
             coverAdaptor.title = newsBlendModel.getAttribute(index, "title");
             coverAdaptor.thumbnail = newsBlendModel.getAttribute(index, "thumbnail");
 
-            console.debug(coverAdaptor.page);
+            //console.debug(coverAdaptor.page);
 
         }
     }
@@ -57,6 +57,7 @@ Page {
             var props = {
                 "listview": listview
             };
+            // was proxy
             pageStack.push("ViewPageProxy.qml", props);
         }
 
@@ -243,6 +244,7 @@ Page {
 
             onClicked: {
                 listview.currentIndex = index;
+                // was proxy
                 pageStack.push("ViewPageProxy.qml", { "listview": listview });
             }
         }

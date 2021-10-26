@@ -8,7 +8,7 @@ Dialog {
     allowedOrientations: Orientation.All
 
     property var listview
-    property int currentIndex: -1
+    property int currentIndex: listview.currentIndex //-1
     property var _fakePreviousPage: null
 
     canAccept: listview.currentIndex < (listview.count - 1)
@@ -29,12 +29,14 @@ Dialog {
             _fakePreviousPage = result
             viewLoader.sourceComponent = fakePreviousPageComponent
             listview.currentIndex += 1
+            console.debug("faking previous succeeded")
         }, Qt.size(Screen.width/20, Screen.height/20))
 
         if (!fakeSuccess) {
             console.log("faking previous page failed")
-            viewLoader.sourceComponent = undefined
-            listview.currentIndex += 1
+            //viewLoader.sourceComponent = undefined
+            //listview.currentIndex += 1
+            console.debug("proxypage: " + listview.currentIndex);
         }
     }
 
