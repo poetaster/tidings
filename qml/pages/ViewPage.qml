@@ -5,7 +5,7 @@ import harbour.tidings 1.0
 Item {
     id: page
     objectName: "ViewPage"
-    property int debug: 1
+    property int debug: 0
     property int status: PageStatus.Active
 
     property GridView listview
@@ -14,7 +14,7 @@ Item {
                                : null
 
     property int _currentIndex: listview.currentIndex
-
+    property int _lastIndex: -1 // keep track of last index to forestall loading data 2 times.
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
 
