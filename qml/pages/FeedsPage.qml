@@ -68,10 +68,14 @@ Page {
                 "listview": listview
             };
 <<<<<<< HEAD
+<<<<<<< HEAD
             pageStack.push("ViewPage.qml", props);
 =======
             pageStack.push("ViewPageProxy.qml", props);
 >>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
+=======
+            pageStack.push("ViewPage.qml", props);
+>>>>>>> parent of d8a9e2b... Push ViewPageProxy instead of ViewPage when moving to first feed item from the cover.
         }
 
         onRefresh: {
