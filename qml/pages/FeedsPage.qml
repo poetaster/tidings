@@ -28,14 +28,32 @@ Page {
 
         onOpenedItem: {
             listview.positionViewAtIndex(index, ListView.Visible);
+<<<<<<< HEAD
             coverAdaptor.hasPrevious = index > 0;
             coverAdaptor.hasNext = index < newsBlendModel.count - 1;
+=======
+            console.debug(index);
+
+            coverAdaptor.page = (index + 1) + "/" +  newsBlendModel.count;
+            console.debug(coverAdaptor.page);
+
+            coverAdaptor.hasPrevious = index > 0;
+            console.debug(coverAdaptor.hasPrevious);
+
+            coverAdaptor.hasNext = index < newsBlendModel.count - 1;
+            console.debug(coverAdaptor.hasNext);
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
 
             coverAdaptor.feedName = newsBlendModel.getAttribute(index, "name");
             coverAdaptor.title = newsBlendModel.getAttribute(index, "title");
             coverAdaptor.thumbnail = newsBlendModel.getAttribute(index, "thumbnail");
 
+<<<<<<< HEAD
             coverAdaptor.page = (index + 1) + "/" +  newsBlendModel.count;
+=======
+            console.debug(coverAdaptor.page);
+
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
         }
     }
 
@@ -49,7 +67,11 @@ Page {
                 "index": 0,
                 "listview": listview
             };
+<<<<<<< HEAD
             pageStack.push("ViewPage.qml", props);
+=======
+            pageStack.push("ViewPageProxy.qml", props);
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
         }
 
         onRefresh: {

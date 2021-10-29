@@ -6,7 +6,11 @@ Item {
     id: page
     objectName: "ViewPage"
 <<<<<<< HEAD
+<<<<<<< HEAD
     property int debug: 0
+=======
+
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
 =======
 
 >>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
@@ -19,7 +23,10 @@ Item {
 
     property int _currentIndex: listview.currentIndex
 <<<<<<< HEAD
+<<<<<<< HEAD
     property int _lastIndex: -1 // keep track of last index to forestall loading data 2 times.
+=======
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
 =======
 >>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
     property int _previousOfFeed: -1

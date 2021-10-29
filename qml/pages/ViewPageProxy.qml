@@ -36,12 +36,16 @@ Dialog {
             _fakePreviousPage = result
             viewLoader.sourceComponent = fakePreviousPageComponent
             listview.currentIndex += 1
+<<<<<<< HEAD
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
+=======
 >>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
         }, Qt.size(Screen.width/20, Screen.height/20))
 
         if (!fakeSuccess) {
             console.log("faking previous page failed")
             viewLoader.sourceComponent = undefined
+<<<<<<< HEAD
 <<<<<<< HEAD
             //listview.currentIndex += 1
             //coverAdaptor.nextItem();
@@ -50,6 +54,8 @@ Dialog {
         //coverAdaptor.nextItem();
         listview.currentIndex += 1
 =======
+=======
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
             listview.currentIndex += 1
         }
 >>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
