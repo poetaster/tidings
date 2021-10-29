@@ -95,23 +95,23 @@
         <translation>Stoppa ljud</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="245"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="248"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="249"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="252"/>
         <source>No entries</source>
         <translation>Inga poster</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="247"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="251"/>
         <source>No unread entries</source>
         <translation>Inga olästa poster</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="257"/>
         <source>Pull down to add feeds.</source>
         <translation>Dra neråt för att lägga till flöden.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="254"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="258"/>
         <source>Pull down to refresh.</source>
         <translation>Dra neråt för att uppdatera.</translation>
     </message>
@@ -429,79 +429,74 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="73"/>
+        <location filename="../qml/pages/ViewPage.qml" line="71"/>
         <source>Audio</source>
-        <translation>Ljud</translation>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="73"/>
+        <source>Image</source>
+        <translation type="unfinished">Bild</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="75"/>
-        <source>Image</source>
-        <translation>Bild</translation>
+        <source>Video</source>
+        <translation type="unfinished">Film</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="77"/>
-        <source>Video</source>
-        <translation>Film</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ViewPage.qml" line="79"/>
         <source>PDF document</source>
-        <translation>PDF-dokument</translation>
+        <translation type="unfinished">PDF-dokument</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="194"/>
-        <source>Resources</source>
-        <translation>Resurser</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ViewPage.qml" line="200"/>
+        <location filename="../qml/pages/ViewPage.qml" line="208"/>
         <source>Previous</source>
-        <translation>Föregående</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="201"/>
+        <location filename="../qml/pages/ViewPage.qml" line="209"/>
         <source>Already at the beginning</source>
-        <translation>Redan vid början</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="231"/>
+        <location filename="../qml/pages/ViewPage.qml" line="239"/>
         <source>Next</source>
-        <translation>Nästa</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="232"/>
+        <location filename="../qml/pages/ViewPage.qml" line="240"/>
         <source>Already at the end</source>
-        <translation>Redan vid slutet</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="362"/>
+        <location filename="../qml/pages/ViewPage.qml" line="370"/>
         <source>(%1 seconds)</source>
-        <translation>(%1 sekunder)</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="385"/>
+        <location filename="../qml/pages/ViewPage.qml" line="393"/>
         <source>Load images</source>
-        <translation>Läs in bilder</translation>
+        <translation type="unfinished">Läs in bilder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="449"/>
+        <location filename="../qml/pages/ViewPage.qml" line="457"/>
         <source>Short article</source>
-        <translation>Kort artikel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="481"/>
-        <source>Website</source>
-        <translation>Webbsida</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/ViewPage.qml" line="450"/>
+        <location filename="../qml/pages/ViewPage.qml" line="458"/>
         <source>Full article</source>
-        <translation>Hel artikel</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="527"/>
+        <location filename="../qml/pages/ViewPage.qml" line="489"/>
+        <source>Website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="535"/>
         <source>Media</source>
-        <translation>Media</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

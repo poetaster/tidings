@@ -74,7 +74,7 @@ TRANSLATIONS += translations/harbour-tidings-pt_BR.ts
 TRANSLATIONS += translations/harbour-tidings-es.ts
 TRANSLATIONS += translations/harbour-tidings-fi_FI.ts
 
-CONFIG += sailfishapp_i18n_unfinished
+#CONFIG += sailfishapp_i18n_unfinished
 
 HEADERS += \
     src/feedloader.h \

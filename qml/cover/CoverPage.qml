@@ -25,7 +25,7 @@ CoverBackground {
     Image {
         id: backgroundImage
         visible: coverAdaptor.thumbnail !== "" &&
-                 (coverAdaptor.currentPage === "ViewPageProxy" ||
+                 (coverAdaptor.currentPage === "ViewPage" ||
                   coverAdaptor.currentPage === "WebPage") &&
                  status === Image.Ready
         anchors.fill: parent
@@ -213,7 +213,7 @@ CoverBackground {
 
     // News Item
     Column {
-        visible: (coverAdaptor.currentPage === "ViewPageProxy" ||
+        visible: (coverAdaptor.currentPage === "ViewPage" ||
                   coverAdaptor.currentPage === "WebPage")
 
         anchors.left: parent.left
@@ -273,7 +273,7 @@ CoverBackground {
     // [previous] and [next]
     CoverActionList {
         enabled: ! coverAdaptor.busy &&
-                 coverAdaptor.currentPage === "ViewPageProxy" &&
+                 coverAdaptor.currentPage === "ViewPage" &&
                  coverAdaptor.hasPrevious &&
                  coverAdaptor.hasNext
 
@@ -295,7 +295,7 @@ CoverBackground {
     // [previous] only
     CoverActionList {
         enabled: ! coverAdaptor.busy &&
-                 coverAdaptor.currentPage === "ViewPageProxy" &&
+                 coverAdaptor.currentPage === "ViewPage" &&
                  coverAdaptor.hasPrevious &&
                  ! coverAdaptor.hasNext
 
@@ -310,7 +310,7 @@ CoverBackground {
     // [next] only
     CoverActionList {
         enabled: ! coverAdaptor.busy &&
-                 coverAdaptor.currentPage === "ViewPageProxy" &&
+                 coverAdaptor.currentPage === "ViewPage" &&
                  ! coverAdaptor.hasPrevious &&
                  coverAdaptor.hasNext
 
