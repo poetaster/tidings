@@ -5,7 +5,11 @@ import harbour.tidings 1.0
 Item {
     id: page
     objectName: "ViewPage"
+<<<<<<< HEAD
     property int debug: 0
+=======
+
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
     property int status: PageStatus.Active
 
     property GridView listview
@@ -14,7 +18,10 @@ Item {
                                : null
 
     property int _currentIndex: listview.currentIndex
+<<<<<<< HEAD
     property int _lastIndex: -1 // keep track of last index to forestall loading data 2 times.
+=======
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
 
@@ -24,18 +31,11 @@ Item {
                                                 : Theme.paddingLarge
 
     function previousItem() {
-        if (listview.currentIndex > 0){
-           listview.currentIndex = listview.currentIndex - 1;
-            if (debug === 1) console.debug("Viewpage-: " + _currentIndex);
-        }
+        listview.currentIndex = listview.currentIndex - 1;
     }
 
     function nextItem() {
-        if (listview.currentIndex < listview.count){
-            listview.currentIndex = listview.currentIndex + 1;
-            if (debug === 1) console.debug("Viewpage+: " + _currentIndex);
-        }
-
+        listview.currentIndex = listview.currentIndex + 1;
     }
 
     function goToItem(idx) {
@@ -115,8 +115,6 @@ Item {
     }
 
     on_CurrentIndexChanged: {
-
-        if (debug === 1) console.debug("ViewPage changed, previous index: " + newsBlendModel.previousOfFeed(listview.currentIndex));
         _previousOfFeed = newsBlendModel.previousOfFeed(listview.currentIndex);
         _nextOfFeed = newsBlendModel.nextOfFeed(listview.currentIndex);
 

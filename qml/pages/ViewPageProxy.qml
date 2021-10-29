@@ -8,7 +8,7 @@ Dialog {
     allowedOrientations: Orientation.All
 
     property var listview
-    property int currentIndex: listview.currentIndex //-1
+    property int currentIndex: -1
     property var _fakePreviousPage: null
 
     canAccept: listview.currentIndex < (listview.count - 1)
@@ -25,22 +25,34 @@ Dialog {
         // is changed. Showing the screenshot is necessary to avoid too much flickering
         // when the old page is being hidden.
 
+<<<<<<< HEAD
         /*var fakeSuccess = viewLoader.item.grabToImage(function(result){
             _fakePreviousPage = result;
             viewLoader.sourceComponent = fakePreviousPageComponent;
             //coverAdaptor.nextItem();
             //listview.currentIndex += 1;
+=======
+        var fakeSuccess = viewLoader.item.grabToImage(function(result){
+            _fakePreviousPage = result
+            viewLoader.sourceComponent = fakePreviousPageComponent
+            listview.currentIndex += 1
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
         }, Qt.size(Screen.width/20, Screen.height/20))
 
         if (!fakeSuccess) {
             console.log("faking previous page failed")
             viewLoader.sourceComponent = undefined
+<<<<<<< HEAD
             //listview.currentIndex += 1
             //coverAdaptor.nextItem();
             console.debug("proxypage: " + listview.currentIndex);
         }*/
         //coverAdaptor.nextItem();
         listview.currentIndex += 1
+=======
+            listview.currentIndex += 1
+        }
+>>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
     }
 
     Component {
