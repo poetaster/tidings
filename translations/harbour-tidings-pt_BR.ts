@@ -65,57 +65,57 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="85"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="79"/>
         <source>%1 items</source>
         <translatorcomment>This is the plural form</translatorcomment>
         <translation>%1 itens</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="109"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="103"/>
         <source>Sort by: %1</source>
         <translation>Visualizar: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="118"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="112"/>
         <source>Show all entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="118"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="112"/>
         <source>Only show unread</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="123"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="127"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="117"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="121"/>
         <source>All read</source>
         <translatorcomment>Added more context to this as &quot;mark all as read&quot;</translatorcomment>
         <translation>Marcar todos como lidos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="138"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="132"/>
         <source>Stop Audio</source>
         <translation>Interromper áudio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="251"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="254"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="245"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="248"/>
         <source>No entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="247"/>
         <source>No unread entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="259"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
         <source>Pull down to add feeds.</source>
         <translatorcomment>Could not find this message to understand the context</translatorcomment>
         <translation>Adicione feeds deslizando para baixo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="260"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="254"/>
         <source>Pull down to refresh.</source>
         <translation type="unfinished"></translation>
     </message>

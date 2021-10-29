@@ -8,7 +8,7 @@ Page {
     allowedOrientations: Orientation.All
 
     onStatusChanged: {
-        if (status === PageStatus.Inactive && pageStack.currentPage.objectName === 'SourcesPage') {
+        if (status == PageStatus.Inactive && pageStack.currentPage.objectName == 'SourcesPage') {
             // Show all feeds again if we returned to the root page, i.e. the
             // feed sources overview page.
             // WARNING: This inevitably breaks if it becomes possible to reach the
@@ -18,9 +18,9 @@ Page {
         }
 
         // Uncomment to debug page changes.
-        if (status == PageStatus.Inactive) {
-             console.log("FeedsPage inactive: status =", status, "depth =", pageStack.depth, "current = ", pageStack.currentPage.objectName)
-         }
+        // if (status == PageStatus.Inactive) {
+        //     console.log("FeedsPage inactive: status =", status, "depth =", pageStack.depth, "current = ", pageStack.currentPage.objectName)
+        // }
     }
 
     Connections {
@@ -28,23 +28,14 @@ Page {
 
         onOpenedItem: {
             listview.positionViewAtIndex(index, ListView.Visible);
-            console.debug(index);
-
-            coverAdaptor.page = (index + 1) + "/" +  newsBlendModel.count;
-            console.debug(coverAdaptor.page);
-
             coverAdaptor.hasPrevious = index > 0;
-            console.debug(coverAdaptor.hasPrevious);
-
             coverAdaptor.hasNext = index < newsBlendModel.count - 1;
-            console.debug(coverAdaptor.hasNext);
 
             coverAdaptor.feedName = newsBlendModel.getAttribute(index, "name");
             coverAdaptor.title = newsBlendModel.getAttribute(index, "title");
             coverAdaptor.thumbnail = newsBlendModel.getAttribute(index, "thumbnail");
 
-            console.debug(coverAdaptor.page);
-
+            coverAdaptor.page = (index + 1) + "/" +  newsBlendModel.count;
         }
     }
 
