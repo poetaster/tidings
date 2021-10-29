@@ -62,10 +62,4 @@ Dialog {
             }
         }
     }
-
-    HintLoader {
-        hint: articleHint
-        when: configHintsEnabled.booleanValue &&
-              page.status === PageStatus.Active
-    }
 }
