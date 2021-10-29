@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.tidings 1.0
 
-Item {
+Page {
     id: page
     objectName: "ViewPage"
 <<<<<<< HEAD
@@ -10,12 +10,15 @@ Item {
     property int debug: 0
 =======
 
+<<<<<<< HEAD
 >>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
 =======
 
 >>>>>>> parent of 4c14446... Added debugging output. We have a repeated call to load the item view.
     property int status: PageStatus.Active
 
+=======
+>>>>>>> parent of 99f6f6b... Merge pull request #74 from ichthyosaurus/next-by-swiping
     property GridView listview
     property variant itemData: listview.currentItem !== null
                                ? listview.currentItem.data
@@ -32,7 +35,7 @@ Item {
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
 
-    property bool _activated: true
+    property bool _activated
 
     property real _pageMargin: (width > height) ? Theme.paddingLarge * 2
                                                 : Theme.paddingLarge
@@ -97,12 +100,29 @@ Item {
         }
     }
 
-    // allowedOrientations: Orientation.All
+    allowedOrientations: Orientation.All
 
     Component.onCompleted: {
         navigationState.openedItem(listview.currentIndex);
         if (! itemData.read && ! itemData.shelved) {
             newsBlendModel.setRead(listview.currentIndex, true);
+        }
+    }
+
+    onStatusChanged: {
+        if (status === PageStatus.Active)
+        {
+            if (itemData.link !== "")
+            {
+                var props = {
+                    "resources": resources
+                };
+
+                pageStack.pushAttached(Qt.resolvedUrl("ResourcesPage.qml"),
+                                       props);
+            }
+
+            page._activated = true;
         }
     }
 
@@ -203,13 +223,6 @@ Item {
                     column.opacity = 0;
                 }
             }
-
-            MenuItem {
-                visible: itemData.link !== ""
-                text: qsTr("Resources")
-                onClicked: pageStack.push(Qt.resolvedUrl("ResourcesPage.qml"), { "resources": resources })
-            }
-
             MenuItem {
                 enabled: listview.currentIndex > 0
                 text: enabled ? qsTr("Previous")
