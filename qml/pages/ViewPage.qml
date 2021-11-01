@@ -88,23 +88,35 @@ Page {
             newsBlendModel.setRead(listview.currentIndex, true);
         }
     }
+    function forwardNow() {
+        if (listview.currentIndex < newsBlendModel.count - 1){
+            nextItem();
+            var props = {
+                "index": listview.currentItem,
+                "listview": listview
+            };
+            pageStack.replace(Qt.resolvedUrl("ViewPage.qml"), props);
+        }
 
-    onStatusChanged: {
+    }
+    /*onStatusChanged: {
+        //if (page._activated === false && coverAdaptor.hasNext) {
+        //            nextItem();
+        //}
+
         if (status === PageStatus.Active)
         {
             if (itemData.link !== "")
             {
-                var props = {
-                    "resources": resources
-                };
-
-                pageStack.pushAttached(Qt.resolvedUrl("ResourcesPage.qml"),
-                                       props);
+                //var props = {
+                    //"resources": resources
+                //};
+                //pageStack.pushAttached(Qt.resolvedUrl("ResourcesPage.qml"), props);
             }
 
             page._activated = true;
         }
-    }
+    }*/
 
     onItemDataChanged: {
         if (itemData)
@@ -174,6 +186,22 @@ Page {
 
         anchors.fill: parent
         contentHeight: column.height
+       /*
+        onFlickStarted: {
+            console.debug(PageStatus.Active);
+        }
+        onMovementStarted: {
+            console.debug(Drag.XAxis)
+            console.debug(Drag.YAxis)
+        }
+        onDraggingHorizontallyChanged:  {
+            console.debug(Flickable.flickingHorizontally)
+        }
+        */
+        //THIS is a hammer. but less so than the hammer that hung here before.
+        onDragEnded: {
+            forwardNow();
+        }
 
         PullDownMenu {
             id: pulleyDown
@@ -182,7 +210,7 @@ Page {
 
             onActiveChanged: {
                 if (! active && _closeAction)
-                {
+                {index < newsBlendModel.count -
                     _closeAction();
                     _closeAction = null;
                 }
@@ -416,7 +444,7 @@ Page {
                         "url": link
                     }
                     pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
-                                                  props);
+                                   props);
                 }
 
             }
