@@ -210,7 +210,7 @@ Page {
 
             onActiveChanged: {
                 if (! active && _closeAction)
-                {index < newsBlendModel.count -
+                {
                     _closeAction();
                     _closeAction = null;
                 }
