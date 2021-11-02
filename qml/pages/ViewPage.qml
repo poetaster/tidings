@@ -15,6 +15,7 @@ Page {
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
 
+    property bool _pullDownActivated: false
     property bool _activated
 
     property real _pageMargin: (width > height) ? Theme.paddingLarge * 2
@@ -200,7 +201,7 @@ Page {
         */
         //THIS is a hammer. but less so than the hammer that hung here before.
         onDragEnded: {
-            forwardNow();
+            if(page._pullDownActivated) forwardNow();
         }
 
         PullDownMenu {
@@ -213,6 +214,7 @@ Page {
                 {
                     _closeAction();
                     _closeAction = null;
+                } else {
                 }
             }
 
@@ -229,6 +231,7 @@ Page {
                     }
                     pulleyDown._closeAction = f;
                     column.opacity = 0;
+                    page._pullDownActivated = true;
                 }
             }
             MenuItem {
@@ -257,9 +260,13 @@ Page {
             onActiveChanged: {
                 if (! active && _closeAction)
                 {
+                    page._pullDownActivated = false;
                     _closeAction();
                     _closeAction = null;
+                } else {
+                    page._pullDownActivated = true;
                 }
+
             }
 
             MenuItem {
@@ -276,6 +283,7 @@ Page {
                     }
                     pulleyUp._closeAction = f;
                     column.opacity = 0;
+                    page._pullDownActivated = true;
                 }
             }
             MenuItem {
