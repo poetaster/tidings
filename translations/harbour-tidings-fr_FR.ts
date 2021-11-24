@@ -469,32 +469,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="406"/>
+        <location filename="../qml/pages/ViewPage.qml" line="306"/>
+        <source>Resources</source>
+        <translation type="unfinished">Ressources</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="429"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="429"/>
+        <location filename="../qml/pages/ViewPage.qml" line="452"/>
         <source>Load images</source>
         <translation type="unfinished">Charger les images</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="493"/>
+        <location filename="../qml/pages/ViewPage.qml" line="516"/>
         <source>Short article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="494"/>
+        <location filename="../qml/pages/ViewPage.qml" line="517"/>
         <source>Full article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="525"/>
+        <location filename="../qml/pages/ViewPage.qml" line="548"/>
         <source>Website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="571"/>
+        <location filename="../qml/pages/ViewPage.qml" line="594"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>
