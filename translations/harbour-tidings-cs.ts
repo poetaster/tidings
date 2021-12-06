@@ -64,54 +64,54 @@
 <context>
     <name>FeedsPage</name>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="79"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="78"/>
         <source>%1 items</source>
         <translation type="unfinished">%1 článků</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="103"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="102"/>
         <source>Sort by: %1</source>
         <translation type="unfinished">Třídit podle: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="112"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="111"/>
         <source>Show all entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="112"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="111"/>
         <source>Only show unread</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="117"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="121"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="116"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="120"/>
         <source>All read</source>
         <translation type="unfinished">Vše přečteno</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="132"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="131"/>
         <source>Stop Audio</source>
         <translation type="unfinished">Zastavit audio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="245"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="248"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="244"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="247"/>
         <source>No entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="247"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="246"/>
         <source>No unread entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="252"/>
         <source>Pull down to add feeds.</source>
         <translation type="unfinished">Táhnutím dolů přidáte feed.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="254"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
         <source>Pull down to refresh.</source>
         <translation type="unfinished"></translation>
     </message>

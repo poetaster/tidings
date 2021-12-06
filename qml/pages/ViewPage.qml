@@ -266,7 +266,7 @@ Item {
             height: childrenRect.height
 
             Behavior on opacity {
-                NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
+                NumberAnimation { duration: 100; easing.type: Easing.InOutQuad }
             }
 
             PageHeader {

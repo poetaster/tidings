@@ -292,7 +292,8 @@ CoverBackground {
         }
     }
 
-    // [previous] only
+    /*
+    //[previous] only
     CoverActionList {
         enabled: ! coverAdaptor.busy &&
                  coverAdaptor.currentPage === "ViewPageProxy" &&
@@ -321,6 +322,7 @@ CoverBackground {
             }
         }
     }
+*/
 
     // [abort] while loading
     CoverActionList {
