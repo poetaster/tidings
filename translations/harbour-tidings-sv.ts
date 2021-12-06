@@ -474,32 +474,32 @@
         <translation type="unfinished">Resurser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="435"/>
+        <location filename="../qml/pages/ViewPage.qml" line="437"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="458"/>
+        <location filename="../qml/pages/ViewPage.qml" line="460"/>
         <source>Load images</source>
         <translation type="unfinished">Läs in bilder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="522"/>
+        <location filename="../qml/pages/ViewPage.qml" line="524"/>
         <source>Short article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="523"/>
+        <location filename="../qml/pages/ViewPage.qml" line="525"/>
         <source>Full article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="554"/>
+        <location filename="../qml/pages/ViewPage.qml" line="556"/>
         <source>Website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="600"/>
+        <location filename="../qml/pages/ViewPage.qml" line="602"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>

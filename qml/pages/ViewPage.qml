@@ -190,7 +190,7 @@ Page {
         id: contentFlickable
 
         anchors.fill: parent
-        contentHeight: column.height
+        contentHeight:view.height * 2
         /*
         onFlickStarted: {
             console.debug(PageStatus.Active);
@@ -311,259 +311,259 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("ResourcesPage.qml"), { "resources": resources })
             }
         }
-
-        SlideshowView {
-            id: view
-            anchors.fill: parent
-            anchors.top: parent.top
-            height: childrenRect.height
-            onCurrentIndexChanged: {
-                //view.currentIndex
-                console.debug(view.currentIndex)
-                goToItem(view.currentIndex);
-            }
-            onCurrentItemChanged: {
-                console.debug(parent.height)
-                console.debug(view.currentIndex)
-            }
-
-            model: listview.count
-
-            delegate: Column {
-                id: column
-                anchors.top: parent.top
-                //anchors.bottom: parent.bottom
-                anchors.fill: parent
-
-                width: parent.width
-                height: childrenRect.height
-
-                Behavior on opacity {
-                //    NumberAnimation { duration: 100; easing.type: Easing.InOutQuad }
+        Column {
+            id:viewColumn
+            height: contentItem.childrenRect.height
+            width:parent.width
+            SlideshowView {
+                id: view
+                height: contentItem.childrenRect.height
+                onCurrentIndexChanged: {
+                    goToItem(view.currentIndex);
+                    console.debug(view.currentIndex)
+                    console.debug('height '+ column.body.height)
                 }
+                /*
+                onCurrentItemChanged: {
+                    console.debug(view.currentIndex)
+                    console.debug(body.height)
+                }*/
 
-                PageHeader {
-                    id: pageHeader
-                    title: feedName[itemData.source]
-                }
+                model: listview.count
 
-                Item {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: _pageMargin
-                    anchors.rightMargin: _pageMargin
+                delegate: Column {
+                    id: column
+                    anchors.fill: parent
+
+                    width: parent.width
                     height: childrenRect.height
+
+                    Behavior on opacity {
+                        NumberAnimation { duration: 100; easing.type: Easing.InOutQuad }
+                    }
+
+                    PageHeader {
+                        id: pageHeader
+                        title: feedName[itemData.source]
+                    }
+
+                    Item {
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.leftMargin: _pageMargin
+                        anchors.rightMargin: _pageMargin
+                        height: childrenRect.height
+
+                        Label {
+                            anchors.left: parent.left
+                            anchors.right: copyIcon.left
+                            anchors.rightMargin: Theme.paddingMedium
+                            horizontalAlignment: Text.AlignLeft
+                            color: Theme.highlightColor
+                            font.pixelSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
+                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                            textFormat: Text.RichText
+                            text: itemData.title
+
+                            MouseArea {
+                                enabled: itemData.link !== ""
+                                anchors.fill: parent
+                                onClicked: {
+                                    var props = {
+                                        "url": itemData.link
+                                    }
+                                    pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
+                                                   props);
+                                }
+                            }
+                        }
+
+                        Image {
+                            id: shelveIcon
+                            anchors.right: parent.right
+                            source: itemData.shelved ? "image://theme/icon-l-favorite"
+                                                     : "image://theme/icon-l-star"
+                            width: Theme.itemSizeSmall
+                            height: width
+
+                            MouseArea {
+                                anchors.fill: parent
+                                onClicked: {
+                                    shelveTimer.itemIndex = listview.currentIndex;
+                                    shelveTimer.shelved = ! itemData.shelved;
+                                    //newsBlendModel.setShelved(listview.currentIndex, ! itemData.shelved);
+                                    itemData.shelved = ! itemData.shelved;
+                                    shelveTimer.start();
+                                }
+                            }
+
+                            Timer {
+                                id: shelveTimer
+                                interval: 10
+
+                                property int itemIndex
+                                property bool shelved
+
+                                onTriggered: {
+                                    newsBlendModel.setShelved(itemIndex, shelved);
+                                }
+                            }
+                        }
+
+                        IconButton {
+                            id: copyIcon
+                            anchors.right: shelveIcon.left
+                            icon.source: "image://theme/icon-m-clipboard"
+
+                            width: Theme.itemSizeSmall
+                            height: width
+
+                            onClicked: Clipboard.text = itemData.link
+                        }
+                    }
+
+
+                    Label {
+                        visible: itemData.mediaDuration > 0
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.leftMargin: _pageMargin
+                        anchors.rightMargin: _pageMargin
+                        horizontalAlignment: Text.AlignLeft
+                        color: Theme.highlightColor
+                        font.pixelSize: Theme.fontSizeExtraSmall * (configFontScale.value / 100.0)
+                        text: qsTr("(%1 seconds)").arg(itemData.mediaDuration)
+                    }
 
                     Label {
                         anchors.left: parent.left
-                        anchors.right: copyIcon.left
-                        anchors.rightMargin: Theme.paddingMedium
+                        anchors.right: parent.right
+                        anchors.leftMargin: _pageMargin
+                        anchors.rightMargin: _pageMargin
                         horizontalAlignment: Text.AlignLeft
-                        color: Theme.highlightColor
-                        font.pixelSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
-                        wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                        textFormat: Text.RichText
-                        text: itemData.title
+                        color: Theme.secondaryColor
+                        font.pixelSize: Theme.fontSizeExtraSmall * (configFontScale.value / 100.0)
+                        text: Format.formatDate(itemData.date, Formatter.Timepoint)
+                    }
 
-                        MouseArea {
-                            enabled: itemData.link !== ""
-                            anchors.fill: parent
+                    Item {
+                        width: 1
+                        height: Theme.paddingMedium
+                    }
+
+                    Button {
+                        id: loadImagesButton
+                        visible: htmlFilter.imageProxy !== "" &&
+                                 htmlFilter.images.length > 0
+                        text: qsTr("Load images")
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        onClicked: htmlFilter.imageProxy = ""
+                    }
+
+                    Item { width: 1; height: Theme.paddingMedium; visible: loadImagesButton.visible }
+
+                    RescalingRichText {
+                        id: body
+
+                        active: page.status === PageStatus.Active
+
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.leftMargin: _pageMargin
+                        anchors.rightMargin: _pageMargin
+
+                        color: Theme.primaryColor
+                        fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
+                        text: htmlFilter.htmlFiltered
+
+                        onLinkActivated: {
+                            var props = {
+                                "url": link
+                            }
+                            pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
+                                           props);
+                        }
+
+                    }
+
+                    Item {
+                        width: 1
+                        height: Theme.paddingLarge
+                    }
+
+                    Row {
+                        visible: ! urlLoader.loading &&
+                                 ! htmlFilter.busy &&
+                                 itemData &&
+                                 itemData.link !== ""
+                        width: column.width
+                        height: Theme.itemSizeLarge
+
+                        ListItem {
+                            id: fullArticleButton
+                            width: parent.width / 2
+                            contentHeight: parent.height
+
+                            property bool _isFull: urlLoader.source != ""
+
+                            Image {
+                                id: fullArticleIcon
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: _pageMargin
+                                source: fullArticleButton._isFull ? "image://theme/icon-m-up"
+                                                                  : "image://theme/icon-m-down"
+                            }
+
+                            Label {
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: fullArticleIcon.right
+                                anchors.leftMargin: Theme.paddingMedium
+                                text: fullArticleButton._isFull ? qsTr("Short article")
+                                                                : qsTr("Full article")
+                            }
+
+                            onClicked: {
+                                if (_isFull)
+                                {
+                                    urlLoader.source = "";
+                                }
+                                else
+                                {
+                                    urlLoader.source = itemData.link;
+                                }
+                            }
+                        }
+
+                        ListItem {
+                            width: parent.width / 2
+                            contentHeight: parent.height
+
+                            Image {
+                                id: webIcon
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: _pageMargin
+                                source: "image://theme/icon-m-region"
+                            }
+
+                            Label {
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: webIcon.right
+                                anchors.leftMargin: Theme.paddingMedium
+                                text: qsTr("Website")
+                            }
+
                             onClicked: {
                                 var props = {
                                     "url": itemData.link
                                 }
-                                pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
-                                               props);
+                                pageStack.push(Qt.resolvedUrl("WebPage.qml"), props);
                             }
                         }
                     }
 
-                    Image {
-                        id: shelveIcon
-                        anchors.right: parent.right
-                        source: itemData.shelved ? "image://theme/icon-l-favorite"
-                                                 : "image://theme/icon-l-star"
-                        width: Theme.itemSizeSmall
-                        height: width
-
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: {
-                                shelveTimer.itemIndex = listview.currentIndex;
-                                shelveTimer.shelved = ! itemData.shelved;
-                                //newsBlendModel.setShelved(listview.currentIndex, ! itemData.shelved);
-                                itemData.shelved = ! itemData.shelved;
-                                shelveTimer.start();
-                            }
-                        }
-
-                        Timer {
-                            id: shelveTimer
-                            interval: 10
-
-                            property int itemIndex
-                            property bool shelved
-
-                            onTriggered: {
-                                newsBlendModel.setShelved(itemIndex, shelved);
-                            }
-                        }
-                    }
-
-                    IconButton {
-                        id: copyIcon
-                        anchors.right: shelveIcon.left
-                        icon.source: "image://theme/icon-m-clipboard"
-
-                        width: Theme.itemSizeSmall
-                        height: width
-
-                        onClicked: Clipboard.text = itemData.link
-                    }
-                }
-
-
-                Label {
-                    visible: itemData.mediaDuration > 0
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: _pageMargin
-                    anchors.rightMargin: _pageMargin
-                    horizontalAlignment: Text.AlignLeft
-                    color: Theme.highlightColor
-                    font.pixelSize: Theme.fontSizeExtraSmall * (configFontScale.value / 100.0)
-                    text: qsTr("(%1 seconds)").arg(itemData.mediaDuration)
-                }
-
-                Label {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: _pageMargin
-                    anchors.rightMargin: _pageMargin
-                    horizontalAlignment: Text.AlignLeft
-                    color: Theme.secondaryColor
-                    font.pixelSize: Theme.fontSizeExtraSmall * (configFontScale.value / 100.0)
-                    text: Format.formatDate(itemData.date, Formatter.Timepoint)
-                }
-
-                Item {
-                    width: 1
-                    height: Theme.paddingMedium
-                }
-
-                Button {
-                    id: loadImagesButton
-                    visible: htmlFilter.imageProxy !== "" &&
-                             htmlFilter.images.length > 0
-                    text: qsTr("Load images")
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    onClicked: htmlFilter.imageProxy = ""
-                }
-
-                Item { width: 1; height: Theme.paddingMedium; visible: loadImagesButton.visible }
-
-                RescalingRichText {
-                    id: body
-
-                    active: page.status === PageStatus.Active
-
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.leftMargin: _pageMargin
-                    anchors.rightMargin: _pageMargin
-
-                    color: Theme.primaryColor
-                    fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
-                    text: htmlFilter.htmlFiltered
-
-                    onLinkActivated: {
-                        var props = {
-                            "url": link
-                        }
-                        pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
-                                       props);
-                    }
-
-                }
-
-                Item {
-                    width: 1
-                    height: Theme.paddingLarge
-                }
-
-                Row {
-                    visible: ! urlLoader.loading &&
-                             ! htmlFilter.busy &&
-                             itemData &&
-                             itemData.link !== ""
-                    width: column.width
-                    height: Theme.itemSizeLarge
-
-                    ListItem {
-                        id: fullArticleButton
-                        width: parent.width / 2
-                        contentHeight: parent.height
-
-                        property bool _isFull: urlLoader.source != ""
-
-                        Image {
-                            id: fullArticleIcon
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.leftMargin: _pageMargin
-                            source: fullArticleButton._isFull ? "image://theme/icon-m-up"
-                                                              : "image://theme/icon-m-down"
-                        }
-
-                        Label {
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: fullArticleIcon.right
-                            anchors.leftMargin: Theme.paddingMedium
-                            text: fullArticleButton._isFull ? qsTr("Short article")
-                                                            : qsTr("Full article")
-                        }
-
-                        onClicked: {
-                            if (_isFull)
-                            {
-                                urlLoader.source = "";
-                            }
-                            else
-                            {
-                                urlLoader.source = itemData.link;
-                            }
-                        }
-                    }
-
-                    ListItem {
-                        width: parent.width / 2
-                        contentHeight: parent.height
-
-                        Image {
-                            id: webIcon
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: parent.left
-                            anchors.leftMargin: _pageMargin
-                            source: "image://theme/icon-m-region"
-                        }
-
-                        Label {
-                            anchors.verticalCenter: parent.verticalCenter
-                            anchors.left: webIcon.right
-                            anchors.leftMargin: Theme.paddingMedium
-                            text: qsTr("Website")
-                        }
-
-                        onClicked: {
-                            var props = {
-                                "url": itemData.link
-                            }
-                            pageStack.push(Qt.resolvedUrl("WebPage.qml"), props);
-                        }
-                    }
-                }
-
-                /*
+                    /*
             ListItem {
                 width: parent.width
 
@@ -589,30 +589,31 @@ Page {
             }
             */
 
-                Item {
-                    visible: enclosureRepeater.count > 0
-                    width: 1
-                    height: Theme.paddingLarge
-                }
-
-                SectionHeader {
-                    visible: enclosureRepeater.count > 0
-                    text: qsTr("Media")
-                }
-
-                Repeater {
-                    id: enclosureRepeater
-                    model: itemData.enclosures
-
-                    delegate: MediaItem {
-                        x: 2
-                        width: column.width - 2
-                        url: modelData.url
-                        mimeType: modelData.type
-                        length: modelData.length
+                    Item {
+                        visible: enclosureRepeater.count > 0
+                        width: 1
+                        height: Theme.paddingLarge
                     }
-                }//Repeater
 
+                    SectionHeader {
+                        visible: enclosureRepeater.count > 0
+                        text: qsTr("Media")
+                    }
+
+                    Repeater {
+                        id: enclosureRepeater
+                        model: itemData.enclosures
+
+                        delegate: MediaItem {
+                            x: 2
+                            width: column.width - 2
+                            url: modelData.url
+                            mimeType: modelData.type
+                            length: modelData.length
+                        }
+                    }//Repeater
+
+                }
             }
         }
         VerticalScrollDecorator {}
