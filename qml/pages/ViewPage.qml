@@ -22,11 +22,15 @@ Page {
                                                 : Theme.paddingLarge
 
     function previousItem() {
-        listview.currentIndex = listview.currentIndex - 1;
+        if (listview.currentIndex > 0) {
+            listview.currentIndex = listview.currentIndex - 1;
+        }
     }
 
     function nextItem() {
-        listview.currentIndex = listview.currentIndex + 1;
+        if (listview.currentIndex < listview.count - 1) {
+            listview.currentIndex = listview.currentIndex + 1;
+        }
     }
 
     function goToItem(idx) {
@@ -310,36 +314,38 @@ Page {
 
         SlideshowView {
             id: view
-            width: parent.width
             anchors.fill: parent
-            //height: childrenRect.height
-
+            anchors.top: parent.top
+            height: childrenRect.height
             onCurrentIndexChanged: {
                 //view.currentIndex
                 console.debug(view.currentIndex)
                 goToItem(view.currentIndex);
             }
-            onMovingChanged:  {
-                console.debug(contentFlickable.contentY)
-
+            onCurrentItemChanged: {
+                console.debug(parent.height)
+                console.debug(view.currentIndex)
             }
 
             model: listview.count
 
             delegate: Column {
                 id: column
+                anchors.top: parent.top
+                //anchors.bottom: parent.bottom
+                anchors.fill: parent
 
                 width: parent.width
                 height: childrenRect.height
 
                 Behavior on opacity {
-                    NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
+                //    NumberAnimation { duration: 100; easing.type: Easing.InOutQuad }
                 }
 
-                /*PageHeader {
-                id: pageHeader
-                title: feedName[itemData.source]
-            }*/
+                PageHeader {
+                    id: pageHeader
+                    title: feedName[itemData.source]
+                }
 
                 Item {
                     anchors.left: parent.left
@@ -609,6 +615,7 @@ Page {
 
             }
         }
+        VerticalScrollDecorator {}
         ScrollDecorator { color: palette.primaryColor }
     }
 
