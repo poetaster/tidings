@@ -20,6 +20,7 @@ Page {
 
     property real _pageMargin: (width > height) ? Theme.paddingLarge * 2
                                                 : Theme.paddingLarge
+    property int bodyHeight
 
     function previousItem() {
         if (listview.currentIndex > 0) {
@@ -313,16 +314,24 @@ Page {
         }
         Column {
             id:viewColumn
-            height: contentItem.childrenRect.height
+            height: contentItem.childrenRect.height + bodyHeight
+            onVisibleChildrenChanged: {
+               height:contentItem.childrenRect.heigh
+            }
             width:parent.width
             SlideshowView {
                 id: view
-                height: contentItem.childrenRect.height
+                height: contentItem.childrenRect.height + bodyHeight
                 onCurrentIndexChanged: {
                     goToItem(view.currentIndex);
                     console.debug(view.currentIndex)
-                    console.debug('height '+ column.body.height)
                 }
+                onVisibleChildrenChanged: {
+                    //height: contentItem.childrenRect.heigh
+                    console.debug('Body height '+ bodyHeight)
+                    console.debug('children height '+ contentItem.childrenRect.height)
+                }
+
                 /*
                 onCurrentItemChanged: {
                     console.debug(view.currentIndex)
@@ -334,10 +343,19 @@ Page {
                 delegate: Column {
                     id: column
                     anchors.fill: parent
+                    //anchors.left: parent.left
+                    //anchors.right: parent.right
 
                     width: parent.width
-                    height: childrenRect.height
+                    height: childrenRect.height + body.height
 
+                   onChildrenChanged: {
+                      // console.debug("c height: " + column.height)
+                   }
+                   onChildrenRectChanged: {
+                       //page.bodyHeight = body.height
+                      //console.debug("Rescaling Height: " + body.height)
+                   }
                     Behavior on opacity {
                         NumberAnimation { duration: 100; easing.type: Easing.InOutQuad }
                     }
@@ -475,6 +493,9 @@ Page {
                         color: Theme.primaryColor
                         fontSize: Theme.fontSizeSmall * (configFontScale.value / 100.0)
                         text: htmlFilter.htmlFiltered
+                        onYChanged: {
+                            page.bodyHeight = body.height
+                        }
 
                         onLinkActivated: {
                             var props = {
