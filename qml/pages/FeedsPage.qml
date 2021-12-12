@@ -18,9 +18,9 @@ Page {
         }
 
         // Uncomment to debug page changes.
-        // if (status == PageStatus.Inactive) {
-        //     console.log("FeedsPage inactive: status =", status, "depth =", pageStack.depth, "current = ", pageStack.currentPage.objectName)
-        // }
+         if (status == PageStatus.Inactive) {
+             console.log("FeedsPage inactive: status =", status, "depth =", pageStack.depth, "current = ", pageStack.currentPage.objectName)
+         }
     }
 
     Connections {

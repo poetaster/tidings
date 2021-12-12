@@ -36,6 +36,7 @@ Dialog {
             viewLoader.sourceComponent = undefined
             listview.currentIndex += 1
         }
+       console.debug("proxy says viewpage active: " + ViewPage.status)
     }
 
     Component {

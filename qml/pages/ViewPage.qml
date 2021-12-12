@@ -23,11 +23,31 @@ Item {
                                                 : Theme.paddingLarge
 
     function previousItem() {
-        listview.currentIndex = listview.currentIndex - 1;
+        console.debug("viewpage says PageStatus: " + PageStatus.Active)
+        console.debug("viewpage says index: " + _currentIndex)
+        console.debug("viewpage says list: " + listview.currentIndex)
+        //listview.currentIndex = listview.currentIndex - 1;
+        //coverIncTimer.itemIndex = listview.currentIndex - 1;
+        //coverIncTimer.start()
+        goToItem(_previousOfFeed);
     }
 
     function nextItem() {
-        listview.currentIndex = listview.currentIndex + 1;
+        console.debug("viewpage says PageStatus: " + PageStatus.Active)
+        console.debug("viewpage says index: " + _currentIndex)
+        console.debug("viewpage says list: " + listview.currentIndex)
+        //listview.currentIndex = listview.currentIndex + 1;
+        //coverIncTimer.itemIndex = listview.currentIndex + 1;
+        //coverIncTimer.start()a
+        goToItem(_nextOfFeed);
+    }
+    Timer {
+        id: coverIncTimer
+        interval: 20
+        property int itemIndex
+        onTriggered: {
+            goToItem(itemIndex);
+        }
     }
 
     function goToItem(idx) {

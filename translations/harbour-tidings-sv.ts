@@ -429,77 +429,77 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="73"/>
+        <location filename="../qml/pages/ViewPage.qml" line="93"/>
         <source>Audio</source>
         <translation>Ljud</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="75"/>
+        <location filename="../qml/pages/ViewPage.qml" line="95"/>
         <source>Image</source>
         <translation>Bild</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="77"/>
+        <location filename="../qml/pages/ViewPage.qml" line="97"/>
         <source>Video</source>
         <translation>Film</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="79"/>
+        <location filename="../qml/pages/ViewPage.qml" line="99"/>
         <source>PDF document</source>
         <translation>PDF-dokument</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="194"/>
+        <location filename="../qml/pages/ViewPage.qml" line="214"/>
         <source>Resources</source>
         <translation>Resurser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="200"/>
+        <location filename="../qml/pages/ViewPage.qml" line="220"/>
         <source>Previous</source>
         <translation>Föregående</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="201"/>
+        <location filename="../qml/pages/ViewPage.qml" line="221"/>
         <source>Already at the beginning</source>
         <translation>Redan vid början</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="231"/>
+        <location filename="../qml/pages/ViewPage.qml" line="251"/>
         <source>Next</source>
         <translation>Nästa</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="232"/>
+        <location filename="../qml/pages/ViewPage.qml" line="252"/>
         <source>Already at the end</source>
         <translation>Redan vid slutet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="362"/>
+        <location filename="../qml/pages/ViewPage.qml" line="382"/>
         <source>(%1 seconds)</source>
         <translation>(%1 sekunder)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="385"/>
+        <location filename="../qml/pages/ViewPage.qml" line="405"/>
         <source>Load images</source>
         <translation>Läs in bilder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="449"/>
+        <location filename="../qml/pages/ViewPage.qml" line="469"/>
         <source>Short article</source>
         <translation>Kort artikel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="481"/>
+        <location filename="../qml/pages/ViewPage.qml" line="501"/>
         <source>Website</source>
         <translation>Webbsida</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="450"/>
+        <location filename="../qml/pages/ViewPage.qml" line="470"/>
         <source>Full article</source>
         <translation>Hel artikel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="527"/>
+        <location filename="../qml/pages/ViewPage.qml" line="547"/>
         <source>Media</source>
         <translation>Media</translation>
     </message>
