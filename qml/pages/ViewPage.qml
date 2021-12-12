@@ -316,7 +316,7 @@ Page {
             id:viewColumn
             height: contentItem.childrenRect.height + bodyHeight
             onVisibleChildrenChanged: {
-               height:contentItem.childrenRect.heigh
+               height:contentItem.childrenRect.height
             }
             width:parent.width
             SlideshowView {
