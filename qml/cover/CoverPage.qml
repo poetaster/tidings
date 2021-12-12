@@ -280,6 +280,7 @@ CoverBackground {
         CoverAction {
             iconSource: "image://theme/icon-cover-previous"
             onTriggered: {
+                console.debug("cover says: " + ViewPage._currentIndex)
                 coverAdaptor.previousItem();
             }
         }
