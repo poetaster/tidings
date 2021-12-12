@@ -66,6 +66,7 @@ OTHER_FILES += qml/harbour-tidings.qml \
 
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-tidings-cs.ts
+TRANSLATIONS += translations/harbour-tidings-cs_CZ.ts
 TRANSLATIONS += translations/harbour-tidings-de_DE.ts
 TRANSLATIONS += translations/harbour-tidings-fr_FR.ts
 TRANSLATIONS += translations/harbour-tidings-ru_RU.ts
@@ -92,4 +93,5 @@ SAILFISHAPP_ICONS += 86x86 108x108 128x128 172x172
 DISTFILES += icons/86x86/harbour-tidings.png \
     icons/108x108/harbour-tidings.png \
     icons/128x128/harbour-tidings.png \
-    icons/172x172/harbour-tidings.png
+    icons/172x172/harbour-tidings.png \
+    translations/harbour-tidings-cs_CZ.ts
