@@ -11,7 +11,7 @@ Page {
                                ? listview.currentItem.data
                                : null
 
-    property int _currentIndex: listview.currentIndex
+    property int _currentIndex: -1 //listview.currentIndex
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
 
@@ -24,18 +24,21 @@ Page {
 
     function previousItem() {
         if (listview.currentIndex > 0) {
-            listview.currentIndex = listview.currentIndex - 1;
+            listview.currentIndex = listview.currentIndex - 1
+            view.currentIndex = listview.currentIndex
         }
     }
 
     function nextItem() {
         if (listview.currentIndex < listview.count - 1) {
-            listview.currentIndex = listview.currentIndex + 1;
+            listview.currentIndex = listview.currentIndex + 1
+            view.currentIndex = listview.currentIndex
         }
     }
 
     function goToItem(idx) {
-        listview.currentIndex = idx;
+        listview.currentIndex = idx
+        view.currentIndex = idx
     }
 
     /* Returns the filename of the given URL.
@@ -191,23 +194,7 @@ Page {
         id: contentFlickable
 
         anchors.fill: parent
-        contentHeight:view.height * 2
-        /*
-        onFlickStarted: {
-            console.debug(PageStatus.Active);
-        }
-        onMovementStarted: {
-            console.debug(Drag.XAxis)
-            console.debug(Drag.YAxis)
-        }
-        onDraggingHorizontallyChanged:  {
-            console.debug(Flickable.flickingHorizontally)
-        }
-        */
-        //THIS is a hammer. but less so than the hammer that hung here before.
-        /*onDragEnded: {
-            if(page._pullDownActivated) forwardNow();
-        }*/
+        contentHeight:  contentItem.childrenRect.height
 
         PullDownMenu {
             id: pulleyDown
@@ -223,22 +210,6 @@ Page {
                 }
             }
 
-            /* MenuItem {
-                enabled: _previousOfFeed !== -1
-                text: "<" + feedName[itemData.source] + ">"
-
-                onClicked: {
-                    function f()
-                    {
-                        goToItem(_previousOfFeed);
-                        contentFlickable.contentY = 0;
-                        column.opacity = 1;
-                    }
-                    pulleyDown._closeAction = f;
-                    column.opacity = 0;
-                    page._pullDownActivated = true;
-                }
-            }*/
             MenuItem {
                 enabled: listview.currentIndex > 0
                 text: enabled ? qsTr("Previous")
@@ -312,24 +283,22 @@ Page {
                 onClicked: pageStack.push(Qt.resolvedUrl("ResourcesPage.qml"), { "resources": resources })
             }
         }
-        Column {
-            id:viewColumn
-            height: contentItem.childrenRect.height + bodyHeight
-            onVisibleChildrenChanged: {
-               height:contentItem.childrenRect.height
-            }
-            width:parent.width
-            SlideshowView {
+
+        SlideshowView {
                 id: view
-                height: contentItem.childrenRect.height + bodyHeight
+                height: contentItem.childrenRect.height
                 onCurrentIndexChanged: {
                     goToItem(view.currentIndex);
                     console.debug(view.currentIndex)
+
                 }
                 onVisibleChildrenChanged: {
-                    //height: contentItem.childrenRect.heigh
+                    //height: contentItem.childrenRect.height
                     console.debug('Body height '+ bodyHeight)
                     console.debug('children height '+ contentItem.childrenRect.height)
+                    if (page.bodyHeight > contentItem.childrenRect.height) {
+                        this.height = bodyHeight
+                    }
                 }
 
                 /*
@@ -343,18 +312,16 @@ Page {
                 delegate: Column {
                     id: column
                     anchors.fill: parent
-                    //anchors.left: parent.left
-                    //anchors.right: parent.right
 
                     width: parent.width
-                    height: childrenRect.height + body.height
+                    height: contentItem.childrenRect.height
 
                    onChildrenChanged: {
                       // console.debug("c height: " + column.height)
                    }
                    onChildrenRectChanged: {
                        //page.bodyHeight = body.height
-                      //console.debug("Rescaling Height: " + body.height)
+
                    }
                     Behavior on opacity {
                         NumberAnimation { duration: 100; easing.type: Easing.InOutQuad }
@@ -495,6 +462,7 @@ Page {
                         text: htmlFilter.htmlFiltered
                         onYChanged: {
                             page.bodyHeight = body.height
+                            console.debug("Rescaling Height: " + body.height)
                         }
 
                         onLinkActivated: {
@@ -636,7 +604,6 @@ Page {
 
                 }
             }
-        }
         VerticalScrollDecorator {}
         ScrollDecorator { color: palette.primaryColor }
     }
