@@ -6,6 +6,7 @@ Page {
     id: page
     objectName: "ViewPage"
 
+    property bool debug: true
     property GridView listview
     property variant itemData: listview.currentItem !== null
                                ? listview.currentItem.data
@@ -289,13 +290,15 @@ Page {
                 height: contentItem.childrenRect.height
                 onCurrentIndexChanged: {
                     goToItem(view.currentIndex);
-                    console.debug(view.currentIndex)
+                    // reset origin
+                    contentFlickable.contentY = 0;
+                    if (debug) console.debug(view.currentIndex)
 
                 }
                 onVisibleChildrenChanged: {
                     //height: contentItem.childrenRect.height
-                    console.debug('Body height '+ bodyHeight)
-                    console.debug('children height '+ contentItem.childrenRect.height)
+                    if (debug) console.debug('Body height '+ bodyHeight)
+                    if (debug) console.debug('children height '+ contentItem.childrenRect.height)
                     if (page.bodyHeight > contentItem.childrenRect.height) {
                         view.height = page.bodyHeight + contentItem.childrenRect.height
                     }
@@ -303,8 +306,8 @@ Page {
 
                 /*
                 onCurrentItemChanged: {
-                    console.debug(view.currentIndex)
-                    console.debug(body.height)
+                    if (debug) console.debug(view.currentIndex)
+                    if (debug) console.debug(body.height)
                 }*/
 
                 model: listview.count
@@ -462,11 +465,11 @@ Page {
                         text: htmlFilter.htmlFiltered
                         onYChanged: {
                             page.bodyHeight = body.height
-                            console.debug("Rescaling Height: " + body.height)
+                            if (debug) console.debug("Rescaling Height: " + body.height)
                         }
                         Component.onCompleted: {
                             page.bodyHeight = body.height
-                            console.debug("Rescaling Height completed: " + body.height)
+                            if (debug) console.debug("Rescaling Height completed: " + body.height)
                         }
 
                         onLinkActivated: {
