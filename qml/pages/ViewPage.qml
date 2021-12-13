@@ -40,6 +40,7 @@ Page {
     function goToItem(idx) {
         listview.currentIndex = idx
         view.currentIndex = idx
+        contentFlickable.contentY = 0;
     }
 
     /* Returns the filename of the given URL.
@@ -220,7 +221,6 @@ Page {
                     function f()
                     {
                         goToItem(listview.currentIndex - 1);
-                        contentFlickable.contentY = 0;
                         column.opacity = 1;
                     }
                     pulleyDown._closeAction = f;
@@ -255,7 +255,6 @@ Page {
                     function f()
                     {
                         goToItem(listview.currentIndex + 1);
-                        contentFlickable.contentY = 0;
                         column.opacity = 1;
                     }
                     pulleyUp._closeAction = f;
@@ -291,7 +290,7 @@ Page {
                 onCurrentIndexChanged: {
                     goToItem(view.currentIndex);
                     // reset origin
-                    contentFlickable.contentY = 0;
+
                     if (debug) console.debug(view.currentIndex)
 
                 }
