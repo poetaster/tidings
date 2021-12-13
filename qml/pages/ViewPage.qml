@@ -297,7 +297,7 @@ Page {
                     console.debug('Body height '+ bodyHeight)
                     console.debug('children height '+ contentItem.childrenRect.height)
                     if (page.bodyHeight > contentItem.childrenRect.height) {
-                        this.height = bodyHeight
+                        view.height = page.bodyHeight + contentItem.childrenRect.height
                     }
                 }
 
@@ -317,7 +317,7 @@ Page {
                     height: contentItem.childrenRect.height
 
                    onChildrenChanged: {
-                      // console.debug("c height: " + column.height)
+                       console.debug("c height: " + column.height)
                    }
                    onChildrenRectChanged: {
                        //page.bodyHeight = body.height
@@ -463,6 +463,10 @@ Page {
                         onYChanged: {
                             page.bodyHeight = body.height
                             console.debug("Rescaling Height: " + body.height)
+                        }
+                        Component.onCompleted: {
+                            page.bodyHeight = body.height
+                            console.debug("Rescaling Height completed: " + body.height)
                         }
 
                         onLinkActivated: {

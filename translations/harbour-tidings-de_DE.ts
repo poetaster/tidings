@@ -449,57 +449,57 @@
         <translation type="unfinished">PDF-Dokument</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="247"/>
+        <location filename="../qml/pages/ViewPage.qml" line="216"/>
         <source>Previous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="248"/>
+        <location filename="../qml/pages/ViewPage.qml" line="217"/>
         <source>Already at the beginning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="282"/>
+        <location filename="../qml/pages/ViewPage.qml" line="251"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="283"/>
+        <location filename="../qml/pages/ViewPage.qml" line="252"/>
         <source>Already at the end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="314"/>
+        <location filename="../qml/pages/ViewPage.qml" line="283"/>
         <source>Resources</source>
         <translation type="unfinished">Ressourcen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="455"/>
+        <location filename="../qml/pages/ViewPage.qml" line="421"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="478"/>
+        <location filename="../qml/pages/ViewPage.qml" line="444"/>
         <source>Load images</source>
         <translation type="unfinished">Bilder laden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="545"/>
+        <location filename="../qml/pages/ViewPage.qml" line="516"/>
         <source>Short article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="546"/>
+        <location filename="../qml/pages/ViewPage.qml" line="517"/>
         <source>Full article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="577"/>
+        <location filename="../qml/pages/ViewPage.qml" line="548"/>
         <source>Website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="623"/>
+        <location filename="../qml/pages/ViewPage.qml" line="594"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>
