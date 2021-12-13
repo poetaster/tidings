@@ -255,6 +255,7 @@ Page {
                     function f()
                     {
                         goToItem(listview.currentIndex + 1);
+                        contentFlickable.contentY = 0;
                         column.opacity = 1;
                     }
                     pulleyUp._closeAction = f;
@@ -290,7 +291,7 @@ Page {
                 onCurrentIndexChanged: {
                     goToItem(view.currentIndex);
                     // reset origin
-
+                    contentFlickable.contentY = 0;
                     if (debug) console.debug(view.currentIndex)
 
                 }
@@ -298,9 +299,10 @@ Page {
                     //height: contentItem.childrenRect.height
                     if (debug) console.debug('Body height '+ bodyHeight)
                     if (debug) console.debug('children height '+ contentItem.childrenRect.height)
-                    if (page.bodyHeight > contentItem.childrenRect.height) {
-                        view.height = page.bodyHeight + contentItem.childrenRect.height
+                    if (view.height < page.bodyHeight) {
+                        view.height = page.bodyHeight + 300 //contentItem.childrenRect.height
                     }
+                    if (debug) console.debug('view height '+ view.height)
                 }
 
                 /*
