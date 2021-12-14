@@ -21,12 +21,12 @@
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="64"/>
         <source>Copyright © 2013 - 2020 Martin Grimme </source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="65"/>
         <source> © 2021 Mark Washeim</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/AboutPage.qml" line="79"/>
@@ -76,12 +76,12 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="112"/>
         <source>Show all entries</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="112"/>
         <source>Only show unread</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="117"/>
@@ -98,12 +98,12 @@
         <location filename="../qml/pages/FeedsPage.qml" line="249"/>
         <location filename="../qml/pages/FeedsPage.qml" line="252"/>
         <source>No entries</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="251"/>
         <source>No unread entries</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="257"/>
@@ -113,7 +113,7 @@
     <message>
         <location filename="../qml/pages/FeedsPage.qml" line="258"/>
         <source>Pull down to refresh.</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -236,12 +236,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="45"/>
         <source>Enable &apos;All read &amp; Refresh all&apos;</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="46"/>
         <source>Whether to show or hide the top menu item for &apos;All read &amp; Refresh all&apos;</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="63"/>
@@ -418,7 +418,7 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="254"/>
         <source>All read &amp; Refresh all</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="270"/>
@@ -429,79 +429,79 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="80"/>
-        <source>Audio</source>
-        <translation ></translation>
-    </message>
-    <message>
         <location filename="../qml/pages/ViewPage.qml" line="82"/>
-        <source>Image</source>
-        <translation >Imagen</translation>
+        <source>Audio</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="84"/>
-        <source>Video</source>
-        <translation >Vídeo</translation>
+        <source>Image</source>
+        <translation>Imagen</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="86"/>
-        <source>PDF document</source>
-        <translation >Documento PDF</translation>
+        <source>Video</source>
+        <translation>Vídeo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="216"/>
-        <source>Previous</source>
-        <translation ></translation>
+        <location filename="../qml/pages/ViewPage.qml" line="88"/>
+        <source>PDF document</source>
+        <translation>Documento PDF</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="217"/>
+        <source>Previous</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="218"/>
         <source>Already at the beginning</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="251"/>
         <source>Next</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="252"/>
         <source>Already at the end</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="283"/>
         <source>Resources</source>
-        <translation >Recursos</translation>
+        <translation>Recursos</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="421"/>
+        <location filename="../qml/pages/ViewPage.qml" line="424"/>
         <source>(%1 seconds)</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="444"/>
+        <location filename="../qml/pages/ViewPage.qml" line="447"/>
         <source>Load images</source>
-        <translation >Cargar imagen</translation>
+        <translation>Cargar imagen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="516"/>
+        <location filename="../qml/pages/ViewPage.qml" line="519"/>
         <source>Short article</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="517"/>
+        <location filename="../qml/pages/ViewPage.qml" line="520"/>
         <source>Full article</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="548"/>
+        <location filename="../qml/pages/ViewPage.qml" line="551"/>
         <source>Website</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="594"/>
+        <location filename="../qml/pages/ViewPage.qml" line="597"/>
         <source>Media</source>
-        <translation ></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
