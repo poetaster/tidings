@@ -321,7 +321,7 @@ Page {
                     height: contentItem.childrenRect.height
 
                    onChildrenChanged: {
-                       console.debug("c height: " + column.height)
+                      if(debug) console.debug("c height: " + column.height)
                    }
                    onChildrenRectChanged: {
                        //page.bodyHeight = body.height

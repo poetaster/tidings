@@ -11,6 +11,9 @@ TARGET = harbour-tidings
 CONFIG += sailfishapp
 QT += concurrent sql xml
 
+#QT_LOGGING_RULES="*.debug=false;driver.usb.debug=true"
+CONFIG(release, debug|release):DEFINES += QT_NO_DEBUG_OUTPUT
+
 SOURCES += \
     src/harbour-tidings.cpp \
     src/feedloader.cpp \
