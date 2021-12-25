@@ -273,9 +273,9 @@ CoverBackground {
     // [previous] and [next]
     CoverActionList {
         enabled: ! coverAdaptor.busy &&
-                 coverAdaptor.currentPage === "ViewPage" //&&
-                 //coverAdaptor.hasPrevious &&
-                 //coverAdaptor.hasNext
+                 coverAdaptor.currentPage === "ViewPage" &&
+                 coverAdaptor.hasPrevious &&
+                 coverAdaptor.hasNext
 
         CoverAction {
             iconSource: "image://theme/icon-cover-previous"
@@ -292,7 +292,7 @@ CoverBackground {
         }
     }
 
-    /* [previous] only
+    /* [previous] only */
     CoverActionList {
         enabled: ! coverAdaptor.busy &&
                  coverAdaptor.currentPage === "ViewPage" &&
@@ -307,7 +307,7 @@ CoverBackground {
         }
     }
 
-     [next] only
+    // [next] only
     CoverActionList {
         enabled: ! coverAdaptor.busy &&
                  coverAdaptor.currentPage === "ViewPage" &&
@@ -320,7 +320,7 @@ CoverBackground {
                 coverAdaptor.nextItem();
             }
         }
-    }*/
+    }
 
     // [abort] while loading
     CoverActionList {

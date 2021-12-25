@@ -10,7 +10,7 @@ import Sailfish.Silica 1.0
 Item {
     id: root
 
-    property bool debug: true
+    property bool debug: false
     property bool active: true
     property string text
     property color color
