@@ -169,39 +169,39 @@
 <context>
     <name>NewsBlendModel</name>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="42"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="43"/>
         <source>Latest first</source>
         <translation>Nejdříve nejnovější</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="48"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="49"/>
         <source>Oldest first</source>
         <translation>Nejdříve nejstarší</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="54"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="55"/>
         <source>Feed, then latest first</source>
         <translation>Feed, nejnovější</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="60"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="61"/>
         <source>Feed, then oldest first</source>
         <translation>Feed, nejstarší</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="66"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="67"/>
         <source>Current feed only, latest first</source>
         <translation>Jen aktuální feed,nejnovější</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="72"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="73"/>
         <source>Current feed only, oldest first</source>
         <translation>Jen aktuální feed, nejstarší</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="295"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="301"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="305"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="296"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="302"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="306"/>
         <source>Error with %1:
 %2</source>
         <translation>Chyba %1:
@@ -264,32 +264,42 @@
         <translation>Pokud je povoleno, každý článek feedu je tónován barvou feedu.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="118"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="99"/>
+        <source>Slideshow View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="100"/>
+        <source>If enabled, the Article/Item view is a flickable slideshow.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="136"/>
         <source>Font scale:</source>
         <translation>Velikost písma:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="139"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="157"/>
         <source>Apply font scale to web view</source>
         <translation>Použít velikost písma na webové zobrazení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="140"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="158"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
         <translation>Pokud je povoleno, je použita nastavená velikost i webovému zobrazení.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="152"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="170"/>
         <source>Show hints</source>
         <translation>Zobrazovat tipy</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="153"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="171"/>
         <source>If enabled, hints will guide you using the application.</source>
         <translation>Pokud je povoleno, budou vás tipy provázet použitím aplikace.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="109"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="127"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
         <translation>Toto nastavení mění měřítko písma v zobrazení feedu.</translation>
     </message>
@@ -429,77 +439,77 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="82"/>
+        <location filename="../qml/pages/ViewPage.qml" line="83"/>
         <source>Audio</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="84"/>
+        <location filename="../qml/pages/ViewPage.qml" line="85"/>
         <source>Image</source>
         <translation>Obrázek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="86"/>
+        <location filename="../qml/pages/ViewPage.qml" line="87"/>
         <source>Video</source>
         <translation>Video</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="88"/>
+        <location filename="../qml/pages/ViewPage.qml" line="89"/>
         <source>PDF document</source>
         <translation>PDF dokument</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="217"/>
+        <location filename="../qml/pages/ViewPage.qml" line="219"/>
         <source>Previous</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="218"/>
+        <location filename="../qml/pages/ViewPage.qml" line="220"/>
         <source>Already at the beginning</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="251"/>
+        <location filename="../qml/pages/ViewPage.qml" line="253"/>
         <source>Next</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="252"/>
+        <location filename="../qml/pages/ViewPage.qml" line="254"/>
         <source>Already at the end</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="283"/>
+        <location filename="../qml/pages/ViewPage.qml" line="285"/>
         <source>Resources</source>
         <translation>Zdroje</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="424"/>
+        <location filename="../qml/pages/ViewPage.qml" line="426"/>
         <source>(%1 seconds)</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="447"/>
+        <location filename="../qml/pages/ViewPage.qml" line="449"/>
         <source>Load images</source>
         <translation>Načíst obrázky</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="519"/>
+        <location filename="../qml/pages/ViewPage.qml" line="521"/>
         <source>Short article</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="520"/>
+        <location filename="../qml/pages/ViewPage.qml" line="522"/>
         <source>Full article</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="551"/>
+        <location filename="../qml/pages/ViewPage.qml" line="553"/>
         <source>Website</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="597"/>
+        <location filename="../qml/pages/ViewPage.qml" line="599"/>
         <source>Media</source>
         <translation></translation>
     </message>
