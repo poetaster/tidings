@@ -11,8 +11,9 @@ Page {
     property variant itemData: listview.currentItem !== null
                                ? listview.currentItem.data
                                : null
+    property int index: -1
+    property int _currentIndex: index //listview.currentIndex
 
-    property int _currentIndex: -1 //listview.currentIndex
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
 
@@ -94,6 +95,7 @@ Page {
     allowedOrientations: Orientation.All
 
     Component.onCompleted: {
+        view.currentIndex = _currentIndex
         navigationState.openedItem(listview.currentIndex);
         if (! itemData.read && ! itemData.shelved) {
             newsBlendModel.setRead(listview.currentIndex, true);
