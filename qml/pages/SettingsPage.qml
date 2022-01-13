@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
-
+    property bool debug: false
     allowedOrientations: Orientation.All
 
     SilicaFlickable {
@@ -94,6 +94,24 @@ Page {
                 height: Theme.paddingLarge
             }
 
+            TextSwitch {
+                width: parent.width
+                text: qsTr("Slideshow View")
+                description: qsTr("If enabled, the Article/Item view is a flickable slideshow.")
+                automaticCheck: false
+                checked: configSlideshowItems.booleanValue
+
+                onClicked: {
+                   configSlideshowItems.value =
+                           configSlideshowItems.booleanValue ? "0" : "1";
+                }
+            }
+
+            Item {
+                width: 1
+                height: Theme.paddingLarge
+            }
+
             ComboBox {
                 id: fontCombo
                 property variant _scales: [50, 75, 100, 125, 150, 200, 250, 300]
@@ -130,7 +148,7 @@ Page {
 
                 onCurrentIndexChanged: {
                     configFontScale.value = _scales[currentIndex];
-                    console.log("config " + configFontScale.value);
+                    if(debug) console.log("config " + configFontScale.value);
                 }
             }
 
