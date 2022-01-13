@@ -25,6 +25,28 @@
 #include "newsblendmodel.h"
 #include "urlloader.h"
 
+
+void migrateLocalStorage()
+{
+    // The new location of the LocalStorage database
+    QDir newDbDir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/de.poetaster/harbour-tidings/");
+
+    if(newDbDir.exists())
+        return;
+
+    newDbDir.mkpath(newDbDir.path());
+
+    QString pathOld = "/harbour-tidings/harbour-tidings/";
+    QString pathNew = "/de.poetaster/harbour-tidings/";
+
+    // The old LocalStorage database
+    QFile oldDb(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +  pathOld + "database.sqlite");
+    oldDb.copy(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +  pathNew + "database.sqlite");
+    // proof of concept you can just move.
+    //oldDb.rename(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +  pathNew + dbname + ".sqlite");
+
+}
+
 /* Clears the web cache, because Qt 5.2 WebView chokes on caches from
  * older Qt versions.
  */
@@ -76,6 +98,12 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 
     clearWebCache();
+
+    app->setOrganizationDomain("de.poetaster");
+    app->setOrganizationName("de.poetaster"); // needed for Sailjail
+    app->setApplicationName("harbour-tidings");
+
+    migrateLocalStorage();
 
     QTranslator *appTranslator = new QTranslator;
     appTranslator->load("harbour-tidings-" + QLocale::system().name(), SailfishApp::pathTo("translations").path());
