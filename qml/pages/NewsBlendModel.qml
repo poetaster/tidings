@@ -6,6 +6,7 @@ import harbour.tidings 1.0
 /* List model that blends various feed models together.
  */
 NewsModel {
+    property bool debug: false
     id: listModel
 
     sortMode: feedSorter.sortMode
@@ -103,19 +104,19 @@ NewsModel {
             switch (type)
             {
             case FeedLoader.RSS2:
-                console.log("RSS2 format detected");
+                if(debug) console.log("RSS2 format detected");
                 _rssModel.xml = data;
                 break;
             case FeedLoader.RDF:
-                console.log("RDF format defected");
+                if(debug) console.log("RDF format defected");
                 _rdfModel.xml = data;
                 break;
             case FeedLoader.Atom:
-                console.log("Atom format detected");
+                if(debug) console.log("Atom format detected");
                 _atomModel.xml = data;
                 break;
             case FeedLoader.OPML:
-                console.log("OPML format detected");
+                if(debug)console.log("OPML format detected");
                 _opmlModel.xml = data;
                 break;
             default:
@@ -165,7 +166,7 @@ NewsModel {
 
     function _handleParserResult(parser)
     {
-        console.log(parser.parserUrl + " status = " + parser.parserStatus);
+        if(debug) console.log(parser.parserUrl + " status = " + parser.parserStatus);
         if (parser.xml)
         {
             if (parser.parserStatus === XmlListModel.Error)
@@ -182,12 +183,12 @@ NewsModel {
 
     function _getFeedSorter(key)
     {
-        console.log("get feed sorter for " + key);
+        if(debug) console.log("get feed sorter for " + key);
         for (var i = 0; i < feedSorters.length; ++i)
         {
             if (feedSorters[i].key === key)
             {
-                console.log("using feed sorter " + feedSorters[i].key + " " + feedSorters[i].sortMode);
+                if(debug) console.log("using feed sorter " + feedSorters[i].key + " " + feedSorters[i].sortMode);
                 return feedSorters[i];
             }
         }
@@ -196,7 +197,7 @@ NewsModel {
 
     function _updateStats()
     {
-        console.log("updating stats");
+        if(debug) console.log("updating stats");
         feedInfo.setTotalCounts(totalStats());
         feedInfo.setUnreadCounts(unreadStats());
         feedInfoChanged();
@@ -267,7 +268,7 @@ NewsModel {
             var url = source.url;
             var name = source.name;
 
-            console.log("Now loading: " + name);
+            if(debug) console.log("Now loading: " + name);
             currentlyLoading = name;
             busy = true;
 
@@ -288,7 +289,7 @@ NewsModel {
     /* Handles errors.
      */
     function _handleError(error) {
-        console.log(error);
+        if(debug) console.log(error);
         var feedName = currentlyLoading + "";
         if (error.substring(0, 5) === "Host ") {
             // Host ... not found
@@ -359,7 +360,7 @@ NewsModel {
         for (var i = 0; i < sources.length; ++i)
         {
             feedInfo.setLoading(sources[i].url, true);
-            console.log("Source: " + sources[i].url);
+            if(debug) console.log("Source: " + sources[i].url);
             _sourcesQueue.push(sources[i]);
         }
 
@@ -489,7 +490,7 @@ NewsModel {
      */
     function itemBody(source, uid)
     {
-        console.log("itemBody: " + source + ", " + uid);
+        if(debug) console.log("itemBody: " + source + ", " + uid);
         var body = database.itemBody(source, uid);
         if (body !== "")
         {
@@ -511,7 +512,7 @@ NewsModel {
 
     function tidyCache()
     {
-        console.log("Clearing read items from cache");
+        if(debug) console.log("Clearing read items from cache");
         database.uncacheReadItems();
         database.forgetRead(3600 * 24 * 500);
     }
