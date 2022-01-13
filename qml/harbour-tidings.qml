@@ -161,8 +161,8 @@ ApplicationWindow
                 sourcesModel.addSource("Engadget",
                                        "https://www.engadget.com/rss.xml",
                                        "#ff0000");
-                sourcesModel.addSource("JollaUsers.com",
-                                       "https://jollausers.com/feed/",
+                sourcesModel.addSource("Hacker News",
+                                       "https://news.ycombinator.com/rss",
                                        "#ffa000");
             }
             newsBlendModel.tidyCache();
