@@ -239,7 +239,11 @@ Page {
                     "index": index,
                     "listview": listview
                 };
-                pageStack.push("ViewPage.qml", props);
+                if (configSlideshowItems.booleanValue) {
+                    pageStack.push("SlideShowViewPage.qml", props);
+                }else{
+                    pageStack.push("ViewPage.qml", props);
+                }
             }
         }
 
