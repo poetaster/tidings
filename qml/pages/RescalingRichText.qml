@@ -10,6 +10,7 @@ import Sailfish.Silica 1.0
 Item {
     id: root
 
+    property bool debug: false
     property bool active: true
     property string text
     property color color
@@ -83,7 +84,7 @@ Item {
             {
                 var contentWidth = Math.floor(paintedWidth);
                 scaling = Math.min(1, parent.width / (paintedWidth + 0.0));
-                console.log("scaling: " + scaling + " width: " + root.width);
+                if (debug) console.log("scaling: " + scaling + " width: " + root.width);
 
                 contentLabel.text = "";
                 contentLabel.width = root.width / scaling;
@@ -104,6 +105,10 @@ Item {
         wrapMode: Text.WrapAtWordBoundaryOrAnywhere
         textFormat: root.showSource ? Text.PlainText : Text.RichText
         smooth: true
+        Component.onCompleted: {
+          if (debug) console.log("scaling: " + scaling + " height: " + root.height);
+
+        }
 
         onLinkActivated: {
             root.linkActivated(link);
