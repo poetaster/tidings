@@ -292,7 +292,7 @@ CoverBackground {
         }
     }
 
-    // [previous] only
+    /* [previous] only */
     CoverActionList {
         enabled: ! coverAdaptor.busy &&
                  coverAdaptor.currentPage === "ViewPage" &&
