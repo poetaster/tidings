@@ -120,6 +120,12 @@ ApplicationWindow
     }
 
     ConfigValue {
+        id: configSlideshowItems
+        key: "slideshow-items"
+        value: "0"
+    }
+
+    ConfigValue {
         id: configTintedItems
         key: "feed-tinted"
         value: "1"
