@@ -37,21 +37,22 @@ void migrateLocalStorage()
     const QStringList dataPaths = QStandardPaths::standardLocations(
                 QStandardPaths::DataLocation);
 
-    qDebug() << "dataPaths " << dataPaths;
-    qDebug() << "generic" << QStandardPaths::GenericDataLocation;
-
     foreach (const QString& path, dataPaths) {
 
         qDebug() << "Looking for database in" << path;
 
         const QString defaultDatabase(QDir(path).absoluteFilePath("database.sqlite"));
-
         if (QFile(defaultDatabase).exists()) {
-            qDebug() << "found database " << defaultDatabase;
-            //copy to new location.
-            QFile(defaultDatabase).copy(
+
+            qDebug() << "found old database " << defaultDatabase;
+
+            //copy to new location if it's not there already.
+            if ( ! QFile(newDbDir.absoluteFilePath("database.sqlite")).exists() ) {
+                // the GenericDataLocation mechanism :) I should probably do this everywhere.
+                QFile(defaultDatabase).copy(
                         QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation )
                         + "/de.poetaster/harbour-tidings/database.sqlite" );
+            }
 
         }
     }
@@ -110,10 +111,12 @@ int main(int argc, char *argv[])
     clearWebCache();
 
     app->setApplicationName("harbour-tidings");
-    // first set too old OrgName
-    app->setOrganizationName("harbour-tidings"); // needed for Sailjail
 
+    // first set too old OrgName
+    // BEGIN HACK. It will need to be removed before we go Sailjail, proper
+    app->setOrganizationName("harbour-tidings");
     migrateLocalStorage();
+    // END HACK
 
     // now set too new OrgName
     app->setOrganizationDomain("de.poetaster");

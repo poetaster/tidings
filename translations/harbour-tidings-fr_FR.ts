@@ -352,32 +352,32 @@
         <translation type="unfinished">Ressources</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SlideShowViewPage.qml" line="426"/>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="423"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SlideShowViewPage.qml" line="449"/>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="444"/>
         <source>Load images</source>
         <translation type="unfinished">Charger les images</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SlideShowViewPage.qml" line="521"/>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="517"/>
         <source>Short article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SlideShowViewPage.qml" line="522"/>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="518"/>
         <source>Full article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SlideShowViewPage.qml" line="553"/>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="549"/>
         <source>Website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SlideShowViewPage.qml" line="599"/>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="594"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>

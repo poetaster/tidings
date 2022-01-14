@@ -10,7 +10,7 @@ import Sailfish.Silica 1.0
 Item {
     id: root
 
-    property bool debug: false
+    property bool debug: true
     property bool active: true
     property string text
     property color color
@@ -27,8 +27,7 @@ Item {
 
     signal linkActivated(string link)
 
-    height: contentLabel.sourceComponent !== null ? contentLabel.height * scaling
-                                                  : 0
+    height: contentLabel.sourceComponent !== null ? contentLabel.height * scaling : 0
     clip: true
 
     onWidthChanged: {
@@ -39,6 +38,7 @@ Item {
     }
 
     onTextChanged: {
+        if (debug) console.log("rescalingRT height: " + root.height);
         _scaledFor = 0;
         if (active)
         {
@@ -84,7 +84,7 @@ Item {
             {
                 var contentWidth = Math.floor(paintedWidth);
                 scaling = Math.min(1, parent.width / (paintedWidth + 0.0));
-                if (debug) console.log("scaling: " + scaling + " width: " + root.width);
+                if (debug) console.log("width changed: " + root.width);
 
                 contentLabel.text = "";
                 contentLabel.width = root.width / scaling;
