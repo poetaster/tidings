@@ -95,23 +95,23 @@
         <translation>Arrêter l&apos;audio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="249"/>
-        <location filename="../qml/pages/FeedsPage.qml" line="252"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="253"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="256"/>
         <source>No entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="251"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="255"/>
         <source>No unread entries</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="257"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="261"/>
         <source>Pull down to add feeds.</source>
         <translation>Tirer vers le bas pour ajouter un flux</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FeedsPage.qml" line="258"/>
+        <location filename="../qml/pages/FeedsPage.qml" line="262"/>
         <source>Pull down to refresh.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -169,39 +169,39 @@
 <context>
     <name>NewsBlendModel</name>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="42"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="43"/>
         <source>Latest first</source>
         <translation>Plus récents d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="48"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="49"/>
         <source>Oldest first</source>
         <translation>Plus anciens d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="54"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="55"/>
         <source>Feed, then latest first</source>
         <translation>Flux, puis les plus récents d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="60"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="61"/>
         <source>Feed, then oldest first</source>
         <translation>Flux, puis les plus anciens d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="66"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="67"/>
         <source>Current feed only, latest first</source>
         <translation>Seulement le flux choisi, les plus récents d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="72"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="73"/>
         <source>Current feed only, oldest first</source>
         <translation>Seulement le flux choisi, les plus anciens d&apos;abord</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="295"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="301"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="305"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="296"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="302"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="306"/>
         <source>Error with %1:
 %2</source>
         <translation>Erreur - %1 :
@@ -264,34 +264,122 @@
         <translation>Une fois activé, le fond des nouvelles est teintée de la couleur du flux.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="118"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="99"/>
+        <source>Slideshow View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="100"/>
+        <source>If enabled, the Article/Item view is a flickable slideshow.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="136"/>
         <source>Font scale:</source>
         <translation>Taille du texte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="139"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="157"/>
         <source>Apply font scale to web view</source>
         <translation>Appliquer la taille de police à la vue web</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="140"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="158"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
         <translation>Activé: les réglages de la taille de police s&apos;appliquent à la vue web.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="152"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="170"/>
         <source>Show hints</source>
         <translation>Montrer les astuces</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="153"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="171"/>
         <source>If enabled, hints will guide you using the application.</source>
         <translation>Activé: des astuces vous aideront à utiliser l&apos;application.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="109"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="127"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
         <translation>Ce réglage permet de changer la taille du texte dans l&apos;affichage des nouvelles</translation>
+    </message>
+</context>
+<context>
+    <name>SlideShowViewPage</name>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="83"/>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="85"/>
+        <source>Image</source>
+        <translation type="unfinished">Images</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="87"/>
+        <source>Video</source>
+        <translation type="unfinished">Vidéo</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="89"/>
+        <source>PDF document</source>
+        <translation type="unfinished">Document PDF</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="219"/>
+        <source>Previous</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="220"/>
+        <source>Already at the beginning</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="253"/>
+        <source>Next</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="254"/>
+        <source>Already at the end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="285"/>
+        <source>Resources</source>
+        <translation type="unfinished">Ressources</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="426"/>
+        <source>(%1 seconds)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="449"/>
+        <source>Load images</source>
+        <translation type="unfinished">Charger les images</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="521"/>
+        <source>Short article</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="522"/>
+        <source>Full article</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="553"/>
+        <source>Website</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="599"/>
+        <source>Media</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -515,87 +603,87 @@
 <context>
     <name>harbour-tidings</name>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="202"/>
+        <location filename="../qml/harbour-tidings.qml" line="208"/>
         <source>Feeds overview</source>
         <translation>Présentation des flux</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="203"/>
+        <location filename="../qml/harbour-tidings.qml" line="209"/>
         <source>- Shows all your subscribed feeds.</source>
         <translation>- Présente tous les flux que vous suivez.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="204"/>
+        <location filename="../qml/harbour-tidings.qml" line="210"/>
         <source>- Pull down to refresh all.</source>
         <translation>- Tirez vers le bas pour tout rafraîchir</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="205"/>
+        <location filename="../qml/harbour-tidings.qml" line="211"/>
         <source>- Tap and hold to add or manage feeds.</source>
         <translation>- Un appui long vous permet d&apos;ajouter ou de gérer les flux.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="210"/>
+        <location filename="../qml/harbour-tidings.qml" line="216"/>
         <source>Managing mode</source>
         <translation>Mode de gestion</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="211"/>
+        <location filename="../qml/harbour-tidings.qml" line="217"/>
         <source>- Tap on a feed to refresh.</source>
         <translation>- Tapez sur un flux pour le rafraïchir</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="212"/>
+        <location filename="../qml/harbour-tidings.qml" line="218"/>
         <source>- Tap on the edit button to edit.</source>
         <translation>- Tapez sur le bouton &quot;éditer&quot; pour éditer le flux.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="213"/>
+        <location filename="../qml/harbour-tidings.qml" line="219"/>
         <source>- Tap and hold on a feed to move position.</source>
         <translation>- Un appui long sur un flux permet de le déplacer.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="214"/>
+        <location filename="../qml/harbour-tidings.qml" line="220"/>
         <source>- Tap on empty space to leave managing mode.</source>
         <translation>- Tapez sur espace vide pour quitter le mode de gestion.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="219"/>
+        <location filename="../qml/harbour-tidings.qml" line="225"/>
         <source>Articles</source>
         <translation>Articles</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="220"/>
+        <location filename="../qml/harbour-tidings.qml" line="226"/>
         <source>- Tap on the page header to change sorting.</source>
         <translation>- Tapez sur le titre de la page pour changer l&apos;ordre de tri.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="221"/>
+        <location filename="../qml/harbour-tidings.qml" line="227"/>
         <source>- Pull down to mark all as read.</source>
         <translation>- Tirez vers le bas pour marquer tous les articles comme lus</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="226"/>
+        <location filename="../qml/harbour-tidings.qml" line="232"/>
         <source>Article view</source>
         <translation>Page article</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="227"/>
+        <location filename="../qml/harbour-tidings.qml" line="233"/>
         <source>- Tap on the title to open in external browser.</source>
         <translation>- Tapez sur le titre de l&apos;article pour l&apos;ouvrir dans un navigateur externe.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="228"/>
+        <location filename="../qml/harbour-tidings.qml" line="234"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="229"/>
+        <location filename="../qml/harbour-tidings.qml" line="235"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation>- Tapez sur l&apos;étoile pour conserver cet article.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="241"/>
+        <location filename="../qml/harbour-tidings.qml" line="247"/>
         <source>Loading from cache</source>
         <translation>Chargement depuis le cache</translation>
     </message>

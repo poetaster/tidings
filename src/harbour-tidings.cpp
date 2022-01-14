@@ -28,23 +28,33 @@
 
 void migrateLocalStorage()
 {
-    // The new location of the LocalStorage database
-    QDir newDbDir(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) + "/de.poetaster/harbour-tidings/");
+    // first for the new directory, post sailjail
+    QDir newDbDir( QDir::homePath() + "/.local/share/de.poetaster/harbour-tidings/");
 
-    if(newDbDir.exists())
-        return;
+    if( ! newDbDir.exists() )
+       newDbDir.mkpath(newDbDir.path());
 
-    newDbDir.mkpath(newDbDir.path());
+    const QStringList dataPaths = QStandardPaths::standardLocations(
+                QStandardPaths::DataLocation);
 
-    QString pathOld = "/harbour-tidings/harbour-tidings/";
-    QString pathNew = "/de.poetaster/harbour-tidings/";
+    qDebug() << "dataPaths " << dataPaths;
+    qDebug() << "generic" << QStandardPaths::GenericDataLocation;
 
-    // The old LocalStorage database
-    QFile oldDb(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +  pathOld + "database.sqlite");
-    oldDb.copy(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +  pathNew + "database.sqlite");
-    // proof of concept you can just move.
-    //oldDb.rename(QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation) +  pathNew + dbname + ".sqlite");
+    foreach (const QString& path, dataPaths) {
 
+        qDebug() << "Looking for database in" << path;
+
+        const QString defaultDatabase(QDir(path).absoluteFilePath("database.sqlite"));
+
+        if (QFile(defaultDatabase).exists()) {
+            qDebug() << "found database " << defaultDatabase;
+            //copy to new location.
+            QFile(defaultDatabase).copy(
+                        QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation )
+                        + "/de.poetaster/harbour-tidings/database.sqlite" );
+
+        }
+    }
 }
 
 /* Clears the web cache, because Qt 5.2 WebView chokes on caches from
@@ -99,11 +109,15 @@ int main(int argc, char *argv[])
 
     clearWebCache();
 
-    app->setOrganizationDomain("de.poetaster");
-    app->setOrganizationName("de.poetaster"); // needed for Sailjail
     app->setApplicationName("harbour-tidings");
+    // first set too old OrgName
+    app->setOrganizationName("harbour-tidings"); // needed for Sailjail
 
     migrateLocalStorage();
+
+    // now set too new OrgName
+    app->setOrganizationDomain("de.poetaster");
+    app->setOrganizationName("de.poetaster"); // needed for Sailjail
 
     QTranslator *appTranslator = new QTranslator;
     appTranslator->load("harbour-tidings-" + QLocale::system().name(), SailfishApp::pathTo("translations").path());

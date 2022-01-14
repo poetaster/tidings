@@ -41,7 +41,7 @@ Database::Database(QObject* parent)
 
     if (myDb.open())
     {
-        migrate();
+       migrate();
     }
 }
 
@@ -95,17 +95,13 @@ QString Database::locateDatabase() const
 
 void Database::migrate()
 {
-    myDb.exec("CREATE TABLE IF NOT EXISTS status ("
-              "  keyname TEXT,"
-              "  value TEXT"
-              ")");
     QSqlQuery query;
     query.prepare("SELECT value FROM status WHERE keyname = ?");
     query.addBindValue("revision");
     query.exec();
 
     int revision = 0;
-    if (query.next())
+    if (query.first())
     {
         revision = query.value(0).toInt();
     }
@@ -249,7 +245,11 @@ void Database::migrateRev11() const
  */
 void Database::createSchema() const
 {
-    myDb.exec("CREATE TABLE sources ("
+    myDb.exec("CREATE TABLE IF NOT EXISTS status ("
+              "  keyname TEXT,"
+              "  value TEXT"
+              ")");
+    myDb.exec("CREATE TABLE IF NOT EXISTS sources ("
               "  sourceid INT,"
               "  name TEXT,"
               "  url TEXT,"
