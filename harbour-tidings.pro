@@ -61,8 +61,7 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/FeedParser.qml \
     qml/tidings.png \
     harbour-tidings.desktop \
-    rpm/harbour-tidings.spec \
-    rpm/harbour-tidings.yaml
+    rpm/harbour-tidings.spec
 
 CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/harbour-tidings-cs.ts

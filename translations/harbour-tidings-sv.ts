@@ -362,22 +362,22 @@
         <translation type="unfinished">Läs in bilder</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SlideShowViewPage.qml" line="517"/>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="515"/>
         <source>Short article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SlideShowViewPage.qml" line="518"/>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="516"/>
         <source>Full article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SlideShowViewPage.qml" line="549"/>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="547"/>
         <source>Website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SlideShowViewPage.qml" line="594"/>
+        <location filename="../qml/pages/SlideShowViewPage.qml" line="592"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>

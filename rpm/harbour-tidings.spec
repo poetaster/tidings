@@ -18,7 +18,6 @@ Release:    1
 Group:      Qt/Qt
 License:    GPLv2
 Source0:    %{name}-%{version}.tar.bz2
-Source100:  harbour-tidings.yaml
 Requires:   qt5-plugin-imageformat-gif
 Requires:   qt5-plugin-imageformat-ico
 Requires:   sailfishsilica-qt5
@@ -33,6 +32,24 @@ BuildRequires:  desktop-file-utils
 
 %description
 Tidings is a news feed and podcast aggregator. Always be up to date with the latest news of what matters to you on your mobile device.
+
+%if "%{?vendor}" == "chum"
+PackageName: Tidings
+Type: desktop-application
+Categories:
+ - Network
+ - News
+DeveloperName: Mark Washeim
+Custom:
+ - Repo: https://github.com/poetaster/tidings
+Icon: https://raw.githubusercontent.com/poetaster/tidings/master/icons/172x172/harbour-tidings.png
+Screenshots:
+ - https://raw.githubusercontent.com/poetaster/tidings/master/screen-1.jpg
+ - https://raw.githubusercontent.com/poetaster/tidings/master/screen-2.jpg
+ - https://raw.githubusercontent.com/poetaster/tidings/master/screen-3.jpg
+Url:
+  Donation: https://www.paypal.me/poetasterFOSS
+%endif
 
 %prep
 %setup -q -n %{name}-%{version}
