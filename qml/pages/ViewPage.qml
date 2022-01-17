@@ -100,7 +100,7 @@ Page {
         }
 
     }
-    onStatusChanged: {
+    /*onStatusChanged: {
         //if (page._activated === false && coverAdaptor.hasNext) {
         //            nextItem();
         //}
@@ -117,7 +117,7 @@ Page {
 
             page._activated = true;
         }
-    }
+    }*/
 
     onItemDataChanged: {
         if (itemData)
@@ -218,7 +218,7 @@ Page {
                 }
             }
 
-            MenuItem {
+            /*MenuItem {
                 enabled: _previousOfFeed !== -1
                 text: "<" + feedName[itemData.source] + ">"
 
@@ -233,7 +233,7 @@ Page {
                     column.opacity = 0;
                     page._pullDownActivated = true;
                 }
-            }
+            }*/
             MenuItem {
                 enabled: listview.currentIndex > 0
                 text: enabled ? qsTr("Previous")
@@ -286,7 +286,7 @@ Page {
                     page._pullDownActivated = true;
                 }
             }
-            MenuItem {
+            /*MenuItem {
                 enabled: _nextOfFeed !== -1
                 text: "<" + feedName[itemData.source] + ">"
 
@@ -300,7 +300,7 @@ Page {
                     pulleyUp._closeAction = f;
                     column.opacity = 0;
                 }
-            }
+            }*/
         }
 
         Column {

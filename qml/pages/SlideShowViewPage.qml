@@ -6,7 +6,7 @@ Page {
     id: page
     objectName: "ViewPage"
 
-    property bool debug: true
+    property bool debug: false
     property GridView listview
     property variant itemData: listview.currentItem !== null
                                ? listview.currentItem.data
