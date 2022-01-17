@@ -42,7 +42,7 @@ Item {
         _scaledFor = 0;
         if (active)
         {
-            layoutLabel.recalc();
+            //layoutLabel.recalc();
         }
     }
 

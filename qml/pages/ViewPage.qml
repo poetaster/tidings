@@ -100,7 +100,7 @@ Page {
         }
 
     }
-    /*onStatusChanged: {
+    onStatusChanged: {
         //if (page._activated === false && coverAdaptor.hasNext) {
         //            nextItem();
         //}
@@ -117,7 +117,7 @@ Page {
 
             page._activated = true;
         }
-    }*/
+    }
 
     onItemDataChanged: {
         if (itemData)

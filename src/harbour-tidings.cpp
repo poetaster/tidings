@@ -29,29 +29,31 @@
 void migrateLocalStorage()
 {
     // first for the new directory, post sailjail
+
     QDir newDbDir( QDir::homePath() + "/.local/share/de.poetaster/harbour-tidings/");
 
     if( ! newDbDir.exists() )
-       newDbDir.mkpath(newDbDir.path());
+        newDbDir.mkpath(newDbDir.path());
 
     const QStringList dataPaths = QStandardPaths::standardLocations(
                 QStandardPaths::DataLocation);
 
-    foreach (const QString& path, dataPaths) {
-
+    foreach (const QString& path, dataPaths)
+    {
         qDebug() << "Looking for database in" << path;
-
         const QString defaultDatabase(QDir(path).absoluteFilePath("database.sqlite"));
-        if (QFile(defaultDatabase).exists()) {
+        if (QFile(defaultDatabase).exists())
+        {
 
             qDebug() << "found old database " << defaultDatabase;
 
-            //copy to new location if it's not there already.
-            if ( ! QFile(newDbDir.absoluteFilePath("database.sqlite")).exists() ) {
+            // copy to new location if it's not there already.
+            if ( ! QFile(newDbDir.absoluteFilePath("database.sqlite")).exists() )
+            {
                 // the GenericDataLocation mechanism :) I should probably do this everywhere.
                 QFile(defaultDatabase).copy(
-                        QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation )
-                        + "/de.poetaster/harbour-tidings/database.sqlite" );
+                            QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation )
+                            + "/de.poetaster/harbour-tidings/database.sqlite" );
             }
 
         }
