@@ -15,7 +15,6 @@ Page {
     property int _previousOfFeed: -1
     property int _nextOfFeed: -1
 
-    property bool _pullDownActivated: false
     property bool _activated
 
     property real _pageMargin: (width > height) ? Theme.paddingLarge * 2
@@ -89,30 +88,18 @@ Page {
             newsBlendModel.setRead(listview.currentIndex, true);
         }
     }
-    function forwardNow() {
-        if (listview.currentIndex < newsBlendModel.count - 1){
-            nextItem();
-            var props = {
-                "index": listview.currentItem,
-                "listview": listview
-            };
-            pageStack.replace(Qt.resolvedUrl("ViewPage.qml"), props);
-        }
 
-    }
     /*onStatusChanged: {
-        //if (page._activated === false && coverAdaptor.hasNext) {
-        //            nextItem();
-        //}
-
         if (status === PageStatus.Active)
         {
             if (itemData.link !== "")
             {
-                //var props = {
-                    //"resources": resources
-                //};
-                //pageStack.pushAttached(Qt.resolvedUrl("ResourcesPage.qml"), props);
+                var props = {
+                    "resources": resources
+                };
+
+                pageStack.pushAttached(Qt.resolvedUrl("ResourcesPage.qml"),
+                                       props);
             }
 
             page._activated = true;
@@ -187,22 +174,6 @@ Page {
 
         anchors.fill: parent
         contentHeight: column.height
-       /*
-        onFlickStarted: {
-            console.debug(PageStatus.Active);
-        }
-        onMovementStarted: {
-            console.debug(Drag.XAxis)
-            console.debug(Drag.YAxis)
-        }
-        onDraggingHorizontallyChanged:  {
-            console.debug(Flickable.flickingHorizontally)
-        }
-        */
-        //THIS is a hammer. but less so than the hammer that hung here before.
-        onDragEnded: {
-            if(page._pullDownActivated) forwardNow();
-        }
 
         PullDownMenu {
             id: pulleyDown
@@ -214,7 +185,6 @@ Page {
                 {
                     _closeAction();
                     _closeAction = null;
-                } else {
                 }
             }
 
@@ -231,7 +201,6 @@ Page {
                     }
                     pulleyDown._closeAction = f;
                     column.opacity = 0;
-                    page._pullDownActivated = true;
                 }
             }*/
             MenuItem {
@@ -260,13 +229,9 @@ Page {
             onActiveChanged: {
                 if (! active && _closeAction)
                 {
-                    page._pullDownActivated = false;
                     _closeAction();
                     _closeAction = null;
-                } else {
-                    page._pullDownActivated = true;
                 }
-
             }
 
             MenuItem {
@@ -283,7 +248,6 @@ Page {
                     }
                     pulleyUp._closeAction = f;
                     column.opacity = 0;
-                    page._pullDownActivated = true;
                 }
             }
             /*MenuItem {
@@ -311,6 +275,16 @@ Page {
 
             Behavior on opacity {
                 NumberAnimation { duration: 300; easing.type: Easing.InOutQuad }
+            }
+
+            LoadImagesButton {
+                visible: htmlFilter.imageProxy !== "" &&
+                         htmlFilter.images.length > 0
+                width: parent.width
+
+                onClicked: {
+                    htmlFilter.imageProxy = "";
+                }
             }
 
             PageHeader {
@@ -422,17 +396,6 @@ Page {
                 height: Theme.paddingMedium
             }
 
-            Button {
-                id: loadImagesButton
-                visible: htmlFilter.imageProxy !== "" &&
-                         htmlFilter.images.length > 0
-                text: qsTr("Load images")
-                anchors.horizontalCenter: parent.horizontalCenter
-                onClicked: htmlFilter.imageProxy = ""
-            }
-
-            Item { width: 1; height: Theme.paddingMedium; visible: loadImagesButton.visible }
-
             RescalingRichText {
                 id: body
 
@@ -452,7 +415,7 @@ Page {
                         "url": link
                     }
                     pageStack.push(Qt.resolvedUrl("ExternalLinkDialog.qml"),
-                                   props);
+                                                  props);
                 }
 
             }
@@ -586,7 +549,7 @@ Page {
 
         }
 
-        ScrollDecorator { color: palette.primaryColor }
+        ScrollDecorator { }
     }
 
     BusyIndicator {
