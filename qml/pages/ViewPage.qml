@@ -6,6 +6,7 @@ Page {
     id: page
     objectName: "ViewPage"
 
+    property bool _pullDownActivated: false
     property GridView listview
     property variant itemData: listview.currentItem !== null
                                ? listview.currentItem.data
@@ -79,7 +80,16 @@ Page {
             return type;
         }
     }
-
+    function forwardNow() {
+           if (listview.currentIndex < newsBlendModel.count - 1){
+               nextItem();
+               var props = {
+                   "index": listview.currentItem,
+                   "listview": listview
+               };
+               pageStack.replace(Qt.resolvedUrl("ViewPage.qml"), props);
+           }
+    }
     allowedOrientations: Orientation.All
 
     Component.onCompleted: {
@@ -174,6 +184,10 @@ Page {
 
         anchors.fill: parent
         contentHeight: column.height
+        //THIS is a hammer. but less so than the hammer that hung here before.
+        onDragEnded: {
+            if(page._pullDownActivated) forwardNow();
+        }
 
         PullDownMenu {
             id: pulleyDown
@@ -187,7 +201,6 @@ Page {
                     _closeAction = null;
                 }
             }
-
             /*MenuItem {
                 enabled: _previousOfFeed !== -1
                 text: "<" + feedName[itemData.source] + ">"
@@ -228,10 +241,13 @@ Page {
 
             onActiveChanged: {
                 if (! active && _closeAction)
-                {
-                    _closeAction();
-                    _closeAction = null;
-                }
+                 {
+                     page._pullDownActivated = false;
+                     _closeAction();
+                     _closeAction = null;
+                 } else {
+                     page._pullDownActivated = true;
+                 }
             }
 
             MenuItem {

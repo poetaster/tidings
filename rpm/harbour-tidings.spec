@@ -22,6 +22,9 @@ Requires:   qt5-plugin-imageformat-gif
 Requires:   qt5-plugin-imageformat-ico
 Requires:   sailfishsilica-qt5
 Requires:   qt5-qtdeclarative-import-xmllistmodel
+%if "%{?vendor}" == "chum"
+BuildRequires:  qt5-qttools-linguist
+%endif
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)
 BuildRequires:  pkgconfig(Qt5Quick)

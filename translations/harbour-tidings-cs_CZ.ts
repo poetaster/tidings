@@ -537,47 +537,47 @@
         <translation type="unfinished">PDF dokument</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="208"/>
+        <location filename="../qml/pages/ViewPage.qml" line="220"/>
         <source>Previous</source>
         <translation type="unfinished">Předchozí</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="209"/>
+        <location filename="../qml/pages/ViewPage.qml" line="221"/>
         <source>Already at the beginning</source>
         <translation type="unfinished">Již jste na začátku</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="239"/>
+        <location filename="../qml/pages/ViewPage.qml" line="251"/>
         <source>Next</source>
         <translation type="unfinished">Další</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="240"/>
+        <location filename="../qml/pages/ViewPage.qml" line="252"/>
         <source>Already at the end</source>
         <translation type="unfinished">Už jste na konci</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="380"/>
+        <location filename="../qml/pages/ViewPage.qml" line="392"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished">(%1 sekund)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="456"/>
+        <location filename="../qml/pages/ViewPage.qml" line="468"/>
         <source>Short article</source>
         <translation type="unfinished">Sbalit článek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="488"/>
+        <location filename="../qml/pages/ViewPage.qml" line="500"/>
         <source>Website</source>
         <translation type="unfinished">Web</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="457"/>
+        <location filename="../qml/pages/ViewPage.qml" line="469"/>
         <source>Full article</source>
         <translation type="unfinished">Rozbalit článek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="534"/>
+        <location filename="../qml/pages/ViewPage.qml" line="546"/>
         <source>Media</source>
         <translation type="unfinished">Média</translation>
     </message>
