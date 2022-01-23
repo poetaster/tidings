@@ -13,7 +13,7 @@ Name:       harbour-tidings
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    RSS / Atom / Podcasts / Feed Reader
-Version:    1.2.1
+Version:    1.2.2
 Release:    1
 Group:      Qt/Qt
 License:    GPLv2
@@ -40,8 +40,8 @@ Tidings is a news feed and podcast aggregator. Always be up to date with the lat
 PackageName: Tidings
 Type: desktop-application
 Categories:
- - Network
  - News
+ - Network
 DeveloperName: Mark Washeim
 Custom:
  - Repo: https://github.com/poetaster/tidings
