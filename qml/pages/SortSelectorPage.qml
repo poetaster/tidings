@@ -41,6 +41,19 @@ Page {
             }
 
             onClicked: {
+                  function closure(sorter, targetConfig)
+                  {
+                      return function()
+                      {
+                          targetConfig.value = sorter.key
+                      }
+                  }
+
+                  _callback = closure(modelData, newsBlendModel.isBlendModeEnabled ? configAllFeedsSorter : configFeedSorter);
+                  pageStack.pop();
+              }
+
+            /*onClicked: {
                 function closure(sorter, targetConfig)
                 {
                     return function()
@@ -51,7 +64,7 @@ Page {
 
                 _callback = closure(modelData, newsBlendModel.isBlendModeEnabled ? configAllFeedsSorter : configFeedSorter);
                 pageStack.pop();
-            }
+            }*/
         }
     }
 }
