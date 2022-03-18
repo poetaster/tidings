@@ -116,8 +116,8 @@ int main(int argc, char *argv[])
 
     // first set too old OrgName
     // BEGIN HACK. It will need to be removed before we go Sailjail, proper
-    app->setOrganizationName("harbour-tidings");
-    migrateLocalStorage();
+    //app->setOrganizationName("harbour-tidings");
+    //migrateLocalStorage();
     // END HACK
 
     // now set too new OrgName

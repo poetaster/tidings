@@ -4,3 +4,8 @@ X-Nemo-Application-Type=silica-qt5
 Name=Tidings
 Icon=harbour-tidings
 Exec=harbour-tidings
+
+[X-Sailjail]
+OrganizationName=de.poetaster
+ApplicationName=harbour-tidings
+Permissions=Internet;Userdirs;RemovableMedia
