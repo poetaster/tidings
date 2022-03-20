@@ -557,27 +557,27 @@
         <translation type="unfinished">Už jste na konci</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="396"/>
+        <location filename="../qml/pages/ViewPage.qml" line="397"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished">(%1 sekund)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="472"/>
+        <location filename="../qml/pages/ViewPage.qml" line="473"/>
         <source>Short article</source>
         <translation type="unfinished">Sbalit článek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="504"/>
+        <location filename="../qml/pages/ViewPage.qml" line="505"/>
         <source>Website</source>
         <translation type="unfinished">Web</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="473"/>
+        <location filename="../qml/pages/ViewPage.qml" line="474"/>
         <source>Full article</source>
         <translation type="unfinished">Rozbalit článek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="550"/>
+        <location filename="../qml/pages/ViewPage.qml" line="551"/>
         <source>Media</source>
         <translation type="unfinished">Média</translation>
     </message>

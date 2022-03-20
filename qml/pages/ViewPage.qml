@@ -258,7 +258,8 @@ Page {
                 onClicked: {
                     function f()
                     {
-                        goToItem(listview.currentIndex + 1);
+                        // This is captured above in onDragend
+                        //goToItem(listview.currentIndex + 1);
                         contentFlickable.contentY = 0;
                         column.opacity = 1;
                     }
