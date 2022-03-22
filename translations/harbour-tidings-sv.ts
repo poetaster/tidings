@@ -266,12 +266,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="99"/>
         <source>Slideshow View</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildspelsvy</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="100"/>
         <source>If enabled, the Article/Item view is a flickable slideshow.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vid aktivering visas artiklarna som ett bläddringsbart bildspel.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="136"/>
@@ -309,77 +309,77 @@
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="83"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ljud</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="85"/>
         <source>Image</source>
-        <translation type="unfinished">Bild</translation>
+        <translation>Bild</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="87"/>
         <source>Video</source>
-        <translation type="unfinished">Film</translation>
+        <translation>Film</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="89"/>
         <source>PDF document</source>
-        <translation type="unfinished">PDF-dokument</translation>
+        <translation>PDF-dokument</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="219"/>
         <source>Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Föregående</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="220"/>
         <source>Already at the beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>Du är redan i början</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="253"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Nästa</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="254"/>
         <source>Already at the end</source>
-        <translation type="unfinished"></translation>
+        <translation>Du är redan i slutet</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="285"/>
         <source>Resources</source>
-        <translation type="unfinished">Resurser</translation>
+        <translation>Resurser</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="423"/>
         <source>(%1 seconds)</source>
-        <translation type="unfinished"></translation>
+        <translation>(%1 sekunder)</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="444"/>
         <source>Load images</source>
-        <translation type="unfinished">Läs in bilder</translation>
+        <translation>Läs in bilder</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="515"/>
         <source>Short article</source>
-        <translation type="unfinished"></translation>
+        <translation>Kort artikel</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="516"/>
         <source>Full article</source>
-        <translation type="unfinished"></translation>
+        <translation>Fullständig artikel</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="547"/>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Webbsida</translation>
     </message>
     <message>
         <location filename="../qml/pages/SlideShowViewPage.qml" line="592"/>
         <source>Media</source>
-        <translation type="unfinished"></translation>
+        <translation>Media</translation>
     </message>
 </context>
 <context>
@@ -519,67 +519,67 @@
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="72"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Ljud</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="74"/>
         <source>Image</source>
-        <translation type="unfinished">Bild</translation>
+        <translation>Bild</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="76"/>
         <source>Video</source>
-        <translation type="unfinished">Film</translation>
+        <translation>Film</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="78"/>
         <source>PDF document</source>
-        <translation type="unfinished">PDF-dokument</translation>
+        <translation>PDF-dokument</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="221"/>
         <source>Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Föregående</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="222"/>
         <source>Already at the beginning</source>
-        <translation type="unfinished"></translation>
+        <translation>Du är redan i början</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="255"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Nästa</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="256"/>
         <source>Already at the end</source>
-        <translation type="unfinished"></translation>
+        <translation>Du är redan i slutet</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="397"/>
         <source>(%1 seconds)</source>
-        <translation type="unfinished"></translation>
+        <translation>(%1 sekunder)</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="473"/>
         <source>Short article</source>
-        <translation type="unfinished"></translation>
+        <translation>Kort artikel</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="474"/>
         <source>Full article</source>
-        <translation type="unfinished"></translation>
+        <translation>Fullständig artikel</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="505"/>
         <source>Website</source>
-        <translation type="unfinished"></translation>
+        <translation>Webbsida</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="551"/>
         <source>Media</source>
-        <translation type="unfinished"></translation>
+        <translation>Media</translation>
     </message>
 </context>
 <context>
