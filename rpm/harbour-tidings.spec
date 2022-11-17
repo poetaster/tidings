@@ -22,8 +22,6 @@ Requires:   qt5-plugin-imageformat-gif
 Requires:   qt5-plugin-imageformat-ico
 Requires:   sailfishsilica-qt5
 Requires:   sailfish-components-webview-qt5
-Requires:   sailfish-components-webview-qt5-popups
-Requires:   sailfish-components-webview-qt5-pickers
 Requires:   qt5-qtdeclarative-import-xmllistmodel
 
 %if "%{?vendor}" == "chum"
