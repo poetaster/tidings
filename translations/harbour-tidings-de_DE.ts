@@ -271,35 +271,45 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="100"/>
         <source>If enabled, the Article/Item view is a flickable slideshow.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Zeige die Artikelansicht als Diashow.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="136"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="117"/>
+        <source>Enable Flicking</source>
+        <translation type="unfinished">Flicking aktivieren</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="118"/>
+        <source>If enabled, flicking slightly up-left in an article view proceeds to next article.</source>
+        <translation type="unfinished">Leichtes Wischen nach oben links in der Artikelansicht wechselt zum nächsten Artikel.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="153"/>
         <source>Font scale:</source>
         <translation>Schriftskalierung:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="157"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="174"/>
         <source>Apply font scale to web view</source>
         <translation>Schriftskalierung auf die Web-Ansicht anwenden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="158"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="175"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
         <translation>Wenn aktiviert, gilt die Schriftgrößenskalierung auch für die Web-Ansicht.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="170"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="187"/>
         <source>Show hints</source>
         <translation>Tipps zeigen</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="171"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="188"/>
         <source>If enabled, hints will guide you using the application.</source>
         <translation>Wenn aktiviert, führen Tipps durch die Bedienung der App.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="127"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="144"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
         <translation>Diese Einstellung ändert die Skalierung der Schriftgröße in der Feed-Ansicht.</translation>
     </message>
@@ -517,168 +527,160 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="72"/>
+        <location filename="../qml/pages/ViewPage.qml" line="74"/>
         <source>Audio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="74"/>
+        <location filename="../qml/pages/ViewPage.qml" line="76"/>
         <source>Image</source>
         <translation type="unfinished">Bild</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="76"/>
+        <location filename="../qml/pages/ViewPage.qml" line="78"/>
         <source>Video</source>
         <translation type="unfinished">Video</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="78"/>
+        <location filename="../qml/pages/ViewPage.qml" line="80"/>
         <source>PDF document</source>
         <translation type="unfinished">PDF-Dokument</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="221"/>
+        <location filename="../qml/pages/ViewPage.qml" line="216"/>
+        <source>Open in browser</source>
+        <translation type="unfinished">Im Browser öffnen</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="224"/>
         <source>Previous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="222"/>
+        <location filename="../qml/pages/ViewPage.qml" line="225"/>
         <source>Already at the beginning</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="255"/>
+        <location filename="../qml/pages/ViewPage.qml" line="258"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="256"/>
+        <location filename="../qml/pages/ViewPage.qml" line="259"/>
         <source>Already at the end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="397"/>
+        <location filename="../qml/pages/ViewPage.qml" line="401"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="473"/>
+        <location filename="../qml/pages/ViewPage.qml" line="477"/>
         <source>Short article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="474"/>
+        <location filename="../qml/pages/ViewPage.qml" line="478"/>
         <source>Full article</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="505"/>
+        <location filename="../qml/pages/ViewPage.qml" line="509"/>
         <source>Website</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="551"/>
+        <location filename="../qml/pages/ViewPage.qml" line="555"/>
         <source>Media</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
-    <name>WebPage</name>
-    <message>
-        <location filename="../qml/pages/WebPage.qml" line="41"/>
-        <source>Close web view</source>
-        <translation>Web-Ansicht schließen</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/WebPage.qml" line="50"/>
-        <source>Open in browser</source>
-        <translation>Im Browser öffnen</translation>
-    </message>
-</context>
-<context>
     <name>harbour-tidings</name>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="208"/>
+        <location filename="../qml/harbour-tidings.qml" line="212"/>
         <source>Feeds overview</source>
         <translation>Feed-Übersicht</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="209"/>
+        <location filename="../qml/harbour-tidings.qml" line="213"/>
         <source>- Shows all your subscribed feeds.</source>
         <translation>- Zeigt alle deine abonnierten Feeds.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="210"/>
+        <location filename="../qml/harbour-tidings.qml" line="214"/>
         <source>- Pull down to refresh all.</source>
         <translation>- Ziehe herunter, um alle zu aktualisieren.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="211"/>
+        <location filename="../qml/harbour-tidings.qml" line="215"/>
         <source>- Tap and hold to add or manage feeds.</source>
         <translation>- Drücke und halte, um Feeds hinzuzufügen oder zu bearbeiten.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="216"/>
+        <location filename="../qml/harbour-tidings.qml" line="220"/>
         <source>Managing mode</source>
         <translation>Verwalten-Modus</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="217"/>
+        <location filename="../qml/harbour-tidings.qml" line="221"/>
         <source>- Tap on a feed to refresh.</source>
         <translation>- Drücke einen Feed, um ihn zu aktualisieren.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="218"/>
+        <location filename="../qml/harbour-tidings.qml" line="222"/>
         <source>- Tap on the edit button to edit.</source>
         <translation>- Drücke den Bearbeiten-Knopf, um zu bearbeiten.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="219"/>
+        <location filename="../qml/harbour-tidings.qml" line="223"/>
         <source>- Tap and hold on a feed to move position.</source>
         <translation>- Drücke und halte einen Feed, um ihn zu verschieben.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="220"/>
+        <location filename="../qml/harbour-tidings.qml" line="224"/>
         <source>- Tap on empty space to leave managing mode.</source>
         <translation>- Drücke eine leere Stelle, um den Verwalten-Modus zu verlassen.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="225"/>
+        <location filename="../qml/harbour-tidings.qml" line="229"/>
         <source>Articles</source>
         <translation>Artikel</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="226"/>
+        <location filename="../qml/harbour-tidings.qml" line="230"/>
         <source>- Tap on the page header to change sorting.</source>
         <translation>- Drücke den Seitentitel, um die Sortierung zu ändern.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="227"/>
+        <location filename="../qml/harbour-tidings.qml" line="231"/>
         <source>- Pull down to mark all as read.</source>
         <translation>- Ziehe herunter, um alle als gelesen zu markieren.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="232"/>
+        <location filename="../qml/harbour-tidings.qml" line="236"/>
         <source>Article view</source>
         <translation>Artikelansicht</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="233"/>
+        <location filename="../qml/harbour-tidings.qml" line="237"/>
         <source>- Tap on the title to open in external browser.</source>
         <translation>- Drücke den Titel, um im externen Browser zu laden.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="234"/>
+        <location filename="../qml/harbour-tidings.qml" line="238"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
         <translation>- Drücke das Klemmbrettsymbol, um den Link in die Zwischenablage zu kopieren.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="235"/>
+        <location filename="../qml/harbour-tidings.qml" line="239"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation>- Drücke das Sternsymbol, um den Artikel zu behalten.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="247"/>
+        <location filename="../qml/harbour-tidings.qml" line="251"/>
         <source>Loading from cache</source>
         <translation>Lade aus dem Cache</translation>
     </message>

@@ -112,6 +112,23 @@ Page {
                 height: Theme.paddingLarge
             }
 
+            TextSwitch {
+                width: parent.width
+                text: qsTr("Enable Flicking")
+                description: qsTr("If enabled, flicking slightly up-left in an article view proceeds to next article.")
+                automaticCheck: false
+                checked: configFlickNext.booleanValue
+
+                onClicked: {
+                   configFlickNext.value =
+                           configFlickNext.booleanValue ? "0" : "1";
+                }
+            }
+
+            Item {
+                width: 1
+                height: Theme.paddingLarge
+            }
             ComboBox {
                 id: fontCombo
                 property variant _scales: [50, 75, 100, 125, 150, 200, 250, 300]

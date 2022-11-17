@@ -6,6 +6,8 @@ Page {
     id: page
     objectName: "ViewPage"
 
+    property int index;
+    property bool debug: true
     property bool _pullDownActivated: false
     property GridView listview
     property variant itemData: listview.currentItem !== null
@@ -153,6 +155,10 @@ Page {
         id: resources
         property string link: itemData ? itemData.link : ""
         property variant images: htmlFilter.images
+        onImagesChanged: {
+            if(debug)
+                console.debug(htmlFilter.images)
+        }
     }
 
     QtObject {
@@ -160,6 +166,10 @@ Page {
         property string data: urlLoader.source != "" ? urlLoader.data
                                                      : itemData ? newsBlendModel.itemBody(itemData.source, itemData.uid)
                                                                 : ""
+        onDataChanged: {
+            //if(debug)
+                //console.debug(contentProvider.data)
+        }
     }
 
     UrlLoader {
@@ -186,9 +196,10 @@ Page {
         contentHeight: column.height
         //THIS is a hammer. but less so than the hammer that hung here before.
         onDragEnded: {
-            if(page._pullDownActivated) forwardNow();
+            if(page._pullDownActivated && configFlickNext) {
+                forwardNow();
+            }
         }
-
         PullDownMenu {
             id: pulleyDown
 
@@ -201,21 +212,13 @@ Page {
                     _closeAction = null;
                 }
             }
-            /*MenuItem {
-                enabled: _previousOfFeed !== -1
-                text: "<" + feedName[itemData.source] + ">"
+            MenuItem {
+                text: qsTr("Open in browser")
 
                 onClicked: {
-                    function f()
-                    {
-                        goToItem(_previousOfFeed);
-                        contentFlickable.contentY = 0;
-                        column.opacity = 1;
-                    }
-                    pulleyDown._closeAction = f;
-                    column.opacity = 0;
+                    Qt.openUrlExternally(itemData.link);
                 }
-            }*/
+            }
             MenuItem {
                 enabled: listview.currentIndex > 0
                 text: enabled ? qsTr("Previous")
@@ -381,6 +384,7 @@ Page {
                     height: width
 
                     onClicked: Clipboard.text = itemData.link
+
                 }
             }
 

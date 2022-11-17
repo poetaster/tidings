@@ -1,17 +1,14 @@
-import QtQuick 2.0
+import QtQuick 2.6
 import Sailfish.Silica 1.0
+import Sailfish.WebView 1.0
+import Sailfish.WebEngine 1.0
+import Sailfish.WebView.Popups 1.0
 
 Page {
     id: root
     objectName: "WebPage"
 
     property string url
-
-    // work around Silica bug: don't let webview enable forward navigation
-    onForwardNavigationChanged: {
-        if (forwardNavigation)
-            forwardNavigation = false;
-    }
 
     allowedOrientations: Orientation.All
 
@@ -25,84 +22,49 @@ Page {
     Component {
         id: webComponent
 
-        SilicaWebView {
+        WebView {
+
             id: webview
+            httpUserAgent: "Mozilla/5.0 (Mobile; rv:78.0) Gecko/78.0"
+                + " Firefox/78.0"
 
-            property int _backCount: 0
-            property int _previousContentY;
-
-            anchors.fill: parent
-
-            PullDownMenu {
-                // people have trouble getting back the page navigation
-                // by zooming out (Silica is bit buggy, too), so offer a menu
-                // option for going back
-                MenuItem {
-                    text: qsTr("Close web view")
-
-                    onClicked: {
-                        root.backNavigation = true;
-                        pageStack.navigateBack(PageStackAction.Animated);
-                    }
-                }
-
-                MenuItem {
-                    text: qsTr("Open in browser")
-
-                    onClicked: {
-                        Qt.openUrlExternally(root.url);
-                    }
-                }
-            }
-
+            /* This will probably be required from 4.4 on. */
             Component.onCompleted: {
-                try
-                {
-                    experimental.userAgent =
-                            "Mozilla/5.0 (Maemo; Linux; Jolla; Sailfish; Mobile) " +
-                            "AppleWebKit/534.13 (KHTML, like Gecko) " +
-                            "NokiaBrowser/8.5.0 Mobile Safari/534.13";
+                //WebEngineSettings.setPreference("security.disable_cors_checks", true, WebEngineSettings.BoolPref)
+                //WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
                     if (configFontScaleWebEnabled.booleanValue)
                     {
                         experimental.preferences.minimumFontSize =
                                 Theme.fontSizeExtraSmall * (configFontScale.value / 100.0);
                     }
 
+            }
+            onRecvAsyncMessage: {
+                /*
+                console.debug(message)
+                switch (message) {
+                case "embed:contentOrientationChanged":
+                    break
+                case "webview:action":
+                    if ( data.key != val ) {
+                        //if (debug) console.debug(data.src)
+                    }
+                    break
                 }
-                catch (err)
-                {
-
-                }
+                */
             }
 
+            //property int _backCount: 0
+            //property int _previousContentY;
+
+            anchors.fill: parent
             url: root.url
 
-            onContentYChanged: {
-                if (contentY < _previousContentY)
-                {
-                    ++_backCount;
-                }
-                else
-                {
-                    _backCount = 0;
-                }
-
-                if (_backCount >= 5)
-                {
-                    toolbar.anchors.bottomMargin = 0;
-                }
-                else
-                {
-                    toolbar.anchors.bottomMargin = -toolbar.height;
-                }
-
-                _previousContentY = contentY;
-            }
+            onLoadingChanged: {}
         }
 
     }
-
-
+/*
     Item {
         id: toolbar
         width: parent.width
@@ -167,5 +129,5 @@ Page {
         }
 
     }
-
+*/
 }

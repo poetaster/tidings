@@ -274,32 +274,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="136"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="117"/>
+        <source>Enable Flicking</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="118"/>
+        <source>If enabled, flicking slightly up-left in an article view proceeds to next article.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="153"/>
         <source>Font scale:</source>
         <translation type="unfinished">Velikost písma:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="157"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="174"/>
         <source>Apply font scale to web view</source>
         <translation type="unfinished">Použít velikost písma na webové zobrazení</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="158"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="175"/>
         <source>If enabled, the font scale settings apply to the web view.</source>
         <translation type="unfinished">Pokud je povoleno, je použita nastavená velikost i webovému zobrazení.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="170"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="187"/>
         <source>Show hints</source>
         <translation type="unfinished">Zobrazovat tipy</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="171"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="188"/>
         <source>If enabled, hints will guide you using the application.</source>
         <translation type="unfinished">Pokud je povoleno, budou vás tipy provázet použitím aplikace.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="127"/>
+        <location filename="../qml/pages/SettingsPage.qml" line="144"/>
         <source>This setting changes the scale of the fonts in the feed view.</source>
         <translation type="unfinished">Toto nastavení mění měřítko písma v zobrazení feedu.</translation>
     </message>
@@ -517,168 +527,160 @@
 <context>
     <name>ViewPage</name>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="72"/>
+        <location filename="../qml/pages/ViewPage.qml" line="74"/>
         <source>Audio</source>
         <translation type="unfinished">Audio</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="74"/>
+        <location filename="../qml/pages/ViewPage.qml" line="76"/>
         <source>Image</source>
         <translation type="unfinished">Obrázek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="76"/>
+        <location filename="../qml/pages/ViewPage.qml" line="78"/>
         <source>Video</source>
         <translation type="unfinished">Video</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="78"/>
+        <location filename="../qml/pages/ViewPage.qml" line="80"/>
         <source>PDF document</source>
         <translation type="unfinished">PDF dokument</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="221"/>
+        <location filename="../qml/pages/ViewPage.qml" line="216"/>
+        <source>Open in browser</source>
+        <translation type="unfinished">Otevřít v prohlížeči</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ViewPage.qml" line="224"/>
         <source>Previous</source>
         <translation type="unfinished">Předchozí</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="222"/>
+        <location filename="../qml/pages/ViewPage.qml" line="225"/>
         <source>Already at the beginning</source>
         <translation type="unfinished">Již jste na začátku</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="255"/>
+        <location filename="../qml/pages/ViewPage.qml" line="258"/>
         <source>Next</source>
         <translation type="unfinished">Další</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="256"/>
+        <location filename="../qml/pages/ViewPage.qml" line="259"/>
         <source>Already at the end</source>
         <translation type="unfinished">Už jste na konci</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="397"/>
+        <location filename="../qml/pages/ViewPage.qml" line="401"/>
         <source>(%1 seconds)</source>
         <translation type="unfinished">(%1 sekund)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="473"/>
+        <location filename="../qml/pages/ViewPage.qml" line="477"/>
         <source>Short article</source>
         <translation type="unfinished">Sbalit článek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="505"/>
+        <location filename="../qml/pages/ViewPage.qml" line="509"/>
         <source>Website</source>
         <translation type="unfinished">Web</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="474"/>
+        <location filename="../qml/pages/ViewPage.qml" line="478"/>
         <source>Full article</source>
         <translation type="unfinished">Rozbalit článek</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ViewPage.qml" line="551"/>
+        <location filename="../qml/pages/ViewPage.qml" line="555"/>
         <source>Media</source>
         <translation type="unfinished">Média</translation>
     </message>
 </context>
 <context>
-    <name>WebPage</name>
-    <message>
-        <location filename="../qml/pages/WebPage.qml" line="41"/>
-        <source>Close web view</source>
-        <translation type="unfinished">Zavřít webové zobrazení</translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/WebPage.qml" line="50"/>
-        <source>Open in browser</source>
-        <translation type="unfinished">Otevřít v prohlížeči</translation>
-    </message>
-</context>
-<context>
     <name>harbour-tidings</name>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="208"/>
+        <location filename="../qml/harbour-tidings.qml" line="212"/>
         <source>Feeds overview</source>
         <translation type="unfinished">Přehled feedů</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="209"/>
+        <location filename="../qml/harbour-tidings.qml" line="213"/>
         <source>- Shows all your subscribed feeds.</source>
         <translation type="unfinished">- Ukazuje všechny vaše feedy.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="210"/>
+        <location filename="../qml/harbour-tidings.qml" line="214"/>
         <source>- Pull down to refresh all.</source>
         <translation type="unfinished">- Pro aktualizaci všech potáhněte dolů.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="211"/>
+        <location filename="../qml/harbour-tidings.qml" line="215"/>
         <source>- Tap and hold to add or manage feeds.</source>
         <translation type="unfinished">- Dlouze podržte pro přidání nebo úpravu feedů.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="216"/>
+        <location filename="../qml/harbour-tidings.qml" line="220"/>
         <source>Managing mode</source>
         <translation type="unfinished">Editovací mód</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="217"/>
+        <location filename="../qml/harbour-tidings.qml" line="221"/>
         <source>- Tap on a feed to refresh.</source>
         <translation type="unfinished">- Klikněte na feed pro aktualizaci.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="218"/>
+        <location filename="../qml/harbour-tidings.qml" line="222"/>
         <source>- Tap on the edit button to edit.</source>
         <translation type="unfinished">- Pro úpravu stiskněte Upravit.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="219"/>
+        <location filename="../qml/harbour-tidings.qml" line="223"/>
         <source>- Tap and hold on a feed to move position.</source>
         <translation type="unfinished">- Dlouze podržte feed pro změnu pozice.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="220"/>
+        <location filename="../qml/harbour-tidings.qml" line="224"/>
         <source>- Tap on empty space to leave managing mode.</source>
         <translation type="unfinished">- Pro ukončení úprav klikněte do prázdného místa.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="225"/>
+        <location filename="../qml/harbour-tidings.qml" line="229"/>
         <source>Articles</source>
         <translation type="unfinished">Články</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="226"/>
+        <location filename="../qml/harbour-tidings.qml" line="230"/>
         <source>- Tap on the page header to change sorting.</source>
         <translation type="unfinished">- Pro změnu třídění klikněte na počet článků.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="227"/>
+        <location filename="../qml/harbour-tidings.qml" line="231"/>
         <source>- Pull down to mark all as read.</source>
         <translation type="unfinished">- Pro označení Vše přečteno potáhněte dolů.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="232"/>
+        <location filename="../qml/harbour-tidings.qml" line="236"/>
         <source>Article view</source>
         <translation type="unfinished">Zobrazení článku</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="233"/>
+        <location filename="../qml/harbour-tidings.qml" line="237"/>
         <source>- Tap on the title to open in external browser.</source>
         <translation type="unfinished">- Pro zobrazení v prohlížeči klikněte na titulek.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="234"/>
+        <location filename="../qml/harbour-tidings.qml" line="238"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
         <translation type="unfinished">- Pro kopírování odkazu klikněte na ikonku schránky.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="235"/>
+        <location filename="../qml/harbour-tidings.qml" line="239"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation type="unfinished">- Pro uložení článku klikněte na hvězdu.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="247"/>
+        <location filename="../qml/harbour-tidings.qml" line="251"/>
         <source>Loading from cache</source>
         <translation type="unfinished">Načítám z cache</translation>
     </message>

@@ -109,8 +109,8 @@ int main(int argc, char *argv[])
     // To display the view, call "show()" (will show fullscreen on device).
 
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
-
-    clearWebCache();
+    // We need to examine removing the old qt
+     clearWebCache();
 
     app->setApplicationName("harbour-tidings");
 

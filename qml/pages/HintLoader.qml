@@ -106,7 +106,7 @@ Item {
             horizontalAlignment: Text.AlignHCenter
             color: Theme.primaryColor
             font.pixelSize: Theme.fontSizeHuge
-            text: hint.title
+            text: hint ? hint.title : ""
         }
 
         Item {
@@ -115,7 +115,7 @@ Item {
         }
 
         Repeater {
-            model: hint.items
+            model: hint ? hint.items: ""
 
             Label {
                 anchors.left: parent.left

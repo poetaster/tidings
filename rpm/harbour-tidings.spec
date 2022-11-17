@@ -13,7 +13,7 @@ Name:       harbour-tidings
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    RSS / Atom / Podcasts / Feed Reader
-Version:    1.2.5
+Version:    1.3.0
 Release:    1
 Group:      Qt/Qt
 License:    GPLv2
@@ -21,7 +21,11 @@ Source0:    %{name}-%{version}.tar.bz2
 Requires:   qt5-plugin-imageformat-gif
 Requires:   qt5-plugin-imageformat-ico
 Requires:   sailfishsilica-qt5
+Requires:   sailfish-components-webview-qt5
+Requires:   sailfish-components-webview-qt5-popups
+Requires:   sailfish-components-webview-qt5-pickers
 Requires:   qt5-qtdeclarative-import-xmllistmodel
+
 %if "%{?vendor}" == "chum"
 BuildRequires:  qt5-qttools-linguist
 %endif

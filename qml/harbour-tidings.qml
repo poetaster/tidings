@@ -124,7 +124,11 @@ ApplicationWindow
         key: "slideshow-items"
         value: "0"
     }
-
+    ConfigValue {
+        id: configFlickNext
+        key: "flick-next"
+        value: "1"
+    }
     ConfigValue {
         id: configTintedItems
         key: "feed-tinted"
