@@ -7,7 +7,7 @@ Page {
     objectName: "ViewPage"
 
     property int index;
-    property bool debug: true
+    property bool debug: false
     property bool _pullDownActivated: false
     property GridView listview
     property variant itemData: listview.currentItem !== null
