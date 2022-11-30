@@ -20,17 +20,16 @@ Page {
 
     Component {
         id: webComponent
-
+        anchors.fill: parent
         WebView {
 
             id: webview
-            httpUserAgent: "Mozilla/5.0 (Mobile; rv:78.0) Gecko/78.0"
-                + " Firefox/78.0"
+            httpUserAgent: "Mozilla/5.0 (Mobile; rv:78.0) Gecko/78.0 Firefox/78.0"
 
             /* This will probably be required from 4.4 on. */
             Component.onCompleted: {
-                //WebEngineSettings.setPreference("security.disable_cors_checks", true, WebEngineSettings.BoolPref)
-                //WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
+                WebEngineSettings.setPreference("security.disable_cors_checks", true, WebEngineSettings.BoolPref)
+                WebEngineSettings.setPreference("security.fileuri.strict_origin_policy", false, WebEngineSettings.BoolPref)
                     if (configFontScaleWebEnabled.booleanValue)
                     {
                         experimental.preferences.minimumFontSize =
@@ -39,7 +38,7 @@ Page {
 
             }
             onRecvAsyncMessage: {
-                /*
+
                 console.debug(message)
                 switch (message) {
                 case "embed:contentOrientationChanged":
@@ -50,7 +49,7 @@ Page {
                     }
                     break
                 }
-                */
+
             }
 
             //property int _backCount: 0

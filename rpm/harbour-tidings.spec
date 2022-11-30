@@ -21,6 +21,7 @@ Source0:    %{name}-%{version}.tar.bz2
 Requires:   qt5-plugin-imageformat-gif
 Requires:   qt5-plugin-imageformat-ico
 Requires:   sailfishsilica-qt5
+Requires:   qtmozembed-qt5
 Requires:   sailfish-components-webview-qt5
 Requires:   qt5-qtdeclarative-import-xmllistmodel
 
@@ -33,6 +34,7 @@ BuildRequires:  pkgconfig(Qt5Quick)
 BuildRequires:  pkgconfig(Qt5Concurrent)
 BuildRequires:  pkgconfig(Qt5Xml)
 BuildRequires:  pkgconfig(sailfishapp)
+BuildRequires:  pkgconfig(qt5embedwidget)
 BuildRequires:  desktop-file-utils
 
 %description
