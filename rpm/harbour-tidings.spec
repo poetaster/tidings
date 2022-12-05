@@ -17,6 +17,7 @@ Version:    1.3.0
 Release:    1
 Group:      Qt/Qt
 License:    GPLv2
+URL:        https://github.com/poetaster/tidings
 Source0:    %{name}-%{version}.tar.bz2
 Requires:   qt5-plugin-imageformat-gif
 Requires:   qt5-plugin-imageformat-ico
