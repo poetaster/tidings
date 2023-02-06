@@ -346,8 +346,8 @@ Page {
                 Image {
                     id: shelveIcon
                     anchors.right: parent.right
-                    source: itemData.shelved ? "image://theme/icon-l-favorite"
-                                             : "image://theme/icon-l-star"
+                    source: itemData.shelved ? "image://theme/icon-m-favorite-selected"
+                                             : "image://theme/icon-m-favorite"
                     width: Theme.itemSizeSmall
                     height: width
 
