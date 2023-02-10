@@ -7,7 +7,6 @@
 #         - desktop filename must be changed
 #         - icon definition filename in desktop file must be changed
 TARGET = harbour-tidings
-PKGCONFIG += qt5embedwidget
 
 CONFIG += sailfishapp
 QT += concurrent sql xml

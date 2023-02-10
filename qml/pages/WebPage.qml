@@ -20,8 +20,9 @@ Page {
 
     Component {
         id: webComponent
-        anchors.fill: parent
+
         WebView {
+            anchors.fill: parent
 
             id: webview
             httpUserAgent: "Mozilla/5.0 (Mobile; rv:78.0) Gecko/78.0 Firefox/78.0"
@@ -55,7 +56,6 @@ Page {
             //property int _backCount: 0
             //property int _previousContentY;
 
-            anchors.fill: parent
             url: root.url
 
             onLoadingChanged: {}
