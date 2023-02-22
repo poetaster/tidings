@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 ListModel {
 
+
     property var names: ({})
     property var colors: ({})
 

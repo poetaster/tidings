@@ -92,4 +92,5 @@ SAILFISHAPP_ICONS += 86x86 108x108 128x128 172x172
 DISTFILES += icons/86x86/harbour-tidings.png \
     icons/108x108/harbour-tidings.png \
     icons/128x128/harbour-tidings.png \
-    icons/172x172/harbour-tidings.png
+    icons/172x172/harbour-tidings.png \
+    qml/pages/worker.js

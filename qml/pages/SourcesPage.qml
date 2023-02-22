@@ -1,11 +1,18 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import Sailfish.Pickers 1.0 // File-Loader
+import QtQuick.XmlListModel 2.0
 
 Page {
     id: page
     objectName: "SourcesPage"
 
     property Page feedsPage
+
+    property bool debug: true
+    property bool importDone: true
+    property int  importIndex: 0
+    property var feeds: ({})
 
     property var cycleThumbnailSources: []
     property int cycleIndex
@@ -16,6 +23,11 @@ Page {
     //   2: move feeds
     property int editMode: 0
     property int editedIndex: 0
+
+    function importOPML(file,mime)
+    {
+        xmlModel.source = file
+    }
 
     function titleText(editMode)
     {
@@ -42,6 +54,107 @@ Page {
         if (editMode === 0)
         {
             sourcesModel.savePositions();
+        }
+    }
+
+    // a widget to permit using the workerscript with the xmllistmodel
+    ListModel {
+       id: tmpMdl
+       ListElement { name:"title" }
+       ListElement { name:"text" }
+       ListElement { name:"xmlUrl" }
+    }
+    // a widget to ease importing opml files
+    XmlListModel {
+        id: xmlModel
+        source: ""
+        query: "/opml/body/outline"
+        XmlRole { name: "title"; query: "@title/string()" }
+        XmlRole { name: "text"; query: "@text/string()" }
+        XmlRole { name: "xmlUrl"; query: "@xmlUrl/string()" }
+        onStatusChanged: {
+        if (xmlModel.status === XmlListModel.Ready) {
+            if (debug) console.log(xmlModel.count)
+            /*
+            for( var x=0; x < opmlModel.count; x++ ) {
+                console.debug(opmlModel.get(x))
+               tmpMdl.insert(0,opmlModel.get(x))
+            }
+            if(tmpMdl.count) {
+                xmlWorker.sendMessage({ 'sources': sourcesModel , 'model': tmpMdl  })
+            }
+            */
+            importDone = false
+            importIndex = 0
+            xmlTimer.start()
+          }
+        }
+    }
+    Component {
+       id: filePickerPage
+       FilePickerPage {
+           title: qsTr("Select OPML file")
+           //nameFilters: [ '*.wav', '*.mp3', '*.flac', '*.ogg', '*.aac', '*.mp4' ]
+           onSelectedContentPropertiesChanged: {
+               var filePath = selectedContentProperties.url
+               var mimeType = selectedContentProperties.mimeType
+               importOPML(filePath,mimeType)
+           }
+       }
+    }
+
+    BusyIndicator {
+        id: indicator
+        size: BusyIndicatorSize.Large
+        anchors.centerIn: parent
+        running: false
+    }
+
+    // this is dumb, but it does not work well with a WorkerScript
+    Timer {
+        id:xmlTimer
+        running: false
+        repeat: false
+        interval: 1000
+
+        onTriggered: {
+            indicator.running = true
+            for( var x=importIndex; x < xmlModel.count && x < importIndex + 10 ; x++ ) {
+                if (debug) console.log(xmlModel.get(x).title)
+                if (debug) console.log(xmlModel.get(x).xmlUrl)
+                var name = xmlModel.get(x).title
+                if (name === "") {
+                    name = xmlModel.get(x).text
+                }
+                var url = xmlModel.get(x).xmlUrl
+                var color = '#'+Math.floor(Math.random()*16777215).toString(16)
+                sourcesModel.addSource(name,url,color)
+        }
+            importIndex = importIndex + 10
+
+            if (importIndex >= xmlModel.count) {
+                xmlTimer.stop()
+                importDone = true
+                indicator.running = false
+            } else {
+                xmlTimer.start()
+            }
+
+       }
+    }
+
+    WorkerScript {
+        id: xmlWorker
+        source: "worker.js"
+        onMessage: {
+             if (messageObject.add) {
+                if (debug) console.log(messageObject.add)
+                sourcesModel.addSource(messageObject.add.name, messageObject.add.url, messageObject.add.color)
+             }
+
+             if (messageObject.reply) {
+               if (debug) console.debug(messageObject.reply)
+             }
         }
     }
 
@@ -213,12 +326,16 @@ Page {
                     pageStack.push(Qt.resolvedUrl("AboutPage.qml"));
                 }
             }
-
             MenuItem {
                 text: qsTr("Settings")
-
                 onClicked: {
                     pageStack.push(Qt.resolvedUrl("SettingsPage.qml"));
+                }
+            }
+            MenuItem {
+                text: qsTr("Import OPML")
+                onClicked: {
+                    pageStack.push(filePickerPage)
                 }
             }
 
@@ -227,10 +344,10 @@ Page {
 
                 onClicked: {
                     remorse.execute(qsTr("All read"),
-                                    function()
-                                    {
-                                        newsBlendModel.setAllRead();
-                                    } );
+                          function()
+                          {
+                               newsBlendModel.setAllRead();
+                           } );
                 }
             }
 
