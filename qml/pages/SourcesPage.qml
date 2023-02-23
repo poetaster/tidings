@@ -9,7 +9,7 @@ Page {
 
     property Page feedsPage
 
-    property bool debug: true
+    property bool debug: false
     property bool importDone: true
     property int  importIndex: 0
     property var feeds: ({})
@@ -51,45 +51,11 @@ Page {
     }
 
     onEditModeChanged: {
-        if (editMode === 0)
-        {
+        if (editMode === 0) {
             sourcesModel.savePositions();
         }
     }
-
-    // a widget to permit using the workerscript with the xmllistmodel
-    ListModel {
-       id: tmpMdl
-       ListElement { name:"title" }
-       ListElement { name:"text" }
-       ListElement { name:"xmlUrl" }
-    }
-    // a widget to ease importing opml files
-    XmlListModel {
-        id: xmlModel
-        source: ""
-        query: "/opml/body/outline"
-        XmlRole { name: "title"; query: "@title/string()" }
-        XmlRole { name: "text"; query: "@text/string()" }
-        XmlRole { name: "xmlUrl"; query: "@xmlUrl/string()" }
-        onStatusChanged: {
-        if (xmlModel.status === XmlListModel.Ready) {
-            if (debug) console.log(xmlModel.count)
-            /*
-            for( var x=0; x < opmlModel.count; x++ ) {
-                console.debug(opmlModel.get(x))
-               tmpMdl.insert(0,opmlModel.get(x))
-            }
-            if(tmpMdl.count) {
-                xmlWorker.sendMessage({ 'sources': sourcesModel , 'model': tmpMdl  })
-            }
-            */
-            importDone = false
-            importIndex = 0
-            xmlTimer.start()
-          }
-        }
-    }
+    /* used for opml import */
     Component {
        id: filePickerPage
        FilePickerPage {
@@ -103,14 +69,53 @@ Page {
        }
     }
 
+    /* used for opml import */
     BusyIndicator {
         id: indicator
         size: BusyIndicatorSize.Large
         anchors.centerIn: parent
         running: false
     }
+    /*   used for opml import
+     *   this captures ungrouped on second pass
+     */
+    XmlListModel {
+        id: xmlFlatModel
+        source: ""
+        query: "/opml/body/outline"
+        XmlRole { name: "title"; query: "@title/string()" }
+        XmlRole { name: "text"; query: "@text/string()" }
+        XmlRole { name: "xmlUrl"; query: "@xmlUrl/string()" }
+        onStatusChanged: {
+        if (xmlModel.status === XmlListModel.Ready) {
+            if (debug) console.log(xmlModel.count)
+            importDone = false
+            importIndex = 0
+            xmlTimer.start()
+          }
+        }
+    }
+    /* used for opml import, grouped */
+    XmlListModel {
+        id: xmlModel
+        source: ""
+        query: "//outline"
+        XmlRole { name: "title"; query: "@title/string()" }
+        XmlRole { name: "text"; query: "@text/string()" }
+        XmlRole { name: "xmlUrl"; query: "@xmlUrl/string()" }
+        onStatusChanged: {
+        if (xmlModel.status === XmlListModel.Ready) {
+            if (debug) console.log(xmlModel.count)
+            importDone = false
+            importIndex = 0
+            xmlTimer.start()
+          }
+        }
+    }
 
-    // this is dumb, but it does not work well with a WorkerScript
+
+    /* used for opml import */
+    /* this is dumb, but it does not work well with a WorkerScript */
     Timer {
         id:xmlTimer
         running: false
@@ -129,7 +134,7 @@ Page {
                 var url = xmlModel.get(x).xmlUrl
                 var color = '#'+Math.floor(Math.random()*16777215).toString(16)
                 sourcesModel.addSource(name,url,color)
-        }
+            }
             importIndex = importIndex + 10
 
             if (importIndex >= xmlModel.count) {
@@ -140,9 +145,10 @@ Page {
                 xmlTimer.start()
             }
 
-       }
+        }
     }
-
+    /* not currently used */
+    /*
     WorkerScript {
         id: xmlWorker
         source: "worker.js"
@@ -156,7 +162,7 @@ Page {
                if (debug) console.debug(messageObject.reply)
              }
         }
-    }
+    }*/
 
     Timer {
         running: Qt.application.active &&
