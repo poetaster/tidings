@@ -276,12 +276,12 @@
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="117"/>
         <source>Enable Flicking</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktivera svepning</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="118"/>
         <source>If enabled, flicking slightly up-left in an article view proceeds to next article.</source>
-        <translation type="unfinished"></translation>
+        <translation>Vid aktiverad, går du till nästa artikel genom att svepa något uppåt vänster i artikelvyn.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="153"/>
@@ -489,7 +489,7 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="62"/>
         <source>Select OPML file</source>
-        <translation type="unfinished"></translation>
+        <translation>Välj OPML-fil</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="328"/>
@@ -504,7 +504,7 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="341"/>
         <source>Import OPML</source>
-        <translation type="unfinished"></translation>
+        <translation>Importera OPML</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="348"/>
@@ -559,7 +559,7 @@
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="216"/>
         <source>Open in browser</source>
-        <translation type="unfinished">Öppna i webbläsaren</translation>
+        <translation>Öppna i webbläsaren</translation>
     </message>
     <message>
         <location filename="../qml/pages/ViewPage.qml" line="224"/>
