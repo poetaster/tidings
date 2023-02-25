@@ -492,44 +492,44 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="328"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="329"/>
         <source>About Tidings</source>
         <translation>Tietoja</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="335"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="336"/>
         <source>Settings</source>
         <translation>Asetukset</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="341"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="342"/>
         <source>Import OPML</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="348"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="351"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="349"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="352"/>
         <source>All read</source>
         <translation>Kaikki luettu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="360"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="375"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="361"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="376"/>
         <source>Abort refreshing</source>
         <translation>Keskeytä päivitys</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="361"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="362"/>
         <source>Refresh all</source>
         <translation>Päivitä kaikki</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="376"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="377"/>
         <source>All read &amp; Refresh all</source>
         <translation>Kaikki luettu &amp; Päivitä kaikki</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="392"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="393"/>
         <source>Stop Audio</source>
         <translation>Pysäytä ääni</translation>
     </message>

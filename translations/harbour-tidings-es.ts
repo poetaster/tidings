@@ -492,44 +492,44 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="328"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="329"/>
         <source>About Tidings</source>
         <translation>Tidings</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="335"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="336"/>
         <source>Settings</source>
         <translation>Ajustes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="341"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="342"/>
         <source>Import OPML</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="348"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="351"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="349"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="352"/>
         <source>All read</source>
         <translation>Leer todo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="360"/>
-        <location filename="../qml/pages/SourcesPage.qml" line="375"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="361"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="376"/>
         <source>Abort refreshing</source>
         <translation>Abortar actualización</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="361"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="362"/>
         <source>Refresh all</source>
         <translation>Actualizar todo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="376"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="377"/>
         <source>All read &amp; Refresh all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/SourcesPage.qml" line="392"/>
+        <location filename="../qml/pages/SourcesPage.qml" line="393"/>
         <source>Stop Audio</source>
         <translation>Detener el audio</translation>
     </message>
