@@ -62,7 +62,7 @@ Page {
             font.pixelSize: Theme.fontSizeExtraSmall
             color: Theme.secondaryColor
             text: qsTr("Copyright © 2013 - 2020 Martin Grimme ")
-                  + qsTr(" © 2021 Mark Washeim")
+                  + qsTr(" © 2021 - 2023 Mark Washeim")
         }
 
         Item {
