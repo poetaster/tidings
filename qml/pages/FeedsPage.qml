@@ -7,6 +7,12 @@ Page {
 
     allowedOrientations: Orientation.All
 
+    function markAllRead() {
+        Remorse.popupAction(page, qsTr("All read"), function(){
+            this.setVisibleRead()
+        }.bind(newsBlendModel))
+    }
+
     onStatusChanged: {
         if (status == PageStatus.Inactive && pageStack.currentPage.objectName == 'SourcesPage') {
             // Show all feeds again if we returned to the root page, i.e. the
@@ -86,19 +92,8 @@ Page {
             }
         }
 
+
         PullDownMenu {
-            id: pulleyMenu
-
-            property var _action
-
-            onActiveChanged: {
-                if (! active && _action)
-                {
-                    _action();
-                    _action = null;
-                }
-            }
-
             MenuItem {
                 text: qsTr("Sort by: %1").arg(newsBlendModel.feedSorter.name)
                 elide: Text.ElideRight
@@ -115,16 +110,7 @@ Page {
 
             MenuItem {
                 text: qsTr("All read")
-
-                onClicked: {
-                    pulleyMenu._action = function() {
-                        remorse.execute(qsTr("All read"),
-                                        function()
-                                        {
-                                            newsBlendModel.setVisibleRead();
-                                        } );
-                    };
-                }
+                onDelayedClick: markAllRead()
             }
 
             MenuItem {
@@ -135,6 +121,15 @@ Page {
                     audioPlayer.stop();
                     audioPlayer.source = "";
                 }
+            }
+        }
+
+        PushUpMenu {
+            quickSelect: true
+
+            MenuItem {
+                text: qsTr("All read")
+                onDelayedClick: markAllRead()
             }
         }
 
