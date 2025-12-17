@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
     Json json;
 
     QScopedPointer<QQuickView> view(SailfishApp::createView());
-    view->rootContext()->setContextProperty("appVersion", appVersion);
+    view->rootContext()->setContextProperty("APP_VERSION", appVersion);
     view->rootContext()->setContextProperty("dateParser", &dateParser);
     view->rootContext()->setContextProperty("json", &json);
 
