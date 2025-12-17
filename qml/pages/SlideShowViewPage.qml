@@ -200,6 +200,8 @@ Page {
         anchors.fill: parent
         contentHeight:  contentItem.childrenRect.height
 
+        VerticalScrollDecorator { flickable: contentFlickable }
+
         PullDownMenu {
             id: pulleyDown
 
@@ -607,8 +609,6 @@ Page {
 
             }
         }
-        VerticalScrollDecorator {}
-        ScrollDecorator { color: palette.primaryColor }
     }
 
     BusyIndicator {

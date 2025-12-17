@@ -1,2 +1,5 @@
 harbour-tidings.pro.user
 rpm/harbour-tidings.spec
+
+libs/opal-docs
+libs/opal-translations

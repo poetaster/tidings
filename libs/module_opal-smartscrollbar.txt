@@ -1,0 +1,21 @@
+# Store this file to keep track of packaged module versions.
+# It is not necessary to ship this in your app's final RPM package.
+# SPDX-FileCopyrightText: 2024 Mirian Margiani
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# Attribution using Opal.About:
+#   Opal attributions are automatically added since version 3.0.0.
+#   Check the "autoAddOpalAttributions" property on your About page.
+#
+# Manual attribution:
+#   1. Import "../modules/Opal/Attributions" in your "About" page.
+#   2. Attribute this module by adding "OpalSmartScrollbarAttribution {}"
+#      to the "attributions" list property of the "About" page.
+
+module: Opal.SmartScrollbar (opal-smartscrollbar)
+version: 1.0.0 (git:a0e025a)
+description: This module provides a Harbour-compatible smart scroll bar for long lists.
+maintainers: Mirian Margiani
+attribution: 2024 Mirian Margiani
+license: GPL-3.0-or-later
+sources: https://github.com/Pretty-SFOS/opal-smartscrollbar
