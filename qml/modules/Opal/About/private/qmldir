@@ -1,0 +1,18 @@
+module Opal.About.private
+# This file is part of Opal.About.
+# SPDX-FileCopyrightText: 2020-2025 Mirian Margiani
+# SPDX-License-Identifier: GPL-3.0-or-later
+singleton ScrollbarType 1.0 ScrollbarType.qml
+Functions 1.0 functions.js
+WorkerSpdx 1.0 worker_spdx.js
+ChangelogItemsLoader 1.0 ChangelogItemsLoader.qml
+ChangelogPage 1.0 ChangelogPage.qml
+ChangelogView 1.0 ChangelogView.qml
+ContributorsAttributionRepeater 1.0 ContributorsAttributionRepeater.qml
+ContributorsPage 1.0 ContributorsPage.qml
+DetailList 1.0 DetailList.qml
+DonationsGroup 1.0 DonationsGroup.qml
+LicenseListPart 1.0 LicenseListPart.qml
+LicenseListRepeater 1.0 LicenseListRepeater.qml
+LicensePage 1.0 LicensePage.qml
+OpalAttributionsLoader 1.0 OpalAttributionsLoader.qml

@@ -1,0 +1,21 @@
+# Store this file to keep track of packaged module versions.
+# It is not necessary to ship this in your app's final RPM package.
+# SPDX-FileCopyrightText: 2018-2024 Mirian Margiani
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# Attribution using Opal.About:
+#   Opal attributions are automatically added since version 3.0.0.
+#   Check the "autoAddOpalAttributions" property on your About page.
+#
+# Manual attribution:
+#   1. Import "../modules/Opal/Attributions" in your "About" page.
+#   2. Attribute this module by adding "OpalAboutAttribution {}"
+#      to the "attributions" list property of the "About" page.
+
+module: Opal.About (opal-about)
+version: 3.0.1 (git:ebd6d50)
+description: This module provides <i>AboutPageBase</i> for building customizable application information pages.
+maintainers: Mirian Margiani
+attribution: 2018-2024 Mirian Margiani
+license: GPL-3.0-or-later
+sources: https://github.com/Pretty-SFOS/opal-about
