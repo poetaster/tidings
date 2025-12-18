@@ -6,6 +6,7 @@
 Name:       harbour-tidings
 
 # >> macros
+%define _binary_payload w2.xzdio
 # << macros
 
 %{!?qtc_qmake:%define qtc_qmake %qmake}
@@ -13,7 +14,7 @@ Name:       harbour-tidings
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    RSS / Atom / Podcasts / Feed Reader
-Version:    1.4.2
+Version:    1.4.3
 Release:    1
 Group:      Qt/Qt
 License:    GPLv2
