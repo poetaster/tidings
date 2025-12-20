@@ -1,0 +1,5 @@
+module Opal.SmartScrollbar
+# This file is part of Opal.SmartScrollbar.
+# SPDX-FileCopyrightText: 2023-2024 Mirian Margiani
+# SPDX-License-Identifier: GPL-3.0-or-later
+SmartScrollbar 1.0 SmartScrollbar.qml

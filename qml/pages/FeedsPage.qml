@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 
+import "../modules/Opal/SmartScrollbar"
+
 Page {
     id: page
     objectName: "FeedsPage"
@@ -92,6 +94,12 @@ Page {
             }
         }
 
+        SmartScrollbar {
+            flickable: listview
+            readonly property int scrollIndex: !!flickable ?
+                flickable.indexAt(flickable.contentX, flickable.contentY) : -1
+            text: "%1 / %2".arg(scrollIndex + 2).arg(flickable.count)
+        }
 
         PullDownMenu {
             MenuItem {
@@ -257,16 +265,7 @@ Page {
                 else return qsTr("Pull down to refresh.")
             }
         }
-
-        ScrollDecorator { color: palette.primaryColor }
     }
-
-    FancyScroller {
-        visible: listview.quickScroll === undefined ||
-                 listview.quickScrollEnabled !== true
-        flickable: listview
-    }
-
 
     // loading indicator
     Rectangle {

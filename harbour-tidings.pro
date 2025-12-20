@@ -95,3 +95,5 @@ DISTFILES += icons/86x86/harbour-tidings.png \
     icons/128x128/harbour-tidings.png \
     icons/172x172/harbour-tidings.png \
     qml/pages/worker.js
+
+QML_IMPORT_PATH += qml/modules
