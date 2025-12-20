@@ -6,6 +6,6 @@ pragma Singleton
 import QtQuick 2.0
 QtObject{readonly property int none:0
 readonly property int plain:1
-readonly property int advanced:2
-readonly property int auto:3
+    readonly property int advanced:2
+    readonly property int auto:3
 }
