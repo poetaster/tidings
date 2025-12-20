@@ -580,8 +580,6 @@ Page {
             }//Repeater
 
         }
-
-        ScrollDecorator { }
     }
 
     BusyIndicator {

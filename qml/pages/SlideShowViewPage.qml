@@ -2,6 +2,8 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.tidings 1.0
 
+import "../modules/Opal/SmartScrollbar"
+
 Page {
     id: page
     objectName: "ViewPage"
@@ -200,7 +202,13 @@ Page {
         anchors.fill: parent
         contentHeight:  contentItem.childrenRect.height
 
-        VerticalScrollDecorator { flickable: contentFlickable }
+        SmartScrollbar {
+            flickable: contentFlickable
+            property int progress: (flickable.contentY +
+                                    flickable.height * (flickable.contentY / flickable.contentHeight)) /
+                                   flickable.contentHeight * 100 + 1
+            text: progress + " %"
+        }
 
         PullDownMenu {
             id: pulleyDown
