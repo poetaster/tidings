@@ -39,7 +39,7 @@ AboutPageBase {
 
     donations.text: donations.defaultTextCoffee
     donations.services: DonationService {
-        name: "LiberaPay"
+        name: "Liberapay"
         url: "https://liberapay.com/poetaster"
     }
 
