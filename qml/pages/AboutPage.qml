@@ -1,6 +1,7 @@
 /*
  * This file is part of harbour-tidings.
- * SPDX-FileCopyrightText: 2025 Mark Washeim, Mirian Margiani
+ * SPDX-FileCopyrightText: 2025 Mark Washeim
+ * SPDX-FileCopyrightText: 2025 Mirian Margiani
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
@@ -20,7 +21,10 @@ AboutPageBase {
     sourcesUrl: "https://github.com/poetaster/tidings"
     // translationsUrl: "https://weblate.org/..."
 
-    authors: ["2021 - 2026 Mark Washeim", "2013 - 2020 Martin Grimme"]
+    authors: [
+        "2021 - %1 Mark Washeim".arg((new Date()).getFullYear()),
+        "2013 - 2020 Martin Grimme"
+    ]
     licenses: License { spdxId: "GPL-2.0-only" }
 
     /* changelogItems: [
