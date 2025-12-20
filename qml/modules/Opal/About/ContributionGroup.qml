@@ -5,6 +5,6 @@
 import QtQuick 2.0
 import"private/functions.js"as Func
 QtObject{property string title
-property var entries:[]
-property var __effectiveEntries:Func.makeStringList(entries)
+    property var entries:[]
+    property var __effectiveEntries:Func.makeStringList(entries)
 }
