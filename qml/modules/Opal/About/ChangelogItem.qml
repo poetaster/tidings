@@ -5,10 +5,10 @@
 import QtQuick 2.0
 import"private/functions.js"as Func
 QtObject{property string version
-property date date:new Date(NaN)
-property string author
-property var paragraphs
-property int textFormat:Text.StyledText
-property var __effectiveEntries:Func.makeStringList(paragraphs,false)
-property string __effectiveSection:version+(isNaN(date.valueOf())?"":"|"+Qt.formatDate(date,Qt.DefaultLocaleShortDate))
+    property date date:new Date(NaN)
+    property string author
+    property var paragraphs
+    property int textFormat:Text.StyledText
+    property var __effectiveEntries:Func.makeStringList(paragraphs,false)
+    property string __effectiveSection:version+(isNaN(date.valueOf())?"":"|"+Qt.formatDate(date,Qt.DefaultLocaleShortDate))
 }

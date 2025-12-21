@@ -4,5 +4,5 @@
 //@ SPDX-License-Identifier: GPL-3.0-or-later
 import QtQuick 2.0
 QtObject{property string title
-property list<ContributionGroup>groups
+    property list<ContributionGroup>groups
 }
