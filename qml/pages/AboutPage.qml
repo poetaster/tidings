@@ -66,7 +66,7 @@ AboutPageBase {
                 ContributionGroup {
                     title: qsTr("Icon Design")
                     entries: [
-                        "Martin Grimme"
+                        "JSEHV"
                     ]
                 }
             ]
