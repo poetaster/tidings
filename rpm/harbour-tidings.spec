@@ -16,7 +16,7 @@ Name:       harbour-tidings
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 
 Summary:    RSS / Atom / Podcasts / Feed Reader
-Version:    1.4.3
+Version:    1.4.4
 Release:    1
 Group:      Qt/Qt
 License:    GPLv2

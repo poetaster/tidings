@@ -75,6 +75,7 @@ TRANSLATIONS += translations/harbour-tidings-es.ts
 TRANSLATIONS += translations/harbour-tidings-fi_FI.ts
 TRANSLATIONS += translations/harbour-tidings-gr_GR.ts
 TRANSLATIONS += translations/harbour-tidings-pl_PL.ts
+TRANSLATIONS += translations/harbour-tidings-it_IT.ts
 
 CONFIG += sailfishapp_i18n_unfinished
 
