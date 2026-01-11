@@ -16,6 +16,8 @@
 
 #include <QDebug>
 
+#include "compressor.h"
+
 namespace
 {
 
@@ -125,6 +127,8 @@ void UrlLoader::setSource(const QUrl& source)
                      .arg(appVersion)
                      .toUtf8());
 
+    req.setRawHeader("Accept-Encoding", "gzip");
+
     qDebug() << "Requesting" << source;
 
     myCurrentReply = myNetworkAccessManager->get(req);
@@ -175,6 +179,7 @@ void UrlLoader::slotGotReply()
                              QString("Tidings/%1 (Sailfish OS)")
                              .arg(appVersion)
                              .toUtf8());
+            req.setRawHeader("Accept-Encoding", "gzip");
             myCurrentReply = myNetworkAccessManager->get(req);
             connect(myCurrentReply, SIGNAL(finished()),
                     this, SLOT(slotGotReply()));
@@ -214,8 +219,8 @@ void UrlLoader::readData(QNetworkReply* reply)
 {
     if (myDestination.isEmpty())
     {
-        const QByteArray data = reply->readAll();
-
+        //const QByteArray data = reply->readAll();
+        const QByteArray data = Compressor::gunzip(reply->readAll());
         const QString charSet =
                 getCharset(reply->header(QNetworkRequest::ContentTypeHeader)
                            .toString());

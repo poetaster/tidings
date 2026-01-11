@@ -11,6 +11,8 @@ TARGET = harbour-tidings
 CONFIG += sailfishapp
 QT += concurrent sql xml
 
+LIBS += -lz
+
 SOURCES += \
     src/harbour-tidings.cpp \
     src/feedloader.cpp \
@@ -18,7 +20,8 @@ SOURCES += \
     src/htmlfilter.cpp \
     src/urlloader.cpp \
     src/htmlsed.cpp \
-    src/database.cpp
+    src/database.cpp \
+    src/compressor.cpp
 
 OTHER_FILES += qml/harbour-tidings.qml \
     qml/cover/CoverPage.qml \
@@ -89,7 +92,8 @@ HEADERS += \
     src/dateparser.h \
     src/urlloader.h \
     src/htmlsed.h \
-    src/database.h
+    src/database.h \
+    src/compressor.h
 
 SAILFISHAPP_ICONS += 86x86 108x108 128x128 172x172
 

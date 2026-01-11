@@ -295,6 +295,8 @@
         <source>show license(s)</source>
         <translation type="unfinished">
             <numerusform>Pokaż licencje</numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -348,6 +350,8 @@
         <source>License(s)</source>
         <translation type="unfinished">
             <numerusform>Licencje</numerusform>
+            <numerusform></numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>

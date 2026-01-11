@@ -294,6 +294,7 @@
         <source>show license(s)</source>
         <translation>
             <numerusform>vis lisenser</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>
@@ -347,6 +348,7 @@
         <source>License(s)</source>
         <translation>
             <numerusform>Lisenser</numerusform>
+            <numerusform></numerusform>
         </translation>
     </message>
     <message>

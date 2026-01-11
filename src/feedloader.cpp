@@ -10,6 +10,8 @@
 
 #include <QDebug>
 
+#include "compressor.h"
+
 namespace
 {
 
@@ -90,6 +92,7 @@ void FeedLoader::setSource(const QString& source)
                      .arg(appVersion)
                      .toUtf8());
 
+    req.setRawHeader("Accept-Encoding", "gzip");
     qDebug() << "Requesting" << source;
 
     myCurrentReply = myNetworkAccessManager->get(req);
@@ -171,6 +174,7 @@ void FeedLoader::slotGotReply()
                              QString("Tidings/%1 (Sailfish OS)")
                              .arg(appVersion)
                              .toUtf8());
+            req.setRawHeader("Accept-Encoding", "gzip");
             myCurrentReply = myNetworkAccessManager->get(req);
             connect(myCurrentReply, SIGNAL(finished()),
                     this, SLOT(slotGotReply()));
@@ -199,7 +203,10 @@ void FeedLoader::slotGotReply()
 
         // convert from encoding to UTF-8
         QDomDocument doc;
-        doc.setContent(reply->readAll(), false);
+
+        const QByteArray repl = Compressor::gunzip(reply->readAll());
+
+        doc.setContent(repl, false);
         QString data = doc.toString();
 
         // remove <?xml ... ?> instructions
