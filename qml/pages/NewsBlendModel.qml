@@ -462,6 +462,7 @@ NewsModel {
         }
 
         _backgroundWorker.execute(loader);
+        ready = true;
     }
 
     /* Aborts loading.
