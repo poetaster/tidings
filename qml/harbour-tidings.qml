@@ -23,7 +23,24 @@ ApplicationWindow
     Database {
         id: database
     }
+    property alias workerscript: worker
 
+    WorkerScript {
+        id: worker
+        source: "pages/worker.js"
+        onMessage: {
+             if (messageObject.reply === "done") {
+                 // should print on completion
+                if (debug) console.log(messageObject)
+                //sourcesModel.addSource(messageObject.add.name, messageObject.add.url, messageObject.add.color)
+             }
+/*
+             if (messageObject.reply) {
+               if (debug) console.debug(messageObject.reply)
+             }
+             */
+        }
+    }
     SourcesModel {
         id: sourcesModel
 

@@ -220,9 +220,9 @@
         <translation>Kun nåværende feed — eldste først</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="296"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="302"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="306"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="297"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="303"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="307"/>
         <source>Error with %1:
 %2</source>
         <translation>Feil med %1: %2</translation>
@@ -820,87 +820,87 @@
 <context>
     <name>harbour-tidings</name>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="212"/>
+        <location filename="../qml/harbour-tidings.qml" line="229"/>
         <source>Feeds overview</source>
         <translation>Feeds oversikt</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="213"/>
+        <location filename="../qml/harbour-tidings.qml" line="230"/>
         <source>- Shows all your subscribed feeds.</source>
         <translation>Viser alle feedene du abonnerer på.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="214"/>
+        <location filename="../qml/harbour-tidings.qml" line="231"/>
         <source>- Pull down to refresh all.</source>
         <translation>Dra ned for å oppdatere alle.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="215"/>
+        <location filename="../qml/harbour-tidings.qml" line="232"/>
         <source>- Tap and hold to add or manage feeds.</source>
         <translation>Trykk og hold for å legge til eller administrere feeds.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="220"/>
+        <location filename="../qml/harbour-tidings.qml" line="237"/>
         <source>Managing mode</source>
         <translation>Administrasjonsmodus</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="221"/>
+        <location filename="../qml/harbour-tidings.qml" line="238"/>
         <source>- Tap on a feed to refresh.</source>
         <translation>- Trykk på en feed for å oppdatere.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="222"/>
+        <location filename="../qml/harbour-tidings.qml" line="239"/>
         <source>- Tap on the edit button to edit.</source>
         <translation>- Trykk på Rediger-knappen for å endre.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="223"/>
+        <location filename="../qml/harbour-tidings.qml" line="240"/>
         <source>- Tap and hold on a feed to move position.</source>
         <translation>- Trykk og hold på en feed for å flytte den.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="224"/>
+        <location filename="../qml/harbour-tidings.qml" line="241"/>
         <source>- Tap on empty space to leave managing mode.</source>
         <translation>- Trykk på tomt felt for å gå ut av administrasjonsmodus.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="229"/>
+        <location filename="../qml/harbour-tidings.qml" line="246"/>
         <source>Articles</source>
         <translation>Artikler</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="230"/>
+        <location filename="../qml/harbour-tidings.qml" line="247"/>
         <source>- Tap on the page header to change sorting.</source>
         <translation>- Trykk på sideoverskriften for å endre sortering.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="231"/>
+        <location filename="../qml/harbour-tidings.qml" line="248"/>
         <source>- Pull down to mark all as read.</source>
         <translation>- Dra ned for å merke alt som lest</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="236"/>
+        <location filename="../qml/harbour-tidings.qml" line="253"/>
         <source>Article view</source>
         <translation>Artikkelvisning</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="237"/>
+        <location filename="../qml/harbour-tidings.qml" line="254"/>
         <source>- Tap on the title to open in external browser.</source>
         <translation>- Trykk på tittelen for å åpne i ekstern nettleser.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="238"/>
+        <location filename="../qml/harbour-tidings.qml" line="255"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
         <translation>- Trykk på utklippsikonet for å kopiere lenken til utklippstavlen.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="239"/>
+        <location filename="../qml/harbour-tidings.qml" line="256"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation>- Trykk på stjernen for å lagre artikkelen.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="251"/>
+        <location filename="../qml/harbour-tidings.qml" line="268"/>
         <source>Loading from cache</source>
         <translation>Laster fra hurtigbuffer</translation>
     </message>

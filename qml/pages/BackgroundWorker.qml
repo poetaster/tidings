@@ -31,7 +31,12 @@ Timer {
         {
             if (!bgWorkers[0]())
             {
-                bgWorkers.shift();
+                var msg = {
+                    'action'    : "execute",
+                    'params'    : [bgWorkers.shift()],
+                }
+                appWin.workerscript.sendMessage(msg)
+                //bgWorkers.shift();
                 if (bgWorkers.length === 0)
                 {
                     stop();

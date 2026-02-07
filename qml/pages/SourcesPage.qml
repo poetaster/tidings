@@ -401,11 +401,8 @@ Page {
 
         delegate: Item {
             id: listItem
-
             property variant item: index < sourcesModel.count ? sourcesModel.get(index)
                                                               : null
-
-
             function edit()
             {
                 var props = {
@@ -419,34 +416,28 @@ Page {
                 }
                 pageStack.push("SourceEditDialog.qml", props);
             }
-
             function refresh()
             {
                 newsBlendModel.refresh(item);
             }
-
             function forgetRead()
             {
                 sourcesModel.forgetSourceRead(item.url);
                 newsBlendModel.setFeedRead(item.url, false);
             }
-
             function remove()
             {
                 newsBlendModel.removeFeedItems(item.url);
                 sourcesModel.removeSource(item.sourceId);
             }
-
             width: gridview.cellWidth
             height: gridview.cellHeight
-
             onItemChanged: {
                 if (item && ! itemContent.loadingStatus)
                 {
                     itemContent.loadThumbnails();
                 }
             }
-
             MouseArea {
                 visible: index >= sourcesModel.count || page.editMode === 1
                 anchors.fill: parent

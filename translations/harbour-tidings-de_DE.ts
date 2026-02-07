@@ -220,9 +220,9 @@
         <translation>Nur aktueller Feed, älteste zuerst</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="296"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="302"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="306"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="297"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="303"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="307"/>
         <source>Error with %1:
 %2</source>
         <translation>Fehler bei %1:
@@ -821,87 +821,87 @@
 <context>
     <name>harbour-tidings</name>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="212"/>
+        <location filename="../qml/harbour-tidings.qml" line="229"/>
         <source>Feeds overview</source>
         <translation>Feed-Übersicht</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="213"/>
+        <location filename="../qml/harbour-tidings.qml" line="230"/>
         <source>- Shows all your subscribed feeds.</source>
         <translation>- Zeigt alle deine abonnierten Feeds.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="214"/>
+        <location filename="../qml/harbour-tidings.qml" line="231"/>
         <source>- Pull down to refresh all.</source>
         <translation>- Ziehe herunter, um alle zu aktualisieren.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="215"/>
+        <location filename="../qml/harbour-tidings.qml" line="232"/>
         <source>- Tap and hold to add or manage feeds.</source>
         <translation>- Drücke und halte, um Feeds hinzuzufügen oder zu bearbeiten.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="220"/>
+        <location filename="../qml/harbour-tidings.qml" line="237"/>
         <source>Managing mode</source>
         <translation>Verwalten-Modus</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="221"/>
+        <location filename="../qml/harbour-tidings.qml" line="238"/>
         <source>- Tap on a feed to refresh.</source>
         <translation>- Drücke einen Feed, um ihn zu aktualisieren.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="222"/>
+        <location filename="../qml/harbour-tidings.qml" line="239"/>
         <source>- Tap on the edit button to edit.</source>
         <translation>- Drücke den Bearbeiten-Knopf, um zu bearbeiten.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="223"/>
+        <location filename="../qml/harbour-tidings.qml" line="240"/>
         <source>- Tap and hold on a feed to move position.</source>
         <translation>- Drücke und halte einen Feed, um ihn zu verschieben.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="224"/>
+        <location filename="../qml/harbour-tidings.qml" line="241"/>
         <source>- Tap on empty space to leave managing mode.</source>
         <translation>- Drücke eine leere Stelle, um den Verwalten-Modus zu verlassen.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="229"/>
+        <location filename="../qml/harbour-tidings.qml" line="246"/>
         <source>Articles</source>
         <translation>Artikel</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="230"/>
+        <location filename="../qml/harbour-tidings.qml" line="247"/>
         <source>- Tap on the page header to change sorting.</source>
         <translation>- Drücke den Seitentitel, um die Sortierung zu ändern.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="231"/>
+        <location filename="../qml/harbour-tidings.qml" line="248"/>
         <source>- Pull down to mark all as read.</source>
         <translation>- Ziehe herunter, um alle als gelesen zu markieren.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="236"/>
+        <location filename="../qml/harbour-tidings.qml" line="253"/>
         <source>Article view</source>
         <translation>Artikelansicht</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="237"/>
+        <location filename="../qml/harbour-tidings.qml" line="254"/>
         <source>- Tap on the title to open in external browser.</source>
         <translation>- Drücke den Titel, um im externen Browser zu laden.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="238"/>
+        <location filename="../qml/harbour-tidings.qml" line="255"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
         <translation>- Drücke das Klemmbrettsymbol, um den Link in die Zwischenablage zu kopieren.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="239"/>
+        <location filename="../qml/harbour-tidings.qml" line="256"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation>- Drücke das Sternsymbol, um den Artikel zu behalten.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="251"/>
+        <location filename="../qml/harbour-tidings.qml" line="268"/>
         <source>Loading from cache</source>
         <translation>Lade aus dem Cache</translation>
     </message>

@@ -138,6 +138,7 @@ NewsModel {
     // worker for running tasks in the background
     property BackgroundWorker _backgroundWorker: BackgroundWorker { }
 
+
     property FeedParser _atomModel: FeedParser {
         parserUrl: Qt.resolvedUrl("AtomModel.qml")
         onParserStatusChanged: _handleParserResult(this)
@@ -461,8 +462,16 @@ NewsModel {
             }
         }
 
-        _backgroundWorker.execute(loader);
-        ready = true;
+        var msg = {
+            'action'    : "execute",
+            'params'    : [loader],
+        }
+
+        //if (debug) console.log(JSON.stringify(msg))
+        ///appWin.workerscript.sendMessage(msg)
+
+       _backgroundWorker.execute(loader);
+        ready = true
     }
 
     /* Aborts loading.

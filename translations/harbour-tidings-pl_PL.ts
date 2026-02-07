@@ -220,9 +220,9 @@
         <translation type="unfinished">Jedynie wybrany kanał, najpierw najstarsze</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="296"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="302"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="306"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="297"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="303"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="307"/>
         <source>Error with %1:
 %2</source>
         <translation type="unfinished">Błąd w %1:
@@ -823,87 +823,87 @@
 <context>
     <name>harbour-tidings</name>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="212"/>
+        <location filename="../qml/harbour-tidings.qml" line="229"/>
         <source>Feeds overview</source>
         <translation type="unfinished">Przegląd kanałów</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="213"/>
+        <location filename="../qml/harbour-tidings.qml" line="230"/>
         <source>- Shows all your subscribed feeds.</source>
         <translation type="unfinished">- Pokazuje wszystkie subskrybcje.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="214"/>
+        <location filename="../qml/harbour-tidings.qml" line="231"/>
         <source>- Pull down to refresh all.</source>
         <translation type="unfinished">- Przeciągnij w dół, aby je odświeżyć.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="215"/>
+        <location filename="../qml/harbour-tidings.qml" line="232"/>
         <source>- Tap and hold to add or manage feeds.</source>
         <translation type="unfinished">- Przyciśnij i przytrzymaj by dowadać kanały lub zarządzać nimi.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="220"/>
+        <location filename="../qml/harbour-tidings.qml" line="237"/>
         <source>Managing mode</source>
         <translation type="unfinished">- Tryb zarządzania</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="221"/>
+        <location filename="../qml/harbour-tidings.qml" line="238"/>
         <source>- Tap on a feed to refresh.</source>
         <translation type="unfinished">- Dotknij kanału, aby go odświeżyć.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="222"/>
+        <location filename="../qml/harbour-tidings.qml" line="239"/>
         <source>- Tap on the edit button to edit.</source>
         <translation type="unfinished">- Aby przejść do edycji, użyj przycisku.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="223"/>
+        <location filename="../qml/harbour-tidings.qml" line="240"/>
         <source>- Tap and hold on a feed to move position.</source>
         <translation type="unfinished">- Przytrzymaj dłużej kanał, aby móc go przenieść.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="224"/>
+        <location filename="../qml/harbour-tidings.qml" line="241"/>
         <source>- Tap on empty space to leave managing mode.</source>
         <translation type="unfinished">- Dotknij pustego miejsca, aby wyjść z trybu edycji</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="229"/>
+        <location filename="../qml/harbour-tidings.qml" line="246"/>
         <source>Articles</source>
         <translation type="unfinished">Artykuły</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="230"/>
+        <location filename="../qml/harbour-tidings.qml" line="247"/>
         <source>- Tap on the page header to change sorting.</source>
         <translation type="unfinished">- Dotknij nagłówka by zmienić sortowanie.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="231"/>
+        <location filename="../qml/harbour-tidings.qml" line="248"/>
         <source>- Pull down to mark all as read.</source>
         <translation type="unfinished">- Pociągnij w dół by oznaczyć wszystkie jako przeczytane</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="236"/>
+        <location filename="../qml/harbour-tidings.qml" line="253"/>
         <source>Article view</source>
         <translation type="unfinished">Widok artykułu</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="237"/>
+        <location filename="../qml/harbour-tidings.qml" line="254"/>
         <source>- Tap on the title to open in external browser.</source>
         <translation type="unfinished">- Dotknij tytuł by otworzyć w przeglądarce.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="238"/>
+        <location filename="../qml/harbour-tidings.qml" line="255"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
         <translation type="unfinished">- Dotknij ikonę schowka, aby skopiować odnośnik.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="239"/>
+        <location filename="../qml/harbour-tidings.qml" line="256"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation type="unfinished">- Dotknij ikonę gwiazdy, aby zapisać artykuł.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="251"/>
+        <location filename="../qml/harbour-tidings.qml" line="268"/>
         <source>Loading from cache</source>
         <translation type="unfinished">Ładuję z pamięci podręcznej</translation>
     </message>

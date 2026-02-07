@@ -220,9 +220,9 @@
         <translation>Вначале старые, только текущая лента</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="296"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="302"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="306"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="297"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="303"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="307"/>
         <source>Error with %1:
 %2</source>
         <translation>Ошибка с %1:
@@ -823,87 +823,87 @@
 <context>
     <name>harbour-tidings</name>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="212"/>
+        <location filename="../qml/harbour-tidings.qml" line="229"/>
         <source>Feeds overview</source>
         <translation>Обзор лент</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="213"/>
+        <location filename="../qml/harbour-tidings.qml" line="230"/>
         <source>- Shows all your subscribed feeds.</source>
         <translation>- Показать все ленты, на которые подписаны.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="214"/>
+        <location filename="../qml/harbour-tidings.qml" line="231"/>
         <source>- Pull down to refresh all.</source>
         <translation>- Потяните вниз, чтобы все обновить.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="215"/>
+        <location filename="../qml/harbour-tidings.qml" line="232"/>
         <source>- Tap and hold to add or manage feeds.</source>
         <translation>- Нажмите и удерживайте, чтобы добавить или изменить ленты.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="220"/>
+        <location filename="../qml/harbour-tidings.qml" line="237"/>
         <source>Managing mode</source>
         <translation>Режим управления</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="221"/>
+        <location filename="../qml/harbour-tidings.qml" line="238"/>
         <source>- Tap on a feed to refresh.</source>
         <translation>- Нажмите на ленту для обновления.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="222"/>
+        <location filename="../qml/harbour-tidings.qml" line="239"/>
         <source>- Tap on the edit button to edit.</source>
         <translation>- Нажмите на кнопку &quot;Редактирование&quot; для редактирования</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="223"/>
+        <location filename="../qml/harbour-tidings.qml" line="240"/>
         <source>- Tap and hold on a feed to move position.</source>
         <translation>- Нажмите и подержите чтобы переместить на другое место.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="224"/>
+        <location filename="../qml/harbour-tidings.qml" line="241"/>
         <source>- Tap on empty space to leave managing mode.</source>
         <translation>- Нажмите на свободное место, что выйти из режима управления</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="229"/>
+        <location filename="../qml/harbour-tidings.qml" line="246"/>
         <source>Articles</source>
         <translation>Статьи</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="230"/>
+        <location filename="../qml/harbour-tidings.qml" line="247"/>
         <source>- Tap on the page header to change sorting.</source>
         <translation>- Нажмите на заголовок страницы, чтобы изменить сортировку</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="231"/>
+        <location filename="../qml/harbour-tidings.qml" line="248"/>
         <source>- Pull down to mark all as read.</source>
         <translation>- Потяните вниз, чтобы отметить как прочтённое</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="236"/>
+        <location filename="../qml/harbour-tidings.qml" line="253"/>
         <source>Article view</source>
         <translation>Просмотр статьи</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="237"/>
+        <location filename="../qml/harbour-tidings.qml" line="254"/>
         <source>- Tap on the title to open in external browser.</source>
         <translation>- Коснитесь заголовка, чтобы открыть статью в браузере.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="238"/>
+        <location filename="../qml/harbour-tidings.qml" line="255"/>
         <source>- Tap on the clipboard symbol to copy the link address to the clipboard.</source>
         <translation>- Коснитесь значка буфера обмена, чтобы скопировать адрес ссылки в буфер.</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="239"/>
+        <location filename="../qml/harbour-tidings.qml" line="256"/>
         <source>- Tap on the star symbol to keep this article.</source>
         <translation>- Коснитесь символа звёздочки, чтобы сохранить статью</translation>
     </message>
     <message>
-        <location filename="../qml/harbour-tidings.qml" line="251"/>
+        <location filename="../qml/harbour-tidings.qml" line="268"/>
         <source>Loading from cache</source>
         <translation>Загрузка из кэша</translation>
     </message>
