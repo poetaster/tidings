@@ -74,7 +74,7 @@ QString repairMalformedTag(const QString& badCode)
             int pos = code.indexOf('=', offset);
             code = code.insert(pos + 1, '"');
             offset += RE_ATTR_EQ_STRING_QUOTE.matchedLength() + 1;
-            qDebug() << "inserted missing first quote";
+            //qDebug() << "inserted missing first quote";
         }
         else if (RE_ATTR_EQ_STRING_APOS.indexIn(code, offset) == offset)
         {
@@ -82,7 +82,7 @@ QString repairMalformedTag(const QString& badCode)
             int pos = code.indexOf('=', offset);
             code = code.insert(pos + 1, '\'');
             offset += RE_ATTR_EQ_STRING_APOS.matchedLength() + 1;
-            qDebug() << "inserted missing first apostrophe";
+            //qDebug() << "inserted missing first apostrophe";
         }
         else if (RE_ATTR_EQ_NOSPACESTRING.indexIn(code, offset) == offset)
         {
@@ -91,14 +91,14 @@ QString repairMalformedTag(const QString& badCode)
             code = code.insert(pos + 1, '"');
             code = code.insert(offset + RE_ATTR_EQ_NOSPACESTRING.matchedLength() + 1, '"');
             offset += RE_ATTR_EQ_NOSPACESTRING.matchedLength() + 2;
-            qDebug() << "inserted missing quotes";
+            //qDebug() << "inserted missing quotes";
         }
         else if (RE_ATTR_EQ.indexIn(code, offset) == offset)
         {
             // missing string, insert quotes
             code = code.insert(RE_ATTR_EQ.matchedLength(), "\"\"");
             offset += RE_ATTR_EQ.matchedLength() + 2;
-            qDebug() << "inserted missing string";
+            //qDebug() << "inserted missing string";
         }
         else if (RE_ATTR_ONLY.indexIn(code, offset) == offset)
         {
@@ -113,7 +113,7 @@ QString repairMalformedTag(const QString& badCode)
     }
     if (code.size() != badCode.size())
     {
-        qDebug() << "Repaired: " << badCode << "->" << code;
+        //qDebug() << "Repaired: " << badCode << "->" << code;
     }
     return code;
 }
