@@ -27,16 +27,17 @@ Timer {
         var now = begin;
 
         while (bgWorkers.length > 0 &&
-               now.getTime() - begin.getTime() < 30 /*ms*/)
+               now.getTime() - begin.getTime() < 5 /*ms*/)
         {
             if (!bgWorkers[0]())
             {
-                var msg = {
+                /*var msg = {
                     'action'    : "execute",
                     'params'    : [bgWorkers.shift()],
                 }
                 appWin.workerscript.sendMessage(msg)
-                //bgWorkers.shift();
+                */
+                bgWorkers.shift();
                 if (bgWorkers.length === 0)
                 {
                     stop();
