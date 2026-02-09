@@ -24,7 +24,7 @@ public:
             d = QDateTime::fromString(dateString, Qt::ISODate);
         }
 
-        qDebug() << "Parsing date:" << dateString << "->" << d;
+        //qDebug() << "Parsing date:" << dateString << "->" << d;
         return d;
     }
 };
