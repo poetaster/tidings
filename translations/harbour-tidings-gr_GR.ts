@@ -190,39 +190,39 @@
 <context>
     <name>NewsBlendModel</name>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="43"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="44"/>
         <source>Latest first</source>
         <translation>Πιο πρόσφατα πρώτα</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="49"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="50"/>
         <source>Oldest first</source>
         <translation>Παλαιότερα πρώτα</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="55"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="56"/>
         <source>Feed, then latest first</source>
         <translation>Ροή, μετά τα πιο πρόσφατα πρώτα</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="61"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="62"/>
         <source>Feed, then oldest first</source>
         <translation>Ροή, μετά τα παλιότερα πρώτα</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="67"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="68"/>
         <source>Current feed only, latest first</source>
         <translation>Τρέχουσα ροή μόνο, τα πρόσφατα πρώτα</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="73"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="74"/>
         <source>Current feed only, oldest first</source>
         <translation>Τρέχουσα ροή, τα παλιότερα πρώτα</translation>
     </message>
     <message>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="297"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="303"/>
-        <location filename="../qml/pages/NewsBlendModel.qml" line="307"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="245"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="251"/>
+        <location filename="../qml/pages/NewsBlendModel.qml" line="255"/>
         <source>Error with %1:
 %2</source>
         <translation>Σφάλμα με %1:

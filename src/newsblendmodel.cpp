@@ -1,7 +1,9 @@
 #include "newsblendmodel.h"
 #include "dateparser.h"
+#include "database.h"
 
 #include <QJsonDocument>
+#include <QAbstractItemModel>
 #include <QDebug>
 
 namespace
@@ -83,6 +85,240 @@ int compare(NewsBlendModel::Item::ConstPtr a,
     }
 }
 
+/* The following functions are pure (no QObject access, no signals), so
+ * they can safely run on the background thread.
+ */
+
+QList<NewsBlendModel::Enclosure> findEnclosures(const QVariantMap& itemData)
+{
+    QList<NewsBlendModel::Enclosure> enclosures;
+    int amount = qMin(itemData.value("enclosuresAmount", 0).toInt(), 9);
+    for (int i = 1; i <= amount; ++i)
+    {
+        NewsBlendModel::Enclosure enclosure;
+        enclosure.url = itemData.value(QString("enclosure_%1_url")
+                                       .arg(i)).toString();
+        enclosure.size = itemData.value(QString("enclosure_%1_length")
+                                       .arg(i), -1).toLongLong();
+
+        QString type = itemData.value(QString("enclosure_%1_type")
+                                      .arg(i)).toString();
+        if (type.size())
+        {
+            enclosure.mimeType = type;
+        }
+        else if (enclosure.url.toLower().endsWith(".jpg") ||
+                 enclosure.url.toLower().endsWith(".jpeg"))
+        {
+            enclosure.mimeType = "image/jpeg";
+        }
+        else if (enclosure.url.toLower().endsWith(".png"))
+        {
+            enclosure.mimeType = "image/png";
+        }
+        else
+        {
+            enclosure.mimeType = "application/octet-stream";
+        }
+
+        enclosures << enclosure;
+    }
+    return enclosures;
+}
+
+QString findThumbnail(const QVariantMap& itemData)
+{
+    QString thumbnail = itemData.value("iTunesImage").toString();
+
+    if (thumbnail.isEmpty())
+    {
+        int minDelta = 9999;
+        int goodWidth = 100;
+        int amount = qMin(itemData.value("thumbnailsAmount", 0).toInt(), 9);
+        for (int i = 1; i <= amount; ++i)
+        {
+            const QString url = itemData.value(QString("thumbnail_%1_url")
+                                               .arg(i)).toString();
+            int width = itemData.value(QString("thumbnail_%1_width")
+                                       .arg(i), 0).toInt();
+
+            if (qAbs(goodWidth - width) < minDelta)
+            {
+                minDelta = qAbs(goodWidth - width);
+                thumbnail = url;
+            }
+        }
+    }
+
+    if (thumbnail.isEmpty())
+    {
+        foreach (const NewsBlendModel::Enclosure& enclosure, findEnclosures(itemData))
+        {
+            if (enclosure.mimeType.startsWith("image/"))
+            {
+                thumbnail = enclosure.url;
+                break;
+            }
+        }
+    }
+
+    if (thumbnail.isEmpty())
+    {
+        // Atom feeds may have a thumbnail as link
+        int amount = qMin(itemData.value("linksAmount", 0).toInt(), 5);
+        for (int i = 1; i <= amount; ++i)
+        {
+            const QString href = itemData.value(QString("link_%1_href")
+                                                .arg(i)).toString();
+            const QString rel = itemData.value(QString("link_%1_rel")
+                                               .arg(i)).toString();
+            const QString type = itemData.value(QString("link_%1_type")
+                                                .arg(i)).toString();
+            if (rel == "enclosure" &&
+                    (type == "image/jpeg" ||
+                     type == "image/png"))
+            {
+                thumbnail = href;
+                break;
+            }
+        }
+    }
+
+    return thumbnail;
+}
+
+QString findLink(const QVariantMap& itemData)
+{
+    QString link = itemData.value("link").toString();
+
+    if (link.isEmpty())
+    {
+        int amount = qMin(itemData.value("linksAmount", 0).toInt(), 5);
+        for (int i = 1; i <= amount; ++i)
+        {
+            const QString href = itemData.value(QString("link_%1_href")
+                                                .arg(i)).toString();
+            const QString rel = itemData.value(QString("link_%1_rel")
+                                               .arg(i)).toString();
+            if (rel == "alternate")
+            {
+                link = href;
+                break;
+            }
+        }
+    }
+    return link;
+}
+
+NewsBlendModel::Item::Ptr parseItemData(const QVariantMap& itemData)
+{
+    NewsBlendModel::Item::Ptr item(new NewsBlendModel::Item);
+
+    item->feedSource = itemData.value("source").toString();
+
+    item->uid = itemData.value("uid").toString();
+    item->date = itemData.value("date").toDateTime();
+
+    // work around broken dates in cached data caused by a Qt 5.2 bug
+    if (! item->date.isValid())
+    {
+        // dates may also be stored as strings
+        item->date = QDateTime::fromString(itemData.value("date").toString(),
+                                           Qt::ISODate);
+    }
+    if (! item->date.isValid())
+    {
+        DateParser dp;
+        item->date = dp.parse(itemData.value("dateString").toString());
+    }
+
+    item->title = itemData.value("title").toString();
+    item->title = item->title
+            .replace("&apos;", "'")
+            .replace("&quot;", "\"")
+            .replace("&#38;", "&")
+            .replace("&Auml;", "Ä")
+            .replace("&Ouml;", "Ö")
+            .replace("&Uuml;", "Ü")
+            .replace("&auml;", "ä")
+            .replace("&ouml;", "ö")
+            .replace("&uuml;", "ü")
+            .replace("&amp;", "&");
+
+    item->link = findLink(itemData);
+
+    item->mediaDuration = itemData.value("duration", 0).toLongLong();
+    item->enclosures = findEnclosures(itemData);
+    item->thumbnail = findThumbnail(itemData);
+
+    item->isShelved = false;
+    item->isRead = false;
+
+    return item;
+}
+
+}
+
+//
+// PersistedLoader
+//
+
+PersistedLoader::PersistedLoader(QObject* parent)
+    : QThread(parent)
+{
+}
+
+void PersistedLoader::setDocuments(const QList<QByteArray>& cached,
+                                   const QList<QByteArray>& shelved)
+{
+    myCached = cached;
+    myShelved = shelved;
+}
+
+void PersistedLoader::run()
+{
+    // The documents were handed to this thread before start(); from here on
+    // only this thread touches them, so parsing them here is safe.
+    foreach (const QByteArray& document, myCached)
+    {
+        parseDocument(document, false);
+    }
+    foreach (const QByteArray& document, myShelved)
+    {
+        parseDocument(document, true);
+    }
+}
+
+void PersistedLoader::parseDocument(const QByteArray& document, bool shelved)
+{
+    QJsonDocument doc = QJsonDocument::fromJson(document);
+    if (! doc.isObject())
+    {
+        return;
+    }
+
+    QVariantMap itemData = doc.toVariant().toMap();
+    NewsBlendModel::Item::Ptr item = parseItemData(itemData);
+    if (! item)
+    {
+        return;
+    }
+
+    // remember the feed logo (first non-empty one wins)
+    const QString logo = itemData.value("logo").toString();
+    if (! logo.isEmpty() &&
+            ! myResult.logos.contains(item->feedSource))
+    {
+        myResult.logos[item->feedSource] = logo;
+    }
+
+    if (shelved)
+    {
+        item->isShelved = true;
+        item->isRead = true;
+    }
+
+    myResult.items << item;
 }
 
 NewsBlendModel::NewsBlendModel(QObject* parent)
@@ -108,6 +344,16 @@ NewsBlendModel::NewsBlendModel(QObject* parent)
     foreach (int key, myRolenames.keys())
     {
         myInverseRolenames[myRolenames[key]] = key;
+    }
+}
+
+NewsBlendModel::~NewsBlendModel()
+{
+    if (myLoader)
+    {
+        // make sure the worker has finished before it (and its result
+        // data) is destroyed
+        myLoader->wait();
     }
 }
 
@@ -312,166 +558,9 @@ int NewsBlendModel::insertItem(const Item::Ptr item, bool update)
     return insertPos;
 }
 
-QList<NewsBlendModel::Enclosure> NewsBlendModel::findEnclosures(const QVariantMap& itemData) const
-{
-    QList<Enclosure> enclosures;
-    int amount = qMin(itemData.value("enclosuresAmount", 0).toInt(), 9);
-    for (int i = 1; i <= amount; ++i)
-    {
-        Enclosure enclosure;
-        enclosure.url = itemData.value(QString("enclosure_%1_url")
-                                       .arg(i)).toString();
-        enclosure.size = itemData.value(QString("enclosure_%1_length")
-                                       .arg(i), -1).toLongLong();
-
-        QString type = itemData.value(QString("enclosure_%1_type")
-                                      .arg(i)).toString();
-        if (type.size())
-        {
-            enclosure.mimeType = type;
-        }
-        else if (enclosure.url.toLower().endsWith(".jpg") ||
-                 enclosure.url.toLower().endsWith(".jpeg"))
-        {
-            enclosure.mimeType = "image/jpeg";
-        }
-        else if (enclosure.url.toLower().endsWith(".png"))
-        {
-            enclosure.mimeType = "image/png";
-        }
-        else
-        {
-            enclosure.mimeType = "application/octet-stream";
-        }
-
-        enclosures << enclosure;
-    }
-    return enclosures;
-}
-
-QString NewsBlendModel::findThumbnail(const QVariantMap& itemData) const
-{
-    QString thumbnail = itemData.value("iTunesImage").toString();
-
-    if (thumbnail.isEmpty())
-    {
-        int minDelta = 9999;
-        int goodWidth = 100;
-        int amount = qMin(itemData.value("thumbnailsAmount", 0).toInt(), 9);
-        for (int i = 1; i <= amount; ++i)
-        {
-            const QString url = itemData.value(QString("thumbnail_%1_url")
-                                               .arg(i)).toString();
-            int width = itemData.value(QString("thumbnail_%1_width")
-                                       .arg(i), 0).toInt();
-
-            if (qAbs(goodWidth - width) < minDelta)
-            {
-                minDelta = qAbs(goodWidth - width);
-                thumbnail = url;
-            }
-        }
-    }
-
-    if (thumbnail.isEmpty())
-    {
-        foreach (const Enclosure& enclosure, findEnclosures(itemData))
-        {
-            if (enclosure.mimeType.startsWith("image/"))
-            {
-                thumbnail = enclosure.url;
-                break;
-            }
-        }
-    }
-
-    if (thumbnail.isEmpty())
-    {
-        // Atom feeds may have a thumbnail as link
-        int amount = qMin(itemData.value("linksAmount", 0).toInt(), 5);
-        for (int i = 1; i <= amount; ++i)
-        {
-            const QString href = itemData.value(QString("link_%1_href")
-                                                .arg(i)).toString();
-            const QString rel = itemData.value(QString("link_%1_rel")
-                                               .arg(i)).toString();
-            const QString type = itemData.value(QString("link_%1_type")
-                                                .arg(i)).toString();
-            if (rel == "enclosure" &&
-                    (type == "image/jpeg" ||
-                     type == "image/png"))
-            {
-                thumbnail = href;
-                break;
-            }
-        }
-    }
-
-    return thumbnail;
-}
-
-QString NewsBlendModel::findLink(const QVariantMap& itemData) const
-{
-    QString link = itemData.value("link").toString();
-
-    if (link.isEmpty())
-    {
-        int amount = qMin(itemData.value("linksAmount", 0).toInt(), 5);
-        for (int i = 1; i <= amount; ++i)
-        {
-            const QString href = itemData.value(QString("link_%1_href")
-                                                .arg(i)).toString();
-            const QString rel = itemData.value(QString("link_%1_rel")
-                                               .arg(i)).toString();
-            if (rel == "alternate")
-            {
-                link = href;
-                break;
-            }
-        }
-    }
-    return link;
-}
-
 NewsBlendModel::Item::Ptr NewsBlendModel::parseItem(const QVariantMap& itemData) const
 {
-    Item::Ptr item(new Item);
-
-    item->feedSource = itemData.value("source").toString();
-
-    item->uid = itemData.value("uid").toString();
-    item->date = itemData.value("date").toDateTime();
-
-    // work around broken dates in cached data caused by a Qt 5.2 bug
-    if (! item->date.isValid())
-    {
-        DateParser dp;
-        item->date = dp.parse(itemData.value("dateString").toString());
-    }
-
-    item->title = itemData.value("title").toString();
-    item->title = item->title
-            .replace("&apos;", "'")
-            .replace("&quot;", "\"")
-            .replace("&#38;", "&")
-            .replace("&Auml;", "Ä")
-            .replace("&Ouml;", "Ö")
-            .replace("&Uuml;", "Ü")
-            .replace("&auml;", "ä")
-            .replace("&ouml;", "ö")
-            .replace("&uuml;", "ü")
-            .replace("&amp;", "&");
-
-    item->link = findLink(itemData);
-
-    item->mediaDuration = itemData.value("duration", 0).toLongLong();
-    item->enclosures = findEnclosures(itemData);
-    item->thumbnail = findThumbnail(itemData);
-
-    item->isShelved = false;
-    item->isRead = false;
-
-    return item;
+    return parseItemData(itemData);
 }
 
 QVariant NewsBlendModel::getAttribute(int idx, const QString& role) const
@@ -480,6 +569,12 @@ QVariant NewsBlendModel::getAttribute(int idx, const QString& role) const
 }
 
 void NewsBlendModel::loadItems(const QVariantList& jsons, bool shelved)
+{
+    mergeItems(jsons, shelved);
+    reinsertItems();
+}
+
+void NewsBlendModel::mergeItems(const QVariantList& jsons, bool shelved)
 {
     foreach (const QVariant& json, jsons)
     {
@@ -519,7 +614,198 @@ void NewsBlendModel::loadItems(const QVariantList& jsons, bool shelved)
         }
         myItemMap[itemId] = item;
     }
+}
+
+void NewsBlendModel::loadPersisted(Database* db)
+{
+    if (! db)
+    {
+        return;
+    }
+
+    if (myLoader)
+    {
+        // a load is already in progress; wait for it to finish before
+        // starting a new one
+        myLoader->wait();
+        myLoader->deleteLater();
+        myLoader = 0;
+    }
+
+    // Fetch all the documents on the main thread (the database is not
+    // thread-safe) and hand them to the worker, which does the (slow)
+    // JSON parsing off the GUI thread.
+    PersistedLoader* loader = new PersistedLoader();
+    loader->setDocuments(db->cachedDocuments(),
+                         db->shelvedDocuments());
+
+    connect(loader, SIGNAL(finished()),
+            this, SLOT(persistedLoaderFinished()));
+
+    myLoader = loader;
+    myLoader->start();
+}
+
+void NewsBlendModel::persistedLoaderFinished()
+{
+    const PersistedLoader::Result& result = myLoader->result();
+
+    // apply the feed logos collected by the worker
+    foreach (const QString& feed, result.logos.keys())
+    {
+        if (myFeedLogos.value(feed).isEmpty())
+        {
+            myFeedLogos[feed] = result.logos[feed];
+        }
+    }
+
+    // merge the parsed items into the item map. This is only bookkeeping
+    // (no view updates), so it is cheap even for large collections.
+    foreach (const Item::Ptr& item, result.items)
+    {
+        if (mySelectedFeed.isEmpty())
+        {
+            mySelectedFeed = item->feedSource;
+        }
+
+        FullId itemId(item->feedSource, item->uid);
+        if (myItemMap.contains(itemId))
+        {
+            // keep the first occurrence
+            continue;
+        }
+
+        myTotalCounts[item->feedSource] =
+                myTotalCounts.value(item->feedSource, 0) + 1;
+        if (! item->isShelved)
+        {
+            myUnreadCounts[item->feedSource] =
+                    myUnreadCounts.value(item->feedSource, 0) + 1;
+        }
+        myItemMap[itemId] = item;
+    }
+
+    // all items are merged now, sort and update the view just once
     reinsertItems();
+
+    if (! myReady)
+    {
+        myReady = true;
+        emit readyChanged();
+    }
+
+    myLoader->deleteLater();
+    myLoader = 0;
+}
+
+void NewsBlendModel::loadFromFeedModel(QObject* feedModel,
+                                       const QString& feedSource,
+                                       const QString& logo,
+                                       Database* db)
+{
+    const QAbstractItemModel* model =
+            qobject_cast<const QAbstractItemModel*>(feedModel);
+
+    if (! model || ! db)
+    {
+        return;
+    }
+
+    QVariantList newItems;
+
+    const QHash<int, QByteArray> roleNames = model->roleNames();
+
+    for (int row = 0; row < model->rowCount(); ++row)
+    {
+        const QModelIndex modelIndex = model->index(row, 0);
+
+        // read all properties of the feed model row
+        QVariantMap itemData;
+        foreach (int role, roleNames.keys())
+        {
+            itemData[QString::fromUtf8(roleNames.value(role))] =
+                    model->data(modelIndex, role);
+        }
+
+        itemData.insert("source", feedSource);
+        itemData.insert("logo", logo);
+
+        // a valid date is needed for sorting; feeds that do not provide
+        // one get the current time
+        const QString dateString = itemData.value("dateString").toString();
+        if (dateString.isEmpty())
+        {
+            itemData.insert("date", QDateTime::currentDateTime());
+        }
+        else
+        {
+            DateParser dp;
+            itemData.insert("date", dp.parse(dateString));
+        }
+
+        // a uid is needed to deduplicate items; fall back to title + date
+        if (itemData.value("uid").toString().isEmpty())
+        {
+            if (! dateString.isEmpty())
+            {
+                itemData.insert("uid",
+                                itemData.value("title").toString()
+                                + dateString);
+            }
+            else
+            {
+                itemData.insert("uid",
+                                itemData.value("title").toString()
+                                + QString::number(
+                                    QDateTime::currentDateTime()
+                                    .toMSecsSinceEpoch()));
+            }
+        }
+
+        const QString uid = itemData.value("uid").toString();
+
+        if (hasItem(feedSource, uid))
+        {
+            // do not insert the same item twice
+            continue;
+        }
+
+        if (db->isRead(feedSource, uid) &&
+                ! db->isShelved(feedSource, uid))
+        {
+            // read items are gone
+            continue;
+        }
+
+        // insert into the model (it is guaranteed new, see the hasItem()
+        // check above) and cache it as well
+        addItem(itemData);
+
+        {
+            const QString encoded = itemData.value("encoded").toString();
+            const QString body = encoded.length() > 0 ? encoded
+                                                      : itemData.value("description").toString();
+
+            // the body is stored separately; do not store it in the
+            // cached document as well
+            itemData.remove("description");
+            itemData.remove("encoded");
+
+            QVariantMap tuple;
+            tuple.insert("url", feedSource);
+            tuple.insert("uid", uid);
+            tuple.insert("document",
+                         QJsonDocument::fromVariant(itemData)
+                         .toJson(QJsonDocument::Compact));
+            tuple.insert("body", body);
+            newItems.append(tuple);
+        }
+    }
+
+    if (! newItems.isEmpty())
+    {
+        db->cacheItems(newItems);
+    }
 }
 
 int NewsBlendModel::addItem(const QVariantMap& itemData, bool update)

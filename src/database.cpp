@@ -602,6 +602,32 @@ QVariantList Database::batchLoadShelved(int offset, int batchSize) const
     return result;
 }
 
+QList<QByteArray> Database::cachedDocuments() const
+{
+    QList<QByteArray> result;
+
+    QSqlQuery q = myDb.exec("SELECT document FROM offlineCache");
+    while (q.next())
+    {
+        result << q.value(0).toByteArray();
+    }
+
+    return result;
+}
+
+QList<QByteArray> Database::shelvedDocuments() const
+{
+    QList<QByteArray> result;
+
+    QSqlQuery q = myDb.exec("SELECT document FROM shelf");
+    while (q.next())
+    {
+        result << q.value(0).toByteArray();
+    }
+
+    return result;
+}
+
 void Database::shelveItem(const QString& url, const QString& uid)
 {
     myDb.transaction();

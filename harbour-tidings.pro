@@ -49,7 +49,6 @@ OTHER_FILES += qml/harbour-tidings.qml \
     qml/pages/SortSelectorPage.qml \
     qml/cover/overlay.png \
     qml/pages/ConfigValue.qml \
-    qml/pages/BackgroundWorker.qml \
     qml/pages/FeedStats.qml \
     qml/pages/FeedItem.qml \
     qml/pages/SettingsPage.qml \

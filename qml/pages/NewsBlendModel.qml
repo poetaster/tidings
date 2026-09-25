@@ -29,8 +29,9 @@ NewsModel {
     // the time of the last refresh
     property variant lastRefresh
 
-    // flag indicating that this model ready
-    property bool ready: false
+    // flag indicating that this model is ready
+    // (the ready property is provided by the C++ NewsModel base class and
+    //  is set after loadPersisted() has finished loading from the database)
 
     // flag indicating that this model is busy
     property bool busy: false
@@ -135,9 +136,6 @@ NewsModel {
     }
 
 
-    // worker for running tasks in the background
-    property BackgroundWorker _backgroundWorker: BackgroundWorker { }
-
 
     property FeedParser _atomModel: FeedParser {
         parserUrl: Qt.resolvedUrl("AtomModel.qml")
@@ -204,56 +202,6 @@ NewsModel {
         feedInfoChanged();
     }
 
-    /* Adds the item from the given model. Returns the new item if it was
-     * inserted, or null otherwise.
-     */
-    function _loadItem(model, i)
-    {
-        // convert model item to an associative array
-        var item = { };
-        var obj = model.get(i);
-        for (var key in obj)
-        {
-            item[key] = obj[key];
-        }
-
-        item["source"] = "" + _feedLoader.source; // convert to string
-        item["logo"] = "" + _feedLoader.logo;
-        item["date"] = item.dateString !== "" ? dateParser.parse(item.dateString)
-                                              : new Date();
-
-        if (item.uid === "")
-        {
-            // if there is no UID, make a unique one
-            if (item.dateString !== "")
-            {
-                item["uid"] = item.title + item.dateString;
-            }
-            else
-            {
-                var d = new Date();
-                item["uid"] = item.title + d.getTime();
-            }
-        }
-
-        if (listModel.hasItem(item.source, item.uid))
-        {
-            // do not insert the same item twice
-            return null;
-        }
-
-        if (database.isRead(item.source, item.uid) &&
-            ! database.isShelved(item.source, item.uid))
-        {
-            // read items are gone
-            return null;
-        }
-
-        listModel.addItem(item);
-
-        return item;
-    }
-
     /* Takes the next source from the sources queue and loads it.
      */
     function _loadNext()
@@ -311,47 +259,18 @@ NewsModel {
     }
 
     /* Loads items from the given feed model.
+     *
+     * The per-item processing (deduplication, read checks) and the
+     * offline caching are all done in C++ in one go.
      */
     function _loadFromFeed(feedModel)
     {
-        var index = 0;
-        var newItems = [];
-
-        function loader()
-        {
-            if (index < feedModel.count)
-            {
-                var newItem = _loadItem(feedModel, index);
-                if (newItem)
-                {
-                    var body = newItem.encoded.length > 0 ? newItem.encoded
-                                                          : newItem.description;
-
-                    // do not store the body in the item
-                    newItem["description"] = null;
-                    newItem["encoded"] = null;
-
-                    var tuple = {
-                        "url": newItem.source,
-                        "uid": newItem.uid,
-                        "document": json.toJson(newItem),
-                        "body": body
-                    };
-                    newItems.push(tuple);
-                }
-                ++index;
-                return true;
-            }
-            else
-            {
-                database.cacheItems(newItems);
-                _updateStats();
-                _loadNext();
-                return false;
-            }
-        }
-
-        _backgroundWorker.execute(loader);
+        loadFromFeedModel(feedModel,
+                          "" + _feedLoader.source,
+                          "" + _feedLoader.logo,
+                          database);
+        _updateStats();
+        _loadNext();
     }
 
     /* Clears and reloads the model from the current sources.
@@ -395,83 +314,28 @@ NewsModel {
     }
 
     /* Loads the persisted items.
+     *
+     * The loading happens on a background thread in C++; once it has
+     * finished, the model emits readyChanged().
      */
     function loadPersistedItems()
-    {   
+    {
         for (var i = 0; i < sources.length; ++i)
         {
             feedInfo.setLoading(sources[i].url, true);
         }
 
-        var mode = 0;
-        var offset = 0;
-        var batchSize = 500;
+        loadPersisted(database);
+    }
 
-        function loader()
-        {
-            var rows;
-            var jsons = [];
-            var i;
-
-            if (mode === 0)
+    onReadyChanged: {
+        if (ready) {
+            for (var i = 0; i < sources.length; ++i)
             {
-                rows = database.batchLoadCached(offset, batchSize);
-                for (i = 0; i < rows.length; ++i)
-                {
-                    jsons.push(rows[i]);
-                }
-                loadItems(jsons, false);
-                if (rows.length < batchSize)
-                {
-                    ++mode;
-                    offset = 0;
-                }
-                else
-                {
-                    offset += batchSize;
-                }
-                return true;
+                feedInfo.setLoading(sources[i].url, false);
             }
-            else if (mode === 1)
-            {
-                rows = database.batchLoadShelved(offset, batchSize);
-                for (i = 0; i < rows.length; ++i)
-                {
-                    jsons.push(rows[i]);
-                }
-                loadItems(jsons, true);
-                if (rows.length < batchSize)
-                {
-                    ++mode;
-                }
-                else
-                {
-                    offset += batchSize;
-                }
-                return true;
-            }
-            else
-            {
-                for (i = 0; i < sources.length; ++i)
-                {
-                    feedInfo.setLoading(sources[i].url, false);
-                }
-                _updateStats();
-                ready = true;
-                return false;
-            }
+            _updateStats();
         }
-
-        var msg = {
-            'action'    : "execute",
-            'params'    : [loader],
-        }
-
-        //if (debug) console.log(JSON.stringify(msg))
-        ///appWin.workerscript.sendMessage(msg)
-
-       _backgroundWorker.execute(loader);
-        ready = true
     }
 
     /* Aborts loading.
@@ -480,7 +344,6 @@ NewsModel {
     {
         _sourcesQueue = [];
         _feedLoader.abort();
-        _backgroundWorker.abort();
 
         _atomModel.xml = "";
         _rssModel.xml = "";

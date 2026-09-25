@@ -1,6 +1,8 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include <QByteArray>
+#include <QList>
 #include <QObject>
 #include <QSqlDatabase>
 #include <QVariantList>
@@ -57,6 +59,11 @@ public:
     Q_INVOKABLE QVariantList batchLoadCached(int offset, int batchSize) const;
     // Loads the shelved items in batches.
     Q_INVOKABLE QVariantList batchLoadShelved(int offset, int batchSize) const;
+
+    // Returns the documents of all cached items (in a single pass).
+    Q_INVOKABLE QList<QByteArray> cachedDocuments() const;
+    // Returns the documents of all shelved items (in a single pass).
+    Q_INVOKABLE QList<QByteArray> shelvedDocuments() const;
 
     // Shelves the given item.
     Q_INVOKABLE void shelveItem(const QString& url, const QString& uid);
