@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="it">
+<TS version="2.1" language="it_IT">
 <context>
     <name>AboutPage</name>
     <message>
@@ -144,7 +144,7 @@
     <message>
         <location filename="../qml/pages/HintLoader.qml" line="142"/>
         <source>No more hints? Disable them in Settings.</source>
-        <translation>Non vuoi più i suggerimenti? Bisabilitali nelle Impostazioni.</translation>
+        <translation>Non vuoi più i suggerimenti? Disabilitali nelle Impostazioni.</translation>
     </message>
 </context>
 <context>
@@ -723,7 +723,7 @@
         <location filename="../qml/pages/SourcesPage.qml" line="349"/>
         <location filename="../qml/pages/SourcesPage.qml" line="352"/>
         <source>All read</source>
-        <translation>Tutto letto</translation>
+        <translation>Leggi tutto</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="361"/>
@@ -739,7 +739,7 @@
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="377"/>
         <source>All read &amp; Refresh all</source>
-        <translation>Tutto letto &amp; Ricarica tutto</translation>
+        <translation>Leggi tutto &amp; Ricarica</translation>
     </message>
     <message>
         <location filename="../qml/pages/SourcesPage.qml" line="393"/>
