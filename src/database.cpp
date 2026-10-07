@@ -294,7 +294,7 @@ void Database::createSchema() const
 
 void Database::vacuum() const
 {
-    if (myDb.isOpen())
+    if (myDb.isOpen() && QDateTime::currentDateTime().date().month() % 2 == 0)
     {
         qDebug() << "Vacuuming database... *vrooom*";
         QSqlQuery query = myDb.exec("VACUUM");
